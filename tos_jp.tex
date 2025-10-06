@@ -1,8 +1,9 @@
 \documentclass[11pt]{article}
 \usepackage[margin=1in]{geometry}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{CJK}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setCJKmainfont{Hiragino Mincho ProN}
+\setCJKsansfont{Hiragino Kaku Gothic ProN}
 \usepackage{hyperref}
 \usepackage{array}
 \usepackage{booktabs}
@@ -47,7 +48,6 @@
 \newcommand{\BlockDAG}{\textbf{BlockDAG}\xspace}
 
 \begin{document}
-\begin{CJK}{UTF8}{min}
 \thispagestyle{empty}
 
 \begin{center}
@@ -1792,7 +1792,7 @@ MERCURY紀元から初期VENUS紀元への外挿：
 \begin{itemize}[noitemsep]
   \item \textbf{コンプライアンス経路}：TOSはすべてのEUタスクにヒューマン・イン・ザ・ループ仲裁を展開；タスク量は15\%減少するがコンプライアンスがアクセスを保持。
   \item \textbf{断片化経路}：EUエージェントは許可されたTOSシャードに移行；遅延耐性プロトコルを介したクロスシャード決済；ネットワークは分割されるが相互運用可能なまま。
-\end{itemize>
+\end{itemize}
 
 \section{セキュリティと脅威モデル}
 \label{sec:security}
@@ -2790,5 +2790,4 @@ TOS開発は、AGI文明のニーズとの長期的整合性を維持しなが�
   \item W3C (2018). \textit{検証可能クレデンシャルデータモデル1.0}. W3C勧告. World Wide Webコンソーシアム.
 \end{itemize}
 
-\end{CJK}
 \end{document}

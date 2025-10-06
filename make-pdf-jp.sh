@@ -1,13 +1,23 @@
 #!/bin/sh
 
-# Compile Japanese PDF using LaTeX.Online service
-# (Local compilation requires many additional packages)
+# Compile Japanese PDF using local MacTeX installation
 
-echo "Compiling Japanese PDF using LaTeX.Online service..."
+# Update PATH to include MacTeX binaries
+eval "$(/usr/libexec/path_helper)"
 
-tar cjf tos_jp.tar.bz2 tex_jp.tex logo-transparent-128x128.png logo-transparent-400x400.png
-curl -o tos_jp.pdf --post301 --post302 --post303 -F file=@tos_jp.tar.bz2 "https://texlive2020.latexonline.cc/data?target=tex_jp.tex&command=pdflatex"
-rm tos_jp.tar.bz2
+echo "Compiling Japanese PDF using local MacTeX..."
+
+# First compilation
+echo "Compiling Japanese PDF (first pass)..."
+/Library/TeX/texbin/xelatex tos_jp.tex
+
+# Second compilation for cross-references
+echo "Compiling Japanese PDF (second pass for cross-references)..."
+/Library/TeX/texbin/xelatex tos_jp.tex
+
+# Clean up auxiliary files
+echo "Cleaning up auxiliary files..."
+rm -f tos_jp.aux tos_jp.log tos_jp.out tos_jp.toc tos_jp.fls tos_jp.fdb_latexmk tos_jp.synctex.gz
 
 echo "Japanese PDF compilation completed: tos_jp.pdf"
 exit 0
