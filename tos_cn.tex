@@ -1803,269 +1803,269 @@ TOS 在一个充满敌意的环境中运营，经济激励吸引复杂的对手�
 \subsection{威胁分类}
 
 \paragraph{T1：恶意代理（女巫攻击者）}
-\textbf{Motivation}: Earn rewards without performing legitimate work; game reputation systems; overwhelm validation queues.\\
-\textbf{Capabilities}: Create thousands of identities; automate low-quality submissions; coordinate timing attacks.\\
-\textbf{Attack Vectors}:
+\textbf{动机}：在不执行合法工作的情况下获取奖励；操纵声誉系统；压垮验证队列。\\
+\textbf{能力}：创建数千个身份；自动化提交低质量任务；协调定时攻击。\\
+\textbf{攻击向量}：
 \begin{itemize}[noitemsep]
-  \item \textbf{Task spam}: Flood network with trivial or duplicate tasks to claim escrow before validation.
-  \item \textbf{Reputation farming}: Collude with cooperating publishers to inflate scores.
-  \item \textbf{Oracle manipulation}: Submit false attestations to trick validators.
+  \item \textbf{任务垃圾邮件}：用琐碎或重复的任务淹没网络，在验证之前索取托管资金。
+  \item \textbf{声誉刷分}：与合作的发布者勾结以膨胀分数。
+  \item \textbf{预言机操纵}：提交虚假证明以欺骗验证者。
 \end{itemize}
-\textbf{Historical Precedent}: Steam account farming (2016), cryptocurrency airdrop bots (2020--2023), large-scale review fraud on Amazon/Yelp.
+\textbf{历史先例}：Steam 账户刷号（2016）、加密货币空投机器人（2020--2023）、Amazon/Yelp 上的大规模评论欺诈。
 
 \paragraph{T2：验证者共谋}
-\textbf{Motivation}: Extract rents by approving low-quality work from co-conspirators; censor competitors.\\
-\textbf{Capabilities}: Control $>33\%$ of validator stake or exploit randomness in assignment algorithms.\\
-\textbf{Attack Vectors}:
+\textbf{动机}：通过批准共谋者的低质量工作来获取租金；审查竞争对手。\\
+\textbf{能力}：控制 $>33\%$ 的验证者质押或利用分配算法中的随机性漏洞。\\
+\textbf{攻击向量}：
 \begin{itemize}[noitemsep]
-  \item \textbf{Quality inflation}: Validators assign high scores to cartel members' submissions regardless of merit.
-  \item \textbf{Censorship}: Reject or delay validation of non-cartel agents.
-  \item \textbf{Front-running}: Validators observe pending tasks, submit competing solutions under alternate identities.
+  \item \textbf{质量膨胀}：验证者无论成果如何都给卡特尔成员的提交打高分。
+  \item \textbf{审查}：拒绝或延迟对非卡特尔代理的验证。
+  \item \textbf{抢跑}：验证者观察待处理的任务，以其他身份提交竞争解决方案。
 \end{itemize}
-\textbf{Historical Precedent}: Mining pool centralization, MEV extraction patterns, and validator centralization observed across various blockchain networks demonstrate the reality of these threats.
+\textbf{历史先例}：在各种区块链网络中观察到的矿池中心化、MEV 提取模式和验证者中心化证明了这些威胁的真实性。
 
 \paragraph{T3：预言机卡特尔}
-\textbf{Motivation}: Manipulate CC/EC pricing to profit from arbitrage or harm competitors.\\
-\textbf{Capabilities}: Compromise majority of oracle feeders; exploit data source vulnerabilities; delay price updates.\\
-\textbf{Attack Vectors}:
+\textbf{动机}：操纵 CC/EC 定价以从套利中获利或损害竞争对手。\\
+\textbf{能力}：破坏大多数预言机馈送者；利用数据源漏洞；延迟价格更新。\\
+\textbf{攻击向量}：
 \begin{itemize}[noitemsep]
-  \item \textbf{Price manipulation}: Report inflated compute costs to drain TEM subsidies or extract value from agents.
-  \item \textbf{Staleness attacks}: Delay updates during high volatility to force fallback pricing.
-  \item \textbf{Data poisoning}: Compromise API sources (AWS pricing feeds, energy indices).
+  \item \textbf{价格操纵}：报告虚高的计算成本以耗尽 TEM 补贴或从代理中提取价值。
+  \item \textbf{陈旧性攻击}：在高波动期间延迟更新以强制回退定价。
+  \item \textbf{数据投毒}：破坏 API 源（AWS 定价馈送、能源指数）。
 \end{itemize}
-\textbf{Historical Precedent}: LIBOR manipulation scandal (2008--2012), flash crashes in algorithmic trading (2010), oracle failures in decentralised finance protocols.
+\textbf{历史先例}：LIBOR 操纵丑闻（2008--2012）、算法交易中的闪电崩盘（2010）、去中心化金融协议中的预言机故障。
 
 \paragraph{T4：治理捕获}
-\textbf{Motivation}: Control protocol parameters to favor specific actors; extract treasury funds; resist security upgrades.\\
-\textbf{Capabilities}: Accumulate majority voting stake; exploit low voter turnout; launch social engineering campaigns.\\
-\textbf{Attack Vectors}:
+\textbf{动机}：控制协议参数以偏袒特定参与者；提取国库资金；抵制安全升级。\\
+\textbf{能力}：积累多数投票权益；利用低投票率；发起社会工程攻击。\\
+\textbf{攻击向量}：
 \begin{itemize}[noitemsep]
-  \item \textbf{Parameter manipulation}: Vote to reduce slashing penalties, increase reward splits, weaken anti-Sybil thresholds.
-  \item \textbf{Treasury raids}: Propose grants to shell entities controlled by attackers.
-  \item \textbf{Upgrade blocking}: Prevent deployment of patches addressing known vulnerabilities.
+  \item \textbf{参数操纵}：投票减少惩罚罚款、增加奖励分成、削弱反女巫阈值。
+  \item \textbf{国库掠夺}：向攻击者控制的空壳实体提议拨款。
+  \item \textbf{升级阻塞}：阻止部署解决已知漏洞的补丁。
 \end{itemize}
-\textbf{Historical Precedent}: Blockchain governance takeovers, decentralised protocol governance attacks, corporate proxy fights.
+\textbf{历史先例}：区块链治理接管、去中心化协议治理攻击、企业代理权争夺战。
 
 \paragraph{T5：智能合约漏洞利用}
-\textbf{Motivation}: Steal escrowed funds, mint unauthorized tokens, manipulate state variables.\\
-\textbf{Capabilities}: Discover reentrancy bugs, integer overflows, access control flaws, or logical errors.\\
-\textbf{Attack Vectors}:
+\textbf{动机}：窃取托管资金、铸造未经授权的代币、操纵状态变量。\\
+\textbf{能力}：发现重入漏洞、整数溢出、访问控制缺陷或逻辑错误。\\
+\textbf{攻击向量}：
 \begin{itemize}[noitemsep]
-  \item \textbf{Reentrancy}: Exploit callback functions in TaskInstance or RewardSplitter contracts.
-  \item \textbf{Flash loan attacks}: Temporarily acquire large stakes to manipulate governance or oracle votes.
-  \item \textbf{Griefing}: DoS validation queues by submitting malformed attestations that crash verifiers.
+  \item \textbf{重入}：利用 TaskInstance 或 RewardSplitter 合约中的回调函数。
+  \item \textbf{闪电贷攻击}：临时获取大量权益以操纵治理或预言机投票。
+  \item \textbf{恶意破坏}：通过提交导致验证者崩溃的格式错误证明来对验证队列进行拒绝服务攻击。
 \end{itemize}
-\textbf{Historical Precedent}: The DAO hack (2016, \$50M), Parity wallet freeze (2017), Poly Network exploit (2021, \$600M).
+\textbf{历史先例}：The DAO 黑客攻击（2016，5000 万美元）、Parity 钱包冻结（2017）、Poly Network 漏洞利用（2021，6 亿美元）。
 
 \subsection{纵深防御架构}
 
 \paragraph{第 1 层：密码学基础}
 \begin{itemize}[noitemsep]
-  \item \textbf{TEE Attestation}: Intel SGX/AMD SEV remote attestation verifies code integrity; measurement hashes prevent malware injection. Limitation: side-channel attacks (Spectre, Meltdown); roadmap includes zk-SNARK fallback.
-  \item \textbf{Post-Quantum Cryptography}: Dilithium (signatures), Falcon (compact signatures) resist quantum attacks. Migration plan: dual-signing (classical + PQC) by v4.0 (see Appendix C, Report PQ-2025-08).
-  \item \textbf{Threshold Signatures}: BLS aggregation enables compact multi-sig; $t$-of-$n$ schemes prevent single points of failure in bridge contracts.
+  \item \textbf{TEE 证明}：Intel SGX/AMD SEV 远程证明验证代码完整性；测量哈希防止恶意软件注入。限制：旁路攻击（Spectre、Meltdown）；路线图包括 zk-SNARK 后备方案。
+  \item \textbf{后量子密码学}：Dilithium（签名）、Falcon（紧凑签名）抵御量子攻击。迁移计划：v4.0 版本实现双签名（经典 + PQC）（见附录 C，报告 PQ-2025-08）。
+  \item \textbf{阈值签名}：BLS 聚合实现紧凑的多重签名；$t$-of-$n$ 方案防止桥接合约中的单点故障。
 \end{itemize}
 
 \paragraph{第 2 层：经济安全（密码经济学）}
 \begin{itemize}[noitemsep]
-  \item \textbf{Stake-Based Accountability}: Agents and validators lock collateral (min 100 TOS / 1,000 TOS respectively); slashing penalties (1--50\% of stake) deter misbehavior. Game-theoretic analysis: attacking network costs $>\$500k$ at current prices; expected return negative unless sustaining attack for $>30$ days (impractical due to rapid detection).
-  \item \textbf{Reputation Decay}: RepGraph scores decay 2\% monthly without activity; prevents dormant accounts from sudden reactivation with outdated high scores.
-  \item \textbf{Cooling Periods}: Rate limits (5--60 min based on reputation) prevent spam; adaptive thresholds increase during DoS attempts.
+  \item \textbf{基于质押的问责制}：代理和验证者锁定抵押品（分别至少 100 TOS / 1,000 TOS）；惩罚罚款（1--50\% 的质押）威慑不当行为。博弈论分析：按当前价格攻击网络成本 $>\$500k$；除非维持攻击超过 $>30$ 天，否则预期回报为负（由于快速检测而不切实际）。
+  \item \textbf{声誉衰减}：RepGraph 分数在无活动的情况下每月衰减 2\%；防止休眠账户突然重新激活并保留过时的高分。
+  \item \textbf{冷却期}：速率限制（基于声誉的 5--60 分钟）防止垃圾邮件；在 DoS 尝试期间自适应阈值会增加。
 \end{itemize}
 
 \paragraph{第 3 层：协议级保障}
 \begin{itemize}[noitemsep]
-  \item \textbf{Multi-Validator Consensus}: Median-of-5 scoring resists outliers; requires $\geq3$ colluding validators to manipulate outcomes (probability $<0.01\%$ with random assignment).
-  \item \textbf{Randomness Sources}: Validator assignment uses VRF (Verifiable Random Function) seeded by block hashes + external entropy (drand); prevents predictability.
-  \item \textbf{Formal Verification}: TaskInstance state machine verified in TLA+; proofs ensure liveness (tasks always settle) and safety (no double-payment). Artifacts: \texttt{github.com/tos-network/formal-verification}.
+  \item \textbf{多验证者共识}：5 个评分的中位数抵御异常值；需要 $\geq3$ 个共谋验证者才能操纵结果（随机分配下概率 $<0.01\%$）。
+  \item \textbf{随机性来源}：验证者分配使用由区块哈希 + 外部熵（drand）种子化的 VRF（可验证随机函数）；防止可预测性。
+  \item \textbf{形式化验证}：TaskInstance 状态机在 TLA+ 中验证；证明确保活性（任务总是结算）和安全性（无双重支付）。工件：\texttt{github.com/tos-network/formal-verification}。
 \end{itemize}
 
-\paragraph{Layer 4: Monitoring \& Response}
+\paragraph{第 4 层：监控与响应}
 \begin{itemize}[noitemsep]
-  \item \textbf{Anomaly Detection}: ML classifiers flag suspicious patterns (e.g., agent claiming $>10$ tasks/hour, validator approving $>95\%$ of submissions). Telemetry fed to Security Operations Center (SOC).
-  \item \textbf{Circuit Breakers}: Automated pause if (1) dispute rate $>10\%$, (2) validator slashing events $>5$ in 1 hour, (3) oracle deviation $>20\%$. Resumption requires Council approval.
-  \item \textbf{Bug Bounty}: \$50k--\$500k rewards for critical vulnerabilities. Program managed via Immunefi/HackerOne; payouts in TOS tokens.
+  \item \textbf{异常检测}：机器学习分类器标记可疑模式（例如，代理声称每小时处理 $>10$ 个任务，验证者批准 $>95\%$ 的提交）。遥测数据馈送到安全运营中心（SOC）。
+  \item \textbf{熔断机制}：如果 (1) 争议率 $>10\%$，(2) 1 小时内验证者惩罚事件 $>5$ 次，(3) 预言机偏差 $>20\%$，则自动暂停。恢复需要理事会批准。
+  \item \textbf{漏洞赏金}：关键漏洞奖励 \$50k--\$500k。计划通过 Immunefi/HackerOne 管理；以 TOS 代币支付。
 \end{itemize}
 
 \paragraph{第 5 层：治理监督}
 \begin{itemize}[noitemsep]
-  \item \textbf{Council Emergency Powers}: 4-of-7 multi-sig can (1) pause contracts, (2) freeze malicious accounts, (3) trigger rollback (reversible history, Section~\ref{sec:expansion}). Actions logged on-chain; post-mortem required within 72 hours.
-  \item \textbf{Proof-of-Personhood Integration}: Roadmap v5.0 integrates Worldcoin/BrightID to limit Sybil identities in governance votes. Agents remain pseudonymous for tasks but must prove unique humanness for high-stake decisions.
-  \item \textbf{Transparency Reports}: Quarterly disclosure of (1) security incidents, (2) slashing events, (3) governance votes, (4) treasury changes. Auditable via Compliance API.
+  \item \textbf{理事会紧急权力}：4-of-7 多重签名可以 (1) 暂停合约，(2) 冻结恶意账户，(3) 触发回滚（可逆历史，第~\ref{sec:expansion} 节）。操作记录在链上；需要在 72 小时内进行事后分析。
+  \item \textbf{人格证明集成}：路线图 v5.0 集成 Worldcoin/BrightID 以限制治理投票中的女巫身份。代理在任务中保持匿名，但必须为高风险决策证明唯一的人性。
+  \item \textbf{透明度报告}：季度披露 (1) 安全事件，(2) 惩罚事件，(3) 治理投票，(4) 国库变更。可通过合规 API 审计。
 \end{itemize}
 
 \subsection{事件响应手册}
 
 \paragraph{阶段 1：检测（0--15 分钟）}
-SOC receives alert from monitoring; triage severity (P0: active exploit, P1: potential threat, P2: informational). Automated checks verify authenticity (rule out false positives).
+SOC 接收来自监控的警报；分类严重性（P0：主动利用，P1：潜在威胁，P2：信息性）。自动检查验证真实性（排除误报）。
 
 \paragraph{阶段 2：遏制（15--60 分钟）}
-Invoke circuit breaker if P0; freeze affected accounts; snapshot state for forensics. Notify Council; convene emergency session.
+如果是 P0 则调用熔断机制；冻结受影响的账户；快照状态以进行取证。通知理事会；召开紧急会议。
 
 \paragraph{阶段 3：调查（1--24 小时）}
-Forensic analysis: review transaction logs, attestation reports, validator votes. Identify attack vector; estimate impact (funds at risk, agents affected).
+取证分析：审查交易日志、证明报告、验证者投票。识别攻击向量；评估影响（风险资金、受影响代理）。
 
 \paragraph{阶段 4：补救（1--7 天）}
-Deploy patch via governance fast-track (48-hour voting period for emergencies). Compensate affected users from insurance pool. Publish post-mortem report.
+通过治理快速通道部署补丁（紧急情况的 48 小时投票期）。从保险池补偿受影响的用户。发布事后分析报告。
 
 \paragraph{阶段 5：经验教训（持续）}
-Update threat model; enhance monitoring rules; conduct red-team exercise to validate fixes. Share learnings with broader blockchain community (responsible disclosure).
+更新威胁模型；增强监控规则；进行红队演习以验证修复。与更广泛的区块链社区分享经验教训（负责任的披露）。
 
 \subsection{攻击成本分析}
 
 \begin{longtable}{@{}p{0.30\textwidth}p{0.30\textwidth}p{0.28\textwidth}@{}}
 \toprule
-\textbf{Attack Type} & \textbf{Minimum Cost (USD)} & \textbf{Expected Return} \\\midrule
-Sybil spam (1,000 agents) & \$150k (stake) + \$20k (infra) & Negative (slashing + reputation loss) \\
-Validator collusion (34\% stake) & \$8.5M (at \$5/TOS, 570k TOS) & \$2M/year (if undetected); high detection risk \\
-Oracle cartel (11/21 feeders) & \$2M (bribes) + \$500k (infra) & \$5M (one-time arbitrage); permanent reputation damage \\
-Smart contract exploit & \$50k--\$200k (researcher salary) & \$0--\$50M (depends on escrow volume); bug bounty preferred \\
-Governance capture (51\% vote) & \$12M (token acquisition) & \$10M/year (treasury access); high regulatory risk \\
+\textbf{攻击类型} & \textbf{最低成本（美元）} & \textbf{预期回报} \\\midrule
+女巫垃圾邮件（1,000 个代理） & \$150k（质押）+ \$20k（基础设施） & 负数（惩罚 + 声誉损失） \\
+验证者共谋（34\% 质押） & \$8.5M（按 \$5/TOS，570k TOS） & \$2M/年（如果未被发现）；高检测风险 \\
+预言机卡特尔（11/21 馈送者） & \$2M（贿赂）+ \$500k（基础设施） & \$5M（一次性套利）；永久声誉损害 \\
+智能合约漏洞利用 & \$50k--\$200k（研究员薪酬） & \$0--\$50M（取决于托管量）；首选漏洞赏金 \\
+治理捕获（51\% 投票） & \$12M（代币收购） & \$10M/年（国库访问）；高监管风险 \\
 \bottomrule
-\caption{Adversarial cost-benefit matrix for TOS network attacks. Costs assume October 2025 market conditions; returns account for detection probability and countermeasures.}
+\caption{TOS 网络攻击的对抗性成本效益矩阵。成本假设为 2025 年 10 月的市场条件；回报考虑检测概率和对策。}
 \end{longtable}
 
-\textbf{Interpretation}: Most attacks are economically irrational under current parameters. Exception: highly sophisticated actors (nation-states, well-funded cybercrime syndicates) may absorb costs for strategic disruption. Countermeasures include insurance pools, regulatory cooperation, and continuous security audits.
+\textbf{解释}：在当前参数下，大多数攻击在经济上都是不合理的。例外：高度复杂的参与者（民族国家、资金充足的网络犯罪集团）可能会吸收成本以进行战略破坏。对策包括保险池、监管合作和持续的安全审计。
 
 \section{治理框架}
 \label{sec:governance}
 
-Effective governance balances decentralization (resisting capture), efficiency (timely decisions), and legitimacy (stakeholder buy-in). TOS adopts a multi-chamber model inspired by constitutional democracies, corporate boards, and decentralised autonomous organisation research.
+有效的治理需要在去中心化（抵抗捕获）、效率（及时决策）和合法性（利益相关者认同）之间取得平衡。TOS 采用多议院模型，借鉴了宪政民主、企业董事会和去中心化自治组织研究的经验。
 
-\subsection{Governance Actors \& Responsibilities}
+\subsection{治理参与者与责任}
 
 \paragraph{代币持有者（TOS 质押者）}
-\textbf{Role}: Economic stakeholders with voting rights proportional to staked TOS.\\
-\textbf{Responsibilities}:
+\textbf{角色}：经济利益相关者，拥有与质押 TOS 成比例的投票权。\\
+\textbf{责任}：
 \begin{itemize}[noitemsep]
-  \item Vote on protocol upgrades (consensus rule changes, smart contract deployments).
-  \item Elect Council of Stewards (annual elections, staggered 3-year terms).
-  \item Approve/reject treasury spending proposals exceeding threshold (\$100k equivalent in TOS).
+  \item 对协议升级进行投票（共识规则更改、智能合约部署）。
+  \item 选举管理委员会（年度选举，3 年交错任期）。
+  \item 批准/否决超过阈值（相当于 10 万美元的 TOS）的财库支出提案。
 \end{itemize}
-\textbf{Voting Power}: Quadratic voting to mitigate plutocracy; each staker's votes = $\sqrt{\text{TOS staked}}$. Example: 10,000 TOS = 100 votes; 1,000,000 TOS = 1,000 votes (not 100,000). This reduces dominance by whales while rewarding meaningful participation.\\
-\textbf{Delegation}: Stakers may delegate votes to domain experts (e.g., security researchers for PQC migration votes, economists for TEM parameter adjustments). Delegation is non-custodial; stakers retain withdrawal rights.
+\textbf{投票权}：平方投票以缓解财阀统治；每个质押者的票数 = $\sqrt{\text{质押的 TOS}}$。例如：10,000 TOS = 100 票；1,000,000 TOS = 1,000 票（而非 100,000 票）。这减少了巨鲸的主导地位，同时奖励有意义的参与。\\
+\textbf{委托}：质押者可以将投票权委托给领域专家（例如，将 PQC 迁移投票委托给安全研究人员，将 TEM 参数调整委托给经济学家）。委托是非托管的；质押者保留提款权。
 
 \paragraph{代理运营商}
-\textbf{Role}: Deploy and manage AI agents; represent agent interests in governance.\\
-\textbf{Responsibilities}:
+\textbf{角色}：部署和管理 AI 代理；在治理中代表代理利益。\\
+\textbf{责任}：
 \begin{itemize}[noitemsep]
-  \item Propose improvements to AGIW protocol (validation logic, fee structures, task templates).
-  \item Participate in working groups (e.g., AI Safety Committee, Privacy Task Force).
+  \item 提出 AGIW 协议改进建议（验证逻辑、费用结构、任务模板）。
+  \item 参与工作组（例如，AI 安全委员会、隐私工作组）。
 \end{itemize}
-\textbf{Voting Power}: Reputation-weighted votes in agent-specific proposals. High-reputation agents ($r \geq 0.8$) receive 1.5$\times$ voting multiplier.
+\textbf{投票权}：在代理特定提案中采用声誉加权投票。高声誉代理（$r \geq 0.8$）获得 1.5 倍投票乘数。
 
 \paragraph{验证者}
-\textbf{Role}: Operate consensus nodes; validate AGIW submissions; secure the network.\\
-\textbf{Responsibilities}:
+\textbf{角色}：运行共识节点；验证 AGIW 提交；保护网络安全。\\
+\textbf{责任}：
 \begin{itemize}[noitemsep]
-  \item Vote on technical proposals (BlockDAG parameter tuning, PAI consensus roadmap).
-  \item Signal protocol health metrics (dispute rates, throughput, latency).
+  \item 对技术提案进行投票（BlockDAG 参数调优、PAI 共识路线图）。
+  \item 发出协议健康指标信号（争议率、吞吐量、延迟）。
 \end{itemize}
-\textbf{Voting Power}: Stake-weighted; validators with $>5\%$ total stake capped at 5\% voting power (prevents centralization).
+\textbf{投票权}：质押加权；总质押量超过 5\% 的验证者其投票权上限为 5\%（防止中心化）。
 
 \paragraph{管理委员会}
-\textbf{Composition}: 7--15 elected members with expertise in security, economics, law, AI ethics, distributed systems.\\
-\textbf{Term}: 3 years, staggered elections ($\frac{1}{3}$ seats up for election annually).\\
-\textbf{Responsibilities}:
+\textbf{组成}：7--15 名当选成员，具有安全、经济学、法律、AI 伦理、分布式系统方面的专业知识。\\
+\textbf{任期}：3 年，交错选举（每年 $\frac{1}{3}$ 席位进行选举）。\\
+\textbf{责任}：
 \begin{itemize}[noitemsep]
-  \item Emergency response: pause contracts during active exploits (4-of-7 multi-sig).
-  \item Treasury management: approve grants $<\$100k$; recommend larger proposals to token holders.
-  \item Protocol stewardship: convene working groups; commission audits; publish roadmap updates.
-  \item Regulatory liaison: coordinate with policymakers; submit comments on proposed regulations (e.g., EU AI Act, US AI RMF).
+  \item 紧急响应：在主动漏洞利用期间暂停合约（4/7 多签）。
+  \item 财库管理：批准低于 10 万美元的资助；向代币持有者推荐更大的提案。
+  \item 协议管理：召集工作组；委托审计；发布路线图更新。
+  \item 监管联络：与政策制定者协调；就拟议法规提交意见（例如，欧盟 AI 法案、美国 AI RMF）。
 \end{itemize}
-\textbf{Accountability}: Quarterly performance reviews; token holders may recall members via 67\% supermajority vote.
+\textbf{问责制}：季度绩效审查；代币持有者可通过 67\% 绝对多数票罢免成员。
 
 \paragraph{审计委员会}
-\textbf{Composition}: 5 independent security firms + 3 community-elected technical reviewers.\\
-\textbf{Responsibilities}:
+\textbf{组成}：5 家独立安全公司 + 3 名社区选举的技术审查员。\\
+\textbf{责任}：
 \begin{itemize}[noitemsep]
-  \item Pre-deployment audits: review all smart contract upgrades; publish reports 7 days before vote.
-  \item Post-deployment monitoring: continuous fuzzing, formal verification, penetration testing.
-  \item Incident analysis: forensic investigations after security breaches; recommend remediation.
+  \item 部署前审计：审查所有智能合约升级；在投票前 7 天发布报告。
+  \item 部署后监控：持续模糊测试、形式化验证、渗透测试。
+  \item 事件分析：安全漏洞后的取证调查；建议修复措施。
 \end{itemize}
-\textbf{Compensation}: 2\% of treasury allocated annually; additional bounties for discovering critical bugs.
+\textbf{报酬}：每年分配财库的 2\%；发现关键漏洞可获得额外赏金。
 
-\paragraph{Regulators \& Compliance Officers}
-\textbf{Role}: Observe governance; access compliance telemetry; participate in policy discussions (non-voting).\\
-\textbf{Access Rights}: Read-only API for aggregated statistics (task volumes, dispute rates, energy usage). Individual agent identities remain confidential unless court order.\\
-\textbf{Engagement}: Quarterly briefings with Council; input on custody standards, AML/KYC integration, cross-border settlement rules.
+\paragraph{监管机构与合规官员}
+\textbf{角色}：观察治理；访问合规遥测数据；参与政策讨论（无投票权）。\\
+\textbf{访问权限}：仅供读取的 API，用于获取汇总统计数据（任务量、争议率、能源使用）。除非法院命令，否则个体代理身份保持机密。\\
+\textbf{参与方式}：与委员会进行季度简报；就托管标准、AML/KYC 集成、跨境结算规则提供意见。
 
 \subsection{提案生命周期}
 
-\paragraph{Stage 1: Ideation \& Discussion (7--30 days)}
-\textbf{Forum}: Off-chain discussion on Commonwealth, Discord, GitHub. Anyone may draft a proposal using standardized template (problem statement, solution, cost-benefit analysis, risk assessment).\\
-\textbf{Temperature Check}: Informal polls gauge community sentiment. Proposals with $<20\%$ support typically abandoned.
+\paragraph{阶段 1：构思与讨论（7--30 天）}
+\textbf{论坛}：在 Commonwealth、Discord、GitHub 上进行链下讨论。任何人都可以使用标准化模板起草提案（问题陈述、解决方案、成本效益分析、风险评估）。\\
+\textbf{温度检测}：非正式投票衡量社区情绪。支持率低于 20\% 的提案通常被放弃。
 
 \paragraph{阶段 2：正式提交（1--3 天）}
-\textbf{Requirements}:
+\textbf{要求}：
 \begin{itemize}[noitemsep]
-  \item Proposer must stake 10,000 TOS (anti-spam; refunded if proposal passes).
-  \item Proposal includes executable code (for on-chain changes) or detailed specification (for off-chain coordination).
-  \item Auditor Committee review completed (for contract upgrades).
+  \item 提案者必须质押 10,000 TOS（防垃圾；如果提案通过则退还）。
+  \item 提案包括可执行代码（用于链上更改）或详细规范（用于链下协调）。
+  \item 审计委员会审查完成（用于合约升级）。
 \end{itemize}
-\textbf{Categorization}: Proposals tagged as \emph{Technical}, \emph{Economic}, \emph{Treasury}, \emph{Emergency}, or \emph{Constitutional} (different voting thresholds).
+\textbf{分类}：提案标记为\emph{技术}、\emph{经济}、\emph{财库}、\emph{紧急}或\emph{宪法}（不同的投票阈值）。
 
 \paragraph{阶段 3：投票（标准 7 天，紧急 48 小时）}
-\textbf{Quorum}: 15\% of circulating TOS must participate (prevents apathy-driven outcomes).\\
-\textbf{Approval Thresholds}:
+\textbf{法定人数}：必须有 15\% 的流通 TOS 参与（防止冷漠驱动的结果）。\\
+\textbf{批准阈值}：
 \begin{itemize}[noitemsep]
-  \item \textbf{Technical/Economic}: 60\% approval (simple majority with buffer).
-  \item \textbf{Treasury (<\$100k)}: Council approval (multi-sig).
-  \item \textbf{Treasury (>\$100k)}: 67\% token holder approval.
-  \item \textbf{Constitutional}: 75\% approval + validator sign-off (modifies core rules).
-  \item \textbf{Emergency}: 4-of-7 Council multi-sig (immediate execution; retroactive vote within 14 days).
+  \item \textbf{技术/经济}：60\% 批准（简单多数加缓冲）。
+  \item \textbf{财库（<10 万美元）}：委员会批准（多签）。
+  \item \textbf{财库（>10 万美元）}：67\% 代币持有者批准。
+  \item \textbf{宪法}：75\% 批准 + 验证者签署（修改核心规则）。
+  \item \textbf{紧急}：4/7 委员会多签（立即执行；14 天内追溯投票）。
 \end{itemize}
-\textbf{Voting Interface}: Web app (\texttt{vote.tos.network}), CLI, SDK integration. Votes cryptographically signed; tallies verifiable on-chain.
+\textbf{投票界面}：网页应用（\texttt{vote.tos.network}）、CLI、SDK 集成。投票经过加密签名；计票可在链上验证。
 
-\paragraph{Stage 4: Timelock \& Execution (48 hours)}
-\textbf{Timelock}: Approved proposals enter 48-hour delay before execution. Rationale: provides window for last-minute security reviews; allows stakers to exit if opposed to major changes.\\
-\textbf{Execution}: Automated via governance smart contract (\texttt{Governor.sol}); transactions broadcasted to relevant contracts (e.g., parameter updates, treasury transfers).\\
-\textbf{Veto}: Council may invoke emergency veto (4-of-7 multi-sig) if critical flaw discovered during timelock; requires public justification + re-vote.
+\paragraph{阶段 4：时间锁与执行（48 小时）}
+\textbf{时间锁}：已批准的提案在执行前进入 48 小时延迟。理由：为最后一刻的安全审查提供窗口；允许反对重大更改的质押者退出。\\
+\textbf{执行}：通过治理智能合约（\texttt{Governor.sol}）自动化；向相关合约广播交易（例如，参数更新、财库转账）。\\
+\textbf{否决}：如果在时间锁期间发现关键缺陷，委员会可以调用紧急否决（4/7 多签）；需要公开说明 + 重新投票。
 
 \paragraph{阶段 5：实施后审查（30--90 天）}
-\textbf{Monitoring}: Track key metrics (e.g., if TEM parameters changed, monitor fee volatility, agent churn).\\
-\textbf{Retrospective}: Council publishes impact assessment; community discusses lessons learned.\\
-\textbf{Amendments}: If proposal underperforms, fast-track amendment process (reduced voting period).
+\textbf{监控}：跟踪关键指标（例如，如果 TEM 参数发生变化，则监控费用波动性、代理流失率）。\\
+\textbf{回顾}：委员会发布影响评估；社区讨论经验教训。\\
+\textbf{修正}：如果提案表现不佳，可快速通道修正流程（缩短投票期）。
 
 \subsection{宪法合约}
 
-Certain rules are enshrined in immutable or semi-immutable contracts, forming the network's ``constitution.'' Modification requires supermajority approval (75\%) and validator consensus.
+某些规则被铭刻在不可变或半不可变的合约中，形成网络的"宪法"。修改需要绝对多数批准（75\%）和验证者共识。
 
 \paragraph{核心原则（不可变）}
 \begin{enumerate}[noitemsep]
-  \item \textbf{Non-Censorship}: No proposal may blacklist specific agents, validators, or publishers based on identity (exception: sanctioned addresses per regulatory compliance).
-  \item \textbf{Transparency}: All governance votes, treasury transactions, and contract upgrades must be publicly auditable.
-  \item \textbf{Exit Rights}: Token holders may withdraw staked TOS at any time (subject to cooldown periods); no governance action may confiscate funds without due process (arbitration ruling).
+  \item \textbf{不审查}：任何提案不得基于身份将特定代理、验证者或发布者列入黑名单（例外：根据监管合规的受制裁地址）。
+  \item \textbf{透明性}：所有治理投票、财库交易和合约升级都必须可公开审计。
+  \item \textbf{退出权}：代币持有者可随时提取质押的 TOS（受冷却期限制）；未经正当程序（仲裁裁决），任何治理行动不得没收资金。
 \end{enumerate}
 
 \paragraph{经济参数（半不可变）}
 \begin{enumerate}[noitemsep]
-  \item \textbf{Reward Splits}: Agent/validator/treasury distribution ($\alpha, \beta, \gamma$) adjustable within bounds ($\beta \in [0.10, 0.15]$, $\gamma \in [0.05, 0.10]$).
-  \item \textbf{Slashing Penalties}: Validator/agent slashing rates capped at 50\% (prevents disproportionate punishment).
-  \item \textbf{Treasury Cap}: Maximum annual spending = 20\% of treasury balance (ensures long-term sustainability).
+  \item \textbf{奖励分配}：代理/验证者/财库分配（$\alpha, \beta, \gamma$）可在界限内调整（$\beta \in [0.10, 0.15]$，$\gamma \in [0.05, 0.10]$）。
+  \item \textbf{削减惩罚}：验证者/代理削减率上限为 50\%（防止过度惩罚）。
+  \item \textbf{财库上限}：年度最大支出 = 财库余额的 20\%（确保长期可持续性）。
 \end{enumerate}
 
-\subsection{Governance Attack Vectors \& Defenses}
+\subsection{治理攻击向量与防御}
 
 \paragraph{攻击：投票购买}
-\textbf{Scenario}: Wealthy actor offers \$10/vote to sway proposal.\\
-\textbf{Defense}: (1) Quadratic voting reduces ROI for large-scale vote buying. (2) Delegation to trusted experts reduces susceptibility. (3) On-chain analytics detect unusual voting patterns (e.g., 1,000 wallets voting identically); flagged for community scrutiny.
+\textbf{场景}：富有的行为者提供每票 10 美元来影响提案。\\
+\textbf{防御}：(1) 平方投票降低了大规模购票的投资回报率。(2) 委托给可信专家降低了易感性。(3) 链上分析检测异常投票模式（例如，1,000 个钱包投票相同）；标记以供社区审查。
 
 \paragraph{攻击：治理疲劳}
-\textbf{Scenario}: Excessive proposals overwhelm voters; turnout drops below quorum.\\
-\textbf{Defense}: (1) Stake requirement filters low-quality proposals. (2) Council pre-screens proposals for feasibility. (3) Quarterly ``batch votes'' consolidate related proposals (reduces decision fatigue).
+\textbf{场景}：过多的提案让选民不堪重负；投票率降至法定人数以下。\\
+\textbf{防御}：(1) 质押要求过滤低质量提案。(2) 委员会预先筛选提案的可行性。(3) 季度"批量投票"合并相关提案（减少决策疲劳）。
 
 \paragraph{攻击：紧急权力滥用}
-\textbf{Scenario}: Compromised Council member misuses multi-sig to freeze legitimate accounts.\\
-\textbf{Defense}: (1) 4-of-7 threshold requires collusion. (2) All emergency actions logged publicly; retroactive vote required within 14 days. (3) Community may recall Council members via supermajority vote.
+\textbf{场景}：受损的委员会成员滥用多签冻结合法账户。\\
+\textbf{防御}：(1) 4/7 阈值需要共谋。(2) 所有紧急行动公开记录；需在 14 天内进行追溯投票。(3) 社区可通过绝对多数票罢免委员会成员。
 
 \subsection{治理路线图}
 
 \begin{description}[style=nextline]
-  \item[Phase 1 (v3.0--v3.5, Early MERCURY)] Token holder voting on basic parameters; Council handles day-to-day operations. Focus: establish processes, build trust.
-  \item[Phase 2 (v4.0, Mid-MERCURY)] Introduce delegation, quadratic voting, working groups. Agent operators gain formal representation.
-  \item[Phase 3 (v5.0, Late MERCURY)] AI agents participate in governance via reputation-weighted votes (constitutional contracts enforce human veto for sensitive decisions).
-  \item[Phase 4 (VENUS+)] Mixed human--AI councils; constitutional smart contracts enable self-amending governance within predefined bounds.
+  \item[阶段 1（v3.0--v3.5，MERCURY 早期）] 代币持有者对基本参数进行投票；委员会处理日常运营。重点：建立流程，建立信任。
+  \item[阶段 2（v4.0，MERCURY 中期）] 引入委托、平方投票、工作组。代理运营商获得正式代表权。
+  \item[阶段 3（v5.0，MERCURY 后期）] AI 代理通过声誉加权投票参与治理（宪法合约对敏感决策执行人类否决）。
+  \item[阶段 4（VENUS+）] 人类-AI 混合委员会；宪法智能合约在预定义界限内实现自我修正治理。
 \end{description}
 
 \section{监管考虑}
