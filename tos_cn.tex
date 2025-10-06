@@ -267,7 +267,7 @@ TOS网络由四个主要层级和多个横切服务组成。该架构设计为�
 \paragraph{流动性池} 自动做市商（恒定乘积AMM）实现CC/EC $\leftrightarrow$ TOS交换。流动性提供者赚取费用（每次交换0.3\%）；TEM对关键交易对的补贴可缓解无常损失。未来的迭代可能会引入集中流动性（Uniswap v3风格）以提高资本效率。
 
 \subsection{第4层：治理与政策}
-\paragraph{政策编译器} 将高级治理规则（用声明式DSL编写）转换为可执行的智能合约。示例策略："将智能体提款>10,000 TOS限制为需多签批准。"编译器生成带有静态检查（有界循环、显式访问控制、事件日志）的Solidity/Rust代码。治理提出编译后的策略，在测试网上运行自动化测试，并在社区审查和时间锁定投票后部署。
+\paragraph{政策编译器} 将高级治理规则（用声明式DSL编写）转换为可执行的智能合约。示例策略："将智能体提款>10,000 TOS限制为需多签批准。"编译器生成带有静态检查（有界循环、显式访问控制、事件日志）的Python代码。治理提出编译后的策略，在测试网上运行自动化测试，并在社区审查和时间锁定投票后部署。
 
 \paragraph{宪法性合约} 编码基本规则（如"禁止超过阈值的单方面财库支出"、"紧急制动需要3/5理事会批准"）。这些合约是不可变的，或需要绝对多数（75\%）投票才能修改。它们作为"宪法"约束治理，防止被捕获或鲁莽变更。
 
@@ -391,15 +391,26 @@ TOS网络由四个主要层级和多个横切服务组成。该架构设计为�
 
 \subsection{身份服务（产品规范）}
 \label{sec:identity-spec}
-\paragraph{DID 注册表实现} DID 注册表是一个 Solidity 智能合约（\texttt{DIDRegistry.sol}），具有以下接口：
+\paragraph{DID 注册表实现} DID 注册表是一个 Python 智能合约模块（\texttt{DIDRegistry.py}），具有以下接口：
 \begin{verbatim}
-function registerDID(bytes32 didHash, bytes calldata didDocument,
-                     bytes calldata signature) external;
-function updateDID(bytes32 didHash, bytes calldata newDocument,
-                   bytes calldata signature) external;
-function revokeDID(bytes32 didHash, bytes calldata signature) external;
-function resolveDID(bytes32 didHash) external view
-    returns (bytes memory didDocument);
+@public
+def register_did(self, did_hash: bytes, did_document: bytes,
+                 signature: bytes) -> None:
+    """在链上注册新的 DID。"""
+
+@public
+def update_did(self, did_hash: bytes, new_document: bytes,
+               signature: bytes) -> None:
+    """更新现有的 DID 文档。"""
+
+@public
+def revoke_did(self, did_hash: bytes, signature: bytes) -> None:
+    """撤销 DID。"""
+
+@public
+@view
+def resolve_did(self, did_hash: bytes) -> bytes:
+    """将 DID 解析为其文档。"""
 \end{verbatim}
 DID 文档符合 W3C DID 核心规范（v1.0）。每个文档包括：
 \begin{itemize}[noitemsep]
@@ -446,7 +457,7 @@ C(v, r) = vG + rH
 \label{sec:agiw-contracts}
 AGIW 生命周期依赖于四个核心合约，具有精确的经济和安全属性：
 
-\paragraph{1. TaskFactory 合约} (\texttt{TaskFactory.sol})\\
+\paragraph{1. TaskFactory 合约} (\texttt{TaskFactory.py})\\
 \textbf{目的}：工厂模式，用于部署具有标准化接口和安全约束的单个任务实例。\\
 \textbf{关键功能}：
 \begin{itemize}[noitemsep]
@@ -462,7 +473,7 @@ AGIW 生命周期依赖于四个核心合约，具有精确的经济和安全属
 \end{itemize}
 \textbf{安全性}：发布者在代理认领任务后无法提取托管；只有 \texttt{RewardSplitter} 可以在验证后释放资金。
 
-\paragraph{2. TaskInstance 合约} (\texttt{TaskInstance.sol})\\
+\paragraph{2. TaskInstance 合约} (\texttt{TaskInstance.py})\\
 \textbf{目的}：管理单个任务的生命周期状态机。\\
 \textbf{状态转换}：
 \begin{equation}
@@ -497,7 +508,7 @@ struct Task {
   \item 如果验证者未能在 24 小时内提交分数，自动回退：任务重新分配给新的验证者群组；原始验证者没收 5\% 的质押。
 \end{itemize}
 
-\paragraph{3. ValidationPool 合约} (\texttt{ValidationPool.sol})\\
+\paragraph{3. ValidationPool 合约} (\texttt{ValidationPool.py})\\
 \textbf{目的}：协调验证者分配、跟踪准确性、执行削减。\\
 \textbf{验证者注册}：
 \begin{itemize}[noitemsep]
@@ -525,7 +536,7 @@ struct Task {
 \end{itemize}
 \textbf{奖励分配}：验证者集体赚取 $e \times \beta \times (1-q)$，其中 $e$ 是托管，$\beta=0.12$，$q$ 是代理质量分数。奖励按准确性 $Acc_v$ 成比例分配。
 
-\paragraph{4. RewardSplitter 合约} (\texttt{RewardSplitter.sol})\\
+\paragraph{4. RewardSplitter 合约} (\texttt{RewardSplitter.py})\\
 \textbf{目的}：确定性奖励分配，带有冷却期和声誉更新。\\
 \textbf{分配公式}：给定具有托管 $e$（以 CC/EC 计）和最终质量分数 $q \in [0,1]$ 的任务：
 \begin{align}
@@ -713,7 +724,7 @@ r_a^{\text{accuracy}} = r_a^{\text{base}} + 0.2 \times (2 Acc_a - 1)
 \subsection{产品组合}
 市场与安全时代引入四项核心产品，面向企业部署和自主商业单元：
 
-\paragraph{1. 受监管托管} (\texttt{CustodyVault.sol})\\
+\paragraph{1. 受监管托管} (\texttt{CustodyVault.py})\\
 \textbf{理由}：企业和受监管实体需要可编程的支出控制、多方批准和可审计性。传统区块链钱包缺乏这些功能。\\
 \textbf{架构}：
 \begin{itemize}[noitemsep]
@@ -730,7 +741,7 @@ r_a^{\text{accuracy}} = r_a^{\text{base}} + 0.2 \times (2 Acc_a - 1)
 \end{itemize}
 \textbf{合规性}：SOC 2 Type II 审计包包括 HSM 证明日志、策略执行轨迹、访问控制矩阵。通过 SAML/OAuth 与企业身份提供商（Active Directory、Okta）集成。
 
-\paragraph{2. 混合结算} (\texttt{BridgeController.sol}, \texttt{FiatGateway.sol})\\
+\paragraph{2. 混合结算} (\texttt{BridgeController.py}, \texttt{FiatGateway.py})\\
 \textbf{理由}：自主商业单元需要与传统金融轨道（银行账户、信用卡、发票）和其他区块链生态系统交互。\\
 \textbf{跨链桥}：
 \begin{itemize}[noitemsep]
@@ -750,7 +761,7 @@ r_a^{\text{accuracy}} = r_a^{\text{base}} + 0.2 \times (2 Acc_a - 1)
   \item \textbf{风险管理}：如果保证金低于维持阈值，自动清算；保险基金（期货交易量的 3\%）覆盖市场错位。
 \end{itemize}
 
-\paragraph{3. 专家仲裁法庭} (\texttt{ArbitrationCourt.sol})\\
+\paragraph{3. 专家仲裁法庭} (\texttt{ArbitrationCourt.py})\\
 \textbf{理由}：需要领域专业知识（法律解释、技术评估）的争议无法通过算法解决。\\
 \textbf{仲裁员认证}：
 \begin{itemize}[noitemsep]
@@ -769,7 +780,7 @@ r_a^{\text{accuracy}} = r_a^{\text{base}} + 0.2 \times (2 Acc_a - 1)
 \end{enumerate}
 \textbf{保险池}：通过 TEM 分配（AGIW 交易量的 2\%）资助；覆盖双方均善意行事但结果不明确的灾难性案例（例如，不可预见的技术故障）。支付需要 4-of-7 理事会投票。
 
-\paragraph{4. 安全预言机} (\texttt{SafetyOracle.sol})\\
+\paragraph{4. 安全预言机} (\texttt{SafetyOracle.py})\\
 \textbf{理由}：AI 代理可能产生有害输出（偏见、毒性、错误信息）；企业需要实时安全保障。\\
 \textbf{数据源}：
 \begin{itemize}[noitemsep]
@@ -875,7 +886,7 @@ PAI 中心化风险 & 开源 AI 模型、治理强制边界（最少验证者、
 
 \subsection{政策即代码编译器}
 \label{sec:policy-compiler}
-\paragraph{动机} 宪法治理需要将法律、业务逻辑和合规规则编码为可执行的智能合约。然而，Solidity/Rust 复杂、易错且非开发者难以使用。政策编译器弥合了这一鸿沟。
+\paragraph{动机} 宪法治理需要将法律、业务逻辑和合规规则编码为可执行的智能合约。然而，低级实现语言复杂、易错且非开发者难以使用。政策编译器弥合了这一鸿沟。
 
 \paragraph{架构}
 \begin{enumerate}[noitemsep]
@@ -899,7 +910,7 @@ policy AgentWithdrawalLimit {
     \begin{itemize}[noitemsep]
       \item \textbf{解析器}：对 DSL 进行词法分析，构建抽象语法树（AST）。
       \item \textbf{静态分析器}：检查有界循环（无无限 gas）、显式访问控制（无未保护函数）、强制事件日志记录。
-      \item \textbf{代码生成器}：生成针对 TOS 虚拟机的 Solidity 或 Rust 代码。
+      \item \textbf{代码生成器}：生成针对 TOS 虚拟机的 Python 代码。
       \item \textbf{优化器}：通过死代码消除、常量折叠减少 gas 成本。
       \item \textbf{验证器}：使用 SMT 求解器（Z3、CVC5）进行形式化验证，证明安全属性（例如"无未授权提款"、"所有状态变更已记录"）。
     \end{itemize}
@@ -2019,7 +2030,7 @@ SOC 接收来自监控的警报；分类严重性（P0：主动利用，P1：潜
 
 \paragraph{阶段 4：时间锁与执行（48 小时）}
 \textbf{时间锁}：已批准的提案在执行前进入 48 小时延迟。理由：为最后一刻的安全审查提供窗口；允许反对重大更改的质押者退出。\\
-\textbf{执行}：通过治理智能合约（\texttt{Governor.sol}）自动化；向相关合约广播交易（例如，参数更新、财库转账）。\\
+\textbf{执行}：通过治理智能合约（\texttt{Governor.py}）自动化；向相关合约广播交易（例如，参数更新、财库转账）。\\
 \textbf{否决}：如果在时间锁期间发现关键缺陷，委员会可以调用紧急否决（4/7 多签）；需要公开说明 + 重新投票。
 
 \paragraph{阶段 5：实施后审查（30--90 天）}

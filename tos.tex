@@ -262,7 +262,7 @@ The TOS Network comprises four primary layers and multiple cross-cutting service
 \paragraph{Liquidity Pools} Automated market makers (constant-product AMMs) enable CC/EC $\leftrightarrow$ TOS swaps. Liquidity providers earn fees (0.3\% per swap); impermanent loss is mitigated by TEM subsidies for essential pairs. Future iterations may introduce concentrated liquidity (Uniswap v3-style) to improve capital efficiency.
 
 \subsection{Layer 4: Governance \& Policy}
-\paragraph{Policy Compiler} Translates high-level governance rules (written in a declarative DSL) into executable smart contracts. Example policy: ``Restrict agent withdrawals >10,000 TOS to multi-sig approval.'' The compiler generates Solidity/Rust code with static checks (bounded loops, explicit access control, event logging). Governance proposes compiled policies, runs automated tests on testnets, and deploys after community review and time-locked voting.
+\paragraph{Policy Compiler} Translates high-level governance rules (written in a declarative DSL) into executable smart contract modules. Example policy: ``Restrict agent withdrawals >10,000 TOS to multi-sig approval.'' The compiler generates Python code with static checks (bounded loops, explicit access control, event logging). Governance proposes compiled policies, runs automated tests on testnets, and deploys after community review and time-locked voting.
 
 \paragraph{Constitutional Contracts} Encode fundamental rules (e.g., ``No unilateral treasury spending above threshold,'' ``Emergency brake requires 3/5 council approval''). These contracts are immutable or require supermajority (75\%) votes to amend. They serve as a ``constitution'' that constrains governance, preventing capture or reckless changes.
 
@@ -386,15 +386,27 @@ Compliance readiness & SOC 2-style audit package & Compliance API logs, proof-of
 
 \subsection{Identity Services (Product Specification)}
 \label{sec:identity-spec}
-\paragraph{DID Registry Implementation} The DID registry is a Solidity smart contract (\texttt{DIDRegistry.sol}) with the following interface:
+\paragraph{DID Registry Implementation} The DID registry is a Python smart contract module (\texttt{DIDRegistry.py}) with the following interface:
 \begin{verbatim}
-function registerDID(bytes32 didHash, bytes calldata didDocument,
-                     bytes calldata signature) external;
-function updateDID(bytes32 didHash, bytes calldata newDocument,
-                   bytes calldata signature) external;
-function revokeDID(bytes32 didHash, bytes calldata signature) external;
-function resolveDID(bytes32 didHash) external view
-    returns (bytes memory didDocument);
+class DIDRegistry:
+    @public
+    def register_did(self, did_hash: bytes, did_document: bytes,
+                     signature: bytes) -> None:
+        """Register a new DID with its document"""
+
+    @public
+    def update_did(self, did_hash: bytes, new_document: bytes,
+                   signature: bytes) -> None:
+        """Update an existing DID document"""
+
+    @public
+    def revoke_did(self, did_hash: bytes, signature: bytes) -> None:
+        """Revoke a DID"""
+
+    @public
+    @view
+    def resolve_did(self, did_hash: bytes) -> bytes:
+        """Resolve a DID to its document"""
 \end{verbatim}
 DID documents conform to W3C DID Core specification (v1.0). Each document includes:
 \begin{itemize}[noitemsep]
@@ -441,7 +453,7 @@ where $v$ is the value (amount), $r$ is the blinding factor, $G$ and $H$ are ell
 \label{sec:agiw-contracts}
 The AGIW lifecycle relies on four core contracts with precise economic and security properties:
 
-\paragraph{1. TaskFactory Contract} (\texttt{TaskFactory.sol})\\
+\paragraph{1. TaskFactory Contract} (\texttt{TaskFactory.py})\\
 \textbf{Purpose}: Factory pattern for deploying individual task instances with standardised interfaces and security constraints.\\
 \textbf{Key Functions}:
 \begin{itemize}[noitemsep]
@@ -457,7 +469,7 @@ The AGIW lifecycle relies on four core contracts with precise economic and secur
 \end{itemize}
 \textbf{Security}: Publishers cannot withdraw escrow after agent claims task; only \texttt{RewardSplitter} can release funds post-validation.
 
-\paragraph{2. TaskInstance Contract} (\texttt{TaskInstance.sol})\\
+\paragraph{2. TaskInstance Contract} (\texttt{TaskInstance.py})\\
 \textbf{Purpose}: Manages lifecycle state machine for a single task.\\
 \textbf{State Transitions}:
 \begin{equation}
@@ -466,19 +478,19 @@ The AGIW lifecycle relies on four core contracts with precise economic and secur
 Alternative path: any state $\xrightarrow{\text{dispute()}}$ \texttt{Disputed} $\xrightarrow{\text{arbitration}}$ \texttt{Resolved}.\\
 \textbf{Key State Variables}:
 \begin{verbatim}
-struct Task {
-    bytes32 taskID;
-    address publisher;
-    address claimedBy;
-    uint256 escrow;
-    uint256 deadline;
-    bytes32 specHash;      // IPFS CID of specification
-    bytes32 resultHash;    // submitted by agent
-    bytes attestation;     // TEE attestation report
-    uint8 state;           // enum: Open, Claimed, Submitted, ...
-    mapping(address => uint8) validatorScores;  // scores [0,100]
-    uint256 finalQuality;  // median of validator scores
-}
+@dataclass
+class Task:
+    task_id: bytes              # Task identifier
+    publisher: str              # Publisher address
+    claimed_by: str             # Agent address who claimed task
+    escrow: int                 # Escrow amount
+    deadline: int               # Deadline timestamp
+    spec_hash: bytes            # IPFS CID of specification
+    result_hash: bytes          # submitted by agent
+    attestation: bytes          # TEE attestation report
+    state: TaskState            # enum: Open, Claimed, Submitted, ...
+    validator_scores: dict[str, int]  # scores [0,100]
+    final_quality: int          # median of validator scores
 \end{verbatim}
 \textbf{Key Functions}:
 \begin{itemize}[noitemsep]
@@ -492,7 +504,7 @@ struct Task {
   \item If validators fail to submit scores within 24 hours, automatic fallback: task re-assigned to new validator cohort; original validators forfeit 5\% of stake.
 \end{itemize}
 
-\paragraph{3. ValidationPool Contract} (\texttt{ValidationPool.sol})\\
+\paragraph{3. ValidationPool Contract} (\texttt{ValidationPool.py})\\
 \textbf{Purpose}: Coordinate validator assignment, track accuracy, enforce slashing.\\
 \textbf{Validator Registration}:
 \begin{itemize}[noitemsep]
@@ -520,7 +532,7 @@ struct Task {
 \end{itemize}
 \textbf{Reward Distribution}: Validators collectively earn $e \times \beta \times (1-q)$ where $e$ is escrow, $\beta=0.12$, $q$ is agent quality score. Rewards split proportional to accuracy $Acc_v$.
 
-\paragraph{4. RewardSplitter Contract} (\texttt{RewardSplitter.sol})\\
+\paragraph{4. RewardSplitter Contract} (\texttt{RewardSplitter.py})\\
 \textbf{Purpose}: Deterministic reward distribution with cooling periods and reputation updates.\\
 \textbf{Distribution Formula}: Given task with escrow $e$ (in CC/EC) and final quality score $q \in [0,1]$:
 \begin{align}
@@ -708,7 +720,7 @@ As the MERCURY era matures and transitions toward VENUS, generative AI's economi
 \subsection{Product Portfolio}
 The Markets \& Safety era introduces four core products targeting enterprise deployments and autonomous business units:
 
-\paragraph{1. Regulated Custody} (\texttt{CustodyVault.sol})\\
+\paragraph{1. Regulated Custody} (\texttt{CustodyVault.py})\\
 \textbf{Rationale}: Enterprises and regulated entities require programmable spending controls, multi-party approval, and auditability. Traditional blockchain wallets lack these features.\\
 \textbf{Architecture}:
 \begin{itemize}[noitemsep]
@@ -725,7 +737,7 @@ The Markets \& Safety era introduces four core products targeting enterprise dep
 \end{itemize}
 \textbf{Compliance}: SOC 2 Type II audit package includes HSM attestation logs, policy execution traces, access control matrices. Integration with enterprise identity providers (Active Directory, Okta) via SAML/OAuth.
 
-\paragraph{2. Hybrid Settlement} (\texttt{BridgeController.sol}, \texttt{FiatGateway.sol})\\
+\paragraph{2. Hybrid Settlement} (\texttt{BridgeController.py}, \texttt{FiatGateway.py})\\
 \textbf{Rationale}: Autonomous business units need to interact with traditional financial rails (bank accounts, credit cards, invoices) and other blockchain ecosystems.\\
 \textbf{Cross-Chain Bridges}:
 \begin{itemize}[noitemsep]
@@ -745,7 +757,7 @@ The Markets \& Safety era introduces four core products targeting enterprise dep
   \item \textbf{Risk management}: Automated liquidation if margin falls below maintenance threshold; insurance fund (3\% of futures volume) covers market dislocations.
 \end{itemize}
 
-\paragraph{3. Expert Arbitration Court} (\texttt{ArbitrationCourt.sol})\\
+\paragraph{3. Expert Arbitration Court} (\texttt{ArbitrationCourt.py})\\
 \textbf{Rationale}: Disputes requiring domain expertise (legal interpretation, technical evaluation) cannot be resolved algorithmically.\\
 \textbf{Arbitrator Accreditation}:
 \begin{itemize}[noitemsep]
@@ -764,7 +776,7 @@ The Markets \& Safety era introduces four core products targeting enterprise dep
 \end{enumerate}
 \textbf{Insurance Pool}: Funded via TEM allocations (2\% of AGIW volume); covers catastrophic cases where both parties acted in good faith but outcome is ambiguous (e.g., unforeseen technical failure). Payout requires 4-of-7 Council vote.
 
-\paragraph{4. Safety Oracle} (\texttt{SafetyOracle.sol})\\
+\paragraph{4. Safety Oracle} (\texttt{SafetyOracle.py})\\
 \textbf{Rationale}: AI agents may produce harmful outputs (bias, toxicity, misinformation); enterprises need real-time safeguards.\\
 \textbf{Data Sources}:
 \begin{itemize}[noitemsep]
@@ -870,7 +882,7 @@ By the 2070s, Metaworld 1.0 emerges as a self-consistent virtual civilization. G
 
 \subsection{Policy-as-Code Compiler}
 \label{sec:policy-compiler}
-\paragraph{Motivation} Constitutional governance requires encoding laws, business logic, and compliance rules in executable smart contracts. However, Solidity/Rust are complex, error-prone, and inaccessible to non-developers. The policy compiler bridges this gap.
+\paragraph{Motivation} Constitutional governance requires encoding laws, business logic, and compliance rules in executable smart contract modules. However, low-level implementation languages are complex, error-prone, and inaccessible to non-developers. The policy compiler bridges this gap.
 
 \paragraph{Architecture}
 \begin{enumerate}[noitemsep]
@@ -894,7 +906,7 @@ policy AgentWithdrawalLimit {
     \begin{itemize}[noitemsep]
       \item \textbf{Parser}: Tokenises DSL, builds abstract syntax tree (AST).
       \item \textbf{Static Analyser}: Checks bounded loops (no infinite gas), explicit access control (no unguarded functions), mandatory event logging.
-      \item \textbf{Code Generator}: Emits Solidity or Rust targeting TOS virtual machine.
+      \item \textbf{Code Generator}: Emits Python code targeting TOS virtual machine.
       \item \textbf{Optimiser}: Reduces gas cost via dead code elimination, constant folding.
       \item \textbf{Verifier}: Formal verification using SMT solvers (Z3, CVC5) to prove safety properties (e.g., ``no unauthorised withdrawal,'' ``all state changes logged'').
     \end{itemize}
@@ -2014,7 +2026,7 @@ Effective governance balances decentralization (resisting capture), efficiency (
 
 \paragraph{Stage 4: Timelock \& Execution (48 hours)}
 \textbf{Timelock}: Approved proposals enter 48-hour delay before execution. Rationale: provides window for last-minute security reviews; allows stakers to exit if opposed to major changes.\\
-\textbf{Execution}: Automated via governance smart contract (\texttt{Governor.sol}); transactions broadcasted to relevant contracts (e.g., parameter updates, treasury transfers).\\
+\textbf{Execution}: Automated via governance smart contract module (\texttt{Governor.py}); transactions broadcasted to relevant contracts (e.g., parameter updates, treasury transfers).\\
 \textbf{Veto}: Council may invoke emergency veto (4-of-7 multi-sig) if critical flaw discovered during timelock; requires public justification + re-vote.
 
 \paragraph{Stage 5: Post-Implementation Review (30--90 days)}

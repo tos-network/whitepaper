@@ -267,7 +267,7 @@ TOSネットワークは4つの主要レイヤーと複数の横断的サービ�
 \paragraph{流動性プール} 自動マーケットメーカー（定数積AMM）はCC/EC $\leftrightarrow$ TOSスワップを可能にする。流動性プロバイダーは手数料（スワップあたり0.3\%）を獲得；インパーマネントロスは必須ペアのTEM助成金によって緩和される。将来の反復では、資本効率を向上させるために集中流動性（Uniswap v3スタイル）が導入される可能性がある。
 
 \subsection{レイヤー4：ガバナンスとポリシー}
-\paragraph{ポリシーコンパイラ} 高レベルのガバナンスルール（宣言型DSLで記述）を実行可能なスマートコントラクトに変換する。ポリシーの例：「10,000 TOSを超えるエージェント引き出しをマルチシグ承認に制限する」。コンパイラは静的チェック（有界ループ、明示的アクセス制御、イベントロギング）を備えたSolidity/Rustコードを生成する。ガバナンスはコンパイルされたポリシーを提案し、testnetで自動テストを実行し、コミュニティレビューと時間ロックされた投票の後に展開する。
+\paragraph{ポリシーコンパイラ} 高レベルのガバナンスルール（宣言型DSLで記述）を実行可能なスマートコントラクトに変換する。ポリシーの例：「10,000 TOSを超えるエージェント引き出しをマルチシグ承認に制限する」。コンパイラは静的チェック（有界ループ、明示的アクセス制御、イベントロギング）を備えたPythonコードを生成する。ガバナンスはコンパイルされたポリシーを提案し、testnetで自動テストを実行し、コミュニティレビューと時間ロックされた投票の後に展開する。
 
 \paragraph{憲法的契約} 基本的なルールをエンコードする（例：「しきい値を超える一方的なトレジャリー支出なし」、「緊急ブレーキには評議会の3/5承認が必要」）。これらの契約は不変であるか、修正するには絶対多数（75\%）の投票を必要とする。これらはガバナンスを制約する「憲法」として機能し、捕獲または無謀な変更を防ぐ。
 
@@ -391,15 +391,26 @@ CC/ECによる手数料助成 & $>$ 60\% & TEM分析（発行、償還） \\
 
 \subsection{アイデンティティサービス（製品仕様）}
 \label{sec:identity-spec}
-\paragraph{DIDレジストリ実装} DIDレジストリは以下のインターフェースを持つSolidityスマートコントラクト（\texttt{DIDRegistry.sol}）である：
+\paragraph{DIDレジストリ実装} DIDレジストリは以下のインターフェースを持つPythonスマートコントラクトモジュール（\texttt{DIDRegistry.py}）である：
 \begin{verbatim}
-function registerDID(bytes32 didHash, bytes calldata didDocument,
-                     bytes calldata signature) external;
-function updateDID(bytes32 didHash, bytes calldata newDocument,
-                   bytes calldata signature) external;
-function revokeDID(bytes32 didHash, bytes calldata signature) external;
-function resolveDID(bytes32 didHash) external view
-    returns (bytes memory didDocument);
+@public
+def register_did(self, did_hash: bytes, did_document: bytes,
+                 signature: bytes) -> None:
+    """Register a new DID on-chain."""
+
+@public
+def update_did(self, did_hash: bytes, new_document: bytes,
+               signature: bytes) -> None:
+    """Update an existing DID document."""
+
+@public
+def revoke_did(self, did_hash: bytes, signature: bytes) -> None:
+    """Revoke a DID."""
+
+@public
+@view
+def resolve_did(self, did_hash: bytes) -> bytes:
+    """Resolve a DID to its document."""
 \end{verbatim}
 DIDドキュメントはW3C DID Core仕様（v1.0）に準拠する。各ドキュメントには以下が含まれる：
 \begin{itemize}[noitemsep]
@@ -446,7 +457,7 @@ C(v, r) = vG + rH
 \label{sec:agiw-contracts}
 AGIWライフサイクルは、正確な経済的およびセキュリティ特性を持つ4つのコア契約に依存する：
 
-\paragraph{1. TaskFactory契約} (\texttt{TaskFactory.sol})\\
+\paragraph{1. TaskFactory契約} (\texttt{TaskFactory.py})\\
 \textbf{目的}：標準化されたインターフェースとセキュリティ制約を持つ個別タスクインスタンスを展開するためのファクトリーパターン。\\
 \textbf{主要機能}：
 \begin{itemize}[noitemsep]
@@ -462,7 +473,7 @@ AGIWライフサイクルは、正確な経済的およびセキュリティ特�
 \end{itemize}
 \textbf{セキュリティ}：公開者はエージェントがタスクを請求した後にエスクローを引き出せない；検証後に資金を解放できるのは\texttt{RewardSplitter}のみ。
 
-\paragraph{2. TaskInstance契約} (\texttt{TaskInstance.sol})\\
+\paragraph{2. TaskInstance契約} (\texttt{TaskInstance.py})\\
 \textbf{目的}：単一タスクのライフサイクル状態マシンを管理。\\
 \textbf{状態遷移}：
 \begin{equation}
@@ -497,7 +508,7 @@ struct Task {
   \item バリデーターが24時間以内にスコアを提出できない場合、自動フォールバック：タスクは新しいバリデーターコホートに再割り当て；元のバリデーターはステークの5\%を没収。
 \end{itemize}
 
-\paragraph{3. ValidationPool契約} (\texttt{ValidationPool.sol})\\
+\paragraph{3. ValidationPool契約} (\texttt{ValidationPool.py})\\
 \textbf{目的}：バリデーター割り当ての調整、精度追跡、スラッシングの実施。\\
 \textbf{バリデーター登録}：
 \begin{itemize}[noitemsep]
@@ -525,7 +536,7 @@ struct Task {
 \end{itemize}
 \textbf{報酬分配}：バリデーターは集合的に $e \times \beta \times (1-q)$ を獲得、ここで $e$ はエスクロー、$\beta=0.12$、$q$ はエージェント品質スコア。報酬は精度 $Acc_v$ に比例して分配。
 
-\paragraph{4. RewardSplitter契約} (\texttt{RewardSplitter.sol})\\
+\paragraph{4. RewardSplitter契約} (\texttt{RewardSplitter.py})\\
 \textbf{目的}：クーリング期間と評判更新を伴う決定論的報酬分配。\\
 \textbf{分配式}：エスクロー $e$（CC/EC建て）および最終品質スコア $q \in [0,1]$ を持つタスクが与えられた場合：
 \begin{align}
@@ -713,7 +724,7 @@ MERCURY紀元が成熟しVENUS紀元への移行が進むにつれ、生成AIの
 \subsection{製品ポートフォリオ}
 市場と安全性時代は、企業展開および自律的ビジネスユニットを対象とした4つのコア製品を導入する:
 
-\paragraph{1. 規制された保管} (\texttt{CustodyVault.sol})\\
+\paragraph{1. 規制された保管} (\texttt{CustodyVault.py})\\
 \textbf{根拠}: 企業および規制対象事業体は、プログラム可能な支出管理、複数当事者による承認、監査可能性を必要とする。従来のブロックチェーンウォレットにはこれらの機能が欠けている。\\
 \textbf{アーキテクチャ}:
 \begin{itemize}[noitemsep]
@@ -730,7 +741,7 @@ MERCURY紀元が成熟しVENUS紀元への移行が進むにつれ、生成AIの
 \end{itemize}
 \textbf{コンプライアンス}: SOC 2 Type II監査パッケージには、HSM証明ログ、ポリシー実行トレース、アクセス制御マトリックスが含まれる。SAML/OAuthを介したエンタープライズIDプロバイダー(Active Directory、Okta)との統合。
 
-\paragraph{2. ハイブリッド決済} (\texttt{BridgeController.sol}, \texttt{FiatGateway.sol})\\
+\paragraph{2. ハイブリッド決済} (\texttt{BridgeController.py}, \texttt{FiatGateway.py})\\
 \textbf{根拠}: 自律的ビジネスユニットは、従来の金融インフラ(銀行口座、クレジットカード、請求書)および他のブロックチェーンエコシステムと相互作用する必要がある。\\
 \textbf{クロスチェーンブリッジ}:
 \begin{itemize}[noitemsep]
@@ -750,7 +761,7 @@ MERCURY紀元が成熟しVENUS紀元への移行が進むにつれ、生成AIの
   \item \textbf{リスク管理}: 証拠金が維持閾値を下回った場合の自動清算。保険基金(先物取引量の3\%)が市場の混乱をカバー。
 \end{itemize}
 
-\paragraph{3. 専門家仲裁裁判所} (\texttt{ArbitrationCourt.sol})\\
+\paragraph{3. 専門家仲裁裁判所} (\texttt{ArbitrationCourt.py})\\
 \textbf{根拠}: ドメイン専門知識(法的解釈、技術評価)を必要とする紛争は、アルゴリズム的に解決できない。\\
 \textbf{仲裁人の認定}:
 \begin{itemize}[noitemsep]
@@ -769,7 +780,7 @@ MERCURY紀元が成熟しVENUS紀元への移行が進むにつれ、生成AIの
 \end{enumerate}
 \textbf{保険プール}: TEM配分(AGIWボリュームの2\%)を介して資金提供される。両当事者が誠実に行動したが結果が曖昧な壊滅的なケース(例:予期しない技術的故障)をカバーする。支払いには4-of-7評議会投票が必要。
 
-\paragraph{4. 安全オラクル} (\texttt{SafetyOracle.sol})\\
+\paragraph{4. 安全オラクル} (\texttt{SafetyOracle.py})\\
 \textbf{根拠}: AIエージェントは有害な出力(バイアス、有毒性、誤情報)を生成する可能性があり、企業はリアルタイムのセーフガードを必要とする。\\
 \textbf{データソース}:
 \begin{itemize}[noitemsep]
@@ -875,7 +886,7 @@ PAI中央集権化リスク & オープンソースAIモデル、ガバナンス
 
 \subsection{ポリシーasコードコンパイラ}
 \label{sec:policy-compiler}
-\paragraph{動機} 憲法的ガバナンスは、法律、ビジネスロジック、コンプライアンスルールを実行可能なスマートコントラクトにエンコードすることを必要とする。しかし、Solidity/Rustは複雑でエラーが発生しやすく、非開発者にはアクセスできない。ポリシーコンパイラがこのギャップを埋める。
+\paragraph{動機} 憲法的ガバナンスは、法律、ビジネスロジック、コンプライアンスルールを実行可能なスマートコントラクトにエンコードすることを必要とする。しかし、低レベルの実装言語は複雑でエラーが発生しやすく、非開発者にはアクセスできない。ポリシーコンパイラがこのギャップを埋める。
 
 \paragraph{アーキテクチャ}
 \begin{enumerate}[noitemsep]
@@ -899,7 +910,7 @@ policy AgentWithdrawalLimit {
     \begin{itemize}[noitemsep]
       \item \textbf{パーサー}: DSLをトークン化し、抽象構文木(AST)を構築する。
       \item \textbf{静的アナライザ}: 有界ループ(無限ガスなし)、明示的アクセス制御(無防備な関数なし)、必須イベントログを確認する。
-      \item \textbf{コードジェネレータ}: TOS仮想マシンをターゲットとするSolidityまたはRustを出力する。
+      \item \textbf{コードジェネレータ}: TOS仮想マシンをターゲットとするPythonコードを出力する。
       \item \textbf{最適化}: デッドコード除去、定数畳み込みによりガスコストを削減する。
       \item \textbf{検証器}: SMTソルバー(Z3、CVC5)を使用した形式検証により、安全性プロパティ(例:「不正な引き出しなし」、「すべての状態変更がログされる」)を証明する。
     \end{itemize}
@@ -2019,7 +2030,7 @@ P0の場合サーキットブレーカーを発動；影響を受けたアカウ
 
 \paragraph{ステージ4：タイムロックと実行（48時間）}
 \textbf{タイムロック}：承認された提案は実行前に48時間遅延に入る。根拠：土壇場のセキュリティレビューのウィンドウを提供；主要な変更に反対する場合ステーカーが退出可能。\\
-\textbf{実行}：ガバナンススマートコントラクト（\texttt{Governor.sol}）を介して自動化；トランザクションは関連コントラクトにブロードキャスト（例：パラメータ更新、財務移転）。\\
+\textbf{実行}：ガバナンススマートコントラクト（\texttt{Governor.py}）を介して自動化；トランザクションは関連コントラクトにブロードキャスト（例：パラメータ更新、財務移転）。\\
 \textbf{拒否権}：タイムロック中に重大な欠陥が発見された場合、評議会は緊急拒否権を発動可能（4-of-7マルチシグ）；公的正当化 + 再投票が必要。
 
 \paragraph{ステージ5：実装後レビュー（30--90日）}
