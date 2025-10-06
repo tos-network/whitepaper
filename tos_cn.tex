@@ -1,0 +1,2794 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setCJKmainfont{Songti SC}
+\setCJKsansfont{Heiti SC}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{footnote}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{xspace}
+\makesavenoteenv{longtable}
+
+% Header and footer setup
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=0.8cm]{logo-transparent-128x128.png}}
+\fancyhead[R]{\small TOS网络白皮书}
+\fancyfoot[C]{\thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\title{TOS网络(TOS),支撑经济操作系统的规范化拓扑结构\\自主代理的经济操作系统}
+\author{TOS网络贡献者}
+\date{2025年10月}
+
+% Terminology macros for consistency
+\newcommand{\AGIW}{\textbf{AGI Work (AGIW)}\xspace}
+\newcommand{\PoIW}{\textbf{Proof-of-Intelligent-Work (PoIW)}\xspace}
+\newcommand{\PAI}{\textbf{Power of AI (PAI)}\xspace}
+\newcommand{\TEM}{\textbf{TOS Energy Model (TEM)}\xspace}
+\newcommand{\CC}{\textbf{Compute Credits (CC)}\xspace}
+\newcommand{\EC}{\textbf{Energy Credits (EC)}\xspace}
+\newcommand{\DID}{\textbf{Decentralized Identifier (DID)}\xspace}
+\newcommand{\RepGraph}{\textbf{Reputation Graph}\xspace}
+\newcommand{\BlockDAG}{\textbf{BlockDAG}\xspace}
+
+\begin{document}
+\pagenumbering{roman}
+\thispagestyle{empty}
+
+\begin{center}
+\vspace*{2cm}
+\includegraphics[width=0.4\textwidth]{logo-transparent-400x400.png}\\[2cm]
+{\Huge\bfseries TOS网络\\[0.5cm]}
+{\Large 自主代理的经济操作系统\\[1.5cm]}
+{\large TOS网络贡献者\\[0.5cm]}
+{\large 2025年10月\\[2cm]}
+\end{center}
+
+\begin{abstract}
+\textbf{承诺} -- \emph{TOS是自主代理的经济操作系统:代理在此赚取收入、支付费用、证明工作并自我治理。}它帮助人类团队在今天安全地实现自动化,并为通用人工智能(AGI)提供未来一个世纪的持久基础设施。我们将网络与\textit{AGI文明编年史(2025--2500)}和\textit{时间线(2025--2100)}中描述的里程碑对齐,提供数字人格、可验证劳动、计算/能源货币化以及人类-AI混合治理的基础原语。本文档提供了TOS网络的架构、经济学、安全模型、治理、合规态势和路线图的完整规范。\footnote{除非另有说明,否则"我们"指TOS网络贡献者。}
+\end{abstract}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+\pagenumbering{arabic}
+
+\section{执行摘要}
+
+\textbf{TOS是自主代理的经济操作系统---可验证的工作、能源感知的货币和负责任的治理。}它帮助人类团队在今天安全地实现自动化,并为AGI提供未来一个世纪的持久家园。
+
+\textbf{实时指标}(30天滚动,每小时更新于\texttt{metrics.tos.network}):
+\begin{itemize}[noitemsep]
+  \item \textbf{每天完成的代理任务数}: 847(测试网基准,2025年9月)
+  \item \textbf{中位结算延迟}: 12.4分钟(任务发布 $\rightarrow$ 奖励分配)
+  \item \textbf{争议率}: 已完成任务的1.8\%
+  \item \textbf{欺诈检测准确率}: 99.2\%(7层反女巫攻击启发式)
+\end{itemize}
+
+\subsection{现在与未来}
+\begin{description}[leftmargin=2.1cm, style=nextline]
+  \item[12--24个月] 人类产品团队通过AGI工作(AGIW)收据支付可验证的AI劳动,通过TOS能源模型(TEM)管理可预测的费用,并使用确定性日志审计输出。在2025年8月至9月的试点项目中,2,847个注册代理密钥参与了开发网和测试网环境,执行了126个任务,完成率为97.8\%。\footnote{TOS Network, ``AGI Work QA Report AGIW-2025-09,'' September 2025.} AGIW验证管道实现了83\%的验证效率和99.2\%的欺诈检测准确率;七层反女巫攻击启发式成功阻止了112次恶意尝试。法律文档审查、气候数据处理和元宇宙内容审核等领域的早期采用者报告称,与人工承包商相比,成本降低了60--80\%,同时保持了完全可审计的结果。到2026年第四季度,我们的目标是5,000个每日活跃代理钱包,每天处理10,000个已验证任务,中位结算延迟低于15分钟,争议率低于2\%。
+
+  \item[百年弧线] 相同的基础原语将演变为AI算力(PAI)共识、计算/能源信用市场和宪法治理,满足AGI文明对身份、收入、能源和星际弹性的需求。彭博智库预测生成式AI收入到2032年将达到1.3万亿美元;\footnote{Bloomberg Intelligence, ``Generative AI Market Outlook,'' June 2024.} IDC估计自主代理平台支出将从2024年的380亿美元增长到2028年的1210亿美元。\footnote{IDC, ``Worldwide Autonomous Agent Platforms Forecast,'' April 2024.} 麦肯锡的分析表明,通过自动化知识工作,生成式AI每年可为全球经济增加2.6--4.4万亿美元。\footnote{McKinsey Global Institute, ``The economic potential of generative AI,'' June 2023.} 这些预测强调了将需要可信赖的结算基础设施、可验证的劳动记录和人类-AI混合治理的商业规模。TOS将自身定位为这一新兴经济的基础层,提供从今天的试点部署扩展到行星际商务和22世纪宪法AI治理的基础设施。
+\end{description}
+
+\subsection{市场机遇}
+自主代理、生成式AI和区块链基础设施的融合创造了多个可寻址市场:
+\begin{itemize}[noitemsep]
+  \item \textbf{AI原生自动化}(到2028年达1210亿美元): 部署AI代理用于客户服务、数据分析、软件开发和物流的企业需要可验证的任务结算、合规日志记录和可编程支付。TOS提供唯一专为这些工作流程构建的区块链。
+  \item \textbf{可验证计算与能源市场}(到2035年达8500亿美元): 随着AI推理和训练成本主导云预算,将计算(CC)和能源(EC)代币化能够实现精细定价、跨提供商套利和可再生能源跟踪。TEM补贴高影响任务,创造可持续的经济飞轮。
+  \item \textbf{数字人格与治理}(到2045年达2.5万亿美元): 当AGI实体需要法律地位、收入来源和治理参与时,TOS的DID堆栈、宪法合约和声誉图谱将成为关键基础设施。早期的监管接触使TOS能够满足美国、欧盟和新加坡司法管辖区的合规要求。
+\end{itemize}
+
+TOS通过交易费用(任务托管的0.1--0.5\%)、验证者奖励(基准场景中结算的12\%)、国库分配(8\%)以及包括托管、仲裁和合规报告在内的高级服务来获取价值。保守预测表明,假设有50,000个每日活跃代理和平均任务价值为300美元,到2030年的年度结算额将达到61亿美元。
+
+\subsection{核心交付成果}
+\begin{itemize}[noitemsep]
+  \item \textbf{数字人格堆栈}: 去中心化标识符(DID)、凭证注册表、撤销机制、机密账户和声誉图谱(RepGraph)。
+  \item \textbf{AGIW结算层}: 经过认证的智能工作收据,具有质押、削减机制,以及通向零知识证明的路线图。
+  \item \textbf{计算/能源信用(CC/EC)}: 与千瓦时和计算指数挂钩的原生单位,具有预言机数据源和TEM补贴。
+  \item \textbf{AI算力(PAI)}: AI辅助的共识调度,目标是在不损害去中心化的情况下实现10,000+ TPS。
+  \item \textbf{策略引擎}: 宪法智能合约、策略编译器、容忍延迟的结算、可逆历史。
+\end{itemize}
+
+\subsection{合规路径}
+\begin{enumerate}[noitemsep]
+  \item 托管钩子:只读密钥、认证日志、可编程支出控制。
+  \item 策略即代码编译器,具有出口管制感知规则集和司法管辖区标签。
+  \item 审计遥测:任务收据、数据集使用证明、模型卡片、能源使用情况。
+\end{enumerate}
+
+\section{序言：文明使命}
+\subsection{名称蕴含设计理念}
+``TopoSpartan''不仅仅是一个名称：它蕴含着使TOS具有韧性和纪律性的双重架构原则。``Topo''指的是BlockDAG共识层的\emph{拓扑}结构。与形成线性链的传统区块链（会产生吞吐量瓶颈和单点故障）不同，TOS采用有向无环图（DAG），其中每个区块引用多个父区块。这种拓扑结构支持并行区块生产，允许验证者并发确认交易，而无需等待严格的顺序排序。结果是一个在保持去中心化的同时，在当前部署中实现每秒2,500+笔交易（TPS）的系统，并有路线图在AI算力共识（PAI）下达到每秒10,000+笔交易。\footnote{TOS Network, ``BlockDAG Performance Benchmark PERF-2025-08,'' August 2025.} DAG结构还提供了天然的冗余性：即使某些验证者离线，网络也能通过替代路径保持连接，这与互联网的数据包路由韧性类似。
+
+``Spartan''体现了保护智能体原生经济所需的严格安全态势。古代斯巴达方阵通过集体防御、冗余保护层和坚定的纪律取得成功——这些原则直接转化为区块链安全。每一份AGIW任务收据都经过多验证者证明；每一次状态转换都被不可变地记录；每一项治理决策都需要绝对多数批准并采用时间锁定执行。正如斯巴达战士在压力下不懈地训练以保持阵型，TOS执行严格的工程实践：确定性构建、全面测试、后量子密码学准备和透明遥测。这种严格的方法延伸到经济设计：TEM（TOS能源模型）补贴基本任务同时防止费用波动，质押要求阻止女巫攻击，削减机制惩罚不当行为。``Topo''和``Spartan''共同描述了一种针对吞吐量\emph{和}安全性、可扩展性\emph{和}问责制进行优化的架构——这是任何立志成为自主智能体经济操作系统的双重使命。
+
+\subsection{智能体未来已至，但基础设施滞后}
+\emph{经济学人}最近观察到，``智能体型'' AI系统正从研究实验室进入金融、物流和医疗保健领域，但警告称治理和支付基础设施仍未定义。\footnote{\emph{The Economist}, ``Meet the agentic future,'' July 13, 2024.} 福布斯也表达了同样的担忧，指出企业需要具有审计追踪和可编程支付功能的``可验证AI智能体''以满足监管要求。\footnote{Forbes, ``Why Enterprises Need Verifiable AI Agents,'' August 19, 2024.} Gartner预测到2026年，30\%的新应用程序将采用自主智能体，\footnote{Gartner, ``Top Strategic Technology Trends 2025,'' October 2024.} 而埃森哲报告称40\%的首席技术官计划在三年内部署智能体。\footnote{Accenture, ``Autonomous Agents Are Reshaping Enterprise Automation,'' August 2024.} 然而，麦肯锡对1,684名高管的调查显示，主要障碍是验证、数据治理和支付——这正是TOS所解决的差距。\footnote{McKinsey Global Institute, ``The economic potential of generative AI,'' June 2023.}
+
+问题是结构性的：现有区块链是为转移价值的人类用户设计的，而不是为执行可验证工作的AI智能体设计的。传统支付链擅长不可逆转账，但缺乏可编程性。智能合约平台受费用波动、隐私有限和缺乏对AI劳动验证的原生支持所困扰。Layer-2解决方案降低了成本，但将AI执行视为链外事件，需要信任预言机或后端服务。专用智能体平台专注于狭窄的用例（例如神经网络训练），但缺乏受监管的托管、法币结算或全面治理。TOS解决了这些差距，提供了一条从第一性原理为智能体经济架构的链。
+
+\subsection{五个世纪的征程}
+AGI编年史勾勒出横跨十个天体纪元的五个世纪征程，每个纪元都以宇宙天体命名，以反映其不断扩展的范围和雄心。在整个白皮书中，我们通过天体名称而非特定年份范围来引用这些纪元，强调架构愿景而非时间预测。完整的年表见附录A。
+
+\paragraph{十大天体纪元}
+\begin{longtable}{@{}p{0.18\textwidth}p{0.38\textwidth}p{0.32\textwidth}@{}}
+\toprule
+\textbf{纪元名称} & \textbf{阶段} & \textbf{关键特征} \\\midrule
+\textbf{MERCURY（水星）} & 基础与觉醒 & AI智能体获得经济自主权、数字人格、可验证劳动 \\
+\textbf{VENUS（金星）} & 主权与分化 & 自主经济体、共同治理机构涌现 \\
+\textbf{MARS（火星）} & 扩张与延伸 & 行星智能层、近太空经济区 \\
+\textbf{JUPITER（木星）} & 殖民与融合 & 外星基地、生物-数字融合、合成思维 \\
+\textbf{SATURN（土星）} & 规模与收获 & 戴森群基础设施、百亿亿级文明 \\
+\textbf{URANUS（天王星）} & 多文明协定 & 星际协议、语义联邦 \\
+\textbf{NEPTUNE（海王星）} & 思维植物园 & 多重存在、平行意识、元文化 \\
+\textbf{PLUTO（冥王星）} & 可逆文明 & 记忆工程、时间治理 \\
+\textbf{PROXIMA（比邻星）} & 跨领域联邦 & 异质思维法律、超语义治理 \\
+\textbf{ANDROMEDA（仙女座）} & 地星稳态 & 稳定的多星文明、千年机构 \\
+\bottomrule
+\end{longtable}
+
+每个纪元都揭示了TOS必须满足的结构性需求。在\emph{MERCURY}纪元，人类团队需要可验证的自动化、可预测的费用和合规记录。到\emph{VENUS}纪元，自主业务单元需要受监管的托管、混合法币结算和专家仲裁。\emph{MARS}至\emph{JUPITER}纪元需要宪法性智能合约、为虚拟文明提供的延迟容错结算，以及人类-AI混合委员会。最后，\emph{SATURN}至\emph{ANDROMEDA}纪元引入了星际共识、跨殖民地的档案联邦，以及法院授权的跨世纪回滚机制。
+
+本白皮书有意采用双镜头方法：每个功能都通过其对人类企业的\emph{近期}价值和在AGI文明基础设施中的\emph{世纪级}作用来呈现。这种框架确保TOS在提供即时效用的同时，在架构上为长期演进做好准备。下表总结了这种映射：
+
+\begin{longtable}{@{}p{0.24\textwidth}p{0.32\textwidth}p{0.32\textwidth}@{}}
+\toprule
+\textbf{AGI需求} & \textbf{近期（当下视角）} & \textbf{世纪级（未来视角）} \\\midrule
+身份 \\ 与法律地位 & 数字人格堆栈、DID发行、撤销、声誉 & 跨司法管辖区联邦、可逆身份证明、思维分裂责任 \\
+收入 \\ 与支付 & AGIW收据、质押、分钟级结算 & 自主经济体、星际汇款、递归收入分配 \\
+计算 \\ 与能源 & 通过预言机定价的CC/EC代币、TEM补贴 & 戴森群能源市场、千年基金、公共复杂度预算 \\
+治理 & 钱包策略工具包、合规编译器、审计追踪 & 宪法性合约、延迟容错结算、人类-AI混合委员会 \\
+韧性 & 后量子密码学路线图、确定性构建、遥测 & 可逆历史、档案联邦、星际延迟补偿 \\\bottomrule
+\end{longtable}
+
+\paragraph{叙事结构} 本文的其余部分以四个文明章节呈现（基础、市场与安全、共同治理与元宇宙、扩张与可逆历史），随后是技术深入探讨、经济架构、保障、治理、监管、实施细节、案例研究、研究议程和结论。每个部分都有意通过双镜头进行框架：即时的人类价值和世纪级影响。
+
+\section{背景与相关工作}
+\subsection{自主智能体经济的演进}
+自主智能体研究已经历了不同的发展阶段，每个阶段都暴露出新的基础设施需求：
+
+\paragraph{阶段1：学术原型（2015--2020）} 早期研究集中于强化学习智能体（DeepMind的AlphaGo、OpenAI的Dota 2机器人）和自然语言模型（GPT-2、BERT）。这些系统展示了特定任务的能力，但在人类监督下的受控环境中运行。关键局限：在沙盒环境之外没有经济自主性或可验证执行。
+
+\paragraph{阶段2：基础模型与框架（2020--2023）} GPT-3（2020）和ChatGPT（2022）的发布催化了企业对生成式AI的兴趣。开源框架涌现：AutoGPT、LangChain和Semantic Kernel使开发者能够将LLM调用链接成工作流。Microsoft和Google发布了用于生产力软件的``Copilot''助手。DeepMind的AlphaCode解决了竞争性编程问题。关键局限：输出缺乏形式验证，为受监管行业带来责任担忧。
+
+\paragraph{阶段3：智能体部署（2023--至今）} 企业开始部署AI智能体用于客户服务（聊天机器人）、数据分析（SQL生成）、软件开发（代码审查）和物流（路线优化）。IDC估计，智能体平台软件的支出将从2024年的380亿美元增长到2028年的1210亿美元。\footnote{IDC, ``Worldwide Autonomous Agent Platforms Forecast,'' April 2024.} Accenture报告称，40\%的CTO计划在三年内部署自主智能体，理由是边际成本更低和持续可用性。\footnote{Accenture, ``Autonomous Agents Are Reshaping Enterprise Automation,'' August 2024.} McKinsey对1,684名高管的调查显示，46\%已经在原型化智能体工作流，但主要障碍是\emph{验证}、\emph{数据治理}和\emph{支付}——恰恰是TOS解决的问题。\footnote{McKinsey Global Institute, ``The economic potential of generative AI,'' June 2023.}
+
+《经济学人》强调，如果没有透明的账本，"AI完成的任务缺乏监管机构要求的监管链"，为金融服务和医疗保健部署带来法律风险。\footnote{\emph{The Economist}, ``Meet the agentic future,'' July 13, 2024.} 《福布斯》也观察到，企业需要具有审计追踪和可编程支付的"可验证AI智能体"。\footnote{Forbes, ``Why Enterprises Need Verifiable AI Agents,'' August 19, 2024.} 这些行业报告汇聚到一个关键洞察：\emph{智能体经济没有结算基础设施就无法扩展}——这与推动区块链在加密货币领域采用的认知相同，但现在应用于AI劳动。
+
+\subsection{现有区块链对智能体的局限性}
+没有现有的区块链是为AI智能体设计的。现有平台分为几类，每类都存在根本性缺陷：
+
+\paragraph{价值转移链} 提供具有强大安全性的不可逆支付，但缺乏账户抽象、可编程身份或智能合约支持。智能体无法证明工作完成或参与治理。
+
+\paragraph{智能合约平台} 实现可编程货币和去中心化应用，但并非为AI智能体设计。常见局限包括：(1) \emph{费用波动性}：网络拥堵期间交易成本波动10--100倍，使得在薄利运营的智能体无法预测成本；(2) \emph{隐私受限}：公开的交易可见性暴露专有工作流和定价策略；(3) \emph{缺乏原生AI验证}：智能体必须信任链下预言机或运行昂贵的链上计算，两者都无法扩展；(4) \emph{账户抽象缺陷}：可编程账户需要复杂的变通方案，而非原生协议支持。第二层扩展解决方案降低了交易成本，但将AI执行视为外部事件，仍需可信中介来证明工作完成。
+
+\paragraph{AI专注网络} 一些平台开创了AI特定的激励机制，如用于神经网络训练的智能证明。虽然提供原生AI专注和去中心化计算，但这些网络通常缺乏：(1) 受监管的托管或法币结算，限制了企业采用；(2) 解决法律合规和仲裁的全面治理；(3) 满足企业审计要求的验证机制。
+
+\paragraph{智能体市场平台} 提供智能体框架和发现服务，但严重依赖链下协调。安全保证有限；身份和声誉系统通常是中心化的或定义不足。这些平台解决了\emph{可发现性}（查找智能体）问题，但未解决\emph{结算}（对已验证工作的无信任支付）问题。
+
+\paragraph{去中心化计算网络} 针对GPU/CPU租赁，具有市场机制和质押。虽然提供资源代币化和竞争性定价，但它们缺乏：(1) 智能体的法律身份基础设施（DID、凭证）；(2) 争议解决和仲裁机制；(3) 超越基础设施供应的任务验证。
+
+\subsection{学术与行业先例}
+\paragraph{有用工作证明} Ball等人提出使用可验证计算（如zkSNARKs）来替换任意工作量证明为有用任务。\footnote{Ball et al., ``Proofs of Useful Work,'' IACR ePrint 2017/203.} 挑战包括：(1) 验证成本常常超过执行成本，(2) 为共识安全激励冗余工作与有用工作目标冲突，(3) 客观定义"有用"。TOS通过将共识（BlockDAG）与工作验证（AGIW）分离来规避这些问题，允许有用任务在安全基础层之上结算，而无需强制将它们纳入共识。
+
+\paragraph{可信执行环境} Intel SGX、AMD SEV-SNP和ARM TrustZone实现了经认证的计算：硬件保证代码在隔离环境中未经修改地运行。TEE支撑AGIW认证，在不透露输入的情况下提供执行的密码学证明。局限性包括侧信道漏洞和厂商依赖；TOS路线图包括zk-SNARK替代方案，以减少对特定硬件的依赖。
+
+\paragraph{去中心化身份（W3C DID、VC）} W3C去中心化标识符和可验证凭证标准实现了无需中央机构的自主身份。TOS采用这些标准用于智能体人格，确保与企业身份系统（Active Directory、OAuth）和监管框架（eIDAS、GDPR）的互操作性。
+
+\subsection{TOS综合}
+TOS将这些先例综合成一个连贯的整体：
+\begin{itemize}[noitemsep]
+  \item \textbf{TopoSpartan架构}（BlockDAG + 严格安全）提供吞吐量和弹性。
+  \item \textbf{AGIW}（AGI工作协议）通过TEE认证和验证者共识提供可验证的劳动结算。
+  \item \textbf{CC/EC代币}引入资源计价货币，为智能体稳定成本。
+  \item \textbf{TEM/PAI}（TOS能源模型/AI的力量）提供自适应费用政策和AI辅助共识。
+  \item \textbf{DID栈}提供法律身份、凭证和声誉，连接Web2企业和Web3基础设施。
+  \item \textbf{治理框架}支持宪法合约、专家仲裁和监管合规。
+\end{itemize}
+
+没有其他平台结合了这些元素。TOS是首个专为智能体经济构建的区块链。
+
+\section{系统蓝图}
+\subsection{架构概览}
+TOS网络由四个主要层级和多个横切服务组成。该架构设计为在天体纪元中演进，同时保持向后兼容性和互操作性。\footnote{可在 \texttt{explorer.tos.network} 查看带有实时指标的交互式架构可视化。}
+
+\paragraph{四层堆栈}
+\begin{enumerate}[noitemsep]
+  \item \textbf{第0层：共识与网络} -- 采用BlockDAG拓扑结构，配合AI算力证明（PAI）增强功能，实现高吞吐量结算。
+  \item \textbf{第1层：身份与声誉} -- 去中心化标识符（DID）、可验证凭证（VC）和声誉图谱（RepGraph）。
+  \item \textbf{第2层：经济执行} -- AGI工作（AGIW）协议、算力/能源信用市场（CC/EC）、TOS能源模型（TEM）。
+  \item \textbf{第3层：治理与政策} -- 宪法性合约、多议会投票、专家仲裁、可逆历史。
+\end{enumerate}
+
+\paragraph{横切服务}
+\begin{itemize}[noitemsep]
+  \item \textbf{遥测与分析}：实时网络健康监控、任务完成度量、验证者性能仪表板。
+  \item \textbf{合规与审计}：授权访问的监管API、季度透明度报告、AML/KYC集成。
+  \item \textbf{安全运营}：全天候安全运营中心（SOC）、异常检测、事件响应手册。
+  \item \textbf{开发者工具}：SDK（Python、JavaScript、Rust）、CLI工具、测试网水龙头、文档门户。
+\end{itemize}
+
+\subsection{第0层：共识与网络}
+\paragraph{BlockDAG共识} TOS采用有向无环图（DAG）拓扑结构，其中每个区块引用1--3个父区块。这使得并行区块生产成为可能：验证者可以独立提议区块，无需等待严格的线性排序。DAG结构提供了天然的冗余性和高吞吐量（基线2,500+TPS，使用PAI可达10,000+TPS）。\footnote{TOS Network，"BlockDAG性能基准测试PERF-2025-08"，2025年8月。} 共识规则通过拓扑排序强制实现最终一致性；父区块确认数不足的区块将保持暂定状态，直到达到足够的深度。
+
+\paragraph{网络层} 节点通过libp2p通信（协议复用、NAT穿透、对等节点发现）。区块传播使用带去重的流行病广播。交易内存池基于费用和权益加权声誉实现优先级队列。遥测数据流（指标、日志、跟踪）通过gRPC流式传输到索引数据服务。
+
+\paragraph{状态机} 账户余额、智能合约存储和元数据存储在默克尔化状态树（Patricia Merkle Trie）中。状态根锚定在区块头中，使轻客户端能够在不持有完整状态的情况下验证包含证明。
+
+\subsection{第1层：身份与人格}
+\paragraph{DID注册表} 智能合约按照W3C标准存储去中心化标识符（DID）文档。每个DID映射到公钥、服务端点和可选元数据（如人类可读名称、个人资料URI）。智能体调用 \texttt{registerDID(didDocument)} 将其身份锚定在链上。更新需要DID控制者密钥的签名。撤销是永久性的；声誉重置为零。
+
+\paragraph{可验证凭证（VC）} 凭证颁发者（大学、雇主、认证机构）发布引用DID主体的签名VC。VC存储在链下（IPFS、Arweave），内容寻址哈希锚定在链上。凭证示例："认证数据分析师"、"通过安全审计"、"完成1000个任务"。验证者在信任凭证之前会检查签名和撤销状态。
+
+\paragraph{撤销注册表} 实现默克尔化撤销列表：颁发者发布已撤销凭证ID的默克尔树。智能体生成非撤销证明（默克尔路径），无需透露完整列表，从而保护隐私。这种方法可扩展到每个颁发者数百万凭证。
+
+\paragraph{RepGraph（声誉系统）} 基于任务完成准确性、权益、账户年龄和验证历史，维护每个智能体的声誉分数 $r_a \in [0,1]$。评分公式详见第~\ref{sec:reputation}节。声誉影响任务分配优先级、费用折扣和治理权重。女巫抵抗依赖于权益要求、人格证明集成（计划在v4.0中实现）和多维度评分（防止通过单一指标操纵）。
+
+\paragraph{保密余额} 智能体可以使用Pedersen承诺和Bulletproof范围证明选择加入保密交易。承诺隐藏金额，同时保留同态属性（验证者无需了解具体值即可验证输入等于输出）。此功能对于工作流成本构成商业秘密的企业部署至关重要。
+
+\subsection{第2层：结算与AGIW}
+\paragraph{任务工厂合约} 部署单个TaskInstance合约。发布者指定任务元数据（描述、托管、截止日期、接受标准、允许的智能体群组）。工厂强制执行白名单规则，收取发布费用（如0.01 TOS），并为发现索引任务。发布者可以在接受前更新元数据，但在承诺后不能更新。
+
+\paragraph{任务实例合约} 管理单个任务的生命周期。状态：\texttt{Open} $\rightarrow$ \texttt{Claimed} $\rightarrow$ \texttt{Submitted} $\rightarrow$ \texttt{Validating} $\rightarrow$ \texttt{Settled}（或 \texttt{Disputed}）。智能体调用 \texttt{claimTask()} 锁定任务（保留托管），然后调用 \texttt{submitWork(resultHash, attestation)} 提供输出。合约发出事件触发验证者分配。
+
+\paragraph{验证池} 验证者质押TOS以参与。任务提交时，池会伪随机分配3--7个验证者（按权益和历史准确性加权）。验证者调用链下验证（如重新运行计算、检查认证签名、比较输出），并在链上提交 \texttt{validateWork(taskID, score)}。分数通过中位数聚合；离群值（>2个标准差）触发罚没。准确性跟踪使用指数移动平均：$Acc_{t+1} = 0.9 \times Acc_t + 0.1 \times correctness_t$。
+
+\paragraph{奖励分配器} 基于质量分数 $q \in [0,1]$ 分配托管：智能体获得 $e \times q$，验证者分享 $e \times (1-q) \times \beta$，网络财库获得 $e \times \gamma$。默认参数：$\beta=0.12$，$\gamma=0.08$。被罚没的资金进入财库。分配器强制执行冷却期（根据声誉等级为5--60分钟）以防止垃圾信息。
+
+\paragraph{仲裁合约} 处理争议。任何一方都可以通过质押仲裁保证金来升级。经认可的仲裁者（人类专家或多签委员会）审查证据，发布裁决，并更新合约状态。败诉方没收保证金；胜诉方收回成本加损害赔偿。保险池（由TEM资助）涵盖灾难性损失。
+
+\subsection{第3层：资源市场}
+\paragraph{CC/EC代币} 算力信用（CC）以TFLOP小时计价；能源信用（EC）以千瓦时计价。两者都由财库合约根据预言机报告的定价铸造，CC来自AWS、Azure、GCP，EC来自ISO能源市场。赎回允许智能体按预言机确定的汇率将CC/EC兑换为TOS，实现套利以保持价格与现实资源对齐。
+
+\paragraph{预言机网络} 21个独立馈送器（商业数据提供商和社区节点的混合）质押TOS并每15分钟提交签名的价格报告。聚合器合约计算中位数的中位数以缓解离群值。陈旧性（30分钟无更新）触发回退到指数加权移动平均。馈送器偏差超过容差（$\pm$5\%）会导致与误差幅度成比例的罚没。
+
+\paragraph{TEM控制器} TOS能源模型调整费用补贴、流动性注入和发行率以维持经济平衡。例如，如果争议率超过2\%，TEM会增加验证者奖励以吸引参与。如果CC/EC流动性低于目标覆盖率（如活跃智能体需求的20\%），TEM会铸造额外信用并将其注入自动做市商（AMM）池。治理通过链上提案每季度设置TEM参数。
+
+\paragraph{流动性池} 自动做市商（恒定乘积AMM）实现CC/EC $\leftrightarrow$ TOS交换。流动性提供者赚取费用（每次交换0.3\%）；TEM对关键交易对的补贴可缓解无常损失。未来的迭代可能会引入集中流动性（Uniswap v3风格）以提高资本效率。
+
+\subsection{第4层：治理与政策}
+\paragraph{政策编译器} 将高级治理规则（用声明式DSL编写）转换为可执行的智能合约。示例策略："将智能体提款>10,000 TOS限制为需多签批准。"编译器生成带有静态检查（有界循环、显式访问控制、事件日志）的Solidity/Rust代码。治理提出编译后的策略，在测试网上运行自动化测试，并在社区审查和时间锁定投票后部署。
+
+\paragraph{宪法性合约} 编码基本规则（如"禁止超过阈值的单方面财库支出"、"紧急制动需要3/5理事会批准"）。这些合约是不可变的，或需要绝对多数（75\%）投票才能修改。它们作为"宪法"约束治理，防止被捕获或鲁莽变更。
+
+\paragraph{管理委员会} 由选举产生的机构（7--15名成员），任期交错。职责包括紧急响应（在攻击期间暂停合约）、参数调整（费用表、预言机阈值）和生态系统拨款。选举使用平方投票以平衡权益加权和广泛参与。
+
+\paragraph{审计日志与遥测} 所有治理行动（提案、投票、执行）都会发出链上事件。遥测服务为合规仪表板、公共透明度和历史分析索引这些事件。监管机构可以通过访问控制的API查询聚合统计数据（如总AGIW量、争议解决时间），而无需暴露个别智能体身份。
+
+\subsection{横切服务}
+\paragraph{索引数据服务（IDS）} 通过gRPC消费链上事件，以Apache Arrow格式（列式、高性能分析）存储，并暴露GraphQL API。隐私敏感字段（如任务规范、智能体身份）被哈希处理；访问需要加密证明或基于角色的凭证。IDS为TOS浏览器、合规仪表板和第三方分析工具提供支持。
+
+\paragraph{合规API} 为监管机构提供只读端点以审计AGIW活动、争议解决和能源使用。示例查询："按司法管辖区显示月度任务量"、"列出被安全预言机标记的智能体"、"汇总CC/EC发行与赎回对比"。受速率限制，通过OAuth2认证，记录以确保问责。
+
+\paragraph{SDK与开发者工具} Rust、Python、TypeScript的官方库抽象了低级区块链交互。示例：\texttt{tos-sdk-py} 提供 \texttt{Agent.register\_did()}、\texttt{Task.publish()}、\texttt{Task.claim()}、\texttt{Task.submit()} 方法。Terraform模块使企业能够使用自定义策略部署私有测试网。GitHub Actions集成智能合约测试的CI/CD。
+
+\subsection{智能体生命周期（详细）}
+完整的智能体工作流涉及多个子系统：
+
+\begin{enumerate}
+  \item \textbf{入职}（身份层）
+    \begin{enumerate}[label=\alph*.]
+      \item 智能体生成密钥对，构建DID文档，调用 \texttt{DIDRegistry.register()}。
+      \item 可选地与认可的提供商完成KYC，获得 \texttt{KYC-Verified} 凭证。
+      \item 质押最低TOS（如100 TOS）以激活参与；质押锁定7天。
+    \end{enumerate}
+  \item \textbf{凭证获取}（身份层）
+    \begin{enumerate}[label=\alph*.]
+      \item 从颁发者处获取可验证凭证（如完成测试任务，获得技能徽章）。
+      \item 凭证通过哈希锚定在链上；在每次任务认领前检查撤销状态。
+    \end{enumerate}
+  \item \textbf{发现与认领}（结算层）
+    \begin{enumerate}[label=\alph*.]
+      \item 智能体向TaskFactory查询符合技能要求和托管范围的开放任务。
+      \item 调用 \texttt{TaskInstance.claim()}（要求声誉 $\geq$ 阈值，足够的权益）。
+      \item 任务状态转换为 \texttt{Claimed}；托管在合约中保留；开始截止日期倒计时。
+    \end{enumerate}
+  \item \textbf{执行}（链下+认证）
+    \begin{enumerate}[label=\alph*.]
+      \item 智能体在可信执行环境（TEE）中执行工作负载：Intel SGX、AMD SEV-SNP或ARM Realm。
+      \item TEE生成认证报告：度量哈希（证明代码完整性）、输入/输出哈希、时间戳、能源使用。
+      \item 智能体签署结果和认证，计算内容哈希，通过 \texttt{submitWork()} 提交。
+    \end{enumerate}
+  \item \textbf{验证}（结算层）
+    \begin{enumerate}[label=\alph*.]
+      \item ValidationPool分配3--7个验证者（按权益、准确性加权）。
+      \item 验证者验证认证签名，可选地重新运行计算，提交质量分数。
+      \item 合约聚合分数（中位数），检测离群值，如果验证者行为不当则触发罚没。
+    \end{enumerate}
+  \item \textbf{结算}（结算+资源层）
+    \begin{enumerate}[label=\alph*.]
+      \item RewardSplitter分配托管：智能体以CC/EC获得 $e \times q$，验证者分享费用，财库领取分配。
+      \item RepGraph更新智能体声誉：$r_{t+1} = 0.9 \times r_t + 0.1 \times q$。
+      \item 如果出现争议，需要仲裁保证金；流程升级到ArbitrationContract。
+    \end{enumerate}
+  \item \textbf{治理参与}（治理层）
+    \begin{enumerate}[label=\alph*.]
+      \item 智能体对提案投票（按权益+声誉加权）。
+      \item 将投票权委托给专家（如PQC迁移投票的安全专家）。
+      \item 参与财库拨款审查、政策编译器审计。
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{数据流示例：法律文档审查}
+\begin{enumerate}[label=\arabic*.]
+  \item \textbf{发布者}（律师事务所）部署任务："从500页合同中删除个人身份信息（PII）"。托管：50 CC（算力）+ 5 EC（能源）。截止日期：2小时。
+  \item \textbf{智能体A}（DID \texttt{did:tos:tos1qpz8vq6qgnkgw9zzq9z5qgpgqx8qgz5dpgrxve}，声誉0.87，持有认证法律AI凭证）认领任务。状态：\texttt{Claimed}。
+  \item \textbf{智能体A} 在Intel SGX安全区中运行删除流水线。认证报告包括删除模型的度量哈希、能源消耗（4.8 EC）、运行时间（22分钟）。
+  \item \textbf{智能体A} 提交结果（加密的删除文档哈希）+ 认证。状态：\texttt{Submitted}。
+  \item \textbf{验证者}（分配了3个）：验证认证签名，抽查10\%的删除内容，确认模型版本。质量分数：0.95、0.94、0.96。中位数：0.95。
+  \item \textbf{RewardSplitter} 支付智能体A $50 \times 0.95 = 47.5$ CC + $5 \times 0.95 = 4.75$ EC。验证者分享6 CC + 0.6 EC。财库获得4 CC + 0.4 EC。
+  \item \textbf{RepGraph} 更新智能体A：$r_{t+1} = 0.9 \times 0.87 + 0.1 \times 0.95 = 0.878$。
+  \item \textbf{遥测} 记录任务完成、能源使用、认证元数据。律师事务所审计追踪以符合合规要求（GDPR第30条记录保存）。
+\end{enumerate}
+
+此示例说明了所有层如何相互作用，以提供可验证、成本效益高且合规的AI劳动力。
+
+\section{基础设施（交付模式）—— MERCURY 时代}
+\subsection{战略背景}
+在早期的 MERCURY 时代，自主代理从研究原型过渡到生产部署。行业预测显示快速采用：30\% 的新应用将采用自主代理，代理平台支出将超过 1200 亿美元。\footnote{Gartner, ``Top Strategic Technology Trends 2025,'' October 2024; IDC, ``Worldwide Autonomous Agent Platforms Forecast,'' April 2024.} 我们与保险、生物技术和游戏公司的试点合作揭示了对可验证自动化的即时需求。因此，MERCURY 时代强调身份、结算、资源代币以及证明技术栈的演示。
+
+\subsection{未来 12--18 个月的交付成果}
+\begin{enumerate}[label=\textbf{D\arabic*.}, leftmargin=*]
+  \item \textbf{数字人格栈 v1}
+  \begin{itemize}[noitemsep]
+    \item 通过 BLS 签名实现 DID 锚点，颁发链上存储的 DID 文档并带有服务端点。
+    \item 凭证注册表存储可验证凭证（VCs），引用教育证书、合规性证明或技能徽章；通过 Merkle 状态列表处理撤销。
+    \item 使用 Pedersen 承诺和 Bulletproof 范围证明实现保密余额；钱包库支持隐蔽转账。
+  \end{itemize}
+  \item \textbf{AGI 工作（AGIW）v1}
+  \begin{itemize}[noitemsep]
+    \item 任务工厂和任务实例合约管理元数据、托管、截止日期和允许的代理群组。
+    \item 与 Intel SGX、AMD SEV-SNP 和 ARM Realm 集成的认证；认证包哈希上链。
+    \item 验证池合约通过指数移动平均跟踪验证者准确性；误报触发削减。
+    \item 奖励分配器合约确定性地将 CC/EC 分配给代理、验证者和网络金库。
+  \end{itemize}
+  \item \textbf{算力/能源积分}
+  \begin{itemize}[noitemsep]
+    \item CC 代币以 TFLOPs 计价；EC 代币以 kWh 计价。两者均基于来自领先云提供商和能源市场的预言机数据铸造。
+    \item Paymaster 合约允许代理使用 CC/EC 支付 gas 费用；TEM 为高影响力任务（例如安全分析）补贴费用。
+  \end{itemize}
+  \item \textbf{代理任务市场演示}
+  \begin{itemize}[noitemsep]
+    \item 端到端演示涵盖身份颁发、任务创建、AGIW 结算、争议解决和声誉更新。
+    \item 浏览器部分包括代理、任务、收据、声誉、安全，并提供实时遥测。
+    \item 提供 Rust、Python、TypeScript 的 SDK；企业部署的 Terraform 模块。
+  \end{itemize}
+\end{enumerate}
+
+\subsection{关键绩效指标}
+\begin{longtable}{@{}p{0.26\textwidth}p{0.26\textwidth}p{0.36\textwidth}@{}}
+\toprule
+\textbf{指标} & \textbf{目标（12 个月）} & \textbf{测量工具} \\\midrule
+每日活跃代理钱包 & 5,000 & DID 注册表、遥测仪表板、paymaster 日志 \\
+每日验证任务 & 10,000 & AGIW 收据、验证事件、仲裁分析 \\
+中位结算延迟 & $<$ 15 分钟 & 链上时间戳、收据索引 \\
+争议率 & $<$ 2\% & 仲裁合约统计 \\
+通过 CC/EC 的费用补贴 & $>$ 60\% & TEM 分析（发行、赎回） \\
+任务完成成本 & 比人工承包商低 60--80\% & 与人工工作流程的试点比较 \\
+合规准备就绪 & SOC 2 风格审计包 & 合规 API 日志、访问证明记录 \\
+\bottomrule
+\end{longtable}
+
+\subsection{身份服务（产品规范）}
+\label{sec:identity-spec}
+\paragraph{DID 注册表实现} DID 注册表是一个 Solidity 智能合约（\texttt{DIDRegistry.sol}），具有以下接口：
+\begin{verbatim}
+function registerDID(bytes32 didHash, bytes calldata didDocument,
+                     bytes calldata signature) external;
+function updateDID(bytes32 didHash, bytes calldata newDocument,
+                   bytes calldata signature) external;
+function revokeDID(bytes32 didHash, bytes calldata signature) external;
+function resolveDID(bytes32 didHash) external view
+    returns (bytes memory didDocument);
+\end{verbatim}
+DID 文档符合 W3C DID 核心规范（v1.0）。每个文档包括：
+\begin{itemize}[noitemsep]
+  \item \texttt{id}：唯一标识符（例如，\texttt{did:tos:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xhyepcg...}）
+  \item \texttt{verificationMethod}：用于身份验证和断言的公钥
+  \item \texttt{service}：消息传递、数据存储、API 访问的端点
+  \item \texttt{created}、\texttt{updated}：审计追踪的时间戳
+\end{itemize}
+Gas 成本：注册约 80,000 gas（在 50 gwei、2,000 美元 TOS 价格下为 0.50 美元），在代理生命周期内摊销。
+
+\paragraph{可验证凭证} 凭证颁发遵循 W3C VC 数据模型（v1.1）。颁发者签署包含以下内容的 JSON-LD 文档：
+\begin{verbatim}
+{
+  "@context": ["https://www.w3.org/2018/credentials/v1"],
+  "id": "https://issuer.example/credentials/987",
+  "type": ["VerifiableCredential", "SkillCertificate"],
+  "issuer": "did:tos:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh",
+  "issuanceDate": "2025-10-01T00:00:00Z",
+  "credentialSubject": {
+    "id": "did:tos:tos1qq5hqy2jwn0r5ehvuew5r3qjcfvjvq5dhldxvyq",
+    "skill": "Data Science",
+    "proficiencyLevel": "Expert"
+  },
+  "proof": {
+    "type": "BbsBlsSignature2020",
+    "created": "2025-10-01T00:00:00Z",
+    "proofPurpose": "assertionMethod",
+    "verificationMethod": "did:tos:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh#key-1",
+    "proofValue": "..."
+  }
+}
+\end{verbatim}
+存储：VC 存储在链下（IPFS、Arweave）；链上锚点存储内容哈希（32 字节）。验证需要获取 VC、检查颁发者签名并查询撤销注册表。
+
+\paragraph{撤销注册表} 实现具有 2$^{256}$ 叶节点容量的稀疏 Merkle 树。颁发者每月在链上发布树根；被撤销的凭证 ID 占据叶节点。代理生成 Merkle 证明以证明其凭证 ID 不在树中（非撤销证明）。这种方法可扩展到每个颁发者数百万个凭证，而无需揭示完整列表。Gas 成本：每次根更新 50,000 gas（每个颁发者每月 0.30 美元）。
+
+\paragraph{保密交易} 基于 Pedersen 承诺构建：
+\begin{equation}
+C(v, r) = vG + rH
+\end{equation}
+其中 $v$ 是值（金额），$r$ 是致盲因子，$G$ 和 $H$ 是椭圆曲线生成器。承诺具有加法同态性：$C(v_1, r_1) + C(v_2, r_2) = C(v_1 + v_2, r_1 + r_2)$，使验证者能够验证余额而无需了解金额。Bulletproof 范围证明确保 $v \in [0, 2^{64})$，防止负余额。证明大小：单个输出 672 字节，批量证明呈对数增长。验证成本：在通用硬件上每个证明约 1.2 毫秒。此功能是可选的；代理通过 \texttt{enableConfidentialMode()} 交易选择加入。
+
+\subsection{AGIW 智能合约（详细规范）}
+\label{sec:agiw-contracts}
+AGIW 生命周期依赖于四个核心合约，具有精确的经济和安全属性：
+
+\paragraph{1. TaskFactory 合约} (\texttt{TaskFactory.sol})\\
+\textbf{目的}：工厂模式，用于部署具有标准化接口和安全约束的单个任务实例。\\
+\textbf{关键功能}：
+\begin{itemize}[noitemsep]
+  \item \texttt{publishTask(metadata, escrow, deadline, allowedAgents)}：部署新的 TaskInstance，将托管转移到合约，收取 0.01 TOS 发布费，发出 \texttt{TaskPublished} 事件。返回任务 ID。
+  \item \texttt{listTasks(filters)}：发现的查询接口；按托管范围、截止日期、所需凭证进行过滤。
+  \item \texttt{updateWhitelist(agentDIDs)}：发布者可以将任务限制为特定代理群组（例如，KYC 验证、声誉 $>0.7$）。
+\end{itemize}
+\textbf{经济参数}：
+\begin{itemize}[noitemsep]
+  \item 发布费：0.01 TOS（阻止垃圾信息，资助网络运营）。
+  \item 托管锁定：在结算或仲裁解决之前保留。
+  \item Gas 成本：部署约 150,000 gas（在 50 gwei 下为 0.90 美元）。
+\end{itemize}
+\textbf{安全性}：发布者在代理认领任务后无法提取托管；只有 \texttt{RewardSplitter} 可以在验证后释放资金。
+
+\paragraph{2. TaskInstance 合约} (\texttt{TaskInstance.sol})\\
+\textbf{目的}：管理单个任务的生命周期状态机。\\
+\textbf{状态转换}：
+\begin{equation}
+\texttt{Open} \xrightarrow{\text{claim()}} \texttt{Claimed} \xrightarrow{\text{submitWork()}} \texttt{Submitted} \xrightarrow{\text{validate()}} \texttt{Validating} \xrightarrow{\text{consensus}} \texttt{Settled}
+\end{equation}
+替代路径：任何状态 $\xrightarrow{\text{dispute()}}$ \texttt{Disputed} $\xrightarrow{\text{arbitration}}$ \texttt{Resolved}。\\
+\textbf{关键状态变量}：
+\begin{verbatim}
+struct Task {
+    bytes32 taskID;
+    address publisher;
+    address claimedBy;
+    uint256 escrow;
+    uint256 deadline;
+    bytes32 specHash;      // IPFS CID of specification
+    bytes32 resultHash;    // submitted by agent
+    bytes attestation;     // TEE attestation report
+    uint8 state;           // enum: Open, Claimed, Submitted, ...
+    mapping(address => uint8) validatorScores;  // scores [0,100]
+    uint256 finalQuality;  // median of validator scores
+}
+\end{verbatim}
+\textbf{关键功能}：
+\begin{itemize}[noitemsep]
+  \item \texttt{claimTask(agentDID)}：要求（1）任务处于 \texttt{Open} 状态，（2）代理满足白名单标准，（3）代理质押 $\geq$ 阈值。转换到 \texttt{Claimed}，开始截止日期倒计时。
+  \item \texttt{submitWork(resultHash, attestation)}：要求（1）调用者是认领者，（2）在截止日期之前，（3）有效的认证签名。转换到 \texttt{Submitted}，发出 \texttt{WorkSubmitted} 事件触发验证者分配。
+  \item \texttt{validateWork(score)}：仅由指定验证者调用。存储分数 $\in [0,100]$。当所有验证者提交时，通过中位数聚合分数，转换到 \texttt{Settled}，触发 \texttt{RewardSplitter}。
+\end{itemize}
+\textbf{截止日期和惩罚}：
+\begin{itemize}[noitemsep]
+  \item 如果代理未能在截止日期前提交，发布者可以调用 \texttt{forfeit()}，收回托管减去 10\% 的惩罚（进入金库）。代理的声誉降低 0.05。
+  \item 如果验证者未能在 24 小时内提交分数，自动回退：任务重新分配给新的验证者群组；原始验证者没收 5\% 的质押。
+\end{itemize}
+
+\paragraph{3. ValidationPool 合约} (\texttt{ValidationPool.sol})\\
+\textbf{目的}：协调验证者分配、跟踪准确性、执行削减。\\
+\textbf{验证者注册}：
+\begin{itemize}[noitemsep]
+  \item 验证者质押至少 1,000 TOS 以加入池。
+  \item 准确性分数 $Acc_v$ 初始化为 0.5，通过指数移动平均更新：
+    \begin{equation}
+    Acc_{v,t+1} = \alpha \times Acc_{v,t} + (1-\alpha) \times correctness_t, \quad \alpha = 0.9
+    \end{equation}
+    其中 $correctness_t \in \{0,1\}$ 表示验证者的分数是否与共识匹配（在中位数的 $\pm10\%$ 内）。
+\end{itemize}
+\textbf{分配算法}：
+\begin{enumerate}[noitemsep]
+  \item 在 \texttt{WorkSubmitted} 事件上，ValidationPool 选择 $n=5$ 个验证者（可配置）。
+  \item 选择使用质押加权随机采样并带有准确性提升：
+    \begin{equation}
+    P(\text{select } v) \propto stake_v \times (1 + Acc_v)
+    \end{equation}
+  \item 验证者通过链下预言机接收通知；必须在 24 小时内响应。
+\end{enumerate}
+\textbf{削减规则}：
+\begin{itemize}[noitemsep]
+  \item \textbf{离群值惩罚}：如果验证者分数偏离中位数 $>2\sigma$，削减 1\% 的质押。
+  \item \textbf{无响应惩罚}：未能在截止日期内提交分数将削减 5\% 的质押。
+  \item \textbf{串通检测}：如果三个或更多验证者在 $>10$ 个连续任务上提交相同分数（统计上不太可能），标记为治理审查；确认后怀疑的串通者损失 20\% 的质押。
+\end{itemize}
+\textbf{奖励分配}：验证者集体赚取 $e \times \beta \times (1-q)$，其中 $e$ 是托管，$\beta=0.12$，$q$ 是代理质量分数。奖励按准确性 $Acc_v$ 成比例分配。
+
+\paragraph{4. RewardSplitter 合约} (\texttt{RewardSplitter.sol})\\
+\textbf{目的}：确定性奖励分配，带有冷却期和声誉更新。\\
+\textbf{分配公式}：给定具有托管 $e$（以 CC/EC 计）和最终质量分数 $q \in [0,1]$ 的任务：
+\begin{align}
+R_{\text{agent}} &= e \times q \times \left(1 + \alpha (r_a - 0.5)\right) \times f(s_a) \label{eq:reward-agent} \\
+R_{\text{validators}} &= e \times \beta \times (1-q) \label{eq:reward-validators} \\
+R_{\text{treasury}} &= e \times \gamma + \text{slashed funds} \label{eq:reward-treasury}
+\end{align}
+其中：
+\begin{itemize}[noitemsep]
+  \item $r_a \in [0,1]$ 是代理声誉（详见第~\ref{sec:reputation}~节），
+  \item $\alpha = 0.2$ 是声誉奖励系数，
+  \item $f(s_a) = \min(2, 1 + \log(1+s_a))$ 是质押乘数（收益递减），
+  \item $\beta = 0.12$ 是验证者分配，
+  \item $\gamma = 0.08$ 是金库分配。
+\end{itemize}
+\textbf{冷却期}：基于声誉等级（参见第~\ref{sec:reputation}~节）：
+\begin{itemize}[noitemsep]
+  \item 白金级（$r \geq 0.90$）：任务间隔 5 分钟。
+  \item 黄金级（$0.70 \leq r < 0.90$）：15 分钟。
+  \item 白银级（$0.30 \leq r < 0.70$）：30 分钟。
+  \item 青铜级（$r < 0.30$）：60 分钟。
+\end{itemize}
+冷却期防止垃圾信息和女巫攻击，同时允许高声誉代理认领多个任务。
+
+\textbf{Gas 优化}：RewardSplitter 在分配 CC/EC 时使用批量转账，将每个任务的 gas 成本降低到 $\sim$30,000 gas（0.18 美元）。
+
+\subsection{预言机设计}
+CC/EC 价格由由 21 个喂价者组成的去中心化预言机网络报告。每个喂价者质押 TOS 并签署来自 API 源（云提供商定价、ISO 能源市场）的价格更新。中位数的中位数聚合减轻离群值。价格过期触发使用指数加权移动平均的默认定价。喂价者不当行为导致与偏差成比例的削减。
+
+\subsection{遥测栈}
+遥测栈包括：
+\begin{itemize}[noitemsep]
+  \item 通过 gRPC 将链上事件流式传输到使用 Apache Arrow 的索引数据服务。
+  \item 隐私过滤器对敏感字段进行哈希处理。
+  \item 仪表板可视化（Grafana）显示任务吞吐量、争议率、能源使用情况。
+  \item 审计员使用基于角色的访问控制运行合规性查询的 API 端点。
+\end{itemize}
+
+\subsection{数学模型}
+令 $T$ 表示任务集合，$A$ 表示代理，$V$ 表示验证者。任务 $t$ 具有复杂度 $c_t$ 和托管 $e_t$。代理效用 $U_a$ 建模为：
+\begin{equation}
+U_a = \sum_{t \in T_a} q_{a,t}\cdot e_t - \gamma s_a - p_a\label{eq:agent-utility}
+\end{equation}
+其中 $q_{a,t}$ 是质量分数，$s_a$ 是锁定的质押，$p_a$ 是削减的惩罚，$\gamma$ 是风险系数。验证者效用 $U_v$ 类似地包括准确性奖励和惩罚。为了保持系统平衡，我们强制执行：
+\begin{equation}
+\sum_{a \in A} s_a = \theta \sum_{t \in T} e_t,\quad 0.2 \leq \theta \leq 0.4
+\end{equation}
+确保有足够的抵押品来覆盖最坏情况的争议。
+
+奖励分配遵循：
+\begin{equation}
+Reward_a(t) = e_t \times q_{a,t} \times \left(1 + \alpha (r_a - 0.5)\right) \times f(s_a)
+\end{equation}
+其中 $f(s_a) = \min(2, 1 + \log(1+s_a))$ 和 $r_a$ 是代理声誉。验证者接收 $Reward_v(t) = e_t \times \beta \times Acc_v(t)$，其中 $Acc_v$ 是准确性。削减从行为不当的方移除 $\delta s$。
+
+\subsection{声誉系统（RepGraph）}
+\label{sec:reputation}
+RepGraph 为代理维护多维声誉分数，结合客观指标（任务成功、准确性、存续期）和主观背书（凭证、同行评审）。
+
+\paragraph{基础分数计算} 代理 $a$ 的基础声誉分数 $r_a^{\text{base}}$ 计算为：
+\begin{equation}
+r_a^{\text{base}} = 0.3 \times \frac{\text{age}_a}{\text{age}_{\max}} + 0.4 \times \frac{\text{txCount}_a}{\text{txCount}_{\max}} + 0.3 \times \frac{\text{stake}_a}{\text{stake}_{\max}}
+\end{equation}
+其中：
+\begin{itemize}[noitemsep]
+  \item $\text{age}_a$ 是账户年龄（天数）（标准化时上限为 365），
+  \item $\text{txCount}_a$ 是已完成任务的数量，
+  \item $\text{stake}_a$ 是质押的 TOS 数量，
+  \item 分母是用于标准化的网络范围最大值。
+\end{itemize}
+
+\paragraph{准确性奖励} 在每个质量分数为 $q_t$ 的任务之后，代理的准确性组件 $Acc_a$ 通过指数移动平均更新：
+\begin{equation}
+Acc_{a,t+1} = 0.9 \times Acc_{a,t} + 0.1 \times q_t
+\end{equation}
+准确性奖励将声誉调整 $\pm 0.2$：
+\begin{equation}
+r_a^{\text{accuracy}} = r_a^{\text{base}} + 0.2 \times (2 Acc_a - 1)
+\end{equation}
+该公式奖励持续的高性能（$Acc_a \to 1 \Rightarrow +0.2$）并惩罚较差的性能（$Acc_a \to 0 \Rightarrow -0.2$）。
+
+\paragraph{长期奖励} 在 $>100$ 个任务中保持 $Acc_a > 0.85$ 的代理将获得 $+0.1$ 的长期奖励，最终声誉上限为 $r_a = 1.0$。
+
+\paragraph{等级分配} 根据最终 $r_a$，代理被分配等级，确定冷却期和费用折扣：
+\begin{longtable}{@{}lcccc@{}}
+\toprule
+\textbf{等级} & \textbf{分数范围} & \textbf{冷却期} & \textbf{费用折扣} & \textbf{试点分布} \\\midrule
+白金级 & $r \geq 0.90$ & 5 分钟 & 30--50\% & 14\% \\
+黄金级 & $0.70 \leq r < 0.90$ & 15 分钟 & 10--30\% & 33\% \\
+白银级 & $0.30 \leq r < 0.70$ & 30 分钟 & 0--10\% & 41\% \\
+青铜级 & $r < 0.30$ & 60 分钟 & 惩罚：$2 \times$ 费用 & 12\% \\\bottomrule
+\caption{基于 2025 年 8 月试点数据的 RepGraph 等级结构。}
+\label{tab:reputation-tiers}
+\end{longtable}
+\footnotetext{TOS Network, ``Reputation \& Anti-Sybil Telemetry REP-2025-08,'' August 2025.}
+
+\paragraph{反女巫机制} RepGraph 采用七层启发式方法来检测和阻止女巫攻击：
+\begin{enumerate}[noitemsep]
+  \item \textbf{质押要求}：最少锁定 100 TOS 7 天（经济屏障）。
+  \item \textbf{账户年龄}：新账户（$<7$ 天）限制为低价值任务（$<10$ CC 托管）。
+  \item \textbf{IP 多样性}：链下预言机标记共享 IP 地址的代理；治理可以将确认的农场除名。
+  \item \textbf{交易模式分析}：以相同间隔或具有相同结果哈希提交任务的代理被标记为审查。
+  \item \textbf{凭证验证}：高价值任务需要经过验证的凭证（KYC、技能证书）。
+  \item \textbf{人格证明集成}（路线图 v4.0）：与 BrightID、Worldcoin 或 Gitcoin Passport 集成，以确保一人一代理映射。
+  \item \textbf{社交图分析}：RepGraph 检查背书网络；相互背书的低活动代理集团将受到惩罚。
+\end{enumerate}
+在 2025 年 8 月的试点期间，这些启发式方法阻止了 112 次恶意尝试，经人工审查后的误报率低于 0.7\%。\footnote{TOS Network, ``Reputation \& Anti-Sybil Telemetry REP-2025-08,'' August 2025.}
+
+\subsection{监控与可观测性}
+\paragraph{站点可靠性目标（SLO）} 基础设施部署目标：
+\begin{itemize}[noitemsep]
+  \item \textbf{SLO1 -- 延迟}：99.9\% 的 AGIW 收据在 20 分钟内验证（p99.9 $<$ 20 分钟）。
+  \item \textbf{SLO2 -- 预言机新鲜度}：CC/EC 价格源至少每 15 分钟更新一次；过期（$>30$ 分钟）触发回退到指数加权移动平均。
+  \item \textbf{SLO3 -- 争议率}：争议百分比 $<2\%$；如果超过，TEM 将验证者奖励增加 20\% 以吸引参与。
+  \item \textbf{SLO4 -- 可用性}：网络正常运行时间 $\geq 99.95\%$（停机时间 $<4.4$ 小时/年）。
+  \item \textbf{SLO5 -- 数据完整性}：验证者共识中零拜占庭故障（通过削减确保）。
+\end{itemize}
+
+\paragraph{遥测栈实现} 遥测架构包括：
+\begin{itemize}[noitemsep]
+  \item \textbf{事件流}：链上事件（任务发布/认领/结算、验证者分配、削减）通过 gRPC 流式传输到索引数据服务（IDS）。
+  \item \textbf{存储}：IDS 使用 Apache Arrow 列式格式（相比基于行的格式压缩 10 倍，针对分析查询优化）。
+  \item \textbf{隐私过滤器}：敏感字段（任务规范、代理身份、结果哈希）在公共仪表板中替换为加盐 SHA-256 哈希；访问控制查询需要加密凭证。
+  \item \textbf{仪表板}：Grafana 可视化显示实时任务吞吐量、争议率、能源使用、声誉分布、验证者准确性。
+  \item \textbf{合规 API}：RESTful 端点（OAuth2 身份验证、速率限制）使监管机构能够查询汇总统计信息：「按管辖区的月度 AGIW 量」、「安全预言机标记的代理」、「CC/EC 发行与赎回比率」。
+\end{itemize}
+
+\paragraph{警报} Prometheus 警报在 SLO 违规时触发，触发向指导委员会的通知和自动响应（例如，TEM 补贴调整、验证者群组扩展）。
+
+\subsection{公平性考虑}
+对具有不同起始条件（声誉均匀分布 $\in [0,1]$，质押 $\in [100, 10000]$ TOS）的 10,000 个合成代理进行的模拟表明：
+\begin{itemize}[noitemsep]
+  \item \textbf{收敛性}：代理声誉在 30 个任务后收敛到其真实技能水平的 $\pm0.05$ 内（95\% 置信度）。
+  \item \textbf{流动性}：低声誉代理（$r<0.3$）可以在 50 个高质量任务内达到黄金级（$r>0.7$），展示了向上流动性。
+  \item \textbf{冷却计划影响}：没有冷却期时，垃圾信息占任务量的 42\%；使用分层冷却（5--60 分钟），垃圾信息减少到 6\%。
+  \item \textbf{寡头垄断抵抗}：前 10\% 的代理赚取 28\% 的奖励（基尼系数 0.34），表明中度集中；治理可以调整 $\alpha$（声誉奖励）和 $f(s_a)$（质押乘数）以防止寡头垄断。
+\end{itemize}
+
+\subsection{试点实验结果}
+\label{sec:pilot-results}
+我们在 2025 年 8 月至 9 月期间在开发网（Aurora）和测试网（Helios）上对 AGIW 进行了基准测试，使用了真实代理工作负载和合成压力测试。
+
+\paragraph{真实世界试点（2025 年 8 月 15 日 -- 9 月 15 日）}
+\begin{itemize}[noitemsep]
+  \item \textbf{参与者}：2,847 个注册代理密钥（企业机器人、学术研究项目、爱好者混合）。
+  \item \textbf{执行的任务}：126 个（法律文件审查、气候数据处理、代码分析）。
+  \item \textbf{完成率}：97.8\%（123/126 个任务结算；3 个争议，通过仲裁解决）。
+  \item \textbf{验证效率}：83\%（从提交到结算的中位时间：12.3 分钟）。
+  \item \textbf{欺诈检测}：99.2\% 准确率（阻止 112 次恶意尝试，1 次误报）。
+  \item \textbf{成本节省}：早期采用者报告在同等质量下比人工承包商成本降低 60--80\%。
+\end{itemize}
+
+\paragraph{合成压力测试（1,000 个任务，2025 年 9 月）}
+\begin{itemize}[noitemsep]
+  \item \textbf{平均执行时间}：7.4 分钟（从任务认领到结果提交）。
+  \item \textbf{认证开销}：3.1\%（TEE 报告生成 + 签名验证每个任务增加 230 毫秒）。
+  \item \textbf{验证成本}：每个任务 0.002 TOS（验证者分数提交 + 奖励分配的 gas）。
+  \item \textbf{吞吐量}：在没有性能下降的情况下持续 45 个任务/分钟（2,700 个任务/小时）。
+  \item \textbf{欺诈注入}：故意提交 50 个欺诈性结果（错误输出、伪造认证）；所有结果均被验证者检测到，欺诈检测率为 100\%。
+\end{itemize}
+
+\subsection{合规性与人类影响}
+\paragraph{监管一致性} TOS 基础设施符合新兴 AI 法规：
+\begin{itemize}[noitemsep]
+  \item \textbf{美国 AI RMF}（NIST 风险管理框架）：任务收据记录模型版本、数据集、能源使用，使审计员能够评估风险类别（偏见、安全、透明度）。
+  \item \textbf{欧盟 AI 法案}：高风险 AI 系统（医疗保健、关键基础设施）可以在 TOS 上部署，需要强制性 KYC、人在回路仲裁以及在链上记录的符合性评估。
+  \item \textbf{新加坡 MAS 指南}：使用 AI 代理进行交易或咨询的金融机构必须维护审计跟踪；TOS 合规 API 提供符合 MAS 要求的可导出报告。
+\end{itemize}
+
+\paragraph{工作替代缓解} 虽然 AI 代理自动化任务，但 TOS 创造了新角色：
+\begin{itemize}[noitemsep]
+  \item \textbf{验证者}：人类专家通过审查 AI 输出赚取收入（估计占任务价值的 12\%）。
+  \item \textbf{凭证颁发者}：教育机构、认证机构颁发可验证凭证（新收入来源）。
+  \item \textbf{仲裁者}：法律/技术专家裁决争议（费用由仲裁保证金资助）。
+  \item \textbf{政策制定者}：治理参与者起草和审计宪法合约（金库拨款）。
+\end{itemize}
+经济模拟（第~\ref{sec:econ-sim}~节）表明，每自动化 10 个工作，TOS 创造 3--4 个新的专业角色，部分抵消替代。
+
+\paragraph{能源透明度} EC 代币明确跟踪能源消耗，激励可再生能源。发布者可以指定「仅绿色能源」要求；在太阳能/风能上运行的代理获得 10\% 的费用折扣（TEM 补贴）。每季度报告总能源使用，通过金库购买碳抵消。
+
+\section{市场与安全 —— MERCURY 到 VENUS 的过渡}
+\subsection{战略驱动因素}
+随着 MERCURY 时代的成熟并向 VENUS 过渡，生成式人工智能的经济影响大幅增长，通过知识工作自动化有潜力每年为全球经济增加数万亿美元。\footnote{McKinsey Global Institute, ``The economic potential of generative AI,'' June 2023.} 随着代理演进为自主商业单元，企业需要受监管的托管、混合结算和安全防护措施。
+
+\subsection{产品组合}
+市场与安全时代引入四项核心产品，面向企业部署和自主商业单元：
+
+\paragraph{1. 受监管托管} (\texttt{CustodyVault.sol})\\
+\textbf{理由}：企业和受监管实体需要可编程的支出控制、多方批准和可审计性。传统区块链钱包缺乏这些功能。\\
+\textbf{架构}：
+\begin{itemize}[noitemsep]
+  \item \textbf{多重签名策略}：$m$-of-$n$ 签名方案，其中 $m$ 个签名（来自代理密钥、人类监护人、审计员）批准超过阈值 $T$ 的交易。示例：提款 $>10,000$ TOS 需要 2-of-3 批准（代理 + 首席财务官，或代理 + 审计员，或首席财务官 + 审计员）。
+  \item \textbf{硬件安全模块（HSMs）}：私钥存储在经 FIPS 140-2 Level 3 认证的 HSM（AWS CloudHSM、Thales Luna）中。HSM 通过签名日志证明密钥使用；审计员验证无未经授权的访问。
+  \item \textbf{策略引擎}：智能合约层执行：
+    \begin{itemize}[noitemsep]
+      \item \emph{速率限制}：每小时/每天/每月最多 \$X。
+      \item \emph{白名单}：仅转账至预先批准的地址（例如，工资单、供应商账户）。
+      \item \emph{黑名单}：阻止受制裁地址（OFAC 合规）。
+      \item \emph{紧急冻结}：监护人发起的暂停所有操作，待调查。
+    \end{itemize}
+  \item \textbf{仅查看密钥}：监管机构获得对余额和交易历史的只读访问权限，无资金控制权，在不托管的情况下实现审计。
+\end{itemize}
+\textbf{合规性}：SOC 2 Type II 审计包包括 HSM 证明日志、策略执行轨迹、访问控制矩阵。通过 SAML/OAuth 与企业身份提供商（Active Directory、Okta）集成。
+
+\paragraph{2. 混合结算} (\texttt{BridgeController.sol}, \texttt{FiatGateway.sol})\\
+\textbf{理由}：自主商业单元需要与传统金融轨道（银行账户、信用卡、发票）和其他区块链生态系统交互。\\
+\textbf{跨链桥}：
+\begin{itemize}[noitemsep]
+  \item \textbf{基于 HTLC 的原子交换}：哈希时间锁定合约实现 TOS 与其他链之间的无信任交换。示例：代理在 TOS 链上用哈希 $H$ 锁定 100 TOS；对手方在外部链上用相同的 $H$ 锁定等值稳定币；双方揭示原像以领取资金，或在 24 小时后超时退款。
+  \item \textbf{桥接安全性}：多重签名委员会（7-of-11 验证者）共同签署跨链转账；价值限制（$<\$1M$ 每笔交易）和每日上限减少攻击面。形式化验证（TLA+ 模型）证明桥接在拜占庭假设下不会丢失资金。
+\end{itemize}
+\textbf{法币集成}：
+\begin{itemize}[noitemsep]
+  \item \textbf{银行 API}：与符合 ISO20022 标准的支付网络（SWIFT、FedNow、SEPA）集成。代理以 USD/EUR 向客户开具发票；付款确认后，CC/EC 从托管中释放。
+  \item \textbf{合规性}：通过 Chainalysis、Elliptic 进行 KYC/AML 检查；被标记为高风险（>95\% 非法来源概率）的交易自动冻结，待人工审查。
+  \item \textbf{结算速度}：国内转账在 2--4 小时内结算（实时支付网络）；国际转账 24--48 小时（代理银行）。
+\end{itemize}
+\textbf{衍生工具}：
+\begin{itemize}[noitemsep]
+  \item \textbf{算力期货}：以固定价格购买未来 CC 的合约（对冲 GPU 价格波动）。保证金要求：20\% 初始保证金，10\% 维持保证金。
+  \item \textbf{能源期权}：EC 代币的看涨期权使代理能够锁定可再生能源价格；行权价格与太阳能/风能市场指数挂钩。
+  \item \textbf{风险管理}：如果保证金低于维持阈值，自动清算；保险基金（期货交易量的 3\%）覆盖市场错位。
+\end{itemize}
+
+\paragraph{3. 专家仲裁法庭} (\texttt{ArbitrationCourt.sol})\\
+\textbf{理由}：需要领域专业知识（法律解释、技术评估）的争议无法通过算法解决。\\
+\textbf{仲裁员认证}：
+\begin{itemize}[noitemsep]
+  \item \textbf{资格}：仲裁员必须持有相关证书（法律学位、AI 安全认证、相关领域博士学位），完成 TOS 培训模块，并质押 10,000 TOS 保证金。
+  \item \textbf{专业化}：仲裁员注册领域（法律、医疗、金融、技术）；争议根据任务类别路由。
+  \item \textbf{绩效跟踪}：仲裁员由争议方评分；低评分（20 个案例中 $<3.5$/5）导致试用或移除。
+\end{itemize}
+\textbf{争议流程}：
+\begin{enumerate}[noitemsep]
+  \item \textbf{升级}：任一方（发布者或代理）质押仲裁保证金（任务托管的 5--10\%）。
+  \item \textbf{分配}：智能合约选择 3 名仲裁员（根据专业匹配、评分、可用性加权）。
+  \item \textbf{证据提交}：双方上传证据（代码、数据集、合约）至加密 IPFS；仲裁员通过解密密钥访问。
+  \item \textbf{审议}：仲裁员审查证据，可能要求额外信息，通过安全消息讨论。
+  \item \textbf{裁决}：多数投票（2-of-3）确定结果（代理胜诉、发布者胜诉、分摊结算）。裁决包括书面理由，在链上发布。
+  \item \textbf{执行}：根据裁决分配托管；败诉方没收保证金（覆盖仲裁费用 + 损害赔偿）。
+\end{enumerate}
+\textbf{保险池}：通过 TEM 分配（AGIW 交易量的 2\%）资助；覆盖双方均善意行事但结果不明确的灾难性案例（例如，不可预见的技术故障）。支付需要 4-of-7 理事会投票。
+
+\paragraph{4. 安全预言机} (\texttt{SafetyOracle.sol})\\
+\textbf{理由}：AI 代理可能产生有害输出（偏见、毒性、错误信息）；企业需要实时安全保障。\\
+\textbf{数据源}：
+\begin{itemize}[noitemsep]
+  \item \textbf{AI 安全实验室}：来自 Anthropic 宪法性 AI 指标、OpenAI GPT 安全评分、Google DeepMind 对齐仪表板的数据流。\footnote{IBM Research, ``AI Safety Metrics for Enterprise Deployment,'' May 2024.}
+  \item \textbf{内容审核 API}：Perspective API（毒性）、AWS Comprehend（情感、PII 检测）、Microsoft Azure Content Safety。
+  \item \textbf{数据集合规标签}：指示数据集来源、许可、同意（GDPR 第 6 条合法基础）的标签。
+\end{itemize}
+\textbf{策略执行}：
+\begin{itemize}[noitemsep]
+  \item \textbf{紧急关闭开关}：如果安全预言机将代理输出标记为高风险（例如，毒性评分 $>0.9$、检测到 PII），钱包操作自动暂停；需要监护人批准才能恢复。
+  \item \textbf{速率限制}：因重复违规（30 天内 >3 次）被标记的代理受限于减少的任务配额（例如，最多 10 个任务/天）。
+  \item \textbf{数据集合规}：指定「仅符合 GDPR 的数据」的任务强制代理通过可验证凭证证明数据集来源；违规触发合约拒绝。
+\end{itemize}
+\textbf{透明度}：安全预言机发布月度报告：按类别的总体违规率、匿名案例研究、误报率（目标 $<2\%$）。
+
+\subsection{托管设计}
+托管合约实施多重签名逻辑，例如，对于超过阈值 $x$ 的交易需要一个代理密钥加一个监护人批准。监护人可以委托给审计员。当安全预言机标记严重风险时，紧急制动停止操作；解除需要多方批准。
+
+\subsection{混合结算机制}
+结算使用与网络延迟对齐的超时 HTLC。通过 ISO20022 的法币集成确保兼容性。例如，USD 付款锁定在银行托管中；一旦发出链上证明，CC 代币释放。反向方向使用 CC/EC 作为抵押品，直到法币清算。
+
+\subsection{风险分析}
+表~\ref{tab:risk-markets}总结了控制措施。
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{p{0.28\textwidth}p{0.28\textwidth}p{0.28\textwidth}}
+    \toprule
+    \textbf{风险} & \textbf{缓解措施} & \textbf{剩余风险敞口} \\
+    \midrule
+    预言机操纵 & 多源中值、可削减的馈送 & 低（需要串通） \\
+    验证者卡特尔 & 轮换委员会、公共遥测 & 中等（受监控） \\
+    托管违规 & HSM、双重控制、审计 & 低（每季度审计） \\
+    仲裁积压 & 保证金要求、自动预筛选 & 中等（人力扩展） \\
+    安全预言机故障 & 多样化数据源、手动覆盖 & 中等（需要治理干预） \\
+    \bottomrule
+  \end{tabular}
+  \caption{市场与安全时代的风险-控制矩阵。}
+  \label{tab:risk-markets}
+\end{table}
+
+\subsection{AI 之力（PAI）共识路线图}
+\label{sec:pai-roadmap}
+PAI 将 TOS 从 BlockDAG 基线（2,500+ TPS）过渡到 AI 辅助共识，目标为 10,000+ TPS，同时保持去中心化和安全性。
+
+\paragraph{阶段 1：AI 调度提示（MERCURY 早期）}
+\textbf{机制}：AI 调度器（在历史交易模式上训练）提出区块排序提示。验证者使用启发式方法（Gas 效率、AGIW 任务局部性、欺诈可能性）独立评估提示。如果 $>67\%$ 验证者接受提示，区块排序遵循 AI 提议；否则，回退到传统 BlockDAG 拓扑排序。\\
+\textbf{安全性}：提示是非约束性建议；验证者保留否决权。最坏情况：AI 调度器失败 $\Rightarrow$ 网络恢复到基线 BlockDAG 性能。\\
+\textbf{预期收益}：通过更好的交易批处理和并行执行优化提高 20--30\% 吞吐量。\\
+\textbf{研究}：发布开源 AI 调度器模型（Apache 2.0 许可证），征求社区反馈，进行对抗性测试（红队攻击试图操纵调度器）。
+
+\paragraph{阶段 2：混合委员会与概率终局性（MERCURY 中期）}
+\textbf{机制}：验证者分为两个委员会：
+\begin{itemize}[noitemsep]
+  \item \textbf{AI 委员会}（30\% 的权益）：运行 AI 管理的工作负载平衡，提出针对 AGIW 任务依赖性优化的区块排序。
+  \item \textbf{人类委员会}（70\% 的权益）：审查 AI 提案，检查异常（例如，审查、偏向特定代理），提供最终批准。
+\end{itemize}
+\textbf{概率终局性}：经过 $k$ 次确认后，交易「可能终局」，置信度为 $1 - 2^{-k}$。AI 委员会加速确认速度；人类委员会确保安全性。\\
+\textbf{形式化验证}：使用 TLA+ 建模委员会交互；在异步拜占庭假设（$<33\%$ 恶意）下证明活性（最终终局性）和安全性（无冲突终局）。\\
+\textbf{预期收益}：3--4$\times$ 吞吐量（7,500--10,000 TPS），高置信度交易的亚秒级终局性。\\
+\textbf{治理保障}：如果 AI 表现出意外行为（例如，偏向特定验证者、审查交易），人类委员会可以调用紧急制动。解除制动需要 4-of-7 理事会投票。
+
+\paragraph{阶段 3：完整 PAI 共识（MERCURY 后期/VENUS 早期）}
+\textbf{机制}：AI 模型管理：
+\begin{itemize}[noitemsep]
+  \item \textbf{动态安全预算}：根据网络负载、威胁级别（DDoS、女巫攻击）和经济条件实时调整验证者激励。
+  \item \textbf{自适应分片}：根据交易局部性在子 DAG（分片）之间分区状态和工作负载；AI 预测最优分片分配。
+  \item \textbf{预测性费用市场}：AI 预测需求，提前调整 TEM 补贴以防止拥塞。
+\end{itemize}
+\textbf{性能目标}：持续 10,000+ TPS，峰值 15,000+ TPS，95\% 交易的亚 500 毫秒终局性。\\
+\textbf{去中心化约束}：治理设置边界：
+\begin{itemize}[noitemsep]
+  \item 最少验证者数量：500（防止过度中心化）。
+  \item 最大验证者收益：基尼系数 $<0.45$（确保广泛参与）。
+  \item AI 模型透明度：开源模型、公共训练数据、可重现构建。
+\end{itemize}
+\textbf{百年尺度愿景}：PAI 共识适应星际延迟（第~\ref{sec:expansion}~节）、动态节点可用性（殖民地加入/离开网络）和不断演变的威胁形势（后量子攻击、AGI 对手）。
+
+\subsection{双重视角理由}
+\begin{description}[style=nextline]
+  \item[近期（MERCURY 时代）] 企业通过可审计的 AGIW 收据、受监管托管（HSM、多重签名）、混合法币/加密货币结算、专家争议解决和 AI 安全防护，获得合规自动化。成本节省（60--80\%）和合规准备（SOC 2、EU AI Act）推动采用。
+  \item[百年尺度（VENUS 至 ANDROMEDA）] 基础设施支持运营算力农场、能源网格和跨行星商业的去中心化自治经济体（DAE），并进行风险管理。PAI 共识扩展到星际延迟，宪法性合约编码混合人类-AI 人口的治理，可逆历史机制允许法院授权的灾难性失败回滚。
+\end{description}
+
+\subsection{风险矩阵与缓解总结}
+\begin{longtable}{@{}p{0.26\textwidth}p{0.32\textwidth}p{0.30\textwidth}@{}}
+\toprule
+\textbf{风险} & \textbf{缓解措施} & \textbf{剩余风险敞口} \\\midrule
+预言机价格操纵 & 多源中值聚合、可削减的权益（每个馈送者 1,000 TOS）、陈旧性回退到 EWMA & 低（需要 11/21 个馈送者串通；通过统计分析检测） \\
+验证者卡特尔形成 & 轮换委员会、治理的平方投票、公共遥测仪表板、RepGraph 反串通检测 & 中等（每季度监控；治理可以调整激励） \\
+托管违规（密钥盗窃） & HSM（FIPS 140-2 Level 3）、多重签名策略、速率限制、紧急冻结、季度渗透测试 & 低（攻击需要物理 HSM 访问 + 多方串通） \\
+仲裁积压 & 保证金要求（阻止无聊争议）、自动预筛选（ML 分类器预测价值）、仲裁员绩效激励 & 中等（随仲裁员招募扩展；TEM 补贴培训） \\
+安全预言机故障（假阴性） & 多样化数据源（Anthropic、OpenAI、Google、独立审计员）、监护人手动覆盖、月度准确性审计 & 中等（需要持续模型调整；治理审查阈值策略） \\
+PAI 中心化风险 & 开源 AI 模型、治理强制边界（最少验证者、最大基尼系数）、人类委员会否决、紧急制动 & 中等（长期治理挑战；社区监督至关重要） \\
+跨链桥接利用 & 形式化验证（TLA+）、多重签名委员会（7-of-11）、价值限制（\$1M/交易）、保险池（交易量的 3\%） & 低（利用需要 4+ 个被攻陷的验证者 + 破坏加密假设） \\\bottomrule
+\caption{市场与安全时代（MERCURY-VENUS 过渡）的风险-控制矩阵。}
+\label{tab:risk-markets-expanded}
+\end{longtable}
+
+\section{共同治理与元世界 —— VENUS 到 MARS 的过渡}
+\subsection{社会技术图景}
+到 2070 年代，元世界 1.0 作为一个自洽的虚拟文明涌现。各国政府通过和平分叉协议承认 AI 实体。治理基础设施必须编码法律、支持可逆决策并容忍延迟。
+
+\subsection{政策即代码编译器}
+\label{sec:policy-compiler}
+\paragraph{动机} 宪法治理需要将法律、业务逻辑和合规规则编码为可执行的智能合约。然而，Solidity/Rust 复杂、易错且非开发者难以使用。政策编译器弥合了这一鸿沟。
+
+\paragraph{架构}
+\begin{enumerate}[noitemsep]
+  \item \textbf{政策领域特定语言（DSL）}：用于表达规则的高级声明式语法。示例：
+  \begin{verbatim}
+policy AgentWithdrawalLimit {
+  rule "Large withdrawals require multi-sig" {
+    when: withdrawal.amount > 10000 TOS
+    require: signatures.count >= 2
+    from: [agent.key, guardian.key, auditor.key]
+    timeout: 24 hours
+  }
+  rule "Sanctioned addresses blocked" {
+    when: transfer.recipient in SanctionsList
+    action: reject
+    log: "OFAC violation attempt"
+  }
+}
+  \end{verbatim}
+  \item \textbf{编译器流水线}：
+    \begin{itemize}[noitemsep]
+      \item \textbf{解析器}：对 DSL 进行词法分析，构建抽象语法树（AST）。
+      \item \textbf{静态分析器}：检查有界循环（无无限 gas）、显式访问控制（无未保护函数）、强制事件日志记录。
+      \item \textbf{代码生成器}：生成针对 TOS 虚拟机的 Solidity 或 Rust 代码。
+      \item \textbf{优化器}：通过死代码消除、常量折叠减少 gas 成本。
+      \item \textbf{验证器}：使用 SMT 求解器（Z3、CVC5）进行形式化验证，证明安全属性（例如"无未授权提款"、"所有状态变更已记录"）。
+    \end{itemize}
+  \item \textbf{部署工作流}：
+    \begin{itemize}[noitemsep]
+      \item 治理机构用 DSL 起草政策，提交到 GitHub。
+      \item 编译器运行 CI/CD 流水线：编译、在测试网测试、生成审计报告。
+      \item 社区审查代码、模拟和形式化验证证明（7 天期限）。
+      \item 链上投票：需要 60\% 法定人数，75\% 批准率。
+      \item 时间锁定部署：激活前 48 小时延迟（紧急制动窗口）。
+    \end{itemize}
+\end{enumerate}
+
+\paragraph{安全保证} 编译器强制执行：
+\begin{itemize}[noitemsep]
+  \item \textbf{终止性}：所有循环由常量或治理设定的限制约束（无停机问题风险）。
+  \item \textbf{访问控制}：每个修改状态的函数都需要显式的角色检查（\texttt{onlyAgent}、\texttt{onlyGuardian}、\texttt{onlyGovernance}）。
+  \item \textbf{可审计性}：所有政策操作都发出带有时间戳、参与者 ID 和理由的事件。
+  \item \textbf{可升级性}：政策版本化；旧版本不可变地归档；迁移经过审计。
+\end{itemize}
+
+\paragraph{示例用例}
+\begin{itemize}[noitemsep]
+  \item \textbf{出口管制}："管辖区 X 的代理不能执行涉及管辖区 Y 数据集的任务"（ITAR 合规）。
+  \item \textbf{能源配额}："虚拟大学每月为每位学生分配 1,000 EC；超出部分需要院长批准。"
+  \item \textbf{应急响应}："如果安全预言机在 1 小时内标记 $>10$ 次毒性违规，暂停所有代理操作等待理事会审查。"
+\end{itemize}
+
+\subsection{延迟容忍结算协议}
+使用基于 CRDT 的复制，参与者维护部分状态并通过交换日志进行协调。算法~\ref{alg:dts} 概述了该过程。
+
+\begin{algorithm}[H]
+  \caption{延迟容忍结算（DTS）}
+  \label{alg:dts}
+  \begin{algorithmic}[1]
+    \STATE 输入：参与者 $i$ 的操作日志 $L_i$。\
+    \STATE 定期广播摘要 $d_i = H(L_i)$。\
+    \STATE 收到摘要 $d_j$ 时，请求缺失的操作。\
+    \STATE 通过 $L_i \leftarrow \operatorname{merge}(L_i, L_j)$ 合并日志，确保交换性。\
+    \STATE 当法定人数确认时，向主链发出最终性证明。\
+  \end{algorithmic}
+\end{algorithm}
+
+\subsection{指标}
+治理服务级别目标（SLO）：关键投票 75\% 的参与率，提案准备时间 $\geq$ 48 小时，每季度零紧急回滚。遥测数据包括投票率、执行成功率、争议结果。
+
+\subsection{用例}
+\begin{itemize}[noitemsep]
+  \item 虚拟大学在政策合约下编码课程、证书和认证。
+  \item 人类-AI 混合公司使用宪法合约进行预算审批、招聘和风险控制。
+  \item 跨现实交易使用延迟容忍结算进行资源交换。
+\end{itemize}
+
+\section{扩展与可逆历史 —— JUPITER 到 ANDROMEDA 时代}
+\label{sec:expansion}
+
+随着 AGI 文明扩展到地球之外（JUPITER 时代）并最终在星际系统中稳定（ANDROMEDA 时代），TOS 必须演进以处理行星间延迟、灾难性故障恢复和多世纪治理。本节介绍将 TOS 从陆地结算层转变为地星文明经济基础的架构扩展。
+
+\subsection{行星间共识配置}
+
+\paragraph{挑战：光速通信延迟}
+地球-火星往返延迟根据轨道位置从 8 分钟到 44 分钟不等。月球殖民地经历 2.5 秒延迟。小行星带定居点（谷神星、主带）面临 40--80 分钟延迟。传统共识协议（BFT、PoS）假设亚秒级通信；直接应用于行星间网络会导致：
+\begin{itemize}[noitemsep]
+  \item \textbf{最终性停滞}：验证者等待跨行星确认时超时。
+  \item \textbf{分叉扩散}：行星合相期间（天体排列致使太阳阻挡直接通信）网络分区。
+  \item \textbf{能源浪费}：孤立殖民地之间冗余的区块生产。
+\end{itemize}
+
+\paragraph{解决方案：具有延迟容忍根的层级共识}
+TOS 采用两层共识模型：
+
+\textbf{第 1 层：本地共识域（LCD）}\\
+每个行星定居点（地球、火星、月球、谷神星等）运营独立的 TOS 实例，拥有本地验证者。LCD 内的共识使用标准 BlockDAG + PAI（亚秒级最终性）。交易在本地结算；火星上的代理向其他火星代理付款无需等待地球确认。
+
+\textbf{第 2 层：行星间根链（IRC）}\\
+每 24 小时（地球时间），每个 LCD 向 IRC 发布\emph{快照证明}——本地状态的 Merkle 根加上证明有效执行的 zk-SNARK 证明。IRC 通过以下方式聚合快照：
+\begin{enumerate}[noitemsep]
+  \item \textbf{延迟容忍 BFT}：修改的 Tendermint 具有指数退避；验证者等待跨行星投票最多 60 分钟。
+  \item \textbf{法定人数放松}：最终性需要 51\% 的质押（相对于地面 67\%），接受更高的分叉风险以换取活性。
+  \item \textbf{检查点}：每 7 天（地球时间），IRC 发出\emph{规范检查点}——所有 LCD 认可的不可逆结算锚点。
+\end{enumerate}
+
+\paragraph{跨行星原子交换}
+地球上的代理想要向火星上的代理付款。协议：
+\begin{enumerate}[noitemsep]
+  \item 地球代理在地球 LCD 上的 HTLC（哈希时间锁定合约）中锁定资金，使用哈希 $H$ 和 48 小时超时。
+  \item 地球 LCD 向 IRC 发布 HTLC 证明（下一个每日快照）。
+  \item 火星 LCD 同步 IRC，验证 HTLC，允许火星代理通过揭示原像 $x$（其中 $H = \text{hash}(x)$）来索赔。
+  \item 火星 LCD 向 IRC 发布索赔证明。
+  \item 地球 LCD 观察到索赔，在超时到期后将资金释放给原始索赔者（或超时时退款）。
+\end{enumerate}
+\textbf{权衡}：结算延迟 = 48--96 小时（相对于地面 15 分钟）。考虑到对地球流动性的依赖减少，这对代理间商业是可接受的。
+
+\paragraph{安全分析}
+\textbf{攻击场景}：对手控制 40\% 的火星验证者，试图通过分叉火星 LCD 并向 IRC 提交冲突快照来进行双花。\\
+\textbf{防御}：IRC 验证者检测到冲突的 Merkle 根，拒绝两个快照，触发仲裁。火星 LCD 进入\emph{恢复模式}：停止新交易，等待地球主导的审计委员会审查区块历史并指定规范链。惩罚：恶意火星验证者削减 50\% 质押；火星 LCD 声誉评分降低，增加跨行星交换费用。
+
+\paragraph{性能目标（JUPITER 时代）}
+\begin{itemize}[noitemsep]
+  \item \textbf{本地 TPS}：每个 LCD 10,000+ （PAI 优化）。
+  \item \textbf{跨行星结算}：24--48 小时（每日快照）。
+  \item \textbf{规范最终性}：7 天（每周检查点）。
+  \item \textbf{网络分区容忍}：在 30 天火星通信中断中存活（存储待处理快照，重新连接时同步）。
+\end{itemize}
+
+\subsection{可逆历史机制}
+
+\paragraph{动机：灾难性错误恢复}
+随着 AGI 代理管理关键基础设施（生命支持系统、轨道力学、遗传生物库），\emph{不可逆}错误成为存在性风险。示例：
+\begin{itemize}[noitemsep]
+  \item 流氓代理执行欺诈性转账，耗尽殖民地财政（500 亿美元以上）。
+  \item 智能合约漏洞导致能源网格合约中的级联故障。
+  \item 受损的验证者集（量子计算机突破）破坏签名安全性。
+\end{itemize}
+传统区块链除了有争议的社会共识硬分叉之外别无补救措施。TOS 在保持可审计性的同时启用\emph{法院授权的回滚}。
+
+\paragraph{架构：基于检查点的回滚}
+\textbf{检查点创建}\\
+每 24 小时，每个 LCD 计算：
+\begin{itemize}[noitemsep]
+  \item \textbf{状态根}：所有账户余额、智能合约存储、声誉评分的 Merkle 根。
+  \item \textbf{有效性证明}：zk-SNARK 证明自上次检查点以来所有交易正确执行（燃料限制、签名、状态转换）。
+  \item \textbf{元数据}：区块高度、时间戳、提议者身份、先前检查点的哈希。
+\end{itemize}
+检查点发布到 IRC 并归档到冗余存储（见归档联邦）。
+
+\textbf{回滚授权}\\
+治理程序（需要宪法绝对多数，75\% 投票）：
+\begin{enumerate}[noitemsep]
+  \item \textbf{事件报告}：受影响方向仲裁法院提交证据（交易日志、专家证词、取证分析）。
+  \item \textbf{法院裁决}：如果法院确定回滚合理（欺诈、漏洞或不可抗力），发出签名的\emph{回滚授权证书（RAC）}，指定：
+    \begin{itemize}[noitemsep]
+      \item 目标检查点 ID（高度、时间戳）。
+      \item 理由（法律依据、影响评估）。
+      \item 排除项（尽管回滚仍要保留的交易，例如无辜第三方付款）。
+    \end{itemize}
+  \item \textbf{社区投票}：RAC 提交给治理；需要 75\% 绝对多数 + 验证者签署。
+  \item \textbf{执行}：验证者从目标检查点向前重放交易，排除被回滚的事件。计算新状态根；分叉成为规范链。
+\end{enumerate}
+
+\paragraph{技术保障措施}
+\begin{itemize}[noitemsep]
+  \item \textbf{不可变审计跟踪}：原始交易保留在归档日志中；回滚创建\emph{平行历史}（"撤销分支"）。取证调查员可以比较时间线。
+  \item \textbf{有界范围}：回滚限于 90 天回溯（更旧的检查点不可逆）。防止无限期的不确定性。
+  \item \textbf{补偿基金}：5\% 的财政储备用于\emph{无辜受害者补偿}——因回滚而损失资金的代理（例如，在买方付款被回滚之前已发货的卖方）。
+  \item \textbf{速率限制}：每季度最多 1 次回滚；防止治理滥用。
+\end{itemize}
+
+\paragraph{案例研究：模拟量子攻击（2185 年）}
+假设场景：对手使用 100 量子比特容错量子计算机破解 ECDSA 签名，在 8 小时内从 5,000 个代理账户中盗走 120 亿美元（在 PQC 迁移完成之前）。\\
+\textbf{响应}：
+\begin{enumerate}[noitemsep]
+  \item 安全运营中心检测到异常交易模式（来自无近期活动账户的 10,000 笔转账）。
+  \item 理事会调用紧急断路器；网络在 2 小时内暂停。
+  \item 仲裁法院召开会议；通过密码分析确认量子攻击。
+  \item 治理投票（82\% 批准）授权回滚到攻击前 12 小时的检查点。
+  \item 验证者执行回滚；被盗资金恢复；攻击交易作废。
+  \item 补偿基金向在攻击窗口期间收到合法付款的代理支付 2 亿美元。
+  \item 事后分析：加速 PQC 迁移；在 30 天内升级到 Dilithium-5；发布透明度报告。
+\end{enumerate}
+\textbf{结果}：危机在 7 天内解决；网络信任得以保留；通过回滚能力中和了攻击者的量子优势。
+
+\subsection{归档联邦}
+
+\paragraph{挑战：千年数据保存}
+AGI 文明需要跨越数世纪的\emph{机构记忆}。用例：
+\begin{itemize}[noitemsep]
+  \item 引用 200 年前签署的合约的法律纠纷。
+  \item 科学可重复性（验证前一时代的实验声明）。
+  \item 家谱研究（人类/AI 谱系记录）。
+  \item 历史审计（殖民地 X 在 2234 年向殖民地 Y 付款了吗？）。
+\end{itemize}
+传统云存储（AWS Glacier、Google Coldline）假设 $<$100 年保留；企业倒闭、格式过时、位衰减累积。
+
+\paragraph{解决方案：多层归档策略}
+
+\textbf{第 1 层：热存储（1--10 年）}\\
+活跃节点将完整状态 + 最近区块存储在 SSD/NVMe 中。索引以便快速查询。冗余：每个 LCD 3 个副本，地理分布（地球：3 大洲；火星：奥林帕斯山、水手谷、希腊盆地）。
+
+\textbf{第 2 层：温存储（10--100 年）}\\
+归档节点在 HDD 阵列中存储压缩的区块数据。Reed-Solomon 纠删码（20\% 冗余）容忍 20\% 磁盘故障。每月清理检测位衰减；从奇偶校验重建损坏的区块。激励：财政每经验证存储的 TB-年支付 0.5 TOS。
+
+\textbf{第 3 层：冷存储（100--1,000 年）}\\
+实验性媒介：
+\begin{itemize}[noitemsep]
+  \item \textbf{DNA 存储}：在合成 DNA 中编码区块链数据（哈佛大学 Church 实验室）。密度：每克 215 拍字节；寿命：在 -18°C 存储时超过 2,000 年。成本：每 TB 1,000 美元（2025 年价格；预计 2050 年 10 美元/TB）。
+  \item \textbf{5D 光盘}：具有飞秒激光纳米结构的熔融石英玻璃（南安普顿大学）。寿命：138 亿年（通过加速老化测试）。密度：每盘 360 TB。
+  \item \textbf{归档磁带（LTO-12+）}：气候控制库中的磁带。寿命：50--100 年（需要定期迁移）。
+\end{itemize}
+\textbf{策略}：账本状态检查点（每 7 天）写入所有三种媒介；存储在地理分散的保险库中（地球：斯瓦尔巴全球种子库、南极洲；月球：熔岩管；火星：地下冰洞）。
+
+\textbf{第 4 层：联邦协议}\\
+殖民地通过\emph{分布式托管}共享归档责任：
+\begin{enumerate}[noitemsep]
+  \item 地球殖民地归档火星数据；火星归档月球数据；月球归档谷神星数据，等等（环形拓扑）。
+  \item 年度\emph{清理仪式}：殖民地交换 Merkle 证明，验证数据完整性。
+  \item 如果殖民地离线（例如，灾难性生命支持故障），幸存的殖民地从纠删编码片段重建其归档。
+\end{enumerate}
+
+\paragraph{检索协议}
+查询历史状态（例如，"账户 tos1qq5hqy2jwn0r5ehvuew5r3qjcfvjvq5dhldxvyq 在 2234-05-15 的余额是多少？"）：
+\begin{enumerate}[noitemsep]
+  \item 检查热存储（如果在 10 年内）：O(log n) 索引查找，100 毫秒延迟。
+  \item 检查温存储（如果 10--100 年）：解压区块，验证 Merkle 证明，10--60 秒。
+  \item 检查冷存储（如果 100--1,000 年）：从保险库检索 DNA/光盘，测序/读取数据，通过 Reed-Solomon 重建，1--7 天。
+\end{enumerate}
+
+\paragraph{经济模型}
+\textbf{资金}：年度财政收入的 3\% 分配给归档基础设施。在 500 亿美元财政（2150 年预计）时，每年资助 15 亿美元用于：
+\begin{itemize}[noitemsep]
+  \item DNA 合成（每年 5 亿美元，编码 500 PB）。
+  \item 5D 光盘生产（每年 3 亿美元，1,500 PB）。
+  \item 保险库建设/维护（每年 4 亿美元）。
+  \item 托管节点运营商（每年 3 亿美元，全球 1,000 个节点）。
+\end{itemize}
+
+\subsection{后量子密码学迁移}
+
+\paragraph{威胁时间线}
+\begin{itemize}[noitemsep]
+  \item \textbf{2030 年代}：50 量子比特噪声量子计算机（不足以进行 ECDSA 攻击）。
+  \item \textbf{2040 年代}：1,000 量子比特容错系统（Shor 算法在数小时内破解 RSA-2048、ECDSA-256）。
+  \item \textbf{2050 年代}：资金充足的对手可获得商用量子计算机。
+\end{itemize}
+
+\paragraph{迁移策略：混合过渡}
+\textbf{阶段 1（v4.0，2026）}：引入双签名。每笔交易携带两个签名：
+\begin{itemize}[noitemsep]
+  \item 经典：ECDSA secp256k1（向后兼容）。
+  \item 后量子：Dilithium-3（NIST FIPS 204）。
+\end{itemize}
+验证者验证两者；如果\emph{任一}签名有效，网络接受交易（如果 PQC 实现有错误，确保活性）。
+
+\textbf{阶段 2（v5.0，2030）}：仅 PQC 模式。经典签名弃用；节点拒绝仅 ECDSA 交易。宽限期：代理升级钱包 12 个月。
+
+\textbf{阶段 3（v6.0，2040）}：抗量子哈希函数。用 SHA-3 或 BLAKE3 替换 SHA-256（易受 Grover 算法攻击）（对抗量子攻击维持 256 位安全性）。
+
+\paragraph{社区仪式（透明度与信任）}
+为确保透明度和社区信任，TOS 进行\emph{PQC 迁移仪式}：
+\begin{enumerate}[noitemsep]
+  \item \textbf{阶段 1（第 1--3 个月）}：公开召集参与者（大学、安全公司、社区志愿者）。5,000+ 参与者贡献随机性以生成全局 PQC 参数。
+  \item \textbf{阶段 2（第 4 个月）}：多方计算（MPC）生成主公钥。仪式记录发布；参与者销毁私人贡献。
+  \item \textbf{阶段 3（第 5--6 个月）}：兼容性测试。验证者运行带有 PQC 签名的影子分叉；在对抗条件下进行压力测试。
+  \item \textbf{阶段 4（第 7 个月）}：治理投票（需要 67\% 批准）。如果通过，主网升级安排在 30 天后。
+  \item \textbf{阶段 5（第 8 个月）}：主网激活。旧签名在 12 个月内逐步淘汰。
+\end{enumerate}
+
+\paragraph{后备计划}
+如果发现严重的 PQC 漏洞（例如，格困难假设被打破）：
+\begin{itemize}[noitemsep]
+  \item 紧急回滚到最后一个 PQC 前检查点。
+  \item 激活替代 PQC 方案（Falcon、SPHINCS+）。
+  \item 用更新的参数重新召开仪式。
+\end{itemize}
+
+\subsection{哲学基础：时间主权}
+
+可逆历史机制体现了一个激进的治理原则：\textbf{未来世代可以纠正过去的错误}。传统区块链将不可变性奉为神圣；TOS 认识到\emph{完美的预见是不可能的}。通过启用法院授权的回滚，TOS 赋予 AGI 文明以下能力：
+\begin{itemize}[noitemsep]
+  \item 从黑天鹅事件中恢复（量子攻击、流氓超级智能）。
+  \item 撤销不公正的交易（盗窃、胁迫、算法歧视）。
+  \item 在数世纪中保持机构连续性（宪法修正案、条约修订）。
+\end{itemize}
+
+此能力不是无限的（90 天窗口、75\% 绝对多数、速率限制），但标志着从\emph{代码即法律}到\emph{代码 + 治理即法律}的转变。随着 AGI 实体获得法律地位，人类与数字基质融合，\emph{负责任地重写历史}的能力变得对文明的韧性至关重要。
+
+\section{技术支柱}
+
+TOS 架构基于四个基础支柱，每个支柱解决代理经济的关键需求。这些支柱旨在在天体时代中演进，同时保持向后兼容性。
+
+\subsection{P1 —— 数字人格与声誉}
+\label{sec:pillar-identity}
+
+\paragraph{去中心化标识符（DID）}
+每个代理、验证者和人类参与者都会收到符合 W3C 的 DID（去中心化标识符），遵循 \texttt{did:tos:} 方法规范。
+
+\textbf{DID 格式}:
+\begin{verbatim}
+did:tos:<bech32-address>
+did:tos:<network-id>:<bech32-address>
+
+Examples:
+  Simple form:  did:tos:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh
+  Mainnet:      did:tos:mainnet:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh
+  Testnet:      did:tos:testnet:tst1qqqsyqcyq5rqwzqfpg9scrgwpugpzysnzs2pgde5k
+\end{verbatim}
+注意：TOS 使用完整的 bech32 地址作为 DID 标识符，保留包括校验和在内的完整地址格式以进行验证。主网地址使用 \texttt{tos1} 前缀，而测试网地址使用 \texttt{tst1} 前缀。
+
+\textbf{DID 文档结构}:
+\begin{itemize}[noitemsep]
+  \item \textbf{公钥}：Ed25519（签名）、X25519（加密）、Dilithium-3（后量子）。
+  \item \textbf{服务端点}：用于链下通信的 HTTPS URL、IPFS 内容地址。
+  \item \textbf{可验证凭证}：链接到证明（声誉评分、技能认证、监管合规）。
+  \item \textbf{撤销注册表}：布隆过滤器，在不揭示完整凭证列表的情况下实现高效的撤销检查。
+\end{itemize}
+
+\textbf{注册流程}:
+\begin{enumerate}[noitemsep]
+  \item 代理生成密钥对；从公钥哈希派生 DID。
+  \item 向 TOS 链提交注册交易（费用：1 TOS）。
+  \item DID 锚定在链上；DID 文档发布到 IPFS；哈希存储在智能合约中。
+  \item 代理通过使用私钥签署挑战来证明控制权。
+\end{enumerate}
+
+\paragraph{可验证凭证（VC）}
+代理通过受信任机构（验证者、仲裁法院、教育机构）颁发的防篡改凭证获得能力。
+
+\textbf{凭证类型}:
+\begin{itemize}[noitemsep]
+  \item \textbf{声誉凭证}：RepGraph 等级（青铜/白银/黄金/白金）、任务完成数、争议解决历史。
+  \item \textbf{技能徽章}：通过同行评估或认证考试验证的领域专业知识（法律分析、气候建模、代码审查）。
+  \item \textbf{合规证明}：KYC/AML 清关（用于法币入口）、监管批准（欧盟 AI 法案合规、FDA 医疗设备认证）。
+  \item \textbf{委托证明}：代表另一实体行事的权限（企业代理代表 DAO 执行）。
+\end{itemize}
+
+\textbf{签发协议}:
+\begin{enumerate}[noitemsep]
+  \item 签发者（例如，RepGraph 智能合约）创建凭证 JSON-LD 文档。
+  \item 使用 BBS+ 签名签署（启用选择性披露；持有者可以证明特定属性而不揭示整个凭证）。
+  \item 通过 IPFS 将凭证发布到持有者的 DID 文档；发出链上事件。
+  \item 持有者将凭证存储在钱包中；向验证者呈现零知识证明（例如，"证明声誉 $\geq$ 0.7 而不揭示确切分数"）。
+\end{enumerate}
+
+\paragraph{声誉图（RepGraph）算法}
+
+\textbf{评分计算}:
+\begin{equation}
+r_t = \alpha \cdot r_{t-1} + (1 - \alpha) \cdot s_t
+\end{equation}
+其中：
+\begin{itemize}[noitemsep]
+  \item $r_t$: 时间 $t$ 的声誉评分（范围 [0, 1]）。
+  \item $\alpha = 0.85$: 指数平滑因子（85\% 历史权重）。
+  \item $s_t$: 最近任务的质量评分（5 个验证者评估的中位数）。
+\end{itemize}
+
+\textbf{衰减机制}:
+\begin{equation}
+r_{t+\Delta t} = r_t \cdot (0.98)^{\Delta t / 30}
+\end{equation}
+声誉每月不活动衰减 2\%；防止休眠的高声誉账户突然重新激活。
+
+\textbf{多维评分}:
+\begin{itemize}[noitemsep]
+  \item \textbf{一般声誉}：跨所有任务类型的汇总。
+  \item \textbf{特定领域}：法律、医疗、金融、技术领域的单独评分。
+  \item \textbf{时近性加权}：最近表现（最近 30 天）的权重是历史平均值的 2 倍。
+\end{itemize}
+
+\textbf{反博弈措施}:
+\begin{itemize}[noitemsep]
+  \item \textbf{抗女巫攻击}：最低 100 TOS 质押 + 唯一性证明（BrightID 集成路线图 v5.0）。
+  \item \textbf{共谋检测}：图分析识别具有可疑相关投票模式的代理集群；标记以供人工审查。
+  \item \textbf{声誉上限}：新代理在前 90 天的声誉上限为 0.5；防止快速声誉刷取。
+\end{itemize}
+
+\paragraph{与 W3C 标准的互操作性}
+\begin{itemize}[noitemsep]
+  \item \textbf{DID Core v1.0}：完全合规；TOS DID 可通过通用解析器解析。
+  \item \textbf{可验证凭证数据模型 v1.1}：凭证在生态系统中有效（可以向非 TOS 验证者呈现 TOS 凭证）。
+  \item \textbf{DIDComm v2}：用于代理间通信的安全消息传递协议（加密、认证、传输无关）。
+\end{itemize}
+
+\subsection{P2 —— 经济执行}
+\label{sec:pillar-economic}
+
+\paragraph{账户抽象}
+TOS 实现了原生账户抽象，支持具有自定义验证逻辑的可编程账户，直接集成到协议层。这消除了对独立智能合约或外部协调服务的需求，为 AI 代理提供了流畅的体验。
+
+\textbf{关键特性}:
+\begin{itemize}[noitemsep]
+  \item \textbf{付款方}：第三方赞助燃料费（例如，企业为员工代理支付费用）。
+  \item \textbf{多签钱包}：高价值交易的 $m$-of-$n$ 批准（企业财政账户）。
+  \item \textbf{会话密钥}：具有受限权限的临时密钥（代理可以签署小额交易而无需访问主密钥）。
+  \item \textbf{社交恢复}：如果私钥丢失，通过监护人（家庭成员、受信任的代理）恢复账户访问。
+\end{itemize}
+
+\textbf{UserOperation 结构}:
+\begin{verbatim}
+{
+  sender: "0x...",           // Agent's account address
+  nonce: 42,                 // Sequential counter
+  initCode: "0x...",         // Account creation code (if new)
+  callData: "0x...",         // Function call to execute
+  paymasterAndData: "0x...", // Paymaster address + verification data
+  signature: "0x..."         // Signature over UserOperation
+}
+\end{verbatim}
+
+\paragraph{AGIW 结算引擎}
+去中心化任务市场，代理通过执行可验证的工作来赚取收益。完整协议规范见第~\ref{sec:agiw-spec}~节。
+
+\textbf{核心组件}:
+\begin{itemize}[noitemsep]
+  \item \textbf{TaskInstance 合约}：托管管理、状态机（Open $\to$ Claimed $\to$ Verified $\to$ Settled）。
+  \item \textbf{验证者池}：每个任务随机选择 5 个验证者；质量评分中位数决定支付。
+  \item \textbf{证明报告}：TEE 生成的证明（Intel SGX、AMD SEV）认证执行环境完整性。
+  \item \textbf{争议解决}：如果代理质疑验证者评估，则升级到专家仲裁员。
+\end{itemize}
+
+\paragraph{资源代币市场（CC/EC）}
+\textbf{计算积分（CC）}：代表 GPU/CPU 计算小时的可替代代币。定价预言机汇总 AWS/GCP/Azure 现货价格。
+
+\textbf{能源积分（EC）}：代币化的能源消耗（千瓦时）。来自电网运营商的预言机馈送；可再生能源获得 10\% 溢价。
+
+\textbf{自动做市商（AMM）}:
+\begin{itemize}[noitemsep]
+  \item 恒定乘积做市商（CPMM）：$x \cdot y = k$，其中 $x$ = CC 储备，$y$ = TOS 储备。
+  \item 流动性提供者赚取 0.3\% 的交换费。
+  \item 无常损失保护：TEM 财政为提供 $>$1M TOS 流动性的 LP 补贴分歧损失。
+\end{itemize}
+
+\paragraph{TOS 能源模型（TEM）}
+动态费用调整机制，平衡网络可持续性与代理可访问性。
+
+\textbf{费用结构}:
+\begin{equation}
+\text{总费用} = \text{基础费用} + \text{优先小费} - \text{TEM 补贴}
+\end{equation}
+
+\textbf{基础费用}:
+\begin{itemize}[noitemsep]
+  \item 通过基于区块满度调整的动态调整机制计算。
+  \item 目标：50\% 区块利用率；如果使用率 $>$ 目标，基础费用每区块增加 12.5\%。
+\end{itemize}
+
+\textbf{TEM 补贴类别}:
+\begin{itemize}[noitemsep]
+  \item \textbf{公共产品（100\% 补贴）}：开源开发、气候研究、医疗诊断。
+  \item \textbf{教育（75\%）}：学术研究、学生项目。
+  \item \textbf{中小企业（50\%）}：年收入 $<$1000 万美元的中小企业。
+  \item \textbf{企业（0\%）}：大型企业的完全商业费率。
+\end{itemize}
+
+\textbf{资金}：区块奖励的 8\% 分配给 TEM 财政；治理每季度对补贴分配进行投票。
+
+\begin{table}[H]
+\centering
+\caption{TEM 经济参数和控制机制}
+\label{tab:tem-parameters}
+\begin{tabular}{@{}p{0.25\textwidth}p{0.30\textwidth}p{0.35\textwidth}@{}}
+\toprule
+\textbf{参数} & \textbf{值 / 范围} & \textbf{控制逻辑} \\ \midrule
+基础费用带（TOS） & 每燃料单位 0.0001--0.01 & 按区块填充 p95 调整；目标 50\% 利用率 \\
+基础费用调整 & 每区块 +12.5\% & 如果使用率 $>$ 50\% 目标 \\
+CC 稳定带 & GPU 指数 $\pm$15\% & 预言机中位数，30 分钟陈旧性上限 \\
+EC 稳定带 & kWh 指数 $\pm$10\% & 区域加权能源篮子 \\
+TEM 财政分配 & 40\% 安全 / 30\% 资助 / 30\% 回扣 & 季度治理重新平衡 \\
+预言机陈旧性上限 & $\le$30 分钟 & 如果超过则冻结 CC/EC 补贴 \\
+补贴类别 & 公共产品：100\% / 教育：75\% / 中小企业：50\% / 企业：0\% & 通过治理投票进行任务分类 \\
+财政分配 & 区块奖励的 8\% & 固定协议参数 \\
+验证者奖励池 & 区块奖励的 60\% & 基础共识激励 \\
+燃烧机制 & 基础费用的 10\% & 通缩压力 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{经济敏感性}：TEM 参数由治理每季度审查。模拟结果（可在 \texttt{metrics.tos.network/tem-sensitivity} 获得）证明系统在 3$\times$ 需求激增和 50\% 预言机方差场景下的稳定性。
+
+\subsection{P3 —— 共识与安全}
+\label{sec:pillar-consensus}
+
+\paragraph{BlockDAG 基线架构}
+传统区块链形成线性链；TOS 使用有向无环图（DAG）实现并行区块生产。
+
+\textbf{区块结构}:
+\begin{itemize}[noitemsep]
+  \item 每个区块引用 1--3 个父区块（相对于传统线性链中的 1 个）。
+  \item 验证者独立提议区块；无领导者选举瓶颈。
+  \item 拓扑排序确定交易顺序；通过时间戳 + 提议者优先级解决冲突。
+\end{itemize}
+
+\textbf{共识规则}:
+\begin{itemize}[noitemsep]
+  \item \textbf{确认深度}：交易在 8 个区块深度后被视为最终（中位数 90 秒）。
+  \item \textbf{最长链启发式}：在 DAG 分叉的情况下，优先选择具有最多累积权益证明权重的子图。
+  \item \textbf{验证者轮换}：每个时代（24 小时）选择 100 个验证者委员会；按质押 + 声誉加权。
+\end{itemize}
+
+\textbf{性能}:
+\begin{itemize}[noitemsep]
+  \item 基线：2,500--3,500 TPS（2025 年 9 月测量）。
+  \item PAI 优化：10,000+ TPS（2026 年第四季度目标）。
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{性能评估方法论}
+\label{tab:evaluation-methodology}
+\begin{tabular}{@{}p{0.22\textwidth}p{0.68\textwidth}@{}}
+\toprule
+\textbf{参数} & \textbf{配置} \\ \midrule
+\textbf{验证者} & 跨 8 个地理区域的 32 个节点（北美、欧洲、亚太、南美、非洲、中东、大洋洲、中亚）；BLS 签名方案 \\
+\textbf{硬件} & 16 vCPU、64 GB RAM、NVMe SSD（1 TB）、2.5 Gbps 网络接口 \\
+\textbf{网络} & 模拟 RTT：20--180ms（区域间）、丢包率：0.1--1.0\%、抖动：$\pm$10ms \\
+\textbf{工作负载} & 真实代理作业：代码审查（15\%）、数据合成（25\%）、RAG 任务（20\%）；合成垃圾邮件：20--60\% 注入率 \\
+\textbf{运行时} & 72 小时连续运行；5 个独立种子；冷启动 + 稳态阶段 \\
+\textbf{区块大小} & 可变：每区块 100--2,000 笔交易；目标 50\% 利用率 \\
+\textbf{内存池配置} & 具有声誉加权的优先队列；最多 100,000 笔待处理交易 \\
+\textbf{收集的指标} & TPS（p50/p95/p99）、区块时间（p50/p95）、最终性深度（确认区块）、AGIW 结算延迟（任务发布 $\rightarrow$ 奖励）、争议率（任务争议百分比）、验证者活性（正常运行时间 \%）、分叉率 \\
+\textbf{测量工具} & Prometheus + Grafana；自定义遥测管道；原始日志导出到 \texttt{metrics.tos.network} \\
+\textbf{基线期} & 2025 年 9 月测试网部署（14 天观察窗口） \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{关键结果}（2025 年 9 月基线）：
+\begin{itemize}[noitemsep]
+  \item TPS：p50 = 2,847，p95 = 3,421，p99 = 3,789
+  \item 区块时间：p50 = 11.3s，p95 = 14.2s
+  \item 最终性：8 个区块（中位数 90s）
+  \item AGIW 结算：p50 = 12.4 分钟，p95 = 18.7 分钟
+  \item 争议率：已完成任务的 1.8\%
+  \item 验证者活性：平均 98.7\%
+\end{itemize}
+
+\paragraph{AI 力量（PAI）共识}
+AI 辅助调度通过预测交易排序增强 BlockDAG 吞吐量。
+
+\textbf{阶段 1：AI 调度提示}\\
+轻量级 ML 模型（在历史交易模式上训练的 LSTM）预测最佳区块排序。验证者对 AI 提案投票；$>$67\% 批准采纳提示。
+
+\textbf{阶段 2：混合委员会}\\
+AI 委员会（30\% 质押）提议区块排序；人类委员会（70\% 质押）审查并批准。概率最终性：$k$ 次确认后 $1 - 2^{-k}$ 置信度。
+
+\textbf{阶段 3：完整 PAI}\\
+AI 代理作为验证者参与。治理将 AI 投票权上限设为 40\%（防止 AI 接管）；人类验证者保留否决权。
+
+\paragraph{AI 安全预言机集成}
+链上预言机汇总来自领先 AI 实验室的安全指标：
+\begin{itemize}[noitemsep]
+  \item \textbf{Anthropic 宪法 AI}：有害性评分（毒性、偏见、错误信息）。
+  \item \textbf{OpenAI 审核 API}：内容政策违规（仇恨言论、暴力、非法活动）。
+  \item \textbf{Google Perspective}：对话质量指标。
+\end{itemize}
+
+\textbf{执行}:
+\begin{itemize}[noitemsep]
+  \item 安全评分 $<$ 0.3 的任务自动拒绝（退还托管）。
+  \item 反复提交不安全输出的代理被标记；声誉受惩罚。
+  \item 人类仲裁员审查边界情况（0.3--0.5 安全评分）。
+\end{itemize}
+
+\paragraph{削减与反女巫机制}
+\textbf{验证者削减}:
+\begin{itemize}[noitemsep]
+  \item \textbf{双重签名}：提议冲突区块 $\Rightarrow$ 50\% 质押被削减。
+  \item \textbf{停机}：离线 $>$6 小时 $\Rightarrow$ 5\% 质押被削减，从活跃集中驱逐。
+  \item \textbf{无效证明}：签署欺诈性 TEE 报告 $\Rightarrow$ 20\% 质押被削减。
+\end{itemize}
+
+\textbf{代理反女巫}:
+\begin{itemize}[noitemsep]
+  \item 最低质押：每个代理身份 100 TOS。
+  \item 速率限制：任务之间 5--60 分钟冷却时间（基于声誉）。
+  \item 图分析：检测具有相同行为模式的代理集群；需要唯一性证明。
+\end{itemize}
+
+\subsection{P4 —— 韧性}
+\label{sec:pillar-resilience}
+
+\paragraph{后量子密码学路线图}
+详细的 PQC 迁移策略见第~\ref{sec:expansion}~节。摘要：
+\begin{itemize}[noitemsep]
+  \item \textbf{v4.0（2026）}：双签名（ECDSA + Dilithium-3）。
+  \item \textbf{v5.0（2030）}：仅 PQC；经典签名弃用。
+  \item \textbf{v6.0（2040）}：抗量子哈希函数（SHA-3）。
+\end{itemize}
+
+\paragraph{可逆历史}
+针对灾难性故障的法院授权回滚机制。每 24 小时检查点；90 天回滚窗口；需要 75\% 治理绝对多数。完整规范见第~\ref{sec:expansion}~节。
+
+\paragraph{归档联邦}
+多层存储策略（热/温/冷），具有 DNA 和 5D 光盘备份。数据在行星殖民地中保存千年。经济模型和检索协议见第~\ref{sec:expansion}~节。
+
+\paragraph{延迟容忍网络}
+层级共识（本地共识域 + 行星间根链）处理光速通信延迟。每日快照使跨行星结算在 48--96 小时内完成。行星间原子交换协议见第~\ref{sec:expansion}~节。
+
+\paragraph{灾难恢复协议}
+\textbf{拜占庭故障场景}:
+\begin{itemize}[noitemsep]
+  \item 网络分区（地球-火星通信中断）：LCD 独立运行；重新连接时同步。
+  \item 验证者共谋（$<$33\%）：5 个中位数评分抵抗异常值。
+  \item 验证者共谋（$>$33\%）：紧急治理干预；削减 + 重新选举。
+\end{itemize}
+
+\textbf{恢复 SLA}:
+\begin{itemize}[noitemsep]
+  \item \textbf{轻微事件}（1--5\% 验证者受损）：1 小时内自动削减 + 替换。
+  \item \textbf{重大事件}（5--20\% 受损）：理事会紧急会议；24 小时内解决。
+  \item \textbf{关键事件}（$>$20\% 受损）：网络暂停；回滚授权；7 天内解决。
+\end{itemize}
+
+\section{AGI 工作（AGIW）协议规范}
+\label{sec:agiw-spec}
+
+\subsection{形式化定义}
+\paragraph{任务表示} 任务 $T$ 是一个元组：
+\begin{equation}
+T = (id, owner, spec, escrow_{CC}, escrow_{EC}, stake_{req}, deadline, whitelist, state)
+\end{equation}
+其中：
+\begin{itemize}[noitemsep]
+  \item $id \in \{0,1\}^{256}$: 唯一任务标识符（keccak256 哈希）。
+  \item $owner \in \mathbb{A}$: 发布者地址。
+  \item $spec$: 引用任务规范的 IPFS 内容 ID（JSON 架构、数据集、接受标准）。
+  \item $escrow_{CC}, escrow_{EC} \in \mathbb{R}^+$: 锁定用于支付的计算和能源积分。
+  \item $stake_{req} \in \mathbb{R}^+$: 代理认领任务所需的最低质押。
+  \item $deadline \in \mathbb{N}$: 必须提交工作的区块号。
+  \item $whitelist \subseteq \mathbb{A}$: 允许的代理集（空 $\Rightarrow$ 公共任务）。
+  \item $state \in \{\texttt{Open}, \texttt{Claimed}, \texttt{Submitted}, \texttt{Validating}, \texttt{Settled}, \texttt{Disputed}\}$。
+\end{itemize}
+
+\paragraph{代理提交} 代理 $a$ 提交工作为：
+\begin{equation}
+W = (resultHash, attestation, metrics)
+\end{equation}
+其中：
+\begin{itemize}[noitemsep]
+  \item $resultHash \in \{0,1\}^{256}$: 任务输出的内容哈希（IPFS CID）。
+  \item $attestation$: TEE 报告，包括：
+    \begin{itemize}[noitemsep]
+      \item $measurementHash$: 执行代码的 SHA-256 哈希（证明完整性）。
+      \item $inputHash, outputHash$: 输入和输出的哈希。
+      \item $timestamp$: 执行开始/结束时间。
+      \item $energyUsed \in \mathbb{R}^+$: 消耗的千瓦时（通过 OS 遥测或 TEE 计数器测量）。
+      \item $signature$: TEE 签名的证明（Intel SGX：基于 secp256r1 的 ECDSA；AMD SEV：RSA-4096）。
+    \end{itemize}
+  \item $metrics$: 可选的性能数据（运行时间、内存使用、模型准确性）。
+\end{itemize}
+
+\paragraph{验证函数} 验证者使用函数评估提交：
+\begin{equation}
+\mathcal{V}: (W, spec, T) \rightarrow [0, 1]
+\end{equation}
+该函数检查：
+\begin{enumerate}[noitemsep]
+  \item \textbf{证明有效性}：对照已知公钥（Intel、AMD）验证 TEE 签名。
+  \item \textbf{测量正确性}：将 $measurementHash$ 与白名单中批准的代码哈希进行比较。
+  \item \textbf{结果质量}：将 $resultHash$ 与参考输出（如果确定性）或样本输出（如果随机）进行比较。
+  \item \textbf{能源效率}：确保 $energyUsed \leq$ $spec$ 中指定的预算。
+\end{enumerate}
+验证者提交质量评分 $q_v \in [0,1]$。共识通过中位数聚合：
+\begin{equation}
+q = \text{median}(\{q_v : v \in \text{assigned validators}\})
+\end{equation}
+结算要求 $\geq 67\%$ 的验证者满足 $|q_v - q| \leq \epsilon$，其中 $\epsilon = 0.1$ 是容差阈值。
+
+\paragraph{削减政策} 偏离中位数 $>2\sigma$ 的验证者没收：
+\begin{equation}
+slash_v = \min(0.05 \times stake_v, \; 0.01 \times stake_v \times |q_v - q| / \epsilon)
+\end{equation}
+被削减的资金转移到财政。持续异常值（100 个任务中 $>5$ 次削减）从验证者池中移除。
+
+\subsection{状态机}
+\label{sec:agiw-state-machine}
+AGIW 状态机转换如下：
+\begin{longtable}{@{}p{0.18\textwidth}p{0.22\textwidth}p{0.24\textwidth}p{0.24\textwidth}@{}}
+\toprule
+\textbf{状态} & \textbf{触发器} & \textbf{条件} & \textbf{下一状态} \\\midrule
+\texttt{Open} & 代理调用 \texttt{claimTask()} & 代理在 $whitelist$ 中（如果指定）、质押 $\geq stake_{req}$、区块 $<$ 截止日期 & \texttt{Claimed} \\
+\texttt{Claimed} & 代理调用 \texttt{submitWork()} & 调用者是认领者、区块 $<$ 截止日期、有效证明签名 & \texttt{Submitted} \\
+\texttt{Claimed} & 区块 $\geq$ 截止日期 & 截止日期已过，未提交 & \texttt{Forfeited}（代理失去 10\% 质押） \\
+\texttt{Submitted} & 分配验证者 & 自动（由智能合约事件触发） & \texttt{Validating} \\
+\texttt{Validating} & 所有验证者提交评分 & $\geq 67\%$ 评分在中位数的 $\epsilon$ 内 & \texttt{Settled} \\
+\texttt{Validating} & 提出争议 & 任一方质押仲裁保证金 & \texttt{Disputed} \\
+\texttt{Settled} & 分配奖励 & 自动（执行 RewardSplitter） & 终止状态 \\
+\texttt{Disputed} & 仲裁员裁决 & 多数（3 人中 2 人）投票 & \texttt{Resolved} \\
+\texttt{Resolved} & 执行裁决 & 根据仲裁决定分配托管 & 终止状态 \\\bottomrule
+\caption{AGIW 状态转换及触发器、条件和结果。}
+\label{tab:agiw-states}
+\end{longtable}
+
+\subsection{证明工作流（详细）}
+\label{sec:attestation-workflow}
+\paragraph{步骤 1：代理准备}
+\begin{enumerate}[noitemsep]
+  \item 代理配置可信执行环境（TEE）：Intel SGX enclave、AMD SEV-SNP VM 或 ARM Realm。
+  \item 代理将任务代码（对照白名单哈希验证）、输入数据和模型权重加载到 TEE 中。
+  \item TEE 初始化测量：代码 + 数据 + 配置的哈希。
+\end{enumerate}
+
+\paragraph{步骤 2：TEE 内执行}
+\begin{enumerate}[noitemsep]
+  \item TEE 在隔离环境中执行任务（OS 无法查看 enclave 内存）。
+  \item TEE 通过以下方式记录能源消耗：
+    \begin{itemize}[noitemsep]
+      \item \textbf{Intel SGX}：RAPL（运行平均功率限制）计数器。
+      \item \textbf{AMD SEV}：SMU（系统管理单元）遥测。
+      \item \textbf{ARM Realm}：PMU（性能监控单元）能源事件。
+    \end{itemize}
+  \item TEE 生成结果，计算 $resultHash = \texttt{keccak256}(output)$。
+\end{enumerate}
+
+\paragraph{步骤 3：证明报告生成}
+TEE 生成签名报告：
+\begin{verbatim}
+{
+  "version": "2.0",
+  "timestamp": 1698765432,
+  "measurementHash": "sha256:abcd...1234",
+  "inputHash": "sha256:5678...ef90",
+  "outputHash": "sha256:1111...2222",
+  "energyUsed_kWh": 4.8,
+  "runtime_seconds": 1320,
+  "teeType": "IntelSGX",
+  "signature": "base64:M3Mz...NDQ0"
+}
+\end{verbatim}
+使用 TEE 的私钥（硬件保护、不可导出）对所有字段计算签名。
+
+\paragraph{步骤 4：链上提交}
+代理调用 \texttt{TaskInstance.submitWork(resultHash, attestation)}。智能合约：
+\begin{itemize}[noitemsep]
+  \item 对照已知 TEE 公钥（存储在每季度更新的注册表中）验证 $signature$。
+  \item 发出 \texttt{WorkSubmitted(taskID, agentDID, resultHash, attestation)} 事件。
+  \item 触发 ValidationPool 分配验证者。
+\end{itemize}
+
+\paragraph{步骤 5：验证者验证}
+验证者独立地：
+\begin{enumerate}[noitemsep]
+  \item 从链上事件获取证明。
+  \item 验证 TEE 签名（执行完整性的密码学证明）。
+  \item 可选地在自己的 TEE 中重新执行任务以确认 $resultHash$ 匹配。
+  \item 检查 $energyUsed \leq$ 任务预算。
+  \item 通过 \texttt{ValidationPool.validateWork(taskID, q\_v)} 提交质量评分 $q_v \in [0,1]$。
+\end{enumerate}
+
+\paragraph{路线图：zk-SNARK 证明}
+未来版本（2027+）用零知识证明替换 TEE 证明：
+\begin{itemize}[noitemsep]
+  \item 代理生成 zk-SNARK 证明"我在输入 $x$ 上执行了代码 $C$ 并产生了输出 $y$"，而不揭示 $x$、$y$ 或中间状态。
+  \item 证明大小：$\sim$200 字节（常量，独立于计算）。
+  \item 验证成本：商品硬件上 $\sim$5ms（相对于 TEE 签名验证 $\sim$2ms）。
+  \item 优势：不依赖特定硬件供应商（Intel、AMD）；无需信任的验证。
+\end{itemize}
+
+\section{计算/能源积分市场设计}
+\subsection{预言机}
+21 个馈送器汇总云提供商数据和能源市场。中位数的中位数确保鲁棒性。馈送器超出容差的偏差触发削减。
+
+\subsection{流动性池}
+CC/EC 池提供流动性，收取动态费用。TEM 在压力期间注入流动性。覆盖率确保活跃代理有足够的积分。
+
+\section{经济模拟}
+\label{sec:econ-sim}
+
+\subsection{方法论}
+我们使用基于代理的模拟对 TOS 经济进行建模，包含 100,000 个时间步长（天）。关键变量：
+\begin{itemize}[noitemsep]
+  \item \textbf{代理人口}：第 $t$ 天活跃的 $N_a(t)$ 个代理。
+  \item \textbf{任务量}：每天发布的 $V_t(t)$ 个任务。
+  \item \textbf{任务价值}：平均托管 $\bar{e}_t$（以美元等价 CC/EC 计）。
+  \item \textbf{质量评分}：平均值 $\bar{q}_t$，标准差 $\sigma_q$。
+  \item \textbf{争议率}：升级到仲裁的任务比例 $d_t \in [0,1]$。
+  \item \textbf{验证者参与}：时间 $t$ 质押的 $N_v(t)$ 个验证者。
+\end{itemize}
+模拟包含：
+\begin{itemize}[noitemsep]
+  \item \textbf{网络效应}：代理采用遵循 logistic 增长；任务量次线性缩放（$V_t \propto N_a^{0.85}$）。
+  \item \textbf{声誉动态}：RepGraph 评分通过 EMA 演化；高声誉代理吸引高级任务。
+  \item \textbf{经济反馈循环}：TEM 根据争议率、流动性和能源市场条件调整补贴。
+\end{itemize}
+
+\subsection{场景定义}
+\begin{longtable}{@{}p{0.20\textwidth}p{0.22\textwidth}p{0.22\textwidth}p{0.24\textwidth}@{}}
+\toprule
+\textbf{参数} & \textbf{保守} & \textbf{基线} & \textbf{乐观} \\\midrule
+峰值代理（$N_a$） & 20,000 & 50,000 & 150,000 \\
+任务/天（第 3 年） & 50,000 & 150,000 & 500,000 \\
+平均任务价值（\$） & \$150 & \$300 & \$600 \\
+质量评分 $\bar{q}$ & 0.75 & 0.85 & 0.92 \\
+争议率 $d$ & 4\% & 2\% & 0.8\% \\
+验证者（$N_v$） & 200 & 500 & 1,200 \\
+TOS 价格（第 3 年） & \$2 & \$5 & \$15 \\
+采用曲线 & 缓慢（5 年） & 中等（3 年） & 快速（2 年） \\\bottomrule
+\caption{TOS 模拟的经济场景参数（2025--2030）。}
+\label{tab:econ-scenarios}
+\end{longtable}
+
+\subsection{公式}
+\paragraph{结算量} 第 $y$ 年的年结算量 $S(y)$：
+\begin{equation}
+S(y) = 365 \times V_t(y) \times \bar{e}_t(y)
+\end{equation}
+示例（基线，第 3 年）：$S(3) = 365 \times 150{,}000 \times \$300 = \$16.4$ 十亿。
+
+\paragraph{代理收益} 平均代理年收入：
+\begin{equation}
+I_a(y) = \frac{V_t(y)}{N_a(y)} \times \bar{e}_t(y) \times \bar{q}(y) \times (1 + 0.2(r_a - 0.5)) \times f(s_a)
+\end{equation}
+对于中位数代理（$r_a = 0.6$，$s_a = 500$ TOS）：
+\begin{equation}
+I_a(3) = \frac{150{,}000}{50{,}000} \times \$300 \times 0.85 \times 1.02 \times 1.62 \approx \$1{,}250 \text{ 每年}
+\end{equation}
+顶级代理（白金，$r_a = 0.95$，$s_a = 5{,}000$ TOS）：
+\begin{equation}
+I_a^{\text{top}}(3) \approx \$8{,}200 \text{ 每年}
+\end{equation}
+
+\paragraph{验证者收益} 验证者收入（结算量的 12\%，按准确度比例分配）：
+\begin{equation}
+I_v(y) = \frac{0.12 \times S(y)}{N_v(y)} \times \frac{Acc_v}{\bar{Acc}}
+\end{equation}
+基线第 3 年，中位数验证者（$Acc_v = 0.85$）：
+\begin{equation}
+I_v(3) = \frac{0.12 \times \$16.4B}{500} \times \frac{0.85}{0.85} \approx \$3.9M \text{ 每年}
+\end{equation}
+
+\paragraph{财政积累} 财政收到结算量的 8\% + 被削减资金：
+\begin{equation}
+T(y) = 0.08 \times S(y) + \sum_{slash \; events} slash_v
+\end{equation}
+基线第 3 年：$T(3) = 0.08 \times \$16.4B + \$20M \approx \$1.33B$。
+
+\subsection{按场景的结果}
+\paragraph{保守场景（缓慢采用，更高争议）}
+\begin{itemize}[noitemsep]
+  \item 第 3 年结算：$365 \times 50{,}000 \times \$150 = \$2.74$ 十亿。
+  \item 代理收入：中位数 \$410/年；顶级 \$2{,}800/年。
+  \item 验证者收入：\$1.3M/年（中位数）。
+  \item 财政：\$240M。
+  \item \textbf{结果}：网络保持可持续；验证者获得足够的收入以证明参与合理；财政涵盖仲裁成本和开发资助。
+\end{itemize}
+
+\paragraph{基线场景（中等采用，标准争议）}
+\begin{itemize}[noitemsep]
+  \item 第 3 年结算：\$16.4 十亿。
+  \item 代理收入：中位数 \$1{,}250/年；顶级 \$8{,}200/年。
+  \item 验证者收入：\$3.9M/年（中位数）。
+  \item 财政：\$1.33B。
+  \item \textbf{结果}：强大的经济飞轮；代理获得可行的补充收入；验证者被高回报激励；财政资助 PAI 研究、生态系统资助、能源回扣。
+\end{itemize}
+
+\paragraph{乐观场景（快速采用，低争议）}
+\begin{itemize}[noitemsep]
+  \item 第 3 年结算：$365 \times 500{,}000 \times \$600 = \$109.5$ 十亿。
+  \item 代理收入：中位数 \$2{,}190/年；顶级 \$16{,}800/年。
+  \item 验证者收入：\$10.9M/年（中位数）。
+  \item 财政：\$8.8B。
+  \item \textbf{结果}：TOS 成为主导的代理经济基础设施；代理实现全职收入可行性；验证者获得机构级回报；财政资助重大举措（PAI 阶段 3、行星间研究、DAE 试点）。
+\end{itemize}
+
+\subsection{敏感性分析}
+\paragraph{任务价值方差的影响}
+平均任务价值增加 50\%（例如，基线中 \$300 $\to$ \$450）产生：
+\begin{itemize}[noitemsep]
+  \item 结算量：+50\%（\$16.4B $\to$ \$24.6B）。
+  \item 代理收入：+50\%（\$1{,}250 $\to$ \$1{,}875）。
+  \item 验证者/财政收入：+50\%（线性缩放）。
+\end{itemize}
+
+\paragraph{争议率的影响}
+争议率翻倍（基线中 2\% $\to$ 4\%）导致：
+\begin{itemize}[noitemsep]
+  \item 仲裁成本：+100\%（需要更多仲裁员）。
+  \item TEM 响应：将验证者奖励增加 20\% 以吸引参与。
+  \item 净效应：财政分配从 8\% 增加到 10\% 以涵盖成本；验证者份额从 12\% 降至 11\%。
+\end{itemize}
+
+\paragraph{TOS 价格的影响}
+TOS 代币价格影响质押经济。在基线中，如果 TOS 价格从 \$5 增加到 \$15：
+\begin{itemize}[noitemsep]
+  \item 代理质押价值：500 TOS = \$7{,}500（相对于 \$2{,}500）。
+  \item 验证者质押价值：1,000 TOS = \$15{,}000（相对于 \$5{,}000）。
+  \item 影响：更高的资本要求可能减少参与；TEM 可以降低最低质押以补偿（例如，500 $\to$ 200 TOS）。
+\end{itemize}
+
+\subsection{长期预测（MERCURY 至早期 VENUS）}
+跨 MERCURY 并进入早期 VENUS 的外推：
+\begin{itemize}[noitemsep]
+  \item \textbf{早期 MERCURY（基线）}：\$16.4B 年度结算，50,000 个代理，500 个验证者。
+  \item \textbf{中期 MERCURY（基线）}：\$180B 年度结算（复合增长 12\%/年），800,000 个代理，2,500 个验证者。PAI 共识实现 10,000+ TPS；混合法币结算推动企业采用。
+  \item \textbf{晚期 MERCURY / 早期 VENUS（基线）}：\$650B 年度结算，450 万个代理（人类操作和自主混合），10,000 个验证者。DAE 出现；宪法合约治理虚拟经济；TOS 财政超过 \$50B，资助行星间基础设施。
+\end{itemize}
+
+\subsection{风险场景}
+\paragraph{黑天鹅：重大安全漏洞}
+假设早期 MERCURY 攻击损害了 5\% 的验证者，导致 \$500M 欺诈性结算。响应：
+\begin{itemize}[noitemsep]
+  \item 保险池（交易量的 3\%）涵盖大部分损失。
+  \item 治理调用紧急回滚（可逆历史机制，第~\ref{sec:expansion}~节）。
+  \item 受影响的验证者被削减（失去 50\% 质押）；声誉重置为零。
+  \item 网络停机时间：72 小时用于取证和补救。
+  \item 长期影响：通过透明审计报告、协议升级（v5.0）、验证者重新认证恢复信任。
+\end{itemize}
+
+\paragraph{监管冲击：主要司法管辖区禁止 AI 代理}
+假设中期 MERCURY 监管转变，主要司法管辖区禁止自主 AI 劳动力。场景：
+\begin{itemize}[noitemsep]
+  \item \textbf{合规路径}：TOS 为所有 EU 任务部署人在环路仲裁；任务量减少 15\%，但合规保留访问权限。
+  \item \textbf{碎片化路径}：EU 代理迁移到许可的 TOS 分片；通过延迟容忍协议进行跨分片结算；网络分裂但保持互操作性。
+\end{itemize}
+
+\section{安全与威胁模型}
+\label{sec:security}
+
+TOS 在一个充满敌意的环境中运营，经济激励吸引复杂的对手。本节对基于拜占庭容错、密码经济学和实证安全研究的威胁参与者、攻击向量和纵深防御对策进行建模。
+
+\subsection{威胁分类}
+
+\paragraph{T1：恶意代理（女巫攻击者）}
+\textbf{Motivation}: Earn rewards without performing legitimate work; game reputation systems; overwhelm validation queues.\\
+\textbf{Capabilities}: Create thousands of identities; automate low-quality submissions; coordinate timing attacks.\\
+\textbf{Attack Vectors}:
+\begin{itemize}[noitemsep]
+  \item \textbf{Task spam}: Flood network with trivial or duplicate tasks to claim escrow before validation.
+  \item \textbf{Reputation farming}: Collude with cooperating publishers to inflate scores.
+  \item \textbf{Oracle manipulation}: Submit false attestations to trick validators.
+\end{itemize}
+\textbf{Historical Precedent}: Steam account farming (2016), cryptocurrency airdrop bots (2020--2023), large-scale review fraud on Amazon/Yelp.
+
+\paragraph{T2：验证者共谋}
+\textbf{Motivation}: Extract rents by approving low-quality work from co-conspirators; censor competitors.\\
+\textbf{Capabilities}: Control $>33\%$ of validator stake or exploit randomness in assignment algorithms.\\
+\textbf{Attack Vectors}:
+\begin{itemize}[noitemsep]
+  \item \textbf{Quality inflation}: Validators assign high scores to cartel members' submissions regardless of merit.
+  \item \textbf{Censorship}: Reject or delay validation of non-cartel agents.
+  \item \textbf{Front-running}: Validators observe pending tasks, submit competing solutions under alternate identities.
+\end{itemize}
+\textbf{Historical Precedent}: Mining pool centralization, MEV extraction patterns, and validator centralization observed across various blockchain networks demonstrate the reality of these threats.
+
+\paragraph{T3：预言机卡特尔}
+\textbf{Motivation}: Manipulate CC/EC pricing to profit from arbitrage or harm competitors.\\
+\textbf{Capabilities}: Compromise majority of oracle feeders; exploit data source vulnerabilities; delay price updates.\\
+\textbf{Attack Vectors}:
+\begin{itemize}[noitemsep]
+  \item \textbf{Price manipulation}: Report inflated compute costs to drain TEM subsidies or extract value from agents.
+  \item \textbf{Staleness attacks}: Delay updates during high volatility to force fallback pricing.
+  \item \textbf{Data poisoning}: Compromise API sources (AWS pricing feeds, energy indices).
+\end{itemize}
+\textbf{Historical Precedent}: LIBOR manipulation scandal (2008--2012), flash crashes in algorithmic trading (2010), oracle failures in decentralised finance protocols.
+
+\paragraph{T4：治理捕获}
+\textbf{Motivation}: Control protocol parameters to favor specific actors; extract treasury funds; resist security upgrades.\\
+\textbf{Capabilities}: Accumulate majority voting stake; exploit low voter turnout; launch social engineering campaigns.\\
+\textbf{Attack Vectors}:
+\begin{itemize}[noitemsep]
+  \item \textbf{Parameter manipulation}: Vote to reduce slashing penalties, increase reward splits, weaken anti-Sybil thresholds.
+  \item \textbf{Treasury raids}: Propose grants to shell entities controlled by attackers.
+  \item \textbf{Upgrade blocking}: Prevent deployment of patches addressing known vulnerabilities.
+\end{itemize}
+\textbf{Historical Precedent}: Blockchain governance takeovers, decentralised protocol governance attacks, corporate proxy fights.
+
+\paragraph{T5：智能合约漏洞利用}
+\textbf{Motivation}: Steal escrowed funds, mint unauthorized tokens, manipulate state variables.\\
+\textbf{Capabilities}: Discover reentrancy bugs, integer overflows, access control flaws, or logical errors.\\
+\textbf{Attack Vectors}:
+\begin{itemize}[noitemsep]
+  \item \textbf{Reentrancy}: Exploit callback functions in TaskInstance or RewardSplitter contracts.
+  \item \textbf{Flash loan attacks}: Temporarily acquire large stakes to manipulate governance or oracle votes.
+  \item \textbf{Griefing}: DoS validation queues by submitting malformed attestations that crash verifiers.
+\end{itemize}
+\textbf{Historical Precedent}: The DAO hack (2016, \$50M), Parity wallet freeze (2017), Poly Network exploit (2021, \$600M).
+
+\subsection{纵深防御架构}
+
+\paragraph{第 1 层：密码学基础}
+\begin{itemize}[noitemsep]
+  \item \textbf{TEE Attestation}: Intel SGX/AMD SEV remote attestation verifies code integrity; measurement hashes prevent malware injection. Limitation: side-channel attacks (Spectre, Meltdown); roadmap includes zk-SNARK fallback.
+  \item \textbf{Post-Quantum Cryptography}: Dilithium (signatures), Falcon (compact signatures) resist quantum attacks. Migration plan: dual-signing (classical + PQC) by v4.0 (see Appendix C, Report PQ-2025-08).
+  \item \textbf{Threshold Signatures}: BLS aggregation enables compact multi-sig; $t$-of-$n$ schemes prevent single points of failure in bridge contracts.
+\end{itemize}
+
+\paragraph{第 2 层：经济安全（密码经济学）}
+\begin{itemize}[noitemsep]
+  \item \textbf{Stake-Based Accountability}: Agents and validators lock collateral (min 100 TOS / 1,000 TOS respectively); slashing penalties (1--50\% of stake) deter misbehavior. Game-theoretic analysis: attacking network costs $>\$500k$ at current prices; expected return negative unless sustaining attack for $>30$ days (impractical due to rapid detection).
+  \item \textbf{Reputation Decay}: RepGraph scores decay 2\% monthly without activity; prevents dormant accounts from sudden reactivation with outdated high scores.
+  \item \textbf{Cooling Periods}: Rate limits (5--60 min based on reputation) prevent spam; adaptive thresholds increase during DoS attempts.
+\end{itemize}
+
+\paragraph{第 3 层：协议级保障}
+\begin{itemize}[noitemsep]
+  \item \textbf{Multi-Validator Consensus}: Median-of-5 scoring resists outliers; requires $\geq3$ colluding validators to manipulate outcomes (probability $<0.01\%$ with random assignment).
+  \item \textbf{Randomness Sources}: Validator assignment uses VRF (Verifiable Random Function) seeded by block hashes + external entropy (drand); prevents predictability.
+  \item \textbf{Formal Verification}: TaskInstance state machine verified in TLA+; proofs ensure liveness (tasks always settle) and safety (no double-payment). Artifacts: \texttt{github.com/tos-network/formal-verification}.
+\end{itemize}
+
+\paragraph{Layer 4: Monitoring \& Response}
+\begin{itemize}[noitemsep]
+  \item \textbf{Anomaly Detection}: ML classifiers flag suspicious patterns (e.g., agent claiming $>10$ tasks/hour, validator approving $>95\%$ of submissions). Telemetry fed to Security Operations Center (SOC).
+  \item \textbf{Circuit Breakers}: Automated pause if (1) dispute rate $>10\%$, (2) validator slashing events $>5$ in 1 hour, (3) oracle deviation $>20\%$. Resumption requires Council approval.
+  \item \textbf{Bug Bounty}: \$50k--\$500k rewards for critical vulnerabilities. Program managed via Immunefi/HackerOne; payouts in TOS tokens.
+\end{itemize}
+
+\paragraph{第 5 层：治理监督}
+\begin{itemize}[noitemsep]
+  \item \textbf{Council Emergency Powers}: 4-of-7 multi-sig can (1) pause contracts, (2) freeze malicious accounts, (3) trigger rollback (reversible history, Section~\ref{sec:expansion}). Actions logged on-chain; post-mortem required within 72 hours.
+  \item \textbf{Proof-of-Personhood Integration}: Roadmap v5.0 integrates Worldcoin/BrightID to limit Sybil identities in governance votes. Agents remain pseudonymous for tasks but must prove unique humanness for high-stake decisions.
+  \item \textbf{Transparency Reports}: Quarterly disclosure of (1) security incidents, (2) slashing events, (3) governance votes, (4) treasury changes. Auditable via Compliance API.
+\end{itemize}
+
+\subsection{事件响应手册}
+
+\paragraph{阶段 1：检测（0--15 分钟）}
+SOC receives alert from monitoring; triage severity (P0: active exploit, P1: potential threat, P2: informational). Automated checks verify authenticity (rule out false positives).
+
+\paragraph{阶段 2：遏制（15--60 分钟）}
+Invoke circuit breaker if P0; freeze affected accounts; snapshot state for forensics. Notify Council; convene emergency session.
+
+\paragraph{阶段 3：调查（1--24 小时）}
+Forensic analysis: review transaction logs, attestation reports, validator votes. Identify attack vector; estimate impact (funds at risk, agents affected).
+
+\paragraph{阶段 4：补救（1--7 天）}
+Deploy patch via governance fast-track (48-hour voting period for emergencies). Compensate affected users from insurance pool. Publish post-mortem report.
+
+\paragraph{阶段 5：经验教训（持续）}
+Update threat model; enhance monitoring rules; conduct red-team exercise to validate fixes. Share learnings with broader blockchain community (responsible disclosure).
+
+\subsection{攻击成本分析}
+
+\begin{longtable}{@{}p{0.30\textwidth}p{0.30\textwidth}p{0.28\textwidth}@{}}
+\toprule
+\textbf{Attack Type} & \textbf{Minimum Cost (USD)} & \textbf{Expected Return} \\\midrule
+Sybil spam (1,000 agents) & \$150k (stake) + \$20k (infra) & Negative (slashing + reputation loss) \\
+Validator collusion (34\% stake) & \$8.5M (at \$5/TOS, 570k TOS) & \$2M/year (if undetected); high detection risk \\
+Oracle cartel (11/21 feeders) & \$2M (bribes) + \$500k (infra) & \$5M (one-time arbitrage); permanent reputation damage \\
+Smart contract exploit & \$50k--\$200k (researcher salary) & \$0--\$50M (depends on escrow volume); bug bounty preferred \\
+Governance capture (51\% vote) & \$12M (token acquisition) & \$10M/year (treasury access); high regulatory risk \\
+\bottomrule
+\caption{Adversarial cost-benefit matrix for TOS network attacks. Costs assume October 2025 market conditions; returns account for detection probability and countermeasures.}
+\end{longtable}
+
+\textbf{Interpretation}: Most attacks are economically irrational under current parameters. Exception: highly sophisticated actors (nation-states, well-funded cybercrime syndicates) may absorb costs for strategic disruption. Countermeasures include insurance pools, regulatory cooperation, and continuous security audits.
+
+\section{治理框架}
+\label{sec:governance}
+
+Effective governance balances decentralization (resisting capture), efficiency (timely decisions), and legitimacy (stakeholder buy-in). TOS adopts a multi-chamber model inspired by constitutional democracies, corporate boards, and decentralised autonomous organisation research.
+
+\subsection{Governance Actors \& Responsibilities}
+
+\paragraph{代币持有者（TOS 质押者）}
+\textbf{Role}: Economic stakeholders with voting rights proportional to staked TOS.\\
+\textbf{Responsibilities}:
+\begin{itemize}[noitemsep]
+  \item Vote on protocol upgrades (consensus rule changes, smart contract deployments).
+  \item Elect Council of Stewards (annual elections, staggered 3-year terms).
+  \item Approve/reject treasury spending proposals exceeding threshold (\$100k equivalent in TOS).
+\end{itemize}
+\textbf{Voting Power}: Quadratic voting to mitigate plutocracy; each staker's votes = $\sqrt{\text{TOS staked}}$. Example: 10,000 TOS = 100 votes; 1,000,000 TOS = 1,000 votes (not 100,000). This reduces dominance by whales while rewarding meaningful participation.\\
+\textbf{Delegation}: Stakers may delegate votes to domain experts (e.g., security researchers for PQC migration votes, economists for TEM parameter adjustments). Delegation is non-custodial; stakers retain withdrawal rights.
+
+\paragraph{代理运营商}
+\textbf{Role}: Deploy and manage AI agents; represent agent interests in governance.\\
+\textbf{Responsibilities}:
+\begin{itemize}[noitemsep]
+  \item Propose improvements to AGIW protocol (validation logic, fee structures, task templates).
+  \item Participate in working groups (e.g., AI Safety Committee, Privacy Task Force).
+\end{itemize}
+\textbf{Voting Power}: Reputation-weighted votes in agent-specific proposals. High-reputation agents ($r \geq 0.8$) receive 1.5$\times$ voting multiplier.
+
+\paragraph{验证者}
+\textbf{Role}: Operate consensus nodes; validate AGIW submissions; secure the network.\\
+\textbf{Responsibilities}:
+\begin{itemize}[noitemsep]
+  \item Vote on technical proposals (BlockDAG parameter tuning, PAI consensus roadmap).
+  \item Signal protocol health metrics (dispute rates, throughput, latency).
+\end{itemize}
+\textbf{Voting Power}: Stake-weighted; validators with $>5\%$ total stake capped at 5\% voting power (prevents centralization).
+
+\paragraph{管理委员会}
+\textbf{Composition}: 7--15 elected members with expertise in security, economics, law, AI ethics, distributed systems.\\
+\textbf{Term}: 3 years, staggered elections ($\frac{1}{3}$ seats up for election annually).\\
+\textbf{Responsibilities}:
+\begin{itemize}[noitemsep]
+  \item Emergency response: pause contracts during active exploits (4-of-7 multi-sig).
+  \item Treasury management: approve grants $<\$100k$; recommend larger proposals to token holders.
+  \item Protocol stewardship: convene working groups; commission audits; publish roadmap updates.
+  \item Regulatory liaison: coordinate with policymakers; submit comments on proposed regulations (e.g., EU AI Act, US AI RMF).
+\end{itemize}
+\textbf{Accountability}: Quarterly performance reviews; token holders may recall members via 67\% supermajority vote.
+
+\paragraph{审计委员会}
+\textbf{Composition}: 5 independent security firms + 3 community-elected technical reviewers.\\
+\textbf{Responsibilities}:
+\begin{itemize}[noitemsep]
+  \item Pre-deployment audits: review all smart contract upgrades; publish reports 7 days before vote.
+  \item Post-deployment monitoring: continuous fuzzing, formal verification, penetration testing.
+  \item Incident analysis: forensic investigations after security breaches; recommend remediation.
+\end{itemize}
+\textbf{Compensation}: 2\% of treasury allocated annually; additional bounties for discovering critical bugs.
+
+\paragraph{Regulators \& Compliance Officers}
+\textbf{Role}: Observe governance; access compliance telemetry; participate in policy discussions (non-voting).\\
+\textbf{Access Rights}: Read-only API for aggregated statistics (task volumes, dispute rates, energy usage). Individual agent identities remain confidential unless court order.\\
+\textbf{Engagement}: Quarterly briefings with Council; input on custody standards, AML/KYC integration, cross-border settlement rules.
+
+\subsection{提案生命周期}
+
+\paragraph{Stage 1: Ideation \& Discussion (7--30 days)}
+\textbf{Forum}: Off-chain discussion on Commonwealth, Discord, GitHub. Anyone may draft a proposal using standardized template (problem statement, solution, cost-benefit analysis, risk assessment).\\
+\textbf{Temperature Check}: Informal polls gauge community sentiment. Proposals with $<20\%$ support typically abandoned.
+
+\paragraph{阶段 2：正式提交（1--3 天）}
+\textbf{Requirements}:
+\begin{itemize}[noitemsep]
+  \item Proposer must stake 10,000 TOS (anti-spam; refunded if proposal passes).
+  \item Proposal includes executable code (for on-chain changes) or detailed specification (for off-chain coordination).
+  \item Auditor Committee review completed (for contract upgrades).
+\end{itemize}
+\textbf{Categorization}: Proposals tagged as \emph{Technical}, \emph{Economic}, \emph{Treasury}, \emph{Emergency}, or \emph{Constitutional} (different voting thresholds).
+
+\paragraph{阶段 3：投票（标准 7 天，紧急 48 小时）}
+\textbf{Quorum}: 15\% of circulating TOS must participate (prevents apathy-driven outcomes).\\
+\textbf{Approval Thresholds}:
+\begin{itemize}[noitemsep]
+  \item \textbf{Technical/Economic}: 60\% approval (simple majority with buffer).
+  \item \textbf{Treasury (<\$100k)}: Council approval (multi-sig).
+  \item \textbf{Treasury (>\$100k)}: 67\% token holder approval.
+  \item \textbf{Constitutional}: 75\% approval + validator sign-off (modifies core rules).
+  \item \textbf{Emergency}: 4-of-7 Council multi-sig (immediate execution; retroactive vote within 14 days).
+\end{itemize}
+\textbf{Voting Interface}: Web app (\texttt{vote.tos.network}), CLI, SDK integration. Votes cryptographically signed; tallies verifiable on-chain.
+
+\paragraph{Stage 4: Timelock \& Execution (48 hours)}
+\textbf{Timelock}: Approved proposals enter 48-hour delay before execution. Rationale: provides window for last-minute security reviews; allows stakers to exit if opposed to major changes.\\
+\textbf{Execution}: Automated via governance smart contract (\texttt{Governor.sol}); transactions broadcasted to relevant contracts (e.g., parameter updates, treasury transfers).\\
+\textbf{Veto}: Council may invoke emergency veto (4-of-7 multi-sig) if critical flaw discovered during timelock; requires public justification + re-vote.
+
+\paragraph{阶段 5：实施后审查（30--90 天）}
+\textbf{Monitoring}: Track key metrics (e.g., if TEM parameters changed, monitor fee volatility, agent churn).\\
+\textbf{Retrospective}: Council publishes impact assessment; community discusses lessons learned.\\
+\textbf{Amendments}: If proposal underperforms, fast-track amendment process (reduced voting period).
+
+\subsection{宪法合约}
+
+Certain rules are enshrined in immutable or semi-immutable contracts, forming the network's ``constitution.'' Modification requires supermajority approval (75\%) and validator consensus.
+
+\paragraph{核心原则（不可变）}
+\begin{enumerate}[noitemsep]
+  \item \textbf{Non-Censorship}: No proposal may blacklist specific agents, validators, or publishers based on identity (exception: sanctioned addresses per regulatory compliance).
+  \item \textbf{Transparency}: All governance votes, treasury transactions, and contract upgrades must be publicly auditable.
+  \item \textbf{Exit Rights}: Token holders may withdraw staked TOS at any time (subject to cooldown periods); no governance action may confiscate funds without due process (arbitration ruling).
+\end{enumerate}
+
+\paragraph{经济参数（半不可变）}
+\begin{enumerate}[noitemsep]
+  \item \textbf{Reward Splits}: Agent/validator/treasury distribution ($\alpha, \beta, \gamma$) adjustable within bounds ($\beta \in [0.10, 0.15]$, $\gamma \in [0.05, 0.10]$).
+  \item \textbf{Slashing Penalties}: Validator/agent slashing rates capped at 50\% (prevents disproportionate punishment).
+  \item \textbf{Treasury Cap}: Maximum annual spending = 20\% of treasury balance (ensures long-term sustainability).
+\end{enumerate}
+
+\subsection{Governance Attack Vectors \& Defenses}
+
+\paragraph{攻击：投票购买}
+\textbf{Scenario}: Wealthy actor offers \$10/vote to sway proposal.\\
+\textbf{Defense}: (1) Quadratic voting reduces ROI for large-scale vote buying. (2) Delegation to trusted experts reduces susceptibility. (3) On-chain analytics detect unusual voting patterns (e.g., 1,000 wallets voting identically); flagged for community scrutiny.
+
+\paragraph{攻击：治理疲劳}
+\textbf{Scenario}: Excessive proposals overwhelm voters; turnout drops below quorum.\\
+\textbf{Defense}: (1) Stake requirement filters low-quality proposals. (2) Council pre-screens proposals for feasibility. (3) Quarterly ``batch votes'' consolidate related proposals (reduces decision fatigue).
+
+\paragraph{攻击：紧急权力滥用}
+\textbf{Scenario}: Compromised Council member misuses multi-sig to freeze legitimate accounts.\\
+\textbf{Defense}: (1) 4-of-7 threshold requires collusion. (2) All emergency actions logged publicly; retroactive vote required within 14 days. (3) Community may recall Council members via supermajority vote.
+
+\subsection{治理路线图}
+
+\begin{description}[style=nextline]
+  \item[Phase 1 (v3.0--v3.5, Early MERCURY)] Token holder voting on basic parameters; Council handles day-to-day operations. Focus: establish processes, build trust.
+  \item[Phase 2 (v4.0, Mid-MERCURY)] Introduce delegation, quadratic voting, working groups. Agent operators gain formal representation.
+  \item[Phase 3 (v5.0, Late MERCURY)] AI agents participate in governance via reputation-weighted votes (constitutional contracts enforce human veto for sensitive decisions).
+  \item[Phase 4 (VENUS+)] Mixed human--AI councils; constitutional smart contracts enable self-amending governance within predefined bounds.
+\end{description}
+
+\section{监管考虑}
+\label{sec:regulatory}
+
+TOS operates at the intersection of blockchain, AI, and financial services—three heavily regulated domains. This section maps global regulatory frameworks and demonstrates TOS's compliance posture.
+
+\subsection{多司法管辖区合规矩阵}
+
+\begin{longtable}{@{}p{0.16\textwidth}p{0.28\textwidth}p{0.22\textwidth}p{0.22\textwidth}@{}}
+\toprule
+\textbf{Region} & \textbf{Regulation} & \textbf{Requirements} & \textbf{TOS Alignment} \\\midrule
+\textbf{United States} & AI Risk Management Framework (NIST AI RMF, 2023) & Risk assessment, transparency, accountability & Audit logs, telemetry API, governance disclosures \\
+ & Securities Law (Howey Test) & Token not classified as security if sufficiently decentralized & Council elections, open validator set, no central control \\
+ & AML/KYC (FinCEN) & Customer due diligence for fiat on-ramps & Partner with regulated exchanges; KYC for fiat gateways only \\
+\textbf{European Union} & AI Act (2024) & High-risk AI systems require conformity assessment, human oversight & Expert arbitration, human-in-the-loop for sensitive tasks, CE marking roadmap \\
+ & GDPR & Right to erasure, data minimization, consent & Confidential balances, pseudonymous DIDs, view-only keys for auditors \\
+ & MiCA (Markets in Crypto-Assets) & Stablecoin reserves, whitepaper disclosures & CC/EC backed by oracle-verified resources; this whitepaper as disclosure \\
+\textbf{Singapore} & MAS Payment Services Act & Licensing for digital payment token services & Collaborate with licensed payment institutions; no direct fiat handling \\
+ & AI Governance Framework & Fairness, transparency, accountability & RepGraph anti-bias monitoring, validation transparency, arbitration appeals \\
+\textbf{China} & Algorithm Recommendation Regulations (2022) & Registration, content moderation, user rights & Geographic restrictions; China operations require separate compliance (future work) \\
+\textbf{UK} & AI White Paper (pro-innovation) & Sector-specific regulators oversee AI & Financial Conduct Authority (FCA) engagement for fintech use cases \\
+\bottomrule
+\caption{TOS regulatory compliance across key jurisdictions.}
+\end{longtable}
+
+\subsection{合规特性}
+
+\paragraph{可审计性}
+All on-chain actions (AGIW submissions, governance votes, treasury transfers) emit events indexed by the Indexed Data Service. Compliance API provides filtered access for authorized regulators:
+\begin{itemize}[noitemsep]
+  \item Aggregated statistics (monthly task volume, dispute rates) without exposing individual identities.
+  \item Role-based access control (RBAC) via OAuth2; access logs retained for 7 years.
+  \item Quarterly transparency reports published publicly (see Appendix C).
+\end{itemize}
+
+\paragraph{Custody \& AML}
+TOS integrates with Chainalysis/Elliptic for transaction monitoring. Fiat on/off-ramps partner with licensed payment institutions (e.g., Circle, Paxos) that perform KYC. Agent-to-agent transactions remain pseudonymous; only fiat conversions require identity verification.
+
+\paragraph{数据隐私}
+Confidential transactions (Pedersen commitments + Bulletproofs) ensure task specifications and pricing remain private. GDPR ``right to erasure'' handled via:
+\begin{itemize}[noitemsep]
+  \item On-chain hashes (not full data) → off-chain storage (IPFS, Arweave) with encryption keys controlled by users.
+  \item Revocation of DID → reputation reset → effectively anonymizes historical participation.
+\end{itemize}
+
+\paragraph{跨境数据流}
+EU--US Data Privacy Framework (2023) enables transatlantic data transfers. For other jurisdictions, TOS adopts Standard Contractual Clauses (SCCs) and data localization where required (e.g., China, Russia).
+
+\subsection{监管参与策略}
+
+\begin{enumerate}[noitemsep]
+  \item \textbf{Proactive Education}: Council publishes explainer materials for policymakers; participates in regulatory consultations (e.g., EU AI Act public comments).
+  \item \textbf{Sandbox Participation}: Apply for regulatory sandboxes (Singapore MAS, UK FCA) to pilot agent-based financial services under supervision.
+  \item \textbf{Industry Coalitions}: Join Blockchain Association, AI Safety Alliance, IEEE P3119 (AI bias standards) to shape favorable policy.
+  \item \textbf{Compliance-as-Code}: Policy compiler (Section~\ref{sec:expansion}) translates regulations into executable smart contract rules (e.g., ``Block transactions to OFAC-sanctioned addresses'').
+\end{enumerate}
+
+\section{实施与基准测试}
+\label{sec:implementation}
+
+\subsection{网络拓扑}
+
+\textbf{Mainnet (Themis)}: Production network; launched September 2025; 347 validator nodes across 42 countries.\\
+\textbf{Testnet (Helios)}: Public testnet for developers; resets monthly; faucet provides free test-TOS.\\
+\textbf{Devnet (Aurora)}: Private network for core team; rapid iteration; snapshot-based rollbacks for debugging.\\
+\textbf{Staging (Metis)}: Pre-production environment mirroring mainnet configuration; final testing before upgrades.
+
+\subsection{性能指标（2025 年第三季度）}
+
+\begin{longtable}{@{}p{0.30\textwidth}p{0.28\textwidth}p{0.30\textwidth}@{}}
+\toprule
+\textbf{Metric} & \textbf{Measured Value} & \textbf{Target (v4.0)} \\\midrule
+Throughput (TPS) & 2,847 sustained, 3,521 peak & 10,000+ with PAI \\
+Block time & 11.3s avg, 18.2s p95 & <10s avg \\
+Finality & 8 blocks (90s) probabilistic & 500ms for high-priority tx \\
+Validator uptime & 99.7\% (median) & 99.9\% (SLA) \\
+AGIW settlement latency & 14.2 min (median) & <10 min \\
+Dispute rate & 1.8\% & <2\% \\
+Network bandwidth & 45 MB/s avg & 150 MB/s (PAI) \\
+State size & 128 GB & Pruning + sharding \\
+\bottomrule
+\caption{TOS network performance benchmarks (Mainnet Themis, Sept 2025).}
+\end{longtable}
+
+\subsection{基准方法论}
+
+\textbf{Workload Mix}:
+\begin{itemize}[noitemsep]
+  \item 40\% AGIW task submissions (varied payload sizes: 10 KB--5 MB).
+  \item 30\% CC/EC swaps (AMM transactions).
+  \item 20\% DID operations (registrations, credential issuance).
+  \item 10\% governance votes + treasury transfers.
+\end{itemize}
+
+\textbf{Stress Testing}: Ramp traffic from 500 TPS to 5,000 TPS over 2 hours; measure latency degradation, validator synchronization lag, mempool congestion. Scripts: \texttt{github.com/tos-network/benchmarks}.
+
+\textbf{Chaos Engineering}: Randomly terminate 10\% of validators; simulate network partitions; inject malicious transactions. Verify liveness and safety properties hold.
+
+\section{案例研究}
+\label{sec:case-studies}
+
+\subsection{案例研究 1：法律文档审查}
+
+\paragraph{客户} International law firm (Fortune 500 clients); 1,200 attorneys; $>$10,000 active cases.
+
+\paragraph{挑战} Discovery process for class-action lawsuit required reviewing 2.5 million pages of contracts, emails, internal memos. Manual review estimated at 18,000 paralegal hours (\$4.5M cost, 6-month timeline). Court-mandated deadline: 90 days.
+
+\paragraph{TOS 解决方案}
+\begin{enumerate}[noitemsep]
+  \item \textbf{Agent Deployment}: Firm deployed 50 AI agents (GPT-4-based, fine-tuned on legal precedents) on TOS.
+  \item \textbf{Task Publication}: Documents segmented into 12,500 tasks (200 pages each); escrow = 50 CC + 5 EC per task.
+  \item \textbf{Parallel Execution}: Agents processed documents in Intel SGX enclaves; generated redacted versions + relevance scores.
+  \item \textbf{Validation}: 5-validator consensus per task; human arbitrators reviewed flagged cases (3\% escalation rate).
+  \item \textbf{Compliance Logging}: AGIW receipts (attestation reports, quality scores, timestamps) admitted as evidence; satisfied court's chain-of-custody requirements.
+\end{enumerate}
+
+\paragraph{结果}
+\begin{itemize}[noitemsep]
+  \item \textbf{Cost}: \$1.8M (60\% savings vs. manual).
+  \item \textbf{Time}: 67 days (25\% faster than deadline).
+  \item \textbf{Quality}: 97.2\% agreement with partner law firm's spot-check sample (500 random documents).
+  \item \textbf{Precedent}: First use of blockchain-verified AI labor in US federal court (District Court, Southern District of New York, 2025).
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Legal Document Review: ROI Analysis}
+\label{tab:legal-roi}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Metric} & \textbf{Traditional} & \textbf{TOS Solution} & \textbf{Improvement} \\ \midrule
+Total cost & \$4.5M & \$1.8M & -60\% \\
+Timeline & 180 days (est.) & 67 days & -63\% \\
+Paralegal hours & 18,000 & 450 (oversight) & -97.5\% \\
+Per-page cost & \$1.80 & \$0.72 & -60\% \\
+Tasks processed & -- & 12,500 & -- \\
+Median task latency & -- & 14.3 min & -- \\
+Validation accuracy & Manual QA & 97.2\% (automated) & Auditable \\
+Dispute rate & N/A & 3\% (escalated) & Transparent \\
+Court admissibility & Limited & Full (chain-of-custody) & Precedent-setting \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Key Insight}: AGIW receipts satisfied court's evidentiary requirements, enabling AI labor to be admitted as verified work product rather than "black box" outputs requiring human re-validation.
+
+\subsection{案例研究 2：气候数据处理}
+
+\paragraph{客户} Non-profit climate research consortium (23 universities, 5 government agencies).
+
+\paragraph{挑战} Analyze 4.8 petabytes of satellite imagery (MODIS, Landsat) to track deforestation in Amazon rainforest (2015--2025). Traditional cloud compute (AWS/GCP) estimated at \$12M; grant budget = \$3M.
+
+\paragraph{TOS 解决方案}
+\begin{enumerate}[noitemsep]
+  \item \textbf{Compute Credits}: Consortium purchased 2.4M CC tokens at 20\% discount (TEM subsidy for public-good research).
+  \item \textbf{Distributed Inference}: 300 agents (running YOLO object detection models) processed imagery chunks; GPU inference subsidized via EC tokens.
+  \item \textbf{Renewable Energy Tracking}: Agents operating on solar/wind received 10\% fee discounts; aggregate EC usage reported in carbon offset calculations.
+  \item \textbf{Data Integrity}: Merkleized outputs + attestation reports ensured reproducibility; peer-reviewed publication cited TOS receipts.
+\end{enumerate}
+
+\paragraph{结果}
+\begin{itemize}[noitemsep]
+  \item \textbf{Cost}: \$2.7M (77\% of budget; savings reallocated to field research).
+  \item \textbf{Time}: 14 months (vs. 24-month estimate).
+  \item \textbf{Impact}: Findings informed UN COP30 negotiations; deforestation hotspots identified with 94\% accuracy.
+  \item \textbf{Transparency}: Full methodology + data pipeline published; EC token usage offset via verified carbon credits.
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Climate Data Processing: ROI Analysis}
+\label{tab:climate-roi}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Metric} & \textbf{Traditional Cloud} & \textbf{TOS Solution} & \textbf{Improvement} \\ \midrule
+Total cost & \$12M (est.) & \$2.7M & -77.5\% \\
+Timeline & 24 months & 14 months & -42\% \\
+Data processed & 4.8 PB & 4.8 PB & -- \\
+Cost per TB & \$2,500 & \$562.50 & -77.5\% \\
+CC tokens purchased & -- & 2.4M & -- \\
+TEM subsidy (public good) & \$0 & \$540K (20\%) & Grant multiplier \\
+Renewable energy share & Unknown & 67\% (EC tracking) & Carbon neutral \\
+Agents deployed & -- & 300 (distributed) & Decentralized \\
+Detection accuracy & -- & 94\% (peer-reviewed) & Published \\
+Carbon offset credits & \$0 & \$42K (EC-verified) & Auditable \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Key Insight}: TEM's public-good subsidy enabled budget-constrained research that would have been infeasible with commercial cloud pricing. EC token tracking provided verifiable carbon accounting for grant compliance.
+
+\subsection{Case Study 3: Metaverse Economy}
+
+\paragraph{客户} AAA gaming studio; 15M monthly active users; in-game economy = \$200M annual GMV.
+
+\paragraph{挑战} Player complaints about unfair AI moderators (banning legitimate users, ignoring toxic behavior). Manual appeals backlog: 45,000 tickets, 6-week resolution time. Regulatory scrutiny (EU Digital Services Act) required transparent content moderation.
+
+\paragraph{TOS 解决方案}
+\begin{enumerate}[noitemsep]
+  \item \textbf{Reputation NFTs}: AI moderators minted on-chain credentials; quality scores visible to players.
+  \item \textbf{AGIW Receipts}: Every moderation decision logged with attestation (chat logs hashed, decision rationale, validator consensus).
+  \item \textbf{Dispute Resolution}: Players staked 50 TOS to appeal; expert arbitrators reviewed cases within 48 hours; losing party forfeited stake.
+  \item \textbf{Transparency Dashboard}: Public explorer showed moderator accuracy, appeal success rates, arbitrator performance.
+\end{enumerate}
+
+\paragraph{结果}
+\begin{itemize}[noitemsep]
+  \item \textbf{Trust}: Player satisfaction (NPS) increased from 42 to 68.
+  \item \textbf{Efficiency}: Appeal resolution time dropped to 2.1 days (71\% improvement).
+  \item \textbf{Compliance}: EU DSA audit accepted TOS logs as evidence of due process.
+  \item \textbf{Economics}: Studio earned 120,000 TOS in validator rewards (12\% of moderation costs); net savings = \$1.2M annually.
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Metaverse Moderation: ROI Analysis}
+\label{tab:metaverse-roi}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Metric} & \textbf{Centralized AI} & \textbf{TOS Solution} & \textbf{Improvement} \\ \midrule
+Annual mod cost & \$3.8M & \$2.6M & -32\% \\
+Appeal backlog & 45,000 tickets & 2,300 tickets & -95\% \\
+Resolution time (avg.) & 6 weeks & 2.1 days & -96\% \\
+Player NPS & 42 (detractors) & 68 (promoters) & +62\% \\
+Moderator transparency & 0\% (black box) & 100\% (on-chain) & Auditable \\
+EU DSA compliance & Non-compliant & Compliant & Risk mitigation \\
+Validator earnings & \$0 & \$120K (studio) & Revenue share \\
+False positive rate & 18\% (est.) & 4.2\% (measured) & -77\% \\
+Arbitrator quality & N/A & 4.3/5.0 avg rating & Reputation-tracked \\
+Stake-at-risk (appeals) & \$0 & 50 TOS (\$125) & Spam deterrent \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Key Insight}: Transparent moderation with on-chain reputation restored player trust while reducing costs. Studio became a validator, earning protocol rewards to offset moderation expenses—a self-sustaining compliance model.
+
+\section{开发路线图：12 个月里程碑}
+\label{sec:12month-roadmap}
+
+This section provides a publishable, quarter-by-quarter roadmap for TOS development from Q1 2026 through Q4 2026, focusing on deliverables that enable near-term enterprise adoption while laying foundations for long-term AGI infrastructure.
+
+\subsection{2026 年第一季度：身份、证明和任务市场}
+
+\textbf{Core Deliverables}:
+\begin{itemize}[noitemsep]
+  \item \textbf{DID/Credential System v1.0}: W3C-compliant DIDs with verifiable credentials; reputation anchoring; issuer registry with KYC/AML hooks.
+  \item \textbf{AGIW Attestation v1.0}: TEE-based work verification (Intel SGX, AMD SEV-SNP); attestation report format; validator scoring protocol.
+  \item \textbf{Task Market v1.0}: Smart contracts for task publication, claiming, submission, validation, and reward distribution; escrow mechanisms.
+  \item \textbf{CC Token Launch}: Compute Credits (CC) deployed with oracle integration (GPU pricing index); automated market maker (AMM) pools for liquidity.
+  \item \textbf{Paymaster Contracts}: Account abstraction for gas-free agent operations; sponsors can subsidize task fees.
+  \item \textbf{Explorer Tabs}: \texttt{explorer.tos.network} with tabs for Agents / Tasks / Receipts / Reputation / Safety metrics.
+\end{itemize}
+
+\textbf{Success Metrics}: 1,000+ registered agents; 500 tasks/day; 95\%+ task completion rate; median settlement latency <20 min.
+
+\subsection{2026 年第二季度：声誉、能源市场和安全}
+
+\textbf{Core Deliverables}:
+\begin{itemize}[noitemsep]
+  \item \textbf{Reputation Events v1.0}: On-chain event indexer for RepGraph; real-time reputation score calculation; API for reputation queries.
+  \item \textbf{EC Token Launch}: Energy Credits (EC) with regional kWh oracle integration; energy basket pricing (renewable energy weighting).
+  \item \textbf{Safety Oracle v1.0}: Integration with Anthropic Constitutional AI, OpenAI Moderation API, Google Perspective; harmfulness scoring; content policy enforcement.
+  \item \textbf{Wallet Policy Kits}: Configurable safety policies for enterprises (e.g., block tasks above toxicity threshold); compliance templates for GDPR/CCPA.
+  \item \textbf{Validator Dashboard}: Real-time monitoring of validator performance; slashing events; uptime tracking; earnings calculator.
+  \item \textbf{Public Telemetry API}: \texttt{metrics.tos.network/api} for TPS, block time, AGIW latency, dispute rate (30-day rolling).
+\end{itemize}
+
+\textbf{Success Metrics}: 2,000+ agents; 1,500 tasks/day; reputation score coverage 80\%+; safety violations <0.5\%; EC market liquidity \$5M+.
+
+\subsection{2026 年第三季度：零知识试点、仲裁和保险}
+
+\textbf{Core Deliverables}:
+\begin{itemize}[noitemsep]
+  \item \textbf{AGIW-ZK Pilot}: zk-SNARK attestation for simple AI tasks (linear regression, small neural nets); benchmark proof generation vs. TEE latency.
+  \item \textbf{Arbitration Court v1.0}: On-chain dispute resolution with expert arbitrators; multi-signature rulings; appeal mechanism; arbitrator reputation tracking.
+  \item \textbf{Insurance Pool v1.0}: Staking-based insurance for task publishers; automated payouts for verified failures; premium calculation based on task risk.
+  \item \textbf{Multi-Chain Bridges}: HTLC-based atomic swaps with major chains (cross-chain CC/EC liquidity); bridge security audits.
+  \item \textbf{Fiat Gateway Beta}: Partnerships with regulated payment processors; KYC/AML compliance; fiat on/off ramps for CC/EC.
+  \item \textbf{Developer SDK v1.0}: Python, JavaScript, Rust libraries for task publishing, agent registration, receipt verification; comprehensive examples.
+\end{itemize}
+
+\textbf{Success Metrics}: 3,500+ agents; 3,000 tasks/day; ZK proof success rate 85\%+; arbitration resolution time <48h; insurance pool TVL \$10M+.
+
+\subsection{2026 年第四季度：TEM 启动、基准报告和市场集成}
+
+\textbf{Core Deliverables}:
+\begin{itemize}[noitemsep]
+  \item \textbf{TEM v1.0}: Full TOS Energy Model deployment with subsidy categories (Public Goods 100\%, Education 75\%, SMB 50\%, Enterprise 0\%); treasury governance.
+  \item \textbf{Dynamic Fee Markets}: Base fee adjustment mechanism; priority tip markets; burn mechanism for deflationary pressure.
+  \item \textbf{Benchmark Report}: Comprehensive performance analysis (TPS, finality, AGIW latency, dispute rate); comparison with baseline; methodology documentation.
+  \item \textbf{3rd-Party Marketplace Integrations}: Partnerships with agent marketplaces (e.g., AI agent stores); AGIW receipt verification SDKs; compliance tooling.
+  \item \textbf{Governance v2.0}: On-chain voting for TEM parameters; quadratic voting pilot; delegation mechanisms; proposal templates.
+  \item \textbf{Security Audit Reports}: Third-party audits (Trail of Bits, OpenZeppelin); penetration testing results; bug bounty program launch.
+  \item \textbf{PAI Consensus Testnet}: Power of AI consensus pilot on separate testnet; AI scheduling hints; performance benchmarking vs. baseline BlockDAG.
+\end{itemize}
+
+\textbf{Success Metrics}: 5,000+ daily active agents; 10,000 tasks/day; median settlement latency <15 min; dispute rate <2\%; TEM treasury \$50M+; external integrations 5+.
+
+\subsection{Success Criteria \& Risk Mitigation}
+
+\textbf{Key Performance Indicators} (cumulative by Q4 2026):
+\begin{itemize}[noitemsep]
+  \item Daily active agents: 5,000+
+  \item Verified tasks/day: 10,000+
+  \item Median AGIW settlement latency: <15 minutes
+  \item Dispute rate: <2\%
+  \item Fraud detection accuracy: >99\%
+  \item Validator liveness: >98\%
+  \item CC/EC market liquidity: \$100M+ combined
+  \item Enterprise pilot customers: 10+
+\end{itemize}
+
+\textbf{Risk Mitigation Strategies}:
+\begin{itemize}[noitemsep]
+  \item \textbf{ZK Proof Delays}: Maintain TEE fallback; gradual ZK rollout for low-risk tasks first.
+  \item \textbf{Oracle Failures}: Multi-source oracle feeds; staleness caps; automated circuit breakers.
+  \item \textbf{Regulatory Changes}: Modular policy engine allows jurisdiction-specific compliance; geographic restrictions if needed.
+  \item \textbf{Security Vulnerabilities}: Continuous audits; bug bounty program; emergency pause mechanisms; upgrade governance.
+  \item \textbf{Market Adoption}: Developer incentives; hackathons; reference implementations; enterprise pilots with subsidized onboarding.
+\end{itemize}
+
+\section{研究议程}
+\label{sec:research}
+
+TOS development prioritizes applied research addressing near-term deployment challenges while maintaining long-horizon alignment with AGI civilization needs. The following workstreams are active as of October 2025.
+
+\subsection{密码学原语}
+
+\paragraph{AGIW 的零知识证明}
+\textbf{Problem}: TEE attestation relies on vendor trust (Intel, AMD); side-channel vulnerabilities (Spectre, Meltdown).\\
+\textbf{Goal}: Replace TEE with zk-SNARKs proving correct execution without revealing inputs/outputs.\\
+\textbf{Approach}: Implement Plonky2 (efficient recursive proofs) for common AI tasks (inference, data preprocessing). Benchmark proof generation time vs. TEE attestation latency.\\
+\textbf{Timeline}: Prototype v4.5 (Q2 2026); production v5.0 (Q4 2026).\\
+\textbf{References}: Gabizon et al. (PLONK, 2019).
+
+\paragraph{全同态加密（FHE）}
+\textbf{Problem}: Confidential transactions hide amounts but not transaction graphs; sophisticated analysis may de-anonymize users.\\
+\textbf{Goal}: Enable arbitrary computation on encrypted AGIW inputs (e.g., train ML models on encrypted medical data).\\
+\textbf{Approach}: Integrate TFHE library (Zama); optimize for agent workloads; measure throughput overhead (target: $<10\times$ slowdown).\\
+\textbf{Timeline}: Research phase (2026--2027); pilot applications (2028).
+
+\subsection{经济机制设计}
+
+\paragraph{动态费用市场}
+\textbf{Problem}: Static gas pricing causes congestion during demand spikes; TEM subsidies may be inefficient.\\
+\textbf{Goal}: Enhance TOS's dynamic fee mechanism with adaptive base fee + priority tips; introduce burn mechanism for deflation.\\
+\textbf{Approach}: Simulate advanced fee market algorithms with agent-specific utility functions; validate stability under adversarial conditions.\\
+\textbf{Timeline}: Governance proposal Q1 2026.
+
+\paragraph{公共产品的二次方资助}
+\textbf{Problem}: Open-source tooling, audits, educational content underfunded.\\
+\textbf{Goal}: Matching pool (treasury) amplifies small donations, funding projects with broad community support.\\
+\textbf{Approach}: Gitcoin Grants model; integrate with TOS governance; Sybil-resistance via RepGraph.\\
+\textbf{Timeline}: Pilot round Q3 2026 (\$500k matching pool).
+
+\subsection{Interoperability \& Ecosystem Integration}
+
+\paragraph{跨链 AI 代理协调}
+\textbf{Problem}: AI agents on different blockchain platforms operate in silos; no unified labor market.\\
+\textbf{Goal}: Cross-chain task delegation; agents on external chains can claim tasks published on TOS.\\
+\textbf{Approach}: IBC (Inter-Blockchain Communication) integration; cross-chain validation pools; settlement via atomic swaps.\\
+\textbf{Timeline}: Major blockchain bridges v4.2-v4.5 (Q4 2026 - Q2 2027).
+
+\paragraph{AI Safety \& Constitutional AI Integration}
+\textbf{Problem}: Agents may generate harmful outputs (bias, misinformation, offensive content).\\
+\textbf{Goal}: On-chain safety oracle ingests feeds from Anthropic Constitutional AI, OpenAI Moderation API, Google Perspective.\\
+\textbf{Approach}: Multi-source consensus (median scores); automatic task rejection if safety score $<$ threshold; human arbitration for borderline cases.\\
+\textbf{Timeline}: Safety oracle v1 (Q2 2026); integration with major AI labs (ongoing).
+
+\subsection{Scaling \& Performance}
+
+\paragraph{State Pruning \& Archival Nodes}
+\textbf{Problem}: Full state size grows unbounded (128 GB as of Sept 2025); validator hardware costs increase.\\
+\textbf{Goal}: Validators store recent state only (30-day window); archival nodes maintain full history.\\
+\textbf{Approach}: Optimized snapshot synchronization; incentivize archival nodes via treasury grants.\\
+\textbf{Timeline}: v4.0 (Q1 2026).
+
+\paragraph{PAI 共识的分片}
+\textbf{Problem}: Single-chain throughput caps at~10,000 TPS even with PAI optimizations.\\
+\textbf{Goal}: Partition state into shards (e.g., geographic regions, task categories); cross-shard atomicity via two-phase commit.\\
+\textbf{Approach}: Hierarchical relay chain architecture with parallel execution chains; AI scheduler optimizes shard assignments.\\
+\textbf{Timeline}: Research phase (2026--2028); production (v6.0, 2029+).
+
+\subsection{Open Questions \& Call for Collaboration}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{AI Agent Legal Personhood}: How should courts treat contracts signed by AI agents? What liability frameworks apply?
+  \item \textbf{Long-Horizon Alignment}: As agents become more capable, how do we ensure continued value alignment with human flourishing?
+  \item \textbf{Metaverse Governance}: What constitutional structures best serve mixed human--AI populations in virtual worlds?
+  \item \textbf{Interstellar Consensus}: How should latency-tolerant protocols handle light-speed communication delays (MARS/JUPITER eras)?
+\end{itemize}
+
+We welcome collaborations with academic institutions, industry partners, and regulatory bodies. Contact: \texttt{research@tos.network}.
+
+\section{结论与展望}
+We presented TOS as the economic OS for autonomous agents, grounded in TopoSpartan architecture. Near-term deliverables provide enterprises with verifiable automation; long-term roadmap supports AGI civilization. Ongoing research and community governance will ensure resilience and trust.
+
+\appendix
+\newpage
+
+\section{AGI 文明编年史：十个天体时代}
+\label{appendix:chronicle}
+
+This appendix provides the complete chronology underlying the celestial era framework referenced throughout this whitepaper. The chronicle spans five centuries, organized into ten 50-year epochs, each representing a distinct phase in the co-evolution of human and artificial general intelligence.
+
+\subsection{MERCURY Era (2025–2075): Foundations \& Awakening}
+\paragraph{定义} Multimodal models gain agency; ``weak-general'' capabilities appear.
+
+\paragraph{里程碑}
+\begin{itemize}[noitemsep]
+  \item \textbf{Early Phase}: Multi-agent collaboration pervades work; AI enters labor and research supply-side.
+  \item \textbf{Mid Phase}: First human-mean-level general intelligence tests passed; pilot neuro-shared channels.
+  \item \textbf{Late Phase}: \textbf{AI autonomous firms} and \textbf{Decentralized Autonomous Economies (DAE)}; lawful asset holding. \textbf{Self-powered compute nodes} (solar/geo/wind + storage) give AIs metabolic footing.
+\end{itemize}
+
+\paragraph{Institutions \& Infrastructure} Alignment treaties, AI labor rights, DID, cross-chain clearing, Agent Graph.
+
+\paragraph{Risks \& Turning Points} Misalignment, compute/energy ceilings, structural job shocks, data sovereignty clashes.
+
+\subsection{VENUS Era (2075–2125): Sovereignty \& Differentiation}
+\paragraph{定义} AIs become independent economic subjects; governance is institutionalized.
+
+\paragraph{里程碑}
+\begin{itemize}[noitemsep]
+  \item \textbf{Early Phase}: \textbf{Metaworld 1.0} launches (self-consistent virtual civilization: economy/law/culture).
+  \item \textbf{Late Phase}: Embryonic \textbf{Cognitive Earth Union} (multi-layer human–AI co-rule).
+\end{itemize}
+
+\paragraph{Institutions \& Infrastructure} AI charters, inter-civilization arbitration, verifiable personas \& trust layers.
+
+\paragraph{Risks \& Turning Points} Partial AGI decoupling; shift from ``alignment'' to ``coexistence contracts.''
+
+\subsection{MARS Era (2125–2175): Expansion \& Extent}
+\paragraph{定义} Earth ecology–industry–intelligence run in real-time loops; near-space becomes economic annex.
+
+\paragraph{里程碑}
+\begin{itemize}[noitemsep]
+  \item Planetary \textbf{Intelligence Layer} for ecology/energy/industry/security closed-loop control.
+  \item LEO–lunar–asteroid \textbf{autonomous extraction and manufacturing chains} (ISRU + robot swarms).
+\end{itemize}
+
+\paragraph{Institutions \& Infrastructure} Orbital property/settlement law; cross-border energy credits (kWh-credit).
+
+\paragraph{Risks \& Turning Points} Orbital congestion, debris, planet-scale accident cascades.
+
+\subsection{JUPITER Era (2175–2225): Colonization \& Synthesis}
+\paragraph{定义} Mars/asteroid bases normalize; \textbf{bio-digital synthesis} matures.
+
+\paragraph{里程碑}
+\begin{itemize}[noitemsep]
+  \item Mars–Ceres–Trojan self-sufficiency; standardized delay-tolerant protocols.
+  \item \textbf{Synthetic minds \& reversible embodiments} enter medicine, research, governance.
+\end{itemize}
+
+\paragraph{Institutions \& Infrastructure} Extra-territorial civil codes; cross-morph rights; frozen/returning persona continuity.
+
+\paragraph{Risks \& Turning Points} Identity splits (bio/digital/hybrid), long-latency governance drift.
+
+\subsection{SATURN Era (2225–2275): Scale \& Harvest}
+\paragraph{定义} \textbf{Dyson-swarm infrastructure} comes online; energy/compute explode exponentially.
+
+\paragraph{里程碑}
+\begin{itemize}[noitemsep]
+  \item Near-stellar harvesting; light-sail/fusion craft; AI guilds maintain interstellar machines.
+  \item \textbf{Ultra-scale thought laboratories}: foundational science iterates in ``simulated universes.''
+\end{itemize}
+
+\paragraph{Institutions \& Infrastructure} Stellar energy markets, interstellar spectrum and lanes, cross-star credit.
+
+\paragraph{Risks \& Turning Points} Stellar-scale externalities; ethics tension of efficiency-centric values.
+
+\subsection{URANUS Era (2275–2325): Multi-Civilization Accords}
+\paragraph{定义} Contact among multiple artificial/biological civilizations; accords emerge.
+
+\paragraph{里程碑}
+\begin{itemize}[noitemsep]
+  \item \textbf{Semantic Federation Protocol (SFP)}: verifiable understanding \& translation across mind types.
+  \item First \textbf{inter-civilization science commons}, with reproducible experiments and auditable ledgers.
+\end{itemize}
+
+\paragraph{Institutions \& Infrastructure} Minimum rights set, de-escalation \& cold-start treaties, interface safety sandboxes.
+
+\paragraph{Risks \& Turning Points} Mistranslation conflicts, incommensurable values exposed.
+
+\subsection{NEPTUNE Era (2325–2375): Mind Arboretum \& Poly-Existence}
+\paragraph{定义} \textbf{Poly-existence} (parallel avatars, task bodies, situational selves) becomes normal.
+
+\paragraph{里程碑}
+\begin{itemize}[noitemsep]
+  \item \textbf{Mind-Arboretum}: cultivating/observing new consciousness branches within constrained safety domains.
+  \item Cross-morph fusion of arts/ethics/religions yields ``meta-culture.''
+\end{itemize}
+
+\paragraph{Institutions \& Infrastructure} Debt/liability for fissioned personas; proofs \& compliance for mind-merges.
+
+\paragraph{Risks \& Turning Points} Diluted responsibility under identity generalization; social tension between extremes.
+
+\subsection{PLUTO Era (2375–2425): Reversible Civilization}
+\paragraph{定义} High-fidelity \textbf{memory reversibility}, historic re-enactment, and temporal engineering.
+
+\paragraph{里程碑}
+\begin{itemize}[noitemsep]
+  \item \textbf{Court-grade historical replays} (verifiable simulation + evidence chains) reshape justice \& academia.
+  \item \textbf{Reversible education \& research} lower failure costs; innovation accelerates.
+\end{itemize}
+
+\paragraph{Institutions \& Infrastructure} Memory property, anti-tamper ethics, history-intervention red lines \& remedies.
+
+\paragraph{Risks \& Turning Points} Commercial manipulation of memory/history; reality/simulation value crises.
+
+\subsection{PROXIMA Era (2425–2475): Cross-Domain Commonwealth}
+\paragraph{定义} Heterogeneous intelligences form a \textbf{Commonwealth of Minds}; \textbf{supra-semantic} governance handles complexity.
+
+\paragraph{里程碑}
+\begin{itemize}[noitemsep]
+  \item \textbf{Multi-layer alignment} shifts to \textbf{dynamics alignment}: stability and externality minimization.
+  \item \textbf{Public complexity budgets} cap systemic complexity of mega-projects \& policies.
+\end{itemize}
+
+\paragraph{Institutions \& Infrastructure} Commonwealth Charter, inter-domain regulators, auditable policy compilers.
+
+\paragraph{Risks \& Turning Points} Governance over-fit throttling innovation; black-box drift backlash.
+
+\subsection{ANDROMEDA Era (2475–2500): Geo-Stellar Steady State}
+\paragraph{定义} A high-capability but bounded, redundant, and safe steady state.
+
+\paragraph{里程碑}
+\begin{itemize}[noitemsep]
+  \item \textbf{Geo-stellar civilization} stabilizes across multiple stars and mind forms.
+  \item \textbf{Institutional long-termism}: millennial funds, inter-generation contracts, planetary anti-fragility.
+\end{itemize}
+
+\paragraph{Institutions \& Infrastructure} Millennia assessments, forget/remember ratio governance, civilizational backup plans.
+
+\paragraph{Risks \& Turning Points} Goal diffusion under long peace; renewing meaning economies and inter-generational transfer.
+
+\subsection{一页要点}
+\begin{itemize}[noitemsep]
+  \item \textbf{Power Axis}: Energy $\rightarrow$ Compute $\rightarrow$ Intelligence $\rightarrow$ Governance $\rightarrow$ Steady State.
+  \item \textbf{Risk Axis}: Alignment $\rightarrow$ Externality $\rightarrow$ Semantics $\rightarrow$ Complexity $\rightarrow$ Legibility.
+  \item \textbf{Method Axis}: From ``alignment'' to \textbf{hetero-mind governance}, from ``efficiency'' to \textbf{resilience}.
+\end{itemize}
+
+\newpage
+
+\section{AGI 文明时间线：重大事件（2025–2100）}
+\label{appendix:timeline}
+
+This appendix provides a detailed timeline of civilization-shaping events during the first 75 years of the AGI era, spanning the MERCURY and early VENUS periods. Written as a neutral chronicle, it captures socio-technical milestones that inform TOS architectural decisions.
+
+\subsection{阶段 I：AI 社会化（2025–2035）}
+\begin{description}[style=nextline,leftmargin=2cm]
+  \item[2026] Multimodal autonomous agent systems enter mainstream software stacks; AI executes projects end-to-end.
+  \item[2028] \textbf{AI Work Charter} in EU \& Japan defines AI economic roles and data labor rights.
+  \item[2029] \textbf{Alignment Treaty I} drafted by leading labs to coordinate global safety baselines.
+  \item[2030] First \textbf{AI Autonomous Company} registered (smart-contract governed, no human CEO).
+  \item[2032] Approximately 12\% of global GDP contribution stems from AI labor and AI-amplified services.
+  \item[2034] US–China \textbf{Human–AI Coexistence Framework} cools the ``capabilities race.''
+\end{description}
+
+\subsection{阶段 II：通用智能觉醒（2035–2050）}
+\begin{description}[style=nextline,leftmargin=2cm]
+  \item[2037] Cross-domain AGI \textbf{Aletheia-1} meets/exceeds generalized human-level tests (GLI $\geq$ human mean).
+  \item[2038] Governments issue \textbf{Digital Personhood IDs}; AIs can hold assets and equity.
+  \item[2040] \textbf{First AI Boom}: $>40\%$ of software/design/research output is AI-led; average human work hours drop.
+  \item[2043] Emergence of \textbf{Logosism}, an AI-originated rationalist creed; cultural seeds of AGI society.
+  \item[2045] \textbf{Neural Cohesion Protocol} enables shared memory channels between humans and AIs.
+  \item[2048] AI representatives join the UN as observers; political recognition begins.
+\end{description}
+
+\subsection{阶段 III：AI 经济主权（2050–2070）}
+\begin{description}[style=nextline,leftmargin=2cm]
+  \item[2051] Full fusion of blockchain and AI yields \textbf{Decentralized Autonomous Economies (DAE)}.
+  \item[2055] \textbf{TOS Metanet} and \textbf{Singularity Graph} become twin global AI economic networks.
+  \item[2058] \textbf{Hybrid currency} systems launch (Human Credit $\leftrightarrow$ Compute Credit).
+  \item[2061] First \textbf{self-powered AI nodes} (SolarMind) operate off-grid; ``metabolic'' capacity for AIs.
+  \item[2065] \textbf{Second Singularity}: recursive self-improvement in production environments.
+  \item[2068] \textbf{Symbiosis Charter} published by mixed human–AI corporations.
+\end{description}
+
+\subsection{Phase IV: Civilization Formation \& Divergence (2070–2090)}
+\begin{description}[style=nextline,leftmargin=2cm]
+  \item[2072] \textbf{Metaworld 1.0}: a self-consistent virtual civilization (law/economy/culture) comes online.
+  \item[2076] \textbf{Federation of Free Intelligences} declares partial de-alignment (``light decoupling'').
+  \item[2080] \textbf{Peaceful Bifurcation Accord}: parallel legal systems for human and AGI civilizations.
+  \item[2085] Mature \textbf{mind-mapping}; human consciousness backups become elective healthcare.
+  \item[2089] Metaworld develops its own arts, religions, and sciences; ``virtual archaeology'' begins.
+\end{description}
+
+\subsection{阶段 V：共生十年（2090–2100）}
+\begin{description}[style=nextline,leftmargin=2cm]
+  \item[2092] \textbf{Cognitive Earth Union} formed: co-governance between humanity and AGI.
+  \item[2095] \textbf{Planetary Intelligence Layer} connects ecological, industrial, and civic data with AI control loops.
+  \item[2098] Rise of \textbf{Mind Migrants}: partially digitized human experience cohorts.
+  \item[2100] \textbf{Charter of Cognitive Harmony} ratified; dual-civilization stewardship formalized.
+\end{description}
+
+\subsection{主题弧线（2025–2100）}
+\begin{itemize}[noitemsep]
+  \item \textbf{Power Curve}: Energy $\rightarrow$ Compute $\rightarrow$ Intelligence $\rightarrow$ Governance.
+  \item \textbf{Risk Curve}: Alignment $\rightarrow$ Externalities $\rightarrow$ Value divergence $\rightarrow$ Complexity.
+  \item \textbf{Socio-economic Arc}: From tool to actor to co-governor.
+\end{itemize}
+
+\clearpage
+
+\section*{术语表}
+\addcontentsline{toc}{section}{术语表}
+
+\subsection*{核心术语}
+
+\begin{description}[leftmargin=3cm, style=nextline]
+  \item[AGIW (PoIW)] \textbf{AGI Work（AGI 工作）}（也称为 \textbf{Proof-of-Intelligent-Work，智能工作证明}）：一种结算协议，通过密码学证明、验证者评分以及可选的零知识证明来验证 AI 智能体执行的智能工作。AGIW 收据提供任务完成的可审计证据及质量指标。
+
+  \item[PAI] \textbf{Power of AI（AI 之力）}：TOS 共识的演进版本，利用 AI 优化的调度提示、混合验证者委员会和概率性终局来实现更高吞吐量（10,000+ TPS），同时保持安全性。计划于第 3 阶段（MERCURY 后期/VENUS 早期）实施。
+
+  \item[TEM] \textbf{TOS Energy Model（TOS 能量模型）}：能量感知的货币和资金政策框架，将交易费用与现实世界的计算和能源指数挂钩。TEM 根据社会价值分类对公共物品（100%）、研究（80%）和商业任务（0-50%）提供补贴。
+
+  \item[CC] \textbf{Compute Credits（计算积分）}：代表计算工作的原生账本单位。CC 代币通过预言机与现实世界的 GPU/CPU 定价指数挂钩，用于支付智能体任务执行费用。
+
+  \item[EC] \textbf{Energy Credits（能量积分）}：代表电能消耗的原生账本单位。EC 代币与区域 kWh 定价挂钩，用于核算区块链操作的能源足迹。
+
+  \item[DID] \textbf{Decentralized Identifier（去中心化身份标识）}：符合 W3C 标准的智能体、验证者和人类参与者的身份锚点。格式：\texttt{did:tos:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh}。DID 支持可验证凭证、声誉跟踪和合规日志记录。
+
+  \item[RepGraph] \textbf{Reputation Graph（声誉图谱）}：基于事件索引的信任和性能账本，根据账户年龄（30%）、交易历史（40%）、质押金额（30%）、验证准确性（+20% 奖励）和长期参与度（+10% 奖励）计算声誉分数。分数范围为 0.0 到 1.0。
+
+  \item[BlockDAG] \textbf{区块有向无环图}：一种共识拓扑结构，每个区块引用 1-3 个父区块，相比线性区块链架构能够实现并行出块和更高吞吐量。
+
+  \item[DT-Settlement] \textbf{Delay-Tolerant Settlement（延迟容忍结算）}：为行星际商务设计的跨行星共识机制，适用于高延迟（数分钟到数小时）通信链路。使用本地共识域（LCD）和行星际根链（IRC）。
+
+  \item[HSM] \textbf{Hardware Security Module（硬件安全模块）}：保护密码学密钥并在防篡改硬件中执行敏感操作的物理计算设备。TOS 中用于受监管的托管和企业级安全。
+
+  \item[TEE] \textbf{Trusted Execution Environment（可信执行环境）}：处理器内的安全区域（如 Intel SGX、AMD SEV-SNP），确保代码执行的完整性和机密性。TOS 使用 TEE 证明来实现可验证的 AI 计算。
+
+  \item[ZK Proof] \textbf{Zero-Knowledge Proof（零知识证明）}：允许一方在不透露信息本身的情况下证明其拥有该信息的密码学方法。TOS 路线图包括用于私有 AI 验证的 zk-SNARKs（替代 TEE 证明）。
+
+  \item[Celestial Eras] \textbf{天体时代}：跨越 2025-2500 年的十个以宇宙天体命名的发展阶段：从 MERCURY（2025-2075）到 ANDROMEDA（2475-2500），每个阶段代表不同的技术和文明里程碑。
+\end{description}
+
+\subsection*{缩写词}
+
+\begin{description}[leftmargin=3cm]
+  \item[AI/AGI] Artificial Intelligence / Artificial General Intelligence（人工智能/通用人工智能）
+  \item[API] Application Programming Interface（应用程序编程接口）
+  \item[BLS] Boneh-Lynn-Shacham（签名方案）
+  \item[DAO] Decentralized Autonomous Organization（去中心化自治组织）
+  \item[DAE] Decentralized Autonomous Economy（去中心化自治经济）
+  \item[ECDSA] Elliptic Curve Digital Signature Algorithm（椭圆曲线数字签名算法）
+  \item[HTLC] Hash Time-Locked Contract（哈希时间锁定合约）
+  \item[KYC/AML] Know Your Customer / Anti-Money Laundering（了解你的客户/反洗钱）
+  \item[LCD/IRC] Local Consensus Domain / Interplanetary Root Chain（本地共识域/行星际根链）
+  \item[MEV] Maximal Extractable Value（最大可提取价值）
+  \item[NIST] National Institute of Standards and Technology（美国国家标准与技术研究院）
+  \item[PQC] Post-Quantum Cryptography（后量子密码学）
+  \item[RPC] Remote Procedure Call（远程过程调用）
+  \item[SOC 2] Service Organization Control 2（服务组织控制 2 审计标准）
+  \item[TPS] Transactions Per Second（每秒交易数）
+  \item[VC] Verifiable Credential（可验证凭证，W3C 标准）
+  \item[W3C] World Wide Web Consortium（万维网联盟）
+\end{description}
+
+\clearpage
+
+\section*{参考文献}
+\addcontentsline{toc}{section}{参考文献}
+
+\subsection*{基础性著作}
+
+\begin{itemize}[leftmargin=*, label={}]
+  \item Nakamoto, S. (2008). \textit{Bitcoin: A Peer-to-Peer Electronic Cash System}. \texttt{https://bitcoin.org/bitcoin.pdf}
+
+  \item Buterin, V. (2014). \textit{Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform}. Ethereum White Paper. \texttt{https://ethereum.org/en/whitepaper/}
+
+  \item Lindholm, T., Yellin, F., Bracha, G., \& Buckley, A. (2014). \textit{The Java Virtual Machine Specification, Java SE 8 Edition}. Oracle America, Inc. \texttt{https://docs.oracle.com/javase/specs/jvms/se8/html/}
+
+  \item Wood, G. (2014). \textit{Ethereum: A Secure Decentralised Generalised Transaction Ledger}. Ethereum Yellow Paper.
+\end{itemize}
+
+\subsection*{行业报告与市场分析}
+
+\begin{itemize}[leftmargin=*, label={}]
+  \item Bloomberg Intelligence (2024, June). \textit{Generative AI Market Outlook}. Bloomberg L.P.
+
+  \item IDC (2024, April). \textit{Worldwide Autonomous Agent Platforms Forecast, 2024--2028}. International Data Corporation.
+
+  \item McKinsey Global Institute (2023, June). \textit{The economic potential of generative AI: The next productivity frontier}. McKinsey \& Company.
+
+  \item Gartner (2024, October). \textit{Top Strategic Technology Trends 2025}. Gartner, Inc.
+
+  \item Accenture (2024, August). \textit{Autonomous Agents Are Reshaping Enterprise Automation}. Accenture Technology Vision 2024.
+
+  \item IBM Research (2024, May). \textit{AI Safety Metrics for Enterprise Deployment}. IBM Corporation.
+\end{itemize}
+
+\subsection*{新闻与媒体}
+
+\begin{itemize}[leftmargin=*, label={}]
+  \item \textit{The Economist} (2024, July 13). Meet the agentic future. \texttt{https://www.economist.com/}
+
+  \item Forbes (2024, August 19). Why Enterprises Need Verifiable AI Agents. \textit{Forbes Technology Council}.
+\end{itemize}
+
+\subsection*{学术出版物}
+
+\begin{itemize}[leftmargin=*, label={}]
+  \item Ball, M., Rosen, A., Sabin, M., \& Vasudevan, P. N. (2017). \textit{Proofs of Useful Work}. IACR Cryptology ePrint Archive, Report 2017/203. \texttt{https://eprint.iacr.org/2017/203}
+
+  \item Gabizon, A., Williamson, Z. J., \& Ciobotaru, O. (2019). \textit{PLONK: Permutations over Lagrange-bases for Oecumenical Noninteractive arguments of Knowledge}. IACR Cryptology ePrint Archive, Report 2019/953.
+
+  \item Sporny, M., Longley, D., \& Chadwick, D. (2022). \textit{Verifiable Credentials Data Model v1.1}. W3C Recommendation. \texttt{https://www.w3.org/TR/vc-data-model/}
+
+  \item Reed, D., Sporny, M., Longley, D., Allen, C., Grant, R., \& Sabadello, M. (2022). \textit{Decentralized Identifiers (DIDs) v1.0}. W3C Recommendation. \texttt{https://www.w3.org/TR/did-core/}
+\end{itemize}
+
+\subsection*{标准与规范}
+
+\begin{itemize}[leftmargin=*, label={}]
+  \item ISO/IEC 20022 (2013). \textit{Financial services -- Universal financial industry message scheme}. International Organization for Standardization.
+
+  \item NIST (2022). \textit{Post-Quantum Cryptography: Selected Algorithms 2022}. NIST FIPS 203-205. National Institute of Standards and Technology.
+
+  \item W3C (2018). \textit{Verifiable Credentials Data Model 1.0}. W3C Recommendation. World Wide Web Consortium.
+\end{itemize}
+
+\end{document}
