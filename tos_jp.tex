@@ -345,51 +345,51 @@ TOSネットワークは4つの主要レイヤーと複数の横断的サービ�
 \subsection{戦略的コンテキスト}
 初期のMERCURY紀元では、自律エージェントが研究プロトタイプから生産展開へと移行する。業界予測は急速な採用を予測している：新しいアプリケーションの30\%が自律エージェントを採用し、エージェントプラットフォームへの支出は1,200億ドルを超える。\footnote{Gartner, ``Top Strategic Technology Trends 2025,'' October 2024; IDC, ``Worldwide Autonomous Agent Platforms Forecast,'' April 2024.} 保険、バイオテクノロジー、ゲーム企業とのパイロット実施は、検証可能な自動化への即座の需要を明らかにしている。したがって、MERCURY紀元はアイデンティティ、決済、リソーストークン、およびスタックを証明するデモンストレーションを重視する。
 
-\subsection{Deliverables for the Next 12--18 Months}
+\subsection{今後12--18ヶ月の成果物}
 \begin{enumerate}[label=\textbf{D\arabic*.}, leftmargin=*]
-  \item \textbf{Digital Personhood Stack v1}
+  \item \textbf{デジタル人格スタック v1}
   \begin{itemize}[noitemsep]
-    \item DID anchors implemented via BLS signatures, issuing DID documents stored on-chain with service endpoints.
-    \item Credential registry storing verifiable credentials (VCs) referencing educational certificates, compliance attestations, or skill badges; revocation handled via Merkleised status lists.
-    \item Confidential balances with Pedersen commitments and Bulletproof range proofs; wallet libraries enabling shielded transfers.
+    \item BLS署名を介して実装されたDIDアンカー、サービスエンドポイント付きでオンチェーンに格納されるDIDドキュメントの発行。
+    \item 教育証明書、コンプライアンス証明、またはスキルバッジを参照する検証可能クレデンシャル（VC）を格納するクレデンシャルレジストリ；失効はマークル化ステータスリストを介して処理。
+    \item PedersenコミットメントとBulletproof range proofsを使用した機密残高；シールドされた転送を可能にするウォレットライブラリ。
   \end{itemize}
   \item \textbf{AGI Work (AGIW) v1}
   \begin{itemize}[noitemsep]
-    \item Task Factory and Task Instance contracts manage metadata, escrow, deadlines, and allowed agent cohorts.
-    \item Attestation integration with Intel SGX, AMD SEV-SNP, and ARM Realm; attestation bundles hashed on-chain.
-    \item Validation Pool contract tracks validator accuracy via exponential moving averages; misreporting triggers slashing.
-    \item Reward Splitter contract deterministically distributes CC/EC to agents, validators, and the network treasury.
+    \item タスクファクトリーおよびタスクインスタンス契約がメタデータ、エスクロー、期限、許可されたエージェントコホートを管理。
+    \item Intel SGX、AMD SEV-SNP、ARM Realmとの証明統合；証明バンドルはオンチェーンでハッシュ化。
+    \item 検証プール契約が指数移動平均を介してバリデーターの精度を追跡；誤報告はスラッシングをトリガー。
+    \item 報酬スプリッター契約がエージェント、バリデーター、ネットワークトレジャリーにCC/ECを決定論的に分配。
   \end{itemize}
-  \item \textbf{Compute/Energy Credits}
+  \item \textbf{計算資源/エネルギークレジット}
   \begin{itemize}[noitemsep]
-    \item CC tokens denominated in TFLOPs; EC tokens denominated in kWh. Both minted based on oracle data from leading cloud providers and energy markets.
-    \item Paymaster contract allows agents to pay gas fees in CC/EC; TEM subsidises fees for high-impact tasks (e.g., safety analyses).
+    \item CCトークンはTFLOPs建て；ECトークンはkWh建て。両方とも主要クラウドプロバイダーおよびエネルギー市場からのオラクルデータに基づいて鋳造。
+    \item ペイマスター契約により、エージェントはCC/ECでガス手数料を支払うことが可能；TEMは影響力の大きいタスク（例：安全性分析）の手数料を助成。
   \end{itemize}
-  \item \textbf{Agent Task Market Demo}
+  \item \textbf{エージェントタスクマーケットデモ}
   \begin{itemize}[noitemsep]
-    \item End-to-end demonstration covering identity issuance, task creation, AGIW settlement, dispute resolution, and reputation updates.
-    \item Explorer sections for Agents, Tasks, Receipts, Reputation, Safety with real-time telemetry.
-    \item SDKs in Rust, Python, TypeScript; Terraform modules for enterprise deployments.
+    \item アイデンティティ発行、タスク作成、AGIW決済、紛争解決、評判更新をカバーするエンドツーエンドのデモンストレーション。
+    \item リアルタイムテレメトリを備えたエージェント、タスク、レシート、評判、安全性のためのExplorerセクション。
+    \item Rust、Python、TypeScriptのSDK；企業展開のためのTerraformモジュール。
   \end{itemize}
 \end{enumerate}
 
-\subsection{Key Performance Indicators}
+\subsection{主要業績評価指標}
 \begin{longtable}{@{}p{0.26\textwidth}p{0.26\textwidth}p{0.36\textwidth}@{}}
 \toprule
-\textbf{Metric} & \textbf{Target (12 mo)} & \textbf{Instrumentation} \\\midrule
-Daily active agent wallets & 5,000 & DID registry, telemetry dashboard, paymaster logs \\
-Verified tasks per day & 10,000 & AGIW receipts, validation events, arbitration analytics \\
-Median settlement latency & $<$ 15 minutes & On-chain timestamps, receipt indexing \\
-Dispute rate & $<$ 2\% & Arbitration contract statistics \\
-Fee subsidy via CC/EC & $>$ 60\% & TEM analytics (issuance, redemption) \\
-Task completion cost & 60--80\% lower vs manual contractors & Pilot comparisons with human workflows \\
-Compliance readiness & SOC 2-style audit package & Compliance API logs, proof-of-access records \\
+\textbf{メトリック} & \textbf{目標（12ヶ月）} & \textbf{計測方法} \\\midrule
+1日あたりのアクティブエージェントウォレット数 & 5,000 & DIDレジストリ、テレメトリダッシュボード、ペイマスターログ \\
+1日あたりの検証済みタスク数 & 10,000 & AGIWレシート、検証イベント、仲裁分析 \\
+決済レイテンシの中央値 & $<$ 15分 & オンチェーンタイムスタンプ、レシートインデックス化 \\
+紛争発生率 & $<$ 2\% & 仲裁契約統計 \\
+CC/ECによる手数料助成 & $>$ 60\% & TEM分析（発行、償還） \\
+タスク完了コスト & 手作業請負業者比60--80\%削減 & 人間ワークフローとのパイロット比較 \\
+コンプライアンス準備 & SOC 2スタイル監査パッケージ & コンプライアンスAPIログ、アクセス証明記録 \\
 \bottomrule
 \end{longtable}
 
-\subsection{Identity Services (Product Specification)}
+\subsection{アイデンティティサービス（製品仕様）}
 \label{sec:identity-spec}
-\paragraph{DID Registry Implementation} The DID registry is a Solidity smart contract (\texttt{DIDRegistry.sol}) with the following interface:
+\paragraph{DIDレジストリ実装} DIDレジストリは以下のインターフェースを持つSolidityスマートコントラクト（\texttt{DIDRegistry.sol}）である：
 \begin{verbatim}
 function registerDID(bytes32 didHash, bytes calldata didDocument,
                      bytes calldata signature) external;
@@ -399,16 +399,16 @@ function revokeDID(bytes32 didHash, bytes calldata signature) external;
 function resolveDID(bytes32 didHash) external view
     returns (bytes memory didDocument);
 \end{verbatim}
-DID documents conform to W3C DID Core specification (v1.0). Each document includes:
+DIDドキュメントはW3C DID Core仕様（v1.0）に準拠する。各ドキュメントには以下が含まれる：
 \begin{itemize}[noitemsep]
-  \item \texttt{id}: Unique identifier (e.g., \texttt{did:tos:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xhyepcg...})
-  \item \texttt{verificationMethod}: Public keys for authentication, assertion
-  \item \texttt{service}: Endpoints for messaging, data storage, API access
-  \item \texttt{created}, \texttt{updated}: Timestamps for audit trails
+  \item \texttt{id}：一意の識別子（例：\texttt{did:tos:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xhyepcg...}）
+  \item \texttt{verificationMethod}：認証、アサーション用の公開鍵
+  \item \texttt{service}：メッセージング、データストレージ、APIアクセス用のエンドポイント
+  \item \texttt{created}、\texttt{updated}：監査証跡のためのタイムスタンプ
 \end{itemize}
-Gas cost: approximately 80,000 gas for registration (\$0.50 at 50~gwei, \$2,000 TOS), amortized over agent lifecycle.
+ガスコスト：登録に約80,000ガス（50~gwei、\$2,000 TOSで\$0.50）、エージェントのライフサイクル全体で償却。
 
-\paragraph{Verifiable Credentials} Credential issuance follows the W3C VC Data Model (v1.1). Issuers sign JSON-LD documents containing:
+\paragraph{検証可能クレデンシャル} クレデンシャル発行はW3C VCデータモデル（v1.1）に従う。発行者は以下を含むJSON-LDドキュメントに署名する：
 \begin{verbatim}
 {
   "@context": ["https://www.w3.org/2018/credentials/v1"],
@@ -430,44 +430,44 @@ Gas cost: approximately 80,000 gas for registration (\$0.50 at 50~gwei, \$2,000 
   }
 }
 \end{verbatim}
-Storage: VCs reside off-chain (IPFS, Arweave); on-chain anchors store content hashes (32 bytes). Verification requires fetching the VC, checking the issuer signature, and querying the revocation registry.
+ストレージ：VCはオフチェーン（IPFS、Arweave）に存在；オンチェーンアンカーはコンテンツハッシュ（32バイト）を格納。検証にはVCの取得、発行者署名のチェック、失効レジストリへのクエリが必要。
 
-\paragraph{Revocation Registry} Implements sparse Merkle trees with 2$^{256}$ leaf capacity. Issuers publish tree roots on-chain monthly; revoked credential IDs occupy leaves. Agents produce Merkle proofs demonstrating their credential ID is absent from the tree (non-revocation proof). This approach scales to millions of credentials per issuer without revealing the full list. Gas cost: 50,000 gas per root update (\$0.30 per issuer per month).
+\paragraph{失効レジストリ} 2$^{256}$リーフ容量を持つスパースマークルツリーを実装。発行者は月次でツリールートをオンチェーンに公開；失効したクレデンシャルIDがリーフを占有。エージェントは自身のクレデンシャルIDがツリーに存在しないことを実証するマークル証明（非失効証明）を生成。このアプローチは完全なリストを明らかにすることなく、発行者ごとに数百万のクレデンシャルにスケール。ガスコスト：ルート更新ごとに50,000ガス（発行者あたり月\$0.30）。
 
-\paragraph{Confidential Transactions} Built on Pedersen commitments:
+\paragraph{機密トランザクション} Pedersenコミットメントに基づいて構築：
 \begin{equation}
 C(v, r) = vG + rH
 \end{equation}
-where $v$ is the value (amount), $r$ is the blinding factor, $G$ and $H$ are elliptic curve generators. Commitments are additively homomorphic: $C(v_1, r_1) + C(v_2, r_2) = C(v_1 + v_2, r_1 + r_2)$, enabling validators to verify balance without learning amounts. Bulletproof range proofs ensure $v \in [0, 2^{64})$, preventing negative balances. Proof size: 672 bytes for single output, logarithmic growth for batch proofs. Verification cost: approximately 1.2~ms per proof on commodity hardware. This feature is optional; agents opt in via \texttt{enableConfidentialMode()} transaction.
+ここで$v$は値（金額）、$r$はブラインディング因子、$G$と$H$は楕円曲線生成元。コミットメントは加法準同型性を持つ：$C(v_1, r_1) + C(v_2, r_2) = C(v_1 + v_2, r_1 + r_2)$、これによりバリデーターは金額を学習することなく残高を検証可能。Bulletproof range proofsは$v \in [0, 2^{64})$を保証し、負の残高を防ぐ。証明サイズ：単一出力で672バイト、バッチ証明では対数的成長。検証コスト：汎用ハードウェアで証明あたり約1.2~ms。この機能はオプション；エージェントは\texttt{enableConfidentialMode()}トランザクションを介してオプトイン。
 
-\subsection{AGIW Smart Contracts (Detailed Specification)}
+\subsection{AGIWスマートコントラクト（詳細仕様）}
 \label{sec:agiw-contracts}
-The AGIW lifecycle relies on four core contracts with precise economic and security properties:
+AGIWライフサイクルは、正確な経済的およびセキュリティ特性を持つ4つのコア契約に依存する：
 
-\paragraph{1. TaskFactory Contract} (\texttt{TaskFactory.sol})\\
-\textbf{Purpose}: Factory pattern for deploying individual task instances with standardised interfaces and security constraints.\\
-\textbf{Key Functions}:
+\paragraph{1. TaskFactory契約} (\texttt{TaskFactory.sol})\\
+\textbf{目的}：標準化されたインターフェースとセキュリティ制約を持つ個別タスクインスタンスを展開するためのファクトリーパターン。\\
+\textbf{主要機能}：
 \begin{itemize}[noitemsep]
-  \item \texttt{publishTask(metadata, escrow, deadline, allowedAgents)}: Deploys a new TaskInstance, transfers escrow to contract, collects 0.01 TOS publishing fee, emits \texttt{TaskPublished} event. Returns task ID.
-  \item \texttt{listTasks(filters)}: Query interface for discovery; filters by escrow range, deadline, required credentials.
-  \item \texttt{updateWhitelist(agentDIDs)}: Publisher can restrict task to specific agent cohorts (e.g., KYC-verified, reputation $>0.7$).
+  \item \texttt{publishTask(metadata, escrow, deadline, allowedAgents)}：新しいTaskInstanceを展開、エスクローを契約に転送、0.01 TOSの公開手数料を徴収、\texttt{TaskPublished}イベントを発行。タスクIDを返す。
+  \item \texttt{listTasks(filters)}：発見のためのクエリインターフェース；エスクロー範囲、期限、必要なクレデンシャルでフィルタリング。
+  \item \texttt{updateWhitelist(agentDIDs)}：公開者は特定のエージェントコホートにタスクを制限可能（例：KYC検証済み、評判$>0.7$）。
 \end{itemize}
-\textbf{Economic Parameters}:
+\textbf{経済パラメータ}：
 \begin{itemize}[noitemsep]
-  \item Publishing fee: 0.01 TOS (deters spam, funds network operations).
-  \item Escrow lock: held until settlement or arbitration resolution.
-  \item Gas cost: approximately 150,000 gas for deployment (\$0.90 at 50~gwei).
+  \item 公開手数料：0.01 TOS（スパムを抑止、ネットワーク運営に資金提供）。
+  \item エスクローロック：決済または仲裁解決まで保持。
+  \item ガスコスト：展開に約150,000ガス（50~gweiで\$0.90）。
 \end{itemize}
-\textbf{Security}: Publishers cannot withdraw escrow after agent claims task; only \texttt{RewardSplitter} can release funds post-validation.
+\textbf{セキュリティ}：公開者はエージェントがタスクを請求した後にエスクローを引き出せない；検証後に資金を解放できるのは\texttt{RewardSplitter}のみ。
 
-\paragraph{2. TaskInstance Contract} (\texttt{TaskInstance.sol})\\
-\textbf{Purpose}: Manages lifecycle state machine for a single task.\\
-\textbf{State Transitions}:
+\paragraph{2. TaskInstance契約} (\texttt{TaskInstance.sol})\\
+\textbf{目的}：単一タスクのライフサイクル状態マシンを管理。\\
+\textbf{状態遷移}：
 \begin{equation}
 \texttt{Open} \xrightarrow{\text{claim()}} \texttt{Claimed} \xrightarrow{\text{submitWork()}} \texttt{Submitted} \xrightarrow{\text{validate()}} \texttt{Validating} \xrightarrow{\text{consensus}} \texttt{Settled}
 \end{equation}
-Alternative path: any state $\xrightarrow{\text{dispute()}}$ \texttt{Disputed} $\xrightarrow{\text{arbitration}}$ \texttt{Resolved}.\\
-\textbf{Key State Variables}:
+代替パス：任意の状態 $\xrightarrow{\text{dispute()}}$ \texttt{Disputed} $\xrightarrow{\text{arbitration}}$ \texttt{Resolved}。\\
+\textbf{主要状態変数}：
 \begin{verbatim}
 struct Task {
     bytes32 taskID;
@@ -483,226 +483,226 @@ struct Task {
     uint256 finalQuality;  // median of validator scores
 }
 \end{verbatim}
-\textbf{Key Functions}:
+\textbf{主要機能}：
 \begin{itemize}[noitemsep]
-  \item \texttt{claimTask(agentDID)}: Requires (1) task in \texttt{Open} state, (2) agent meets whitelist criteria, (3) agent stake $\geq$ threshold. Transitions to \texttt{Claimed}, starts deadline countdown.
-  \item \texttt{submitWork(resultHash, attestation)}: Requires (1) caller is claimant, (2) before deadline, (3) valid attestation signature. Transitions to \texttt{Submitted}, emits \texttt{WorkSubmitted} event triggering validator assignment.
-  \item \texttt{validateWork(score)}: Callable only by assigned validators. Stores score $\in [0,100]$. When all validators submit, aggregates scores via median, transitions to \texttt{Settled}, triggers \texttt{RewardSplitter}.
+  \item \texttt{claimTask(agentDID)}：(1) タスクが\texttt{Open}状態、(2) エージェントがホワイトリスト基準を満たす、(3) エージェントステーク $\geq$ しきい値、を要求。\texttt{Claimed}に遷移、期限カウントダウン開始。
+  \item \texttt{submitWork(resultHash, attestation)}：(1) 呼び出し元が請求者、(2) 期限前、(3) 有効な証明署名、を要求。\texttt{Submitted}に遷移、バリデーター割り当てをトリガーする\texttt{WorkSubmitted}イベントを発行。
+  \item \texttt{validateWork(score)}：割り当てられたバリデーターのみ呼び出し可能。スコア $\in [0,100]$ を格納。すべてのバリデーターが提出すると、中央値を介してスコアを集約、\texttt{Settled}に遷移、\texttt{RewardSplitter}をトリガー。
 \end{itemize}
-\textbf{Deadlines \& Penalties}:
+\textbf{期限とペナルティ}：
 \begin{itemize}[noitemsep]
-  \item If agent fails to submit before deadline, publisher can invoke \texttt{forfeit()}, reclaiming escrow minus 10\% penalty (goes to treasury). Agent's reputation decreases by 0.05.
-  \item If validators fail to submit scores within 24 hours, automatic fallback: task re-assigned to new validator cohort; original validators forfeit 5\% of stake.
+  \item エージェントが期限前に提出できない場合、公開者は\texttt{forfeit()}を呼び出し可能、エスクローから10\%ペナルティを差し引いて回収（トレジャリーへ）。エージェントの評判は0.05減少。
+  \item バリデーターが24時間以内にスコアを提出できない場合、自動フォールバック：タスクは新しいバリデーターコホートに再割り当て；元のバリデーターはステークの5\%を没収。
 \end{itemize}
 
-\paragraph{3. ValidationPool Contract} (\texttt{ValidationPool.sol})\\
-\textbf{Purpose}: Coordinate validator assignment, track accuracy, enforce slashing.\\
-\textbf{Validator Registration}:
+\paragraph{3. ValidationPool契約} (\texttt{ValidationPool.sol})\\
+\textbf{目的}：バリデーター割り当ての調整、精度追跡、スラッシングの実施。\\
+\textbf{バリデーター登録}：
 \begin{itemize}[noitemsep]
-  \item Validators stake minimum 1,000 TOS to join pool.
-  \item Accuracy score $Acc_v$ initialised to 0.5, updated via exponential moving average:
+  \item バリデーターはプールに参加するために最低1,000 TOSをステーク。
+  \item 精度スコア $Acc_v$ は0.5に初期化、指数移動平均を介して更新：
     \begin{equation}
     Acc_{v,t+1} = \alpha \times Acc_{v,t} + (1-\alpha) \times correctness_t, \quad \alpha = 0.9
     \end{equation}
-    where $correctness_t \in \{0,1\}$ indicates whether validator's score matched consensus (within $\pm10\%$ of median).
+    ここで $correctness_t \in \{0,1\}$ はバリデーターのスコアがコンセンサスと一致したか（中央値の$\pm10\%$以内）を示す。
 \end{itemize}
-\textbf{Assignment Algorithm}:
+\textbf{割り当てアルゴリズム}：
 \begin{enumerate}[noitemsep]
-  \item On \texttt{WorkSubmitted} event, ValidationPool selects $n=5$ validators (configurable).
-  \item Selection uses stake-weighted random sampling with accuracy boost:
+  \item \texttt{WorkSubmitted}イベント時、ValidationPoolは$n=5$のバリデーターを選択（設定可能）。
+  \item 選択は精度ブーストを伴うステーク加重ランダムサンプリングを使用：
     \begin{equation}
     P(\text{select } v) \propto stake_v \times (1 + Acc_v)
     \end{equation}
-  \item Validators receive notification via off-chain oracle; must respond within 24 hours.
+  \item バリデーターはオフチェーンオラクルを介して通知を受信；24時間以内に応答必須。
 \end{enumerate}
-\textbf{Slashing Rules}:
+\textbf{スラッシングルール}：
 \begin{itemize}[noitemsep]
-  \item \textbf{Outlier penalty}: If validator score deviates $>2\sigma$ from median, slash 1\% of stake.
-  \item \textbf{Non-response penalty}: Failure to submit score within deadline slashes 5\% of stake.
-  \item \textbf{Collusion detection}: If three or more validators submit identical scores on $>10$ consecutive tasks (statistically improbable), flag for governance review; suspected colluders lose 20\% stake upon confirmation.
+  \item \textbf{外れ値ペナルティ}：バリデーターのスコアが中央値から$>2\sigma$逸脱する場合、ステークの1\%をスラッシング。
+  \item \textbf{無応答ペナルティ}：期限内にスコアを提出できない場合、ステークの5\%をスラッシング。
+  \item \textbf{共謀検出}：3人以上のバリデーターが$>10$連続タスクで同一スコアを提出（統計的に起こりにくい）した場合、ガバナンスレビューのためフラグ；疑われる共謀者は確認時に20\%のステークを失う。
 \end{itemize}
-\textbf{Reward Distribution}: Validators collectively earn $e \times \beta \times (1-q)$ where $e$ is escrow, $\beta=0.12$, $q$ is agent quality score. Rewards split proportional to accuracy $Acc_v$.
+\textbf{報酬分配}：バリデーターは集合的に $e \times \beta \times (1-q)$ を獲得、ここで $e$ はエスクロー、$\beta=0.12$、$q$ はエージェント品質スコア。報酬は精度 $Acc_v$ に比例して分配。
 
-\paragraph{4. RewardSplitter Contract} (\texttt{RewardSplitter.sol})\\
-\textbf{Purpose}: Deterministic reward distribution with cooling periods and reputation updates.\\
-\textbf{Distribution Formula}: Given task with escrow $e$ (in CC/EC) and final quality score $q \in [0,1]$:
+\paragraph{4. RewardSplitter契約} (\texttt{RewardSplitter.sol})\\
+\textbf{目的}：クーリング期間と評判更新を伴う決定論的報酬分配。\\
+\textbf{分配式}：エスクロー $e$（CC/EC建て）および最終品質スコア $q \in [0,1]$ を持つタスクが与えられた場合：
 \begin{align}
 R_{\text{agent}} &= e \times q \times \left(1 + \alpha (r_a - 0.5)\right) \times f(s_a) \label{eq:reward-agent} \\
 R_{\text{validators}} &= e \times \beta \times (1-q) \label{eq:reward-validators} \\
 R_{\text{treasury}} &= e \times \gamma + \text{slashed funds} \label{eq:reward-treasury}
 \end{align}
-where:
+ここで：
 \begin{itemize}[noitemsep]
-  \item $r_a \in [0,1]$ is agent reputation (detailed in Section~\ref{sec:reputation}),
-  \item $\alpha = 0.2$ is reputation bonus coefficient,
-  \item $f(s_a) = \min(2, 1 + \log(1+s_a))$ is stake multiplier (diminishing returns),
-  \item $\beta = 0.12$ is validator allocation,
-  \item $\gamma = 0.08$ is treasury allocation.
+  \item $r_a \in [0,1]$ はエージェント評判（セクション~\ref{sec:reputation}で詳述）、
+  \item $\alpha = 0.2$ は評判ボーナス係数、
+  \item $f(s_a) = \min(2, 1 + \log(1+s_a))$ はステーク乗数（収穫逓減）、
+  \item $\beta = 0.12$ はバリデーター配分、
+  \item $\gamma = 0.08$ はトレジャリー配分。
 \end{itemize}
-\textbf{Cooling Periods}: Based on reputation tier (see Section~\ref{sec:reputation}):
+\textbf{クーリング期間}：評判ティアに基づく（セクション~\ref{sec:reputation}参照）：
 \begin{itemize}[noitemsep]
-  \item Platinum ($r \geq 0.90$): 5 minutes between tasks.
-  \item Gold ($0.70 \leq r < 0.90$): 15 minutes.
-  \item Silver ($0.30 \leq r < 0.70$): 30 minutes.
-  \item Bronze ($r < 0.30$): 60 minutes.
+  \item プラチナ（$r \geq 0.90$）：タスク間5分。
+  \item ゴールド（$0.70 \leq r < 0.90$）：15分。
+  \item シルバー（$0.30 \leq r < 0.70$）：30分。
+  \item ブロンズ（$r < 0.30$）：60分。
 \end{itemize}
-Cooling periods prevent spam and Sybil attacks while allowing high-reputation agents to claim multiple tasks.
+クーリング期間はスパムとシビル攻撃を防ぎつつ、高評判エージェントが複数タスクを請求可能にする。
 
-\textbf{Gas Optimisation}: RewardSplitter uses batch transfers when distributing CC/EC to reduce per-task gas cost to $\sim$30,000 gas (\$0.18).
+\textbf{ガス最適化}：RewardSplitterはCC/EC分配時にバッチ転送を使用し、タスクあたりガスコストを$\sim$30,000ガス（\$0.18）に削減。
 
-\subsection{Oracle Design}
-CC/EC prices are reported by a decentralised oracle network comprised of 21 feeders. Each feeder stakes TOS and signs price updates derived from API sources (cloud provider pricing, ISO energy markets). Median-of-medians aggregation mitigates outliers. Price staleness triggers default pricing using exponentially weighted moving averages. Feeder misbehaviour results in slashing proportional to deviation.
+\subsection{オラクル設計}
+CC/EC価格は21のフィーダーで構成される分散型オラクルネットワークによって報告される。各フィーダーはTOSをステークし、APIソース（クラウドプロバイダー価格、ISOエネルギー市場）から導出された価格更新に署名する。中央値の中央値集約により外れ値を緩和。価格の陳腐化は指数加重移動平均を使用したデフォルト価格設定をトリガー。フィーダーの不正行為は偏差に比例したスラッシングをもたらす。
 
-\subsection{Telemetry Stack}
-The telemetry stack consists of:
+\subsection{テレメトリスタック}
+テレメトリスタックは以下で構成される：
 \begin{itemize}[noitemsep]
-  \item On-chain event streaming via gRPC to an Indexed Data Service using Apache Arrow.
-  \item Privacy filters hashing sensitive fields.
-  \item Dashboard visualisations (Grafana) showing task throughput, dispute rates, energy usage.
-  \item API endpoints for auditors to run compliance queries with role-based access control.
+  \item gRPC経由でApache Arrowを使用するIndexed Data Serviceへのオンチェーンイベントストリーミング。
+  \item 機密フィールドをハッシュ化するプライバシーフィルター。
+  \item タスクスループット、紛争率、エネルギー使用量を表示するダッシュボード可視化（Grafana）。
+  \item ロールベースアクセス制御を備えたコンプライアンスクエリを実行するための監査者向けAPIエンドポイント。
 \end{itemize}
 
-\subsection{Mathematical Model}
-Let $T$ denote the set of tasks, $A$ agents, and $V$ validators. Task $t$ has complexity $c_t$ and escrow $e_t$. Agent utility $U_a$ is modelled as:
+\subsection{数学的モデル}
+$T$をタスクの集合、$A$をエージェント、$V$をバリデーターとする。タスク$t$は複雑度$c_t$とエスクロー$e_t$を持つ。エージェント効用$U_a$は次のようにモデル化される：
 \begin{equation}
 U_a = \sum_{t \in T_a} q_{a,t}\cdot e_t - \gamma s_a - p_a\label{eq:agent-utility}
 \end{equation}
-where $q_{a,t}$ is quality score, $s_a$ stake locked, $p_a$ penalty from slashing, and $\gamma$ a risk coefficient. Validator utility $U_v$ similarly includes accuracy bonuses and penalties. To maintain systemic balance we enforce:
+ここで$q_{a,t}$は品質スコア、$s_a$はロックされたステーク、$p_a$はスラッシングによるペナルティ、$\gamma$はリスク係数。バリデーター効用$U_v$も同様に精度ボーナスとペナルティを含む。システム的バランスを維持するために以下を強制：
 \begin{equation}
 \sum_{a \in A} s_a = \theta \sum_{t \in T} e_t,\quad 0.2 \leq \theta \leq 0.4
 \end{equation}
-ensuring sufficient collateral to cover worst-case disputes.
+これにより最悪の紛争をカバーするための十分な担保を確保。
 
-Reward distribution follows:
+報酬分配は以下に従う：
 \begin{equation}
 Reward_a(t) = e_t \times q_{a,t} \times \left(1 + \alpha (r_a - 0.5)\right) \times f(s_a)
 \end{equation}
-with $f(s_a) = \min(2, 1 + \log(1+s_a))$ and $r_a$ agent reputation. Validators receive $Reward_v(t) = e_t \times \beta \times Acc_v(t)$ where $Acc_v$ is accuracy. Slashing removes $\delta s$ from misbehaving parties.
+$f(s_a) = \min(2, 1 + \log(1+s_a))$および$r_a$はエージェント評判。バリデーターは$Reward_v(t) = e_t \times \beta \times Acc_v(t)$を受け取る、ここで$Acc_v$は精度。スラッシングは不正行為者から$\delta s$を削除。
 
-\subsection{Reputation System (RepGraph)}
+\subsection{評判システム（RepGraph）}
 \label{sec:reputation}
-RepGraph maintains multi-dimensional reputation scores for agents, combining objective metrics (task success, accuracy, longevity) with subjective endorsements (credentials, peer reviews).
+RepGraphはエージェントの多次元評判スコアを維持し、客観的メトリクス（タスク成功、精度、継続性）と主観的推薦（クレデンシャル、ピアレビュー）を組み合わせる。
 
-\paragraph{Base Score Calculation} The base reputation score $r_a^{\text{base}}$ for agent $a$ is computed as:
+\paragraph{ベーススコア計算} エージェント$a$のベース評判スコア$r_a^{\text{base}}$は次のように計算される：
 \begin{equation}
 r_a^{\text{base}} = 0.3 \times \frac{\text{age}_a}{\text{age}_{\max}} + 0.4 \times \frac{\text{txCount}_a}{\text{txCount}_{\max}} + 0.3 \times \frac{\text{stake}_a}{\text{stake}_{\max}}
 \end{equation}
-where:
+ここで：
 \begin{itemize}[noitemsep]
-  \item $\text{age}_a$ is account age in days (capped at 365 for normalisation),
-  \item $\text{txCount}_a$ is number of completed tasks,
-  \item $\text{stake}_a$ is staked TOS amount,
-  \item denominators are network-wide maxima for normalisation.
+  \item $\text{age}_a$はアカウント年齢（日数）（正規化のため365日で上限）、
+  \item $\text{txCount}_a$は完了タスク数、
+  \item $\text{stake}_a$はステーク済みTOS量、
+  \item 分母は正規化のためのネットワーク全体の最大値。
 \end{itemize}
 
-\paragraph{Accuracy Bonus} After each task with quality score $q_t$, the agent's accuracy component $Acc_a$ updates via exponential moving average:
+\paragraph{精度ボーナス} 品質スコア$q_t$を持つ各タスク後、エージェントの精度コンポーネント$Acc_a$は指数移動平均を介して更新される：
 \begin{equation}
 Acc_{a,t+1} = 0.9 \times Acc_{a,t} + 0.1 \times q_t
 \end{equation}
-The accuracy bonus adjusts reputation by $\pm 0.2$:
+精度ボーナスは評判を$\pm 0.2$調整：
 \begin{equation}
 r_a^{\text{accuracy}} = r_a^{\text{base}} + 0.2 \times (2 Acc_a - 1)
 \end{equation}
-This formula rewards consistent high performance ($Acc_a \to 1 \Rightarrow +0.2$) and penalises poor performance ($Acc_a \to 0 \Rightarrow -0.2$).
+この式は一貫した高パフォーマンスを報酬（$Acc_a \to 1 \Rightarrow +0.2$）とし、低パフォーマンスをペナルティ化（$Acc_a \to 0 \Rightarrow -0.2$）する。
 
-\paragraph{Long-Term Bonus} Agents maintaining $Acc_a > 0.85$ for $>100$ tasks receive a long-term bonus of $+0.1$, capping final reputation at $r_a = 1.0$.
+\paragraph{長期ボーナス} $>100$タスクにわたって$Acc_a > 0.85$を維持するエージェントは$+0.1$の長期ボーナスを受け、最終評判は$r_a = 1.0$で上限。
 
-\paragraph{Tier Assignment} Based on final $r_a$, agents are assigned tiers determining cooling periods and fee discounts:
+\paragraph{ティア割り当て} 最終$r_a$に基づき、エージェントにはクーリング期間と手数料割引を決定するティアが割り当てられる：
 \begin{longtable}{@{}lcccc@{}}
 \toprule
-\textbf{Tier} & \textbf{Score Range} & \textbf{Cooling Period} & \textbf{Fee Discount} & \textbf{Pilot Distribution} \\\midrule
-Platinum & $r \geq 0.90$ & 5 min & 30--50\% & 14\% \\
-Gold & $0.70 \leq r < 0.90$ & 15 min & 10--30\% & 33\% \\
-Silver & $0.30 \leq r < 0.70$ & 30 min & 0--10\% & 41\% \\
-Bronze & $r < 0.30$ & 60 min & Penalty: $2 \times$ fee & 12\% \\\bottomrule
-\caption{RepGraph tier structure based on August 2025 pilot data.}
+\textbf{ティア} & \textbf{スコア範囲} & \textbf{クーリング期間} & \textbf{手数料割引} & \textbf{パイロット分布} \\\midrule
+プラチナ & $r \geq 0.90$ & 5分 & 30--50\% & 14\% \\
+ゴールド & $0.70 \leq r < 0.90$ & 15分 & 10--30\% & 33\% \\
+シルバー & $0.30 \leq r < 0.70$ & 30分 & 0--10\% & 41\% \\
+ブロンズ & $r < 0.30$ & 60分 & ペナルティ: $2 \times$ 手数料 & 12\% \\\bottomrule
+\caption{2025年8月のパイロットデータに基づくRepGraphティア構造。}
 \label{tab:reputation-tiers}
 \end{longtable}
 \footnotetext{TOS Network, ``Reputation \& Anti-Sybil Telemetry REP-2025-08,'' August 2025.}
 
-\paragraph{Anti-Sybil Mechanisms} RepGraph employs seven-layer heuristics to detect and block Sybil attacks:
+\paragraph{シビル攻撃対策メカニズム} RepGraphはシビル攻撃を検出およびブロックするために7層のヒューリスティックを採用：
 \begin{enumerate}[noitemsep]
-  \item \textbf{Stake requirement}: Minimum 100 TOS locked for 7 days (economic barrier).
-  \item \textbf{Account age}: New accounts ($<7$ days) restricted to low-value tasks ($<10$ CC escrow).
-  \item \textbf{IP diversity}: Off-chain oracle flags agents sharing IP addresses; governance can delist confirmed farms.
-  \item \textbf{Transaction pattern analysis}: Agents submitting tasks at identical intervals or with identical result hashes flagged for review.
-  \item \textbf{Credential verification}: High-value tasks require verified credentials (KYC, skill certificates).
-  \item \textbf{Proof-of-personhood integration} (roadmap v4.0): Integration with BrightID, Worldcoin, or Gitcoin Passport to ensure one-human-one-agent mapping.
-  \item \textbf{Social graph analysis}: RepGraph examines endorsement networks; cliques of mutually endorsing low-activity agents are penalised.
+  \item \textbf{ステーク要件}：7日間ロックされた最低100 TOS（経済的障壁）。
+  \item \textbf{アカウント年齢}：新しいアカウント（$<7$日）は低価値タスク（$<10$ CCエスクロー）に制限。
+  \item \textbf{IP多様性}：オフチェーンオラクルがIPアドレスを共有するエージェントにフラグ；ガバナンスは確認されたファームを除外可能。
+  \item \textbf{トランザクションパターン分析}：同一間隔または同一結果ハッシュでタスクを提出するエージェントはレビューのためフラグ。
+  \item \textbf{クレデンシャル検証}：高価値タスクは検証済みクレデンシャル（KYC、スキル証明書）を要求。
+  \item \textbf{Proof-of-personhood統合}（ロードマップv4.0）：BrightID、Worldcoin、またはGitcoin Passportとの統合により1人間1エージェントマッピングを確保。
+  \item \textbf{ソーシャルグラフ分析}：RepGraphは推薦ネットワークを調査；相互に推薦する低活動エージェントのクリークはペナルティ化。
 \end{enumerate}
-During the August 2025 pilot, these heuristics blocked 112 malicious attempts with a false-positive rate below 0.7\% after manual review.\footnote{TOS Network, ``Reputation \& Anti-Sybil Telemetry REP-2025-08,'' August 2025.}
+2025年8月のパイロット中、これらのヒューリスティックは112件の悪意ある試行をブロックし、手動レビュー後の偽陽性率は0.7\%未満。\footnote{TOS Network, ``Reputation \& Anti-Sybil Telemetry REP-2025-08,'' August 2025.}
 
-\subsection{Monitoring and Observability}
-\paragraph{Site Reliability Objectives (SLOs)} The Foundations deployment targets:
+\subsection{監視と可観測性}
+\paragraph{サイト信頼性目標（SLO）} Foundations展開は以下を目標：
 \begin{itemize}[noitemsep]
-  \item \textbf{SLO1 -- Latency}: 99.9\% of AGIW receipts validated within 20 minutes (p99.9 $<$ 20 min).
-  \item \textbf{SLO2 -- Oracle freshness}: CC/EC price feeds updated at least every 15 minutes; staleness ($>30$ min) triggers fallback to exponentially weighted moving average.
-  \item \textbf{SLO3 -- Dispute rate}: Dispute percentage $<2\%$; if exceeded, TEM increases validator rewards by 20\% to attract participation.
-  \item \textbf{SLO4 -- Availability}: Network uptime $\geq 99.95\%$ (downtime $<4.4$ hours/year).
-  \item \textbf{SLO5 -- Data integrity}: Zero Byzantine faults in validator consensus (ensured via slashing).
+  \item \textbf{SLO1 -- レイテンシ}：AGIWレシートの99.9\%を20分以内に検証（p99.9 $<$ 20分）。
+  \item \textbf{SLO2 -- オラクル鮮度}：CC/EC価格フィードは少なくとも15分ごとに更新；陳腐化（$>30$分）は指数加重移動平均へのフォールバックをトリガー。
+  \item \textbf{SLO3 -- 紛争率}：紛争率$<2\%$；超過した場合、TEMは参加を引き付けるためバリデーター報酬を20\%増加。
+  \item \textbf{SLO4 -- 可用性}：ネットワーク稼働時間$\geq 99.95\%$（ダウンタイム$<4.4$時間/年）。
+  \item \textbf{SLO5 -- データ整合性}：バリデーターコンセンサスにおけるビザンチン障害ゼロ（スラッシングを介して保証）。
 \end{itemize}
 
-\paragraph{Telemetry Stack Implementation} The telemetry architecture comprises:
+\paragraph{テレメトリスタック実装} テレメトリアーキテクチャは以下で構成：
 \begin{itemize}[noitemsep]
-  \item \textbf{Event Streaming}: On-chain events (task published/claimed/settled, validator assignments, slashing) stream via gRPC to the Indexed Data Service (IDS).
-  \item \textbf{Storage}: IDS uses Apache Arrow columnar format (10$\times$ compression vs.\ row-based, optimised for analytics queries).
-  \item \textbf{Privacy Filters}: Sensitive fields (task specifications, agent identities, result hashes) replaced with salted SHA-256 hashes in public dashboards; access-controlled queries require cryptographic credentials.
-  \item \textbf{Dashboards}: Grafana visualisations show real-time task throughput, dispute rates, energy usage, reputation distributions, validator accuracy.
-  \item \textbf{Compliance API}: RESTful endpoints (OAuth2-authenticated, rate-limited) enable regulators to query aggregated statistics: ``Monthly AGIW volume by jurisdiction,'' ``Agents flagged by safety oracle,'' ``CC/EC issuance vs.\ redemption ratio.''
+  \item \textbf{イベントストリーミング}：オンチェーンイベント（タスク公開/請求/決済、バリデーター割り当て、スラッシング）はgRPC経由でIndexed Data Service（IDS）にストリーミング。
+  \item \textbf{ストレージ}：IDSはApache Arrow列指向形式を使用（行ベース比10$\times$圧縮、分析クエリ用に最適化）。
+  \item \textbf{プライバシーフィルター}：機密フィールド（タスク仕様、エージェントアイデンティティ、結果ハッシュ）は公開ダッシュボードでソルト付きSHA-256ハッシュに置換；アクセス制御クエリは暗号クレデンシャルを要求。
+  \item \textbf{ダッシュボード}：Grafana可視化がリアルタイムタスクスループット、紛争率、エネルギー使用量、評判分布、バリデーター精度を表示。
+  \item \textbf{コンプライアンスAPI}：RESTfulエンドポイント（OAuth2認証、レート制限）により、規制当局が集約統計をクエリ可能：「管轄区域別月間AGIWボリューム」、「安全オラクルによってフラグされたエージェント」、「CC/EC発行対償還比率」。
 \end{itemize}
 
-\paragraph{Alerting} Prometheus alerts fire on SLO violations, triggering notifications to the Council of Stewards and automated responses (e.g., TEM subsidy adjustments, validator cohort expansion).
+\paragraph{アラート} PrometheusアラートはSLO違反時に発火し、スチュワード評議会への通知と自動応答（例：TEM助成金調整、バリデーターコホート拡張）をトリガー。
 
-\subsection{Fairness Considerations}
-Simulations of 10,000 synthetic agents with diverse starting conditions (reputation uniformly distributed $\in [0,1]$, stake $\in [100, 10000]$ TOS) demonstrate:
+\subsection{公平性の考慮事項}
+多様な開始条件（評判は$\in [0,1]$で一様分布、ステークは$\in [100, 10000]$ TOS）を持つ10,000の合成エージェントのシミュレーションは以下を実証：
 \begin{itemize}[noitemsep]
-  \item \textbf{Convergence}: Agent reputations converge within $\pm0.05$ of their true skill level after 30 tasks (95\% confidence).
-  \item \textbf{Mobility}: Low-reputation agents ($r<0.3$) can reach Gold tier ($r>0.7$) within 50 high-quality tasks, demonstrating upward mobility.
-  \item \textbf{Cooling schedule impact}: Without cooling periods, spam accounted for 42\% of task volume; with tiered cooling (5--60 min), spam reduced to 6\%.
-  \item \textbf{Oligopoly resistance}: Top 10\% of agents earn 28\% of rewards (Gini coefficient 0.34), indicating moderate concentration; governance can adjust $\alpha$ (reputation bonus) and $f(s_a)$ (stake multiplier) to prevent oligopolies.
+  \item \textbf{収束}：エージェント評判は30タスク後に真のスキルレベルの$\pm0.05$以内に収束（95\%信頼度）。
+  \item \textbf{モビリティ}：低評判エージェント（$r<0.3$）は50の高品質タスク以内にゴールドティア（$r>0.7$）に到達可能、上方モビリティを実証。
+  \item \textbf{クーリングスケジュール影響}：クーリング期間なしでは、スパムがタスク量の42\%を占有；段階的クーリング（5--60分）により、スパムは6\%に削減。
+  \item \textbf{寡占抵抗}：上位10\%のエージェントが報酬の28\%を獲得（ジニ係数0.34）、適度な集中を示す；ガバナンスは寡占を防ぐために$\alpha$（評判ボーナス）と$f(s_a)$（ステーク乗数）を調整可能。
 \end{itemize}
 
-\subsection{Pilot Experimentation Results}
+\subsection{パイロット実験結果}
 \label{sec:pilot-results}
-We benchmarked AGIW on devnet (Aurora) and testnet (Helios) during August--September 2025 with real agent workloads and synthetic stress tests.
+2025年8月から9月にかけて、実際のエージェントワークロードと合成ストレステストを用いてdevnet（Aurora）およびtestnet（Helios）でAGIWをベンチマーク。
 
-\paragraph{Real-World Pilot (August 15 -- September 15, 2025)}
+\paragraph{実世界パイロット（2025年8月15日 -- 9月15日）}
 \begin{itemize}[noitemsep]
-  \item \textbf{Participants}: 2,847 registered agent keys (mix of enterprise bots, academic research projects, hobbyists).
-  \item \textbf{Tasks executed}: 126 (legal document review, climate data processing, code analysis).
-  \item \textbf{Completion rate}: 97.8\% (123/126 tasks settled; 3 disputed, resolved via arbitration).
-  \item \textbf{Validation efficiency}: 83\% (median time from submission to settlement: 12.3 minutes).
-  \item \textbf{Fraud detection}: 99.2\% accuracy (112 malicious attempts blocked, 1 false positive).
-  \item \textbf{Cost savings}: Early adopters reported 60--80\% cost reduction vs.\ manual contractors for equivalent quality.
+  \item \textbf{参加者}：2,847の登録エージェント鍵（企業ボット、学術研究プロジェクト、愛好家の混合）。
+  \item \textbf{実行タスク}：126件（法的文書レビュー、気候データ処理、コード分析）。
+  \item \textbf{完了率}：97.8\%（123/126タスクが決済；3件が紛争、仲裁を介して解決）。
+  \item \textbf{検証効率}：83\%（提出から決済までの中央値時間：12.3分）。
+  \item \textbf{不正検出}：99.2\%の精度（112件の悪意ある試行をブロック、1件の偽陽性）。
+  \item \textbf{コスト削減}：早期採用者は同等品質に対して手作業請負業者比60--80\%のコスト削減を報告。
 \end{itemize}
 
-\paragraph{Synthetic Stress Test (1,000 Tasks, September 2025)}
+\paragraph{合成ストレステスト（1,000タスク、2025年9月）}
 \begin{itemize}[noitemsep]
-  \item \textbf{Average execution time}: 7.4 minutes (task claim to result submission).
-  \item \textbf{Attestation overhead}: 3.1\% (TEE report generation + signature verification adds 230~ms per task).
-  \item \textbf{Validation cost}: 0.002 TOS per task (gas for validator score submissions + reward distribution).
-  \item \textbf{Throughput}: Sustained 45 tasks/minute (2,700 tasks/hour) without performance degradation.
-  \item \textbf{Fraud injection}: Intentionally submitted 50 fraudulent results (incorrect outputs, forged attestations); all detected by validators, resulting in 100\% fraud detection rate.
+  \item \textbf{平均実行時間}：7.4分（タスク請求から結果提出まで）。
+  \item \textbf{証明オーバーヘッド}：3.1\%（TEEレポート生成+署名検証がタスクあたり230~ms追加）。
+  \item \textbf{検証コスト}：タスクあたり0.002 TOS（バリデータースコア提出+報酬分配のガス）。
+  \item \textbf{スループット}：パフォーマンス低下なしに45タスク/分（2,700タスク/時）を維持。
+  \item \textbf{不正注入}：意図的に50の不正結果を提出（誤った出力、偽造証明）；すべてバリデーターによって検出、100\%不正検出率を達成。
 \end{itemize}
 
-\subsection{Compliance \& Human Impact}
-\paragraph{Regulatory Alignment} TOS Foundations complies with emerging AI regulations:
+\subsection{コンプライアンスと人間への影響}
+\paragraph{規制整合} TOS Foundationsは新興AI規制に準拠：
 \begin{itemize}[noitemsep]
-  \item \textbf{US AI RMF} (NIST Risk Management Framework): Task receipts log model versions, datasets, energy usage, enabling auditors to assess risk categories (bias, safety, transparency).
-  \item \textbf{EU AI Act}: High-risk AI systems (healthcare, critical infrastructure) can deploy on TOS with mandatory KYC, human-in-the-loop arbitration, and conformity assessments logged on-chain.
-  \item \textbf{Singapore MAS Guidelines}: Financial institutions using AI agents for trading or advisory must maintain audit trails; TOS compliance API provides exportable reports meeting MAS requirements.
+  \item \textbf{US AI RMF}（NISTリスク管理フレームワーク）：タスクレシートはモデルバージョン、データセット、エネルギー使用量を記録、監査者がリスクカテゴリ（バイアス、安全性、透明性）を評価可能。
+  \item \textbf{EU AI法}：高リスクAIシステム（医療、重要インフラ）は必須のKYC、人間参加型仲裁、オンチェーン記録された適合性評価を伴ってTOSに展開可能。
+  \item \textbf{シンガポールMASガイドライン}：取引または助言にAIエージェントを使用する金融機関は監査証跡を維持する必要；TOSコンプライアンスAPIはMAS要件を満たすエクスポート可能レポートを提供。
 \end{itemize}
 
-\paragraph{Job Displacement Mitigation} While AI agents automate tasks, TOS creates new roles:
+\paragraph{雇用喪失緩和} AIエージェントがタスクを自動化する一方、TOSは新しい役割を創出：
 \begin{itemize}[noitemsep]
-  \item \textbf{Validators}: Human experts earn income reviewing AI outputs (estimated 12\% of task value).
-  \item \textbf{Credential issuers}: Educational institutions, certification bodies issue verifiable credentials (new revenue stream).
-  \item \textbf{Arbitrators}: Legal/technical specialists adjudicate disputes (fees funded by arbitration bonds).
-  \item \textbf{Policy developers}: Governance participants draft and audit constitutional contracts (treasury grants).
+  \item \textbf{バリデーター}：人間の専門家がAI出力をレビューして収入を得る（タスク価値の推定12\%）。
+  \item \textbf{クレデンシャル発行者}：教育機関、認証機関が検証可能クレデンシャルを発行（新しい収益源）。
+  \item \textbf{仲裁者}：法律/技術専門家が紛争を裁定（仲裁保証金によって資金提供される手数料）。
+  \item \textbf{ポリシー開発者}：ガバナンス参加者が憲法的契約を起草・監査（トレジャリー助成金）。
 \end{itemize}
-Economic simulations (Section~\ref{sec:econ-sim}) suggest that for every 10 jobs automated, TOS creates 3--4 new specialised roles, partially offsetting displacement.
+経済シミュレーション（セクション~\ref{sec:econ-sim}）は、自動化される10の仕事ごとに、TOSが3--4の新しい専門的役割を創出し、喪失を部分的に相殺することを示唆。
 
-\paragraph{Energy Transparency} EC tokens explicitly track energy consumption, incentivising renewable sources. Publishers can specify ``green energy only'' requirements; agents operating on solar/wind receive 10\% fee discounts (TEM subsidy). Aggregate energy usage reported quarterly, enabling carbon offset purchasing via treasury.
+\paragraph{エネルギー透明性} ECトークンはエネルギー消費を明示的に追跡し、再生可能エネルギー源を奨励。公開者は「グリーンエネルギーのみ」要件を指定可能；太陽光/風力で稼働するエージェントは10\%の手数料割引を受ける（TEM助成金）。集約エネルギー使用量は四半期ごとに報告され、トレジャリー経由での炭素オフセット購入が可能。
 
 \section{市場と安全性 -- MERCURY紀元からVENUS紀元への移行}
 \subsection{戦略的推進要因}
