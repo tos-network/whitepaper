@@ -1192,10 +1192,10 @@ TOSアーキテクチャは、エージェント経済の重要な要件に対�
 did:tos:<bech32-address>
 did:tos:<network-id>:<bech32-address>
 
-Examples:
-  Simple form:  did:tos:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh
-  Mainnet:      did:tos:mainnet:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh
-  Testnet:      did:tos:testnet:tst1qqqsyqcyq5rqwzqfpg9scrgwpugpzysnzs2pgde5k
+例：
+  シンプル形式: did:tos:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh
+  メインネット: did:tos:mainnet:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh
+  テストネット: did:tos:testnet:tst1qqqsyqcyq5rqwzqfpg9scrgwpugpzysnzs2pgde5k
 \end{verbatim}
 注：TOSは完全なbech32アドレスをDID識別子として使用し、検証のためのチェックサムを含む完全なアドレスフォーマットを保持する。メインネットアドレスは\texttt{tos1}プレフィックスを使用し、テストネットアドレスは\texttt{tst1}プレフィックスを使用する。
 
@@ -1291,12 +1291,12 @@ TOSはネイティブのアカウント抽象化を実装し、プロトコル�
 \textbf{UserOperation構造}：
 \begin{verbatim}
 {
-  sender: "0x...",           // Agent's account address
-  nonce: 42,                 // Sequential counter
-  initCode: "0x...",         // Account creation code (if new)
-  callData: "0x...",         // Function call to execute
-  paymasterAndData: "0x...", // Paymaster address + verification data
-  signature: "0x..."         // Signature over UserOperation
+  sender: "0x...",           // エージェントのアカウントアドレス
+  nonce: 42,                 // 順次カウンター
+  initCode: "0x...",         // アカウント作成コード（新規の場合）
+  callData: "0x...",         // 実行する関数呼び出し
+  paymasterAndData: "0x...", // ペイマスターアドレス + 検証データ
+  signature: "0x..."         // UserOperationに対する署名
 }
 \end{verbatim}
 
@@ -1353,17 +1353,17 @@ TOSはネイティブのアカウント抽象化を実装し、プロトコル�
 \label{tab:tem-parameters}
 \begin{tabular}{@{}p{0.25\textwidth}p{0.30\textwidth}p{0.35\textwidth}@{}}
 \toprule
-\textbf{Parameter} & \textbf{Value / Range} & \textbf{Control Logic} \\ \midrule
-Base fee band (TOS) & 0.0001--0.01 per gas unit & Adjust by block fill p95; target 50\% utilization \\
-Base fee adjustment & +12.5\% per block & If usage $>$ 50\% target \\
-CC stabilization band & $\pm$15\% of GPU index & Oracle median with 30-min staleness cap \\
-EC stabilization band & $\pm$10\% of kWh index & Region-weighted energy basket \\
-TEM treasury split & 40\% security / 30\% grants / 30\% rebates & Quarterly governance rebalancing \\
-Oracle staleness cap & $\le$30 minutes & Freeze CC/EC subsidy if exceeded \\
-Subsidy categories & Public Goods: 100\% / Education: 75\% / SMB: 50\% / Enterprise: 0\% & Task classification by governance vote \\
-Treasury allocation & 8\% of block rewards & Fixed protocol parameter \\
-Validator reward pool & 60\% of block rewards & Base consensus incentive \\
-Burn mechanism & 10\% of base fees & Deflationary pressure \\
+\textbf{パラメータ} & \textbf{値/範囲} & \textbf{制御ロジック} \\ \midrule
+基本手数料帯域（TOS） & ガスユニット当たり0.0001--0.01 & ブロック充満率p95で調整；50\%利用率を目標 \\
+基本手数料調整 & ブロックごとに+12.5\% & 使用量$>$50\%目標の場合 \\
+CC安定化帯域 & GPU指数の$\pm$15\% & 30分陳腐化上限を持つオラクル中央値 \\
+EC安定化帯域 & kWh指数の$\pm$10\% & 地域加重エネルギーバスケット \\
+TEM財務分割 & 40\%セキュリティ / 30\%助成金 / 30\%リベート & 四半期ごとのガバナンス再調整 \\
+オラクル陳腐化上限 & $\le$30分 & 超過した場合CC/EC補助金を凍結 \\
+補助金カテゴリ & 公共財：100\% / 教育：75\% / SMB：50\% / 企業：0\% & ガバナンス投票によるタスク分類 \\
+財務配分 & ブロック報酬の8\% & 固定プロトコルパラメータ \\
+バリデーター報酬プール & ブロック報酬の60\% & 基本コンセンサスインセンティブ \\
+バーンメカニズム & 基本手数料の10\% & デフレ圧力 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1402,17 +1402,17 @@ Burn mechanism & 10\% of base fees & Deflationary pressure \\
 \label{tab:evaluation-methodology}
 \begin{tabular}{@{}p{0.22\textwidth}p{0.68\textwidth}@{}}
 \toprule
-\textbf{Parameter} & \textbf{Configuration} \\ \midrule
-\textbf{Validators} & 32 nodes across 8 geographic regions (N. America, Europe, Asia-Pacific, S. America, Africa, Middle East, Oceania, Central Asia); BLS signature scheme \\
-\textbf{Hardware} & 16 vCPU, 64 GB RAM, NVMe SSD (1 TB), 2.5 Gbps network interface \\
-\textbf{Network} & Emulated RTT: 20--180ms (inter-region), packet loss: 0.1--1.0\%, jitter: $\pm$10ms \\
-\textbf{Workloads} & Real agent jobs: code review (15\%), data synthesis (25\%), RAG tasks (20\%); Synthetic spam: 20--60\% injection rate \\
-\textbf{Runtime} & 72-hour continuous runs; 5 independent seeds; cold start + steady state phases \\
-\textbf{Block Size} & Variable: 100--2,000 transactions per block; target 50\% utilization \\
-\textbf{Mempool Config} & Priority queue with reputation weighting; max 100,000 pending transactions \\
-\textbf{Metrics Collected} & TPS (p50/p95/p99), block time (p50/p95), finality depth (confirmation blocks), AGIW settlement latency (task publish $\rightarrow$ reward), dispute rate (\% of tasks disputed), validator liveness (uptime \%), fork rate \\
-\textbf{Measurement Tools} & Prometheus + Grafana; custom telemetry pipeline; raw logs exported to \texttt{metrics.tos.network} \\
-\textbf{Baseline Period} & September 2025 testnet deployment (14-day observation window) \\
+\textbf{パラメータ} & \textbf{構成} \\ \midrule
+\textbf{バリデーター} & 8つの地理的地域（北米、ヨーロッパ、アジア太平洋、南米、アフリカ、中東、オセアニア、中央アジア）にわたる32ノード；BLS署名方式 \\
+\textbf{ハードウェア} & 16 vCPU、64 GB RAM、NVMe SSD（1 TB）、2.5 Gbpsネットワークインターフェース \\
+\textbf{ネットワーク} & エミュレートされたRTT：20--180ms（地域間）、パケットロス：0.1--1.0\%、ジッター：$\pm$10ms \\
+\textbf{ワークロード} & 実際のエージェントジョブ：コードレビュー（15\%）、データ合成（25\%）、RAGタスク（20\%）；合成スパム：20--60\%注入率 \\
+\textbf{実行時間} & 72時間の連続実行；5つの独立したシード；コールドスタート+定常状態フェーズ \\
+\textbf{ブロックサイズ} & 可変：ブロック当たり100--2,000トランザクション；50\%利用率を目標 \\
+\textbf{メモリプール設定} & 評判加重を伴う優先キュー；最大100,000の保留中トランザクション \\
+\textbf{収集メトリクス} & TPS（p50/p95/p99）、ブロック時間（p50/p95）、ファイナリティ深度（確認ブロック）、AGIW決済レイテンシ（タスク公開$\rightarrow$報酬）、紛争率（紛争されたタスクの\%）、バリデーター活性（稼働時間\%）、フォーク率 \\
+\textbf{測定ツール} & Prometheus + Grafana；カスタムテレメトリパイプライン；生ログを\texttt{metrics.tos.network}にエクスポート \\
+\textbf{ベースライン期間} & 2025年9月テストネット展開（14日間観測ウィンドウ） \\
 \bottomrule
 \end{tabular}
 \end{table}

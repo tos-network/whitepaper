@@ -1,0 +1,24 @@
+# Python files
+*.py
+
+# Backup files
+*.bak
+*.bak*
+
+# Markdown files (except README.md)
+*.md
+!README.md
+
+# Shell scripts and analysis files
+analyze_coverage.sh
+apply_translations.sh
+translation_analysis_detailed.txt
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+
+# PDF files (if you want to ignore generated PDFs)
+# *.pdf
