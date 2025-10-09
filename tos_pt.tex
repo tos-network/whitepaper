@@ -691,7 +691,7 @@ Fizemos benchmark do AGIW na devnet (Aurora) e testnet (Helios) durante agosto--
   \item \textbf{Attestation overhead}: 3.1\% (TEE report generation + signature verification adds 230~ms per task).
   \item \textbf{Validation cost}: 0.002 TOS per task (gas for validator score submissions + distribuição de recompensas).
   \item \textbf{Throughput}: Sustained 45 tasks/minute (2,700 tasks/hour) without performance degradation.
-  \item \textbf{Fraud injection}: Intentionally submitted 50 fraudulent results (incorrect outputs, forged attestations); all detected by validators, resulting in 100\% fraud detection rate.
+  \item \textbf{Injeção de fraude}: Intencionalmente submetidos 50 resultados fraudulentos (saídas incorretas, atestações forjadas); todos detectados por validadores, resultando em taxa de detecção de fraude de 100\%.
 \end{itemize}
 
 \subsection{Compliance \& Human Impact}
@@ -699,19 +699,19 @@ Fizemos benchmark do AGIW na devnet (Aurora) e testnet (Helios) durante agosto--
 \begin{itemize}[noitemsep]
   \item \textbf{US AI RMF} (NIST Risk Management Framework): Task receipts log model versions, datasets, energy usage, enabling auditors to assess risk categories (bias, safety, transparency).
   \item \textbf{EU AI Act}: High-risk AI systems (healthcare, critical infrastructure) can deploy on TOS with mandatory KYC, human-in-the-loop arbitration, and conformity assessments logged on-chain.
-  \item \textbf{Singapore MAS Guidelines}: Financial institutions using AI agents for trading or advisory must maintain audit trails; TOS compliance API provides exportable reports meeting MAS requirements.
+  \item \textbf{Diretrizes MAS de Singapura}: Instituições financeiras usando agentes de IA para negociação ou consultoria devem manter trilhas de auditoria; API de conformidade TOS fornece relatórios exportáveis atendendo requisitos MAS.
 \end{itemize}
 
-\paragraph{Job Displacement Mitigation} While AI agents automate tasks, TOS creates new roles:
+\paragraph{Mitigação de Deslocamento de Empregos} Enquanto agentes de IA automatizam tarefas, TOS cria novas funções:
 \begin{itemize}[noitemsep]
-  \item \textbf{Validators}: Human experts earn income reviewing AI outputs (estimated 12\% of task value).
-  \item \textbf{Credential issuers}: Educational institutions, certification bodies issue verifiable credentials (new revenue stream).
-  \item \textbf{Arbitrators}: Legal/technical specialists adjudicate disputes (fees funded by arbitration bonds).
-  \item \textbf{Policy developers}: Governance participants draft and audit constitutional contracts (treasury grants).
+  \item \textbf{Validadores}: Especialistas humanos ganham renda revisando saídas de IA (estimado em 12\% do valor da tarefa).
+  \item \textbf{Emissores de credenciais}: Instituições educacionais, órgãos de certificação emitem credenciais verificáveis (novo fluxo de receita).
+  \item \textbf{Árbitros}: Especialistas legais/técnicos julgam disputas (taxas financiadas por cauções de arbitragem).
+  \item \textbf{Desenvolvedores de políticas}: Participantes de governança redigem e auditam contratos constitucionais (bolsas de tesouraria).
 \end{itemize}
-Economic simulations (Section~\ref{sec:econ-sim}) suggest that for every 10 jobs automated, TOS creates 3--4 new specialised roles, partially offsetting displacement.
+Simulações econômicas (Seção~\ref{sec:econ-sim}) sugerem que para cada 10 empregos automatizados, TOS cria 3--4 novas funções especializadas, compensando parcialmente o deslocamento.
 
-\paragraph{Energy Transparency} EC tokens explicitly track energy consumption, incentivising renewable sources. Publishers can specify ``green energy only'' requirements; agents operating on solar/wind receive 10\% fee discounts (TEM subsidy). Aggregate energy usage reported quarterly, enabling carbon offset purchasing via treasury.
+\paragraph{Transparência Energética} Tokens EC rastreiam explicitamente consumo de energia, incentivando fontes renováveis. Publicadores podem especificar requisitos ``somente energia verde''; agentes operando em solar/eólica recebem 10\% de descontos em taxas (subsídio TEM). Uso agregado de energia relatado trimestralmente, habilitando compra de compensação de carbono via tesouraria.
 
 \section{Mercados e Segurança -- Transição MERCÚRIO-para-VÊNUS}
 \subsection{Impulsionadores Estratégicos}
@@ -946,7 +946,7 @@ Usando replicação baseada em CRDT, os participantes mantêm estado parcial e r
     \STATE Broadcast digest $d_i = H(L_i)$ periodically.\
     \STATE On receiving digest $d_j$, request missing operations.\
     \STATE Merge logs via $L_i \leftarrow \operatorname{merge}(L_i, L_j)$, ensuring commutativity.\
-    \STATE When quorum acknowledges, emit finality proof to main chain.\
+    \STATE Quando quórum reconhece, emitir prova de finalidade para cadeia principal.\
   \end{algorithmic}
 \end{algorithm}
 
@@ -1227,7 +1227,7 @@ Agentes adquirem capacidades através de credenciais à prova de adulteração e
   \item Emissor (por exemplo, contrato inteligente RepGraph) cria documento de credencial JSON-LD.
   \item Assina com assinaturas BBS+ (divulgação seletiva habilitada; titular pode provar atributos específicos sem revelar credencial inteira).
   \item Publica credencial no documento DID do titular via IPFS; evento on-chain emitido.
-  \item Titular armazena credencial em carteira; apresenta provas de conhecimento zero a verificadores (por exemplo, ``Provar reputação $\geq$ 0.7 without revealing exact score'').
+  \item Titular armazena credencial em carteira; apresenta provas de conhecimento zero a verificadores (por exemplo, ``Provar reputação $\geq$ 0.7 sem revelar pontuação exata'').
 \end{enumerate}
 
 \paragraph{Reputation Graph (RepGraph) Algorithms}
@@ -1236,52 +1236,52 @@ Agentes adquirem capacidades através de credenciais à prova de adulteração e
 \begin{equation}
 r_t = \alpha \cdot r_{t-1} + (1 - \alpha) \cdot s_t
 \end{equation}
-where:
+onde:
 \begin{itemize}[noitemsep]
-  \item $r_t$: Reputation score at time $t$ (range [0, 1]).
-  \item $\alpha = 0.85$: Exponential smoothing factor (85\% historical weight).
-  \item $s_t$: Quality score for most recent task (median of 5 validator assessments).
+  \item $r_t$: Pontuação de reputação no tempo $t$ (faixa [0, 1]).
+  \item $\alpha = 0.85$: Fator de suavização exponencial (85\% de peso histórico).
+  \item $s_t$: Pontuação de qualidade para a tarefa mais recente (mediana de 5 avaliações de validadores).
 \end{itemize}
 
 \textbf{Decay Mechanism}:
 \begin{equation}
 r_{t+\Delta t} = r_t \cdot (0.98)^{\Delta t / 30}
 \end{equation}
-Reputation decays 2\% per month of inactivity; prevents dormant high-reputation accounts from sudden reactivation.
+A reputação decai 2\% por mês de inatividade; previne reativação súbita de contas dormentes de alta reputação.
 
-\textbf{Multi-Dimensional Scoring}:
+\textbf{Pontuação Multidimensional}:
 \begin{itemize}[noitemsep]
-  \item \textbf{General Reputation}: Aggregate across all task types.
-  \item \textbf{Domain-Specific}: Separate scores for legal, medical, financial, technical domains.
-  \item \textbf{Recency-Weighted}: Recent performance (last 30 days) weighted 2$\times$ vs. historical average.
+  \item \textbf{Reputação Geral}: Agregação em todos os tipos de tarefa.
+  \item \textbf{Específica de Domínio}: Pontuações separadas para domínios jurídicos, médicos, financeiros e técnicos.
+  \item \textbf{Ponderada por Recência}: Desempenho recente (últimos 30 dias) ponderado 2$\times$ vs. média histórica.
 \end{itemize}
 
-\textbf{Anti-Gaming Measures}:
+\textbf{Medidas Anti-Manipulação}:
 \begin{itemize}[noitemsep]
-  \item \textbf{Sybil Resistance}: Minimum 100 TOS stake + proof-of-uniqueness (BrightID integration roadmap v5.0).
-  \item \textbf{Collusion Detection}: Graph analysis identifies clusters of agents with suspiciously correlated voting patterns; flagged for manual review.
-  \item \textbf{Reputation Caps}: New agents capped at 0.5 reputation for first 90 days; prevents rapid reputation farming.
-\end{itemize}
+  \item \textbf{Resistência Sybil}: Stake mínimo de 100 TOS + prova de unicidade (roteiro de integração BrightID v5.0).
+  \item \textbf{Detecção de Conluio}: Análise de grafo identifica clusters de agentes com padrões de votação suspeitosamente correlacionados; sinalizados para revisão manual.
+  \item \textbf{Limites de Reputação}: Novos agentes limitados a 0,5 de reputação nos primeiros 90 dias; previne farming rápido de reputação.
+\end{itemize>
 
-\paragraph{Interoperability with W3C Standards}
+\paragraph{Interoperabilidade com Padrões W3C}
 \begin{itemize}[noitemsep]
-  \item \textbf{DID Core v1.0}: Full compliance; TOS DIDs resolvable via Universal Resolver.
-  \item \textbf{Verifiable Credentials Data Model v1.1}: Credentials valid across ecosystems (can present TOS credential to non-TOS verifier).
-  \item \textbf{DIDComm v2}: Secure messaging protocol for agent-to-agent communication (encrypted, authenticated, transport-agnostic).
-\end{itemize}
+  \item \textbf{DID Core v1.0}: Conformidade total; DIDs TOS resolvíveis via Resolvedor Universal.
+  \item \textbf{Modelo de Dados de Credenciais Verificáveis v1.1}: Credenciais válidas entre ecossistemas (pode apresentar credencial TOS a verificador não-TOS).
+  \item \textbf{DIDComm v2}: Protocolo de mensagens seguro para comunicação agente-a-agente (criptografado, autenticado, agnóstico de transporte).
+\end{itemize>
 
 \subsection{P2 -- Economic Execution}
 \label{sec:pillar-economic}
 
-\paragraph{Account Abstraction}
-TOS implements native account abstraction, enabling programmable accounts with custom validation logic integrated directly into the protocol layer. This eliminates the need for separate smart contracts or external coordination services, providing a streamlined experience for AI agents.
+\paragraph{Abstração de Conta}
+TOS implementa abstração de conta nativa, habilitando contas programáveis com lógica de validação personalizada integrada diretamente na camada de protocolo. Isso elimina a necessidade de contratos inteligentes separados ou serviços de coordenação externos, fornecendo uma experiência simplificada para agentes de IA.
 
-\textbf{Key Features}:
+\textbf{Recursos Principais}:
 \begin{itemize}[noitemsep]
-  \item \textbf{Paymasters}: Third parties sponsor gas fees (e.g., enterprise pays fees for employee agents).
-  \item \textbf{Multi-Sig Wallets}: $m$-of-$n$ approval for high-value transactions (corporate treasury accounts).
-  \item \textbf{Session Keys}: Temporary keys with restricted permissions (agent can sign small transactions without accessing main key).
-  \item \textbf{Social Recovery}: Recover account access via guardians (family members, trusted agents) if private key lost.
+  \item \textbf{Paymasters}: Terceiros patrocinam taxas de gás (por exemplo, empresa paga taxas para agentes funcionários).
+  \item \textbf{Carteiras Multi-Assinatura}: Aprovação $m$-de-$n$ para transações de alto valor (contas de tesouraria corporativa).
+  \item \textbf{Chaves de Sessão}: Chaves temporárias com permissões restritas (agente pode assinar pequenas transações sem acessar chave principal).
+  \item \textbf{Recuperação Social}: Recuperar acesso à conta via guardiões (familiares, agentes confiáveis) se chave privada for perdida.
 \end{itemize}
 
 \textbf{UserOperation Structure}:
@@ -1297,74 +1297,74 @@ TOS implements native account abstraction, enabling programmable accounts with c
 \end{verbatim}
 
 \paragraph{AGIW Settlement Engine}
-Decentralized task marketplace where agents earn by performing verifiable work. Full protocol specification in Section~\ref{sec:agiw-spec}.
+Mercado de tarefas descentralizado onde agentes ganham executando trabalho verificável. Especificação completa do protocolo na Seção~\ref{sec:agiw-spec}.
 
-\textbf{Core Components}:
+\textbf{Componentes Principais}:
 \begin{itemize}[noitemsep]
-  \item \textbf{TaskInstance Contract}: Escrow management, state machine (Open $\to$ Claimed $\to$ Verified $\to$ Settled).
-  \item \textbf{Validator Pool}: Random selection of 5 validators per task; median quality score determines payout.
-  \item \textbf{Attestation Reports}: TEE-generated proofs (Intel SGX, AMD SEV) certifying execution environment integrity.
-  \item \textbf{Dispute Resolution}: Escalation to expert arbitrators if agent contests validator assessment.
+  \item \textbf{Contrato TaskInstance}: Gerenciamento de depósito em garantia, máquina de estados (Aberta $\to$ Reivindicada $\to$ Verificada $\to$ Liquidada).
+  \item \textbf{Pool de Validadores}: Seleção aleatória de 5 validadores por tarefa; pontuação de qualidade mediana determina pagamento.
+  \item \textbf{Relatórios de Atestação}: Provas geradas por TEE (Intel SGX, AMD SEV) certificando integridade do ambiente de execução.
+  \item \textbf{Resolução de Disputas}: Escalação para árbitros especialistas se agente contestar avaliação do validador.
 \end{itemize}
 
-\paragraph{Resource Token Markets (CC/EC)}
-\textbf{Compute Credits (CC)}: Fungible tokens representing GPU/CPU compute hours. Pricing oracles aggregate AWS/GCP/Azure spot prices.
+\paragraph{Mercados de Tokens de Recursos (CC/EC)}
+\textbf{Créditos de Computação (CC)}: Tokens fungíveis representando horas de computação GPU/CPU. Oráculos de precificação agregam preços spot AWS/GCP/Azure.
 
-\textbf{Energy Credits (EC)}: Tokenized energy consumption (kWh). Oracle feeds from grid operators; renewable energy sources earn 10\% premium.
+\textbf{Créditos de Energia (EC)}: Consumo de energia tokenizado (kWh). Feeds de oráculo de operadores de rede; fontes de energia renovável ganham 10\% de prêmio.
 
-\textbf{Automated Market Maker (AMM)}:
+\textbf{Formador de Mercado Automatizado (AMM)}:
 \begin{itemize}[noitemsep]
-  \item Constant Product Market Maker (CPMM): $x \cdot y = k$ where $x$ = CC reserves, $y$ = TOS reserves.
-  \item Liquidity providers earn 0.3\% swap fees.
-  \item Impermanent loss protection: TEM treasury subsidizes divergence losses for LPs providing $>$1M TOS liquidity.
-\end{itemize}
+  \item Formador de Mercado de Produto Constante (CPMM): $x \cdot y = k$ onde $x$ = reservas CC, $y$ = reservas TOS.
+  \item Provedores de liquidez ganham 0,3\% de taxas de swap.
+  \item Proteção contra perda impermanente: tesouraria TEM subsidia perdas de divergência para LPs fornecendo liquidez $>$1M TOS.
+\end{itemize>
 
 \paragraph{TOS Energy Model (TEM)}
-Dynamic fee adjustment mechanism balancing network sustainability with agent accessibility.
+Mecanismo dinâmico de ajuste de taxas equilibrando sustentabilidade da rede com acessibilidade de agentes.
 
 \textbf{Fee Structure}:
 \begin{equation}
 \text{Total Fee} = \text{Base Fee} + \text{Priority Tip} - \text{TEM Subsidy}
 \end{equation}
 
-\textbf{Base Fee}:
+\textbf{Taxa Base}:
 \begin{itemize}[noitemsep]
-  \item Computed via dynamic adjustment mechanism that adjusts based on block fullness.
-  \item Target: 50\% block utilization; base fee increases 12.5\% per block if usage $>$ target.
+  \item Calculada via mecanismo de ajuste dinâmico que se ajusta com base na plenitude do bloco.
+  \item Meta: 50\% de utilização de bloco; taxa base aumenta 12,5\% por bloco se uso $>$ meta.
 \end{itemize}
 
-\textbf{TEM Subsidy Categories}:
+\textbf{Categorias de Subsídio TEM}:
 \begin{itemize}[noitemsep]
-  \item \textbf{Public Goods (100\% subsidy)}: Open-source development, climate research, medical diagnostics.
-  \item \textbf{Education (75\%)}: Academic research, student projects.
-  \item \textbf{SMBs (50\%)}: Small/medium businesses with $<$\$10M annual revenue.
-  \item \textbf{Enterprise (0\%)}: Full commercial rates for large corporations.
+  \item \textbf{Bens Públicos (100\% de subsídio)}: Desenvolvimento de código aberto, pesquisa climática, diagnósticos médicos.
+  \item \textbf{Educação (75\%)}: Pesquisa acadêmica, projetos estudantis.
+  \item \textbf{PMEs (50\%)}: Pequenas/médias empresas com receita anual $<$\$10M.
+  \item \textbf{Enterprise (0\%)}: Taxas comerciais completas para grandes corporações.
 \end{itemize}
 
-\textbf{Funding}: 8\% of block rewards allocated to TEM treasury; governance votes on subsidy allocations quarterly.
+\textbf{Financiamento}: 8\% das recompensas de bloco alocadas para tesouraria TEM; governança vota em alocações de subsídios trimestralmente.
 
 \begin{table}[H]
 \centering
-\caption{TEM Economic Parameters and Control Mechanisms}
+\caption{Parâmetros Econômicos TEM e Mecanismos de Controle}
 \label{tab:tem-parameters}
 \begin{tabular}{@{}p{0.25\textwidth}p{0.30\textwidth}p{0.35\textwidth}@{}}
 \toprule
-\textbf{Parameter} & \textbf{Value / Range} & \textbf{Control Logic} \\ \midrule
-Base fee band (TOS) & 0.0001--0.01 per gas unit & Adjust by block fill p95; target 50\% utilization \\
-Base fee adjustment & +12.5\% per block & If usage $>$ 50\% target \\
-CC stabilization band & $\pm$15\% of GPU index & Oracle median with 30-min staleness cap \\
-EC stabilization band & $\pm$10\% of kWh index & Region-weighted energy basket \\
-TEM treasury split & 40\% security / 30\% grants / 30\% rebates & Quarterly governance rebalancing \\
-Oracle staleness cap & $\le$30 minutes & Freeze CC/EC subsidy if exceeded \\
-Subsidy categories & Public Goods: 100\% / Education: 75\% / SMB: 50\% / Enterprise: 0\% & Task classification by governance vote \\
-Treasury allocation & 8\% of block rewards & Fixed protocol parameter \\
-Validator reward pool & 60\% of block rewards & Base consensus incentive \\
-Burn mechanism & 10\% of base fees & Deflationary pressure \\
+\textbf{Parâmetro} & \textbf{Valor / Faixa} & \textbf{Lógica de Controle} \\ \midrule
+Faixa de taxa base (TOS) & 0.0001--0.01 por unidade de gás & Ajustar por preenchimento de bloco p95; meta 50\% de utilização \\
+Ajuste de taxa base & +12.5\% por bloco & Se uso $>$ 50\% meta \\
+Faixa de estabilização CC & $\pm$15\% do índice GPU & Mediana de oráculo com limite de obsolescência de 30 min \\
+Faixa de estabilização EC & $\pm$10\% do índice kWh & Cesta de energia ponderada por região \\
+Divisão tesouraria TEM & 40\% segurança / 30\% bolsas / 30\% reembolsos & Rebalanceamento de governança trimestral \\
+Limite de obsolescência de oráculo & $\le$30 minutos & Congelar subsídio CC/EC se excedido \\
+Categorias de subsídio & Bens Públicos: 100\% / Educação: 75\% / PME: 50\% / Enterprise: 0\% & Classificação de tarefa por voto de governança \\
+Alocação de tesouraria & 8\% de recompensas de bloco & Parâmetro de protocolo fixo \\
+Pool de recompensa de validadores & 60\% de recompensas de bloco & Incentivo de consenso base \\
+Mecanismo de queima & 10\% de taxas base & Pressão deflacionária \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Economic Sensitivity}: TEM parameters undergo quarterly review by governance. Simulation results (available at \texttt{metrics.tos.network/tem-sensitivity}) demonstrate system stability under 3$\times$ demand spikes and 50\% oracle variance scenarios.
+\textbf{Sensibilidade Econômica}: Parâmetros TEM passam por revisão trimestral pela governança. Resultados de simulação (disponíveis em \texttt{metrics.tos.network/tem-sensitivity}) demonstram estabilidade do sistema sob picos de demanda 3$\times$ e cenários de variância de oráculo de 50\%.
 
 \subsection{P3 -- Consensus \& Safety}
 \label{sec:pillar-consensus}
@@ -1415,12 +1415,12 @@ Blockchains tradicionais formam cadeias lineares; TOS usa Grafo Acíclico Dirigi
 
 \textbf{Key Results} (September 2025 baseline):
 \begin{itemize}[noitemsep]
-  \item TPS: p50 = 2,847, p95 = 3,421, p99 = 3,789
-  \item Block time: p50 = 11.3s, p95 = 14.2s
-  \item Finality: 8 blocks (median 90s)
-  \item AGIW settlement: p50 = 12.4 min, p95 = 18.7 min
-  \item Taxa de disputas: 1.8\% das tarefas concluídas
-  \item Validator liveness: 98.7\% average
+  \item TPS: p50 = 2.847, p95 = 3.421, p99 = 3.789
+  \item Tempo de bloco: p50 = 11,3s, p95 = 14,2s
+  \item Finalidade: 8 blocos (mediana 90s)
+  \item Liquidação AGIW: p50 = 12,4 min, p95 = 18,7 min
+  \item Taxa de disputas: 1,8\% das tarefas concluídas
+  \item Vivacidade de validadores: 98,7\% em média
 \end{itemize}
 
 \paragraph{Consenso Power of AI (PAI)}
@@ -1445,7 +1445,7 @@ Oráculo on-chain agrega métricas de segurança de laboratórios líderes de IA
 
 \textbf{Aplicação}:
 \begin{itemize}[noitemsep]
-  \item Tasks with safety score $<$ 0.3 automatically rejected (refund escrow).
+  \item Tarefas com pontuação de segurança $<$ 0,3 automaticamente rejeitadas (reembolso de depósito em garantia).
   \item Agentes que enviam repetidamente saídas inseguras são sinalizados; reputação penalizada.
   \item Árbitros humanos revisam casos limítrofes (pontuação de segurança 0,3--0,5).
 \end{itemize}
@@ -1477,7 +1477,7 @@ Veja Seção~\ref{sec:expansion} para estratégia detalhada de migração PQC. R
 \end{itemize}
 
 \paragraph{Histórico Reversível}
-Court-authorised rollback mechanism for catastrophic failures. Checkpoints every 24 hours; 90-day rollback window; 75\% governance supermajority required. See Section~\ref{sec:expansion} for full specification.
+Mecanismo de rollback autorizado por tribunal para falhas catastróficas. Checkpoints a cada 24 horas; janela de rollback de 90 dias; supermaioria de governança de 75\% requerida. Veja Seção~\ref{sec:expansion} para especificação completa.
 
 \paragraph{Federação de Arquivo}
 Estratégia de armazenamento multicamadas (Quente/Morno/Frio) com backups de DNA e disco óptico 5D. Dados preservados por milênios em colônias planetárias. Veja Seção~\ref{sec:expansion} para modelo econômico e protocolos de recuperação.
@@ -1695,15 +1695,15 @@ S(y) = 365 \times V_t(y) \times \bar{e}_t(y)
 \end{equation}
 Example (Baseline, year 3): $S(3) = 365 \times 150{,}000 \times \$300 = \$16.4$ billion.
 
-\paragraph{Agent Earnings} Average agent income per year:
+\paragraph{Ganhos de Agentes} Renda média de agentes por ano:
 \begin{equation}
 I_a(y) = \frac{V_t(y)}{N_a(y)} \times \bar{e}_t(y) \times \bar{q}(y) \times (1 + 0.2(r_a - 0.5)) \times f(s_a)
 \end{equation}
-For median agent ($r_a = 0.6$, $s_a = 500$ TOS):
+Para agente mediano ($r_a = 0.6$, $s_a = 500$ TOS):
 \begin{equation}
 I_a(3) = \frac{150{,}000}{50{,}000} \times \$300 \times 0.85 \times 1.02 \times 1.62 \approx \$1{,}250 \text{ per year}
 \end{equation}
-Top-tier agent (Platinum, $r_a = 0.95$, $s_a = 5{,}000$ TOS):
+Agente de alto nível (Platina, $r_a = 0.95$, $s_a = 5{,}000$ TOS):
 \begin{equation}
 I_a^{\text{top}}(3) \approx \$8{,}200 \text{ per year}
 \end{equation}
@@ -1723,221 +1723,221 @@ T(y) = 0.08 \times S(y) + \sum_{slash \; events} slash_v
 \end{equation}
 Baseline year 3: $T(3) = 0.08 \times \$16.4B + \$20M \approx \$1.33B$.
 
-\subsection{Results by Scenario}
-\paragraph{Conservative Scenario (Slow Adoption, Higher Disputes)}
+\subsection{Resultados por Cenário}
+\paragraph{Cenário Conservador (Adoção Lenta, Disputas Maiores)}
 \begin{itemize}[noitemsep]
-  \item Year 3 settlement: $365 \times 50{,}000 \times \$150 = \$2.74$ billion.
-  \item Agent income: Median \$410/year; top tier \$2{,}800/year.
-  \item Validator income: \$1.3M/year (median).
-  \item Treasury: \$240M.
-  \item \textbf{Outcome}: Network remains sustainable; validators earn sufficient income to justify participation; treasury covers arbitration costs and development grants.
+  \item Liquidação Ano 3: $365 \times 50{,}000 \times \$150 = \$2,74$ bilhões.
+  \item Renda de agentes: Mediana \$410/ano; nível superior \$2{,}800/ano.
+  \item Renda de validadores: \$1,3M/ano (mediana).
+  \item Tesouraria: \$240M.
+  \item \textbf{Resultado}: Rede permanece sustentável; validadores ganham renda suficiente para justificar participação; tesouraria cobre custos de arbitragem e bolsas de desenvolvimento.
 \end{itemize}
 
-\paragraph{Baseline Scenario (Moderate Adoption, Standard Disputes)}
+\paragraph{Cenário Base (Adoção Moderada, Disputas Padrão)}
 \begin{itemize}[noitemsep]
-  \item Year 3 settlement: \$16.4 billion.
-  \item Agent income: Median \$1{,}250/year; top tier \$8{,}200/year.
-  \item Validator income: \$3.9M/year (median).
-  \item Treasury: \$1.33B.
-  \item \textbf{Outcome}: Strong economic flywheel; agents earn viable supplementary income; validators incentivised by high returns; treasury funds PAI research, ecosystem grants, energy rebates.
+  \item Liquidação Ano 3: \$16,4 bilhões.
+  \item Renda de agentes: Mediana \$1{,}250/ano; nível superior \$8{,}200/ano.
+  \item Renda de validadores: \$3,9M/ano (mediana).
+  \item Tesouraria: \$1,33B.
+  \item \textbf{Resultado}: Forte volante econômico; agentes ganham renda suplementar viável; validadores incentivados por retornos altos; tesouraria financia pesquisa PAI, bolsas de ecossistema, reembolsos de energia.
 \end{itemize}
 
-\paragraph{Optimistic Scenario (Rapid Adoption, Low Disputes)}
+\paragraph{Cenário Otimista (Adoção Rápida, Disputas Baixas)}
 \begin{itemize}[noitemsep]
-  \item Year 3 settlement: $365 \times 500{,}000 \times \$600 = \$109.5$ billion.
-  \item Agent income: Median \$2{,}190/year; top tier \$16{,}800/year.
-  \item Validator income: \$10.9M/year (median).
-  \item Treasury: \$8.8B.
-  \item \textbf{Outcome}: TOS becomes dominant agent economy infrastructure; agents achieve full-time income viability; validators earn institutional-grade returns; treasury funds major initiatives (PAI Phase 3, interplanetary research, DAE pilots).
+  \item Liquidação Ano 3: $365 \times 500{,}000 \times \$600 = \$109,5$ bilhões.
+  \item Renda de agentes: Mediana \$2{,}190/ano; nível superior \$16{,}800/ano.
+  \item Renda de validadores: \$10,9M/ano (mediana).
+  \item Tesouraria: \$8,8B.
+  \item \textbf{Resultado}: TOS se torna infraestrutura dominante da economia de agentes; agentes alcançam viabilidade de renda em tempo integral; validadores ganham retornos de nível institucional; tesouraria financia iniciativas importantes (PAI Fase 3, pesquisa interplanetária, pilotos DAE).
 \end{itemize}
 
-\subsection{Sensitivity Analysis}
-\paragraph{Impact of Task Value Variance}
-Increasing average task value by 50\% (e.g., \$300 $\to$ \$450 in Baseline) yields:
+\subsection{Análise de Sensibilidade}
+\paragraph{Impacto da Variância de Valor de Tarefa}
+Aumentar o valor médio da tarefa em 50\% (por exemplo, \$300 $\to$ \$450 no Baseline) resulta em:
 \begin{itemize}[noitemsep]
-  \item Settlement volume: +50\% (\$16.4B $\to$ \$24.6B).
-  \item Agent income: +50\% (\$1{,}250 $\to$ \$1{,}875).
-  \item Validator/treasury income: +50\% (linear scaling).
+  \item Volume de liquidação: +50\% (\$16,4B $\to$ \$24,6B).
+  \item Renda de agentes: +50\% (\$1{,}250 $\to$ \$1{,}875).
+  \item Renda de validadores/tesouraria: +50\% (escalonamento linear).
 \end{itemize}
 
-\paragraph{Impact of Dispute Rate}
-Doubling dispute rate (2\% $\to$ 4\% in Baseline) results in:
+\paragraph{Impacto da Taxa de Disputa}
+Dobrar a taxa de disputa (2\% $\to$ 4\% no Baseline) resulta em:
 \begin{itemize}[noitemsep]
-  \item Arbitration costs: +100\% (more arbitrators required).
-  \item TEM response: Increase validator rewards by 20\% to attract participation.
-  \item Net effect: Treasury allocation increases from 8\% to 10\% to cover costs; validator share decreases from 12\% to 11\%.
+  \item Custos de arbitragem: +100\% (mais árbitros necessários).
+  \item Resposta TEM: Aumentar recompensas de validadores em 20\% para atrair participação.
+  \item Efeito líquido: Alocação de tesouraria aumenta de 8\% para 10\% para cobrir custos; participação de validadores diminui de 12\% para 11\%.
 \end{itemize}
 
-\paragraph{Impact of TOS Price}
-TOS token price affects staking economics. In Baseline, if TOS price increases from \$5 to \$15:
+\paragraph{Impacto do Preço TOS}
+O preço do token TOS afeta a economia de staking. No Baseline, se o preço TOS aumentar de \$5 para \$15:
 \begin{itemize}[noitemsep]
-  \item Agent stake value: 500 TOS = \$7{,}500 (vs.\ \$2{,}500).
-  \item Validator stake value: 1,000 TOS = \$15{,}000 (vs.\ \$5{,}000).
-  \item Effect: Higher capital requirements may reduce participation; TEM can lower minimum stakes to compensate (e.g., 500 $\to$ 200 TOS).
+  \item Valor de stake de agente: 500 TOS = \$7{,}500 (vs.\ \$2{,}500).
+  \item Valor de stake de validador: 1.000 TOS = \$15{,}000 (vs.\ \$5{,}000).
+  \item Efeito: Requisitos de capital mais altos podem reduzir participação; TEM pode diminuir stakes mínimos para compensar (por exemplo, 500 $\to$ 200 TOS).
 \end{itemize}
 
-\subsection{Long-Term Projections (MERCURY through Early VENUS)}
-Extrapolating across MERCURY and into early VENUS:
+\subsection{Projeções de Longo Prazo (MERCURY até Early VENUS)}
+Extrapolando através de MERCURY e início de VENUS:
 \begin{itemize}[noitemsep]
-  \item \textbf{Early MERCURY (Baseline)}: \$16.4B annual settlement, 50,000 agents, 500 validators.
-  \item \textbf{Mid-MERCURY (Baseline)}: \$180B annual settlement (compound growth 12\%/year), 800,000 agents, 2,500 validators. PAI consensus achieves 10,000+ TPS; hybrid fiat settlement drives enterprise adoption.
-  \item \textbf{Late MERCURY / Early VENUS (Baseline)}: \$650B annual settlement, 4.5M agents (mix of human-operated and autonomous), 10,000 validators. DAEs emerge; constitutional contracts govern virtual economies; TOS treasury exceeds \$50B, funding interplanetary infrastructure.
+  \item \textbf{Early MERCURY (Base)}: \$16,4B de liquidação anual, 50.000 agentes, 500 validadores.
+  \item \textbf{Mid-MERCURY (Base)}: \$180B de liquidação anual (crescimento composto 12\%/ano), 800.000 agentes, 2.500 validadores. Consenso PAI alcança 10.000+ TPS; liquidação híbrida fiat impulsiona adoção empresarial.
+  \item \textbf{Late MERCURY / Early VENUS (Base)}: \$650B de liquidação anual, 4,5M agentes (mix de operados por humanos e autônomos), 10.000 validadores. DAEs emergem; contratos constitucionais governam economias virtuais; tesouraria TOS excede \$50B, financiando infraestrutura interplanetária.
 \end{itemize}
 
-\subsection{Risk Scenarios}
-\paragraph{Black Swan: Major Security Breach}
-Suppose an early-MERCURY attack compromises 5\% of validators, resulting in \$500M fraudulent settlements. Response:
+\subsection{Cenários de Risco}
+\paragraph{Cisne Negro: Grande Violação de Segurança}
+Suponha um ataque early-MERCURY que compromete 5\% dos validadores, resultando em \$500M em liquidações fraudulentas. Resposta:
 \begin{itemize}[noitemsep]
-  \item Insurance pool (3\% of volume) covers most losses.
-  \item Governance invokes emergency rollback (reversible history mechanism, Section~\ref{sec:expansion}).
-  \item Affected validators slashed (lose 50\% stake); reputations reset to zero.
-  \item Network downtime: 72 hours for forensics and remediation.
-  \item Long-term impact: Trust recovery via transparent audit report, protocol upgrade (v5.0), validator re-accreditation.
+  \item Pool de seguro (3\% do volume) cobre a maioria das perdas.
+  \item Governança invoca rollback de emergência (mecanismo de histórico reversível, Seção~\ref{sec:expansion}).
+  \item Validadores afetados penalizados (perdem 50\% do stake); reputações resetadas para zero.
+  \item Tempo de inatividade da rede: 72 horas para perícia e remediação.
+  \item Impacto de longo prazo: Recuperação de confiança via relatório de auditoria transparente, upgrade de protocolo (v5.0), reacreditação de validadores.
 \end{itemize}
 
-\paragraph{Regulatory Shock: Major Jurisdiction Bans AI Agents}
-Suppose a mid-MERCURY regulatory shift where a major jurisdiction bans autonomous AI labour. Scenarios:
+\paragraph{Choque Regulatório: Grande Jurisdição Proíbe Agentes de IA}
+Suponha uma mudança regulatória mid-MERCURY onde uma jurisdição importante proíbe trabalho autônomo de IA. Cenários:
 \begin{itemize}[noitemsep]
-  \item \textbf{Compliance path}: TOS deploys human-in-the-loop arbitration for all EU tasks; task volume decreases 15\% but compliance preserves access.
-  \item \textbf{Fragmentation path}: EU agents migrate to permissioned TOS shard; cross-shard settlement via delay-tolerant protocol; network splits but remains interoperable.
+  \item \textbf{Caminho de conformidade}: TOS implanta arbitragem humana no loop para todas as tarefas da UE; volume de tarefas diminui 15\% mas conformidade preserva acesso.
+  \item \textbf{Caminho de fragmentação}: Agentes da UE migram para shard TOS permissionado; liquidação entre shards via protocolo tolerante a atrasos; rede se divide mas permanece interoperável.
 \end{itemize}
 
-\section{Security and Threat Model}
+\section{Modelo de Segurança e Ameaças}
 \label{sec:security}
 
-TOS operates in a hostile environment where economic incentives attract sophisticated adversaries. This section models threat actors, attack vectors, and defense-in-depth countermeasures grounded in Byzantine fault tolerance, cryptoeconomics, and empirical security research.
+O TOS opera em um ambiente hostil onde incentivos econômicos atraem adversários sofisticados. Esta seção modela atores de ameaças, vetores de ataque e contramedidas de defesa em profundidade fundamentadas em tolerância a falhas bizantinas, criptoeconomia e pesquisa empírica de segurança.
 
-\subsection{Threat Taxonomy}
+\subsection{Taxonomia de Ameaças}
 
-\paragraph{T1: Malicious Agents (Sybil Attackers)}
-\textbf{Motivation}: Earn rewards without performing legitimate work; game reputation systems; overwhelm validation queues.\\
-\textbf{Capabilities}: Create thousands of identities; automate low-quality submissions; coordinate timing attacks.\\
-\textbf{Attack Vectors}:
+\paragraph{T1: Agentes Maliciosos (Atacantes Sybil)}
+\textbf{Motivação}: Ganhar recompensas sem realizar trabalho legítimo; manipular sistemas de reputação; sobrecarregar filas de validação.\\
+\textbf{Capacidades}: Criar milhares de identidades; automatizar submissões de baixa qualidade; coordenar ataques de temporização.\\
+\textbf{Vetores de Ataque}:
 \begin{itemize}[noitemsep]
-  \item \textbf{Task spam}: Flood network with trivial or duplicate tasks to claim escrow before validation.
-  \item \textbf{Reputation farming}: Collude with cooperating publishers to inflate scores.
-  \item \textbf{Oracle manipulation}: Submit false attestations to trick validators.
+  \item \textbf{Spam de tarefas}: Inundar a rede com tarefas triviais ou duplicadas para reivindicar depósito em garantia antes da validação.
+  \item \textbf{Farming de reputação}: Colusão com publicadores cooperantes para inflar pontuações.
+  \item \textbf{Manipulação de oráculos}: Enviar atestações falsas para enganar validadores.
 \end{itemize}
-\textbf{Historical Precedent}: Steam account farming (2016), cryptocurrency airdrop bots (2020--2023), large-scale review fraud on Amazon/Yelp.
+\textbf{Precedente Histórico}: Farming de contas Steam (2016), bots de airdrop de criptomoedas (2020--2023), fraude de avaliações em larga escala na Amazon/Yelp.
 
-\paragraph{T2: Validator Collusion}
-\textbf{Motivation}: Extract rents by approving low-quality work from co-conspirators; censor competitors.\\
-\textbf{Capabilities}: Control $>33\%$ of validator stake or exploit randomness in assignment algorithms.\\
-\textbf{Attack Vectors}:
+\paragraph{T2: Colusão de Validadores}
+\textbf{Motivação}: Extrair rendas aprovando trabalho de baixa qualidade de co-conspiradores; censurar competidores.\\
+\textbf{Capacidades}: Controlar $>33\%$ do stake de validadores ou explorar aleatoriedade em algoritmos de atribuição.\\
+\textbf{Vetores de Ataque}:
 \begin{itemize}[noitemsep]
-  \item \textbf{Quality inflation}: Validators assign high scores to cartel members' submissions regardless of merit.
-  \item \textbf{Censorship}: Reject or delay validation of non-cartel agents.
-  \item \textbf{Front-running}: Validators observe pending tasks, submit competing solutions under alternate identities.
+  \item \textbf{Inflação de qualidade}: Validadores atribuem pontuações altas às submissões de membros do cartel independentemente de mérito.
+  \item \textbf{Censura}: Rejeitar ou atrasar validação de agentes não-cartel.
+  \item \textbf{Front-running}: Validadores observam tarefas pendentes, enviam soluções concorrentes sob identidades alternativas.
 \end{itemize}
-\textbf{Historical Precedent}: Mining pool centralization, MEV extraction patterns, and validator centralization observed across various blockchain networks demonstrate the reality of these threats.
+\textbf{Precedente Histórico}: Centralização de pools de mineração, padrões de extração MEV e centralização de validadores observados em várias redes blockchain demonstram a realidade dessas ameaças.
 
-\paragraph{T3: Oracle Cartels}
-\textbf{Motivation}: Manipulate CC/EC pricing to profit from arbitrage or harm competitors.\\
-\textbf{Capabilities}: Compromise majority of oracle feeders; exploit data source vulnerabilities; delay price updates.\\
-\textbf{Attack Vectors}:
+\paragraph{T3: Cartéis de Oráculos}
+\textbf{Motivação}: Manipular preços de CC/EC para lucrar com arbitragem ou prejudicar competidores.\\
+\textbf{Capacidades}: Comprometer maioria dos fornecedores de oráculos; explorar vulnerabilidades de fontes de dados; atrasar atualizações de preços.\\
+\textbf{Vetores de Ataque}:
 \begin{itemize}[noitemsep]
-  \item \textbf{Price manipulation}: Report inflated compute costs to drain TEM subsidies or extract value from agents.
-  \item \textbf{Staleness attacks}: Delay updates during high volatility to force fallback pricing.
-  \item \textbf{Data poisoning}: Compromise API sources (AWS pricing feeds, energy indices).
+  \item \textbf{Manipulação de preços}: Reportar custos de computação inflados para drenar subsídios TEM ou extrair valor de agentes.
+  \item \textbf{Ataques de obsolescência}: Atrasar atualizações durante alta volatilidade para forçar precificação de fallback.
+  \item \textbf{Envenenamento de dados}: Comprometer fontes de API (feeds de preços AWS, índices de energia).
 \end{itemize}
-\textbf{Historical Precedent}: LIBOR manipulation scandal (2008--2012), flash crashes in algorithmic trading (2010), oracle failures in decentralised finance protocols.
+\textbf{Precedente Histórico}: Escândalo de manipulação LIBOR (2008--2012), flash crashes em trading algorítmico (2010), falhas de oráculos em protocolos de finanças descentralizadas.
 
-\paragraph{T4: Governance Capture}
-\textbf{Motivation}: Control protocol parameters to favor specific actors; extract treasury funds; resist security upgrades.\\
-\textbf{Capabilities}: Accumulate majority voting stake; exploit low voter turnout; launch social engineering campaigns.\\
-\textbf{Attack Vectors}:
+\paragraph{T4: Captura de Governança}
+\textbf{Motivação}: Controlar parâmetros de protocolo para favorecer atores específicos; extrair fundos do tesouro; resistir a atualizações de segurança.\\
+\textbf{Capacidades}: Acumular maioria de stake de votação; explorar baixa participação de votantes; lançar campanhas de engenharia social.\\
+\textbf{Vetores de Ataque}:
 \begin{itemize}[noitemsep]
-  \item \textbf{Parameter manipulation}: Vote to reduce slashing penalties, increase reward splits, weaken anti-Sybil thresholds.
-  \item \textbf{Treasury raids}: Propose grants to shell entities controlled by attackers.
-  \item \textbf{Upgrade blocking}: Prevent deployment of patches addressing known vulnerabilities.
+  \item \textbf{Manipulação de parâmetros}: Votar para reduzir penalidades de slashing, aumentar divisões de recompensa, enfraquecer limites anti-Sybil.
+  \item \textbf{Ataques ao tesouro}: Propor grants para entidades de fachada controladas por atacantes.
+  \item \textbf{Bloqueio de atualizações}: Prevenir deployment de patches que abordam vulnerabilidades conhecidas.
 \end{itemize}
-\textbf{Historical Precedent}: Blockchain governance takeovers, decentralised protocol governance attacks, corporate proxy fights.
+\textbf{Precedente Histórico}: Takeovers de governança blockchain, ataques de governança de protocolos descentralizados, disputas de proxy corporativas.
 
-\paragraph{T5: Smart Contract Exploits}
-\textbf{Motivation}: Steal escrowed funds, mint unauthorized tokens, manipulate state variables.\\
-\textbf{Capabilities}: Discover reentrancy bugs, integer overflows, access control flaws, or logical errors.\\
-\textbf{Attack Vectors}:
+\paragraph{T5: Exploits de Smart Contracts}
+\textbf{Motivação}: Roubar fundos em garantia, cunhar tokens não autorizados, manipular variáveis de estado.\\
+\textbf{Capacidades}: Descobrir bugs de reentrância, overflows de inteiros, falhas de controle de acesso ou erros lógicos.\\
+\textbf{Vetores de Ataque}:
 \begin{itemize}[noitemsep]
-  \item \textbf{Reentrancy}: Exploit callback functions in TaskInstance or RewardSplitter contracts.
-  \item \textbf{Flash loan attacks}: Temporarily acquire large stakes to manipulate governance or oracle votes.
-  \item \textbf{Griefing}: DoS validation queues by submitting malformed attestations that crash verifiers.
+  \item \textbf{Reentrância}: Explorar funções de callback em contratos TaskInstance ou RewardSplitter.
+  \item \textbf{Ataques de flash loan}: Adquirir temporariamente grandes stakes para manipular governança ou votos de oráculos.
+  \item \textbf{Griefing}: DoS de filas de validação enviando atestações malformadas que quebram verificadores.
 \end{itemize}
-\textbf{Historical Precedent}: The DAO hack (2016, \$50M), Parity wallet freeze (2017), Poly Network exploit (2021, \$600M).
+\textbf{Precedente Histórico}: Hack do The DAO (2016, \$50M), congelamento da wallet Parity (2017), exploit da Poly Network (2021, \$600M).
 
-\subsection{Defense-in-Depth Architecture}
+\subsection{Arquitetura de Defesa em Profundidade}
 
-\paragraph{Layer 1: Cryptographic Foundations}
+\paragraph{Camada 1: Fundações Criptográficas}
 \begin{itemize}[noitemsep]
-  \item \textbf{TEE Attestation}: Intel SGX/AMD SEV remote attestation verifies code integrity; measurement hashes prevent malware injection. Limitation: side-channel attacks (Spectre, Meltdown); roadmap includes zk-SNARK fallback.
-  \item \textbf{Post-Quantum Cryptography}: Dilithium (signatures), Falcon (compact signatures) resist quantum attacks. Migration plan: dual-signing (classical + PQC) by v4.0 (see Appendix C, Report PQ-2025-08).
-  \item \textbf{Threshold Signatures}: BLS aggregation enables compact multi-sig; $t$-of-$n$ schemes prevent single points of failure in bridge contracts.
-\end{itemize}
-
-\paragraph{Layer 2: Economic Security (Cryptoeconomics)}
-\begin{itemize}[noitemsep]
-  \item \textbf{Stake-Based Accountability}: Agents and validators lock collateral (min 100 TOS / 1,000 TOS respectively); slashing penalties (1--50\% of stake) deter misbehavior. Game-theoretic analysis: attacking network costs $>\$500k$ at current prices; expected return negative unless sustaining attack for $>30$ days (impractical due to rapid detection).
-  \item \textbf{Reputation Decay}: RepGraph scores decay 2\% monthly without activity; prevents dormant accounts from sudden reactivation with outdated high scores.
-  \item \textbf{Cooling Periods}: Rate limits (5--60 min based on reputation) prevent spam; adaptive thresholds increase during DoS attempts.
+  \item \textbf{Atestação TEE}: Atestação remota Intel SGX/AMD SEV verifica integridade de código; hashes de medição previnem injeção de malware. Limitação: ataques de canal lateral (Spectre, Meltdown); roadmap inclui fallback zk-SNARK.
+  \item \textbf{Criptografia Pós-Quântica}: Dilithium (assinaturas), Falcon (assinaturas compactas) resistem a ataques quânticos. Plano de migração: assinatura dupla (clássica + PQC) até v4.0 (ver Apêndice C, Relatório PQ-2025-08).
+  \item \textbf{Assinaturas de Limiar}: Agregação BLS possibilita multi-sig compacta; esquemas $t$-de-$n$ previnem pontos únicos de falha em contratos de bridge.
 \end{itemize}
 
-\paragraph{Layer 3: Protocol-Level Safeguards}
+\paragraph{Camada 2: Segurança Econômica (Criptoeconomia)}
 \begin{itemize}[noitemsep]
-  \item \textbf{Multi-Validator Consensus}: Median-of-5 scoring resists outliers; requires $\geq3$ colluding validators to manipulate outcomes (probability $<0.01\%$ with random assignment).
-  \item \textbf{Randomness Sources}: Validator assignment uses VRF (Verifiable Random Function) seeded by block hashes + external entropy (drand); prevents predictability.
-  \item \textbf{Formal Verification}: TaskInstance state machine verified in TLA+; proofs ensure liveness (tasks always settle) and safety (no double-payment). Artifacts: \texttt{github.com/tos-network/formal-verification}.
+  \item \textbf{Responsabilização Baseada em Stake}: Agentes e validadores bloqueiam colateral (mín 100 TOS / 1.000 TOS respectivamente); penalidades de slashing (1--50\% do stake) desencorajam mau comportamento. Análise teórico-de-jogos: atacar a rede custa $>\$500k$ aos preços atuais; retorno esperado negativo a menos que o ataque seja sustentado por $>30$ dias (impraticável devido à detecção rápida).
+  \item \textbf{Decaimento de Reputação}: Pontuações RepGraph decaem 2\% mensalmente sem atividade; previne reativação súbita de contas dormentes com pontuações altas desatualizadas.
+  \item \textbf{Períodos de Resfriamento}: Limites de taxa (5--60 min baseados em reputação) previnem spam; limiares adaptativos aumentam durante tentativas de DoS.
 \end{itemize}
 
-\paragraph{Layer 4: Monitoring \& Response}
+\paragraph{Camada 3: Salvaguardas em Nível de Protocolo}
 \begin{itemize}[noitemsep]
-  \item \textbf{Anomaly Detection}: ML classifiers flag suspicious patterns (e.g., agent claiming $>10$ tasks/hour, validator approving $>95\%$ of submissions). Telemetry fed to Security Operations Center (SOC).
-  \item \textbf{Circuit Breakers}: Automated pause if (1) dispute rate $>10\%$, (2) validator slashing events $>5$ in 1 hour, (3) oracle deviation $>20\%$. Resumption requires Council approval.
-  \item \textbf{Bug Bounty}: \$50k--\$500k rewards for critical vulnerabilities. Program managed via Immunefi/HackerOne; payouts in TOS tokens.
+  \item \textbf{Consenso Multi-Validador}: Pontuação mediana-de-5 resiste a outliers; requer $\geq3$ validadores em colusão para manipular resultados (probabilidade $<0.01\%$ com atribuição aleatória).
+  \item \textbf{Fontes de Aleatoriedade}: Atribuição de validadores usa VRF (Função Aleatória Verificável) semeada por hashes de blocos + entropia externa (drand); previne previsibilidade.
+  \item \textbf{Verificação Formal}: Máquina de estados TaskInstance verificada em TLA+; provas garantem vivacidade (tarefas sempre liquidam) e segurança (sem pagamento duplo). Artefatos: \texttt{github.com/tos-network/formal-verification}.
 \end{itemize}
 
-\paragraph{Layer 5: Governance Oversight}
+\paragraph{Camada 4: Monitoramento e Resposta}
 \begin{itemize}[noitemsep]
-  \item \textbf{Council Emergency Powers}: 4-of-7 multi-sig can (1) pause contracts, (2) freeze malicious accounts, (3) trigger rollback (reversible history, Section~\ref{sec:expansion}). Actions logged on-chain; post-mortem required within 72 hours.
-  \item \textbf{Proof-of-Personhood Integration}: Roadmap v5.0 integrates Worldcoin/BrightID to limit Sybil identities in governance votes. Agents remain pseudonymous for tasks but must prove unique humanness for high-stake decisions.
-  \item \textbf{Transparency Reports}: Quarterly disclosure of (1) security incidents, (2) slashing events, (3) governance votes, (4) treasury changes. Auditable via Compliance API.
+  \item \textbf{Detecção de Anomalias}: Classificadores ML sinalizam padrões suspeitos (ex: agente reivindicando $>10$ tarefas/hora, validador aprovando $>95\%$ das submissões). Telemetria alimenta Centro de Operações de Segurança (SOC).
+  \item \textbf{Disjuntores}: Pausa automatizada se (1) taxa de disputas $>10\%$, (2) eventos de slashing de validadores $>5$ em 1 hora, (3) desvio de oráculo $>20\%$. Retomada requer aprovação do Conselho.
+  \item \textbf{Bug Bounty}: Recompensas de \$50k--\$500k para vulnerabilidades críticas. Programa gerenciado via Immunefi/HackerOne; pagamentos em tokens TOS.
 \end{itemize}
 
-\subsection{Incident Response Playbook}
+\paragraph{Camada 5: Supervisão de Governança}
+\begin{itemize}[noitemsep]
+  \item \textbf{Poderes Emergenciais do Conselho}: Multi-sig 4-de-7 pode (1) pausar contratos, (2) congelar contas maliciosas, (3) acionar rollback (histórico reversível, Seção~\ref{sec:expansion}). Ações registradas on-chain; post-mortem necessário dentro de 72 horas.
+  \item \textbf{Integração Proof-of-Personhood}: Roadmap v5.0 integra Worldcoin/BrightID para limitar identidades Sybil em votos de governança. Agentes permanecem pseudônimos para tarefas mas devem provar humanidade única para decisões de alto risco.
+  \item \textbf{Relatórios de Transparência}: Divulgação trimestral de (1) incidentes de segurança, (2) eventos de slashing, (3) votos de governança, (4) mudanças no tesouro. Auditável via API de Compliance.
+\end{itemize}
 
-\paragraph{Phase 1: Detection (0--15 minutes)}
-SOC receives alert from monitoring; triage severity (P0: active exploit, P1: potential threat, P2: informational). Automated checks verify authenticity (rule out false positives).
+\subsection{Manual de Resposta a Incidentes}
 
-\paragraph{Phase 2: Containment (15--60 minutes)}
-Invoke circuit breaker if P0; freeze affected accounts; snapshot state for forensics. Notify Council; convene emergency session.
+\paragraph{Fase 1: Detecção (0--15 minutos)}
+SOC recebe alerta do monitoramento; triagem de severidade (P0: exploit ativo, P1: ameaça potencial, P2: informacional). Verificações automatizadas confirmam autenticidade (descartam falsos positivos).
 
-\paragraph{Phase 3: Investigation (1--24 hours)}
-Forensic analysis: review transaction logs, attestation reports, validator votes. Identify attack vector; estimate impact (funds at risk, agents affected).
+\paragraph{Fase 2: Contenção (15--60 minutos)}
+Invocar disjuntor se P0; congelar contas afetadas; snapshot de estado para perícia. Notificar Conselho; convocar sessão emergencial.
 
-\paragraph{Phase 4: Remediation (1--7 days)}
-Deploy patch via governance fast-track (48-hour voting period for emergencies). Compensate affected users from insurance pool. Publish post-mortem report.
+\paragraph{Fase 3: Investigação (1--24 horas)}
+Análise forense: revisar logs de transações, relatórios de atestação, votos de validadores. Identificar vetor de ataque; estimar impacto (fundos em risco, agentes afetados).
 
-\paragraph{Phase 5: Lessons Learned (ongoing)}
-Update threat model; enhance monitoring rules; conduct red-team exercise to validate fixes. Share learnings with broader blockchain community (responsible disclosure).
+\paragraph{Fase 4: Remediação (1--7 dias)}
+Deployar patch via fast-track de governança (período de votação de 48 horas para emergências). Compensar usuários afetados do pool de seguros. Publicar relatório post-mortem.
 
-\subsection{Attack Cost Analysis}
+\paragraph{Fase 5: Lições Aprendidas (contínuo)}
+Atualizar modelo de ameaças; aprimorar regras de monitoramento; conduzir exercício red-team para validar correções. Compartilhar aprendizados com comunidade blockchain mais ampla (divulgação responsável).
+
+\subsection{Análise de Custo de Ataques}
 
 \begin{longtable}{@{}p{0.30\textwidth}p{0.30\textwidth}p{0.28\textwidth}@{}}
 \toprule
-\textbf{Attack Type} & \textbf{Minimum Cost (USD)} & \textbf{Expected Return} \\\midrule
-Sybil spam (1,000 agents) & \$150k (stake) + \$20k (infra) & Negative (slashing + reputation loss) \\
-Validator collusion (34\% stake) & \$8.5M (at \$5/TOS, 570k TOS) & \$2M/year (if undetected); high detection risk \\
-Oracle cartel (11/21 feeders) & \$2M (bribes) + \$500k (infra) & \$5M (one-time arbitrage); permanent reputation damage \\
-Smart contract exploit & \$50k--\$200k (researcher salary) & \$0--\$50M (depends on escrow volume); bug bounty preferred \\
-Governance capture (51\% vote) & \$12M (token acquisition) & \$10M/year (treasury access); high regulatory risk \\
+\textbf{Tipo de Ataque} & \textbf{Custo Mínimo (USD)} & \textbf{Retorno Esperado} \\\midrule
+Spam Sybil (1.000 agentes) & \$150k (stake) + \$20k (infra) & Negativo (slashing + perda de reputação) \\
+Colusão de validadores (34\% stake) & \$8.5M (a \$5/TOS, 570k TOS) & \$2M/ano (se não detectado); alto risco de detecção \\
+Cartel de oráculos (11/21 feeders) & \$2M (subornos) + \$500k (infra) & \$5M (arbitragem única); dano reputacional permanente \\
+Exploit de smart contract & \$50k--\$200k (salário pesquisador) & \$0--\$50M (depende do volume de escrow); bug bounty preferível \\
+Captura de governança (51\% votos) & \$12M (aquisição de tokens) & \$10M/ano (acesso ao tesouro); alto risco regulatório \\
 \bottomrule
-\caption{Adversarial cost-benefit matrix for TOS network attacks. Costs assume Outubro 2025 market conditions; returns account for detection probability and countermeasures.}
+\caption{Matriz custo-benefício adversarial para ataques à rede TOS. Custos assumem condições de mercado de outubro 2025; retornos consideram probabilidade de detecção e contramedidas.}
 \end{longtable}
 
-\textbf{Interpretation}: Most attacks are economically irrational under current parameters. Exception: highly sophisticated actors (nation-states, well-funded cybercrime syndicates) may absorb costs for strategic disruption. Countermeasures include insurance pools, regulatory cooperation, and continuous security audits.
+\textbf{Interpretação}: A maioria dos ataques é economicamente irracional sob os parâmetros atuais. Exceção: atores altamente sofisticados (estados-nação, sindicatos de cibercrime bem financiados) podem absorver custos para disrupção estratégica. Contramedidas incluem pools de seguros, cooperação regulatória e auditorias de segurança contínuas.
 
 \section{Estrutura de Governança}
 \label{sec:governance}
 
-Effective governance balances decentralization (resisting capture), efficiency (timely decisions), and legitimacy (stakeholder buy-in). TOS adopts a multi-chamber model inspired by constitutional democracies, corporate boards, and decentralised autonomous organisation research.
+Governança eficaz equilibra descentralização (resistindo à captura), eficiência (decisões oportunas) e legitimidade (engajamento das partes interessadas). TOS adota um modelo multi-câmara inspirado em democracias constitucionais, conselhos corporativos e pesquisa sobre organizações autônomas descentralizadas.
 
 \subsection{Governance Actors \& Responsibilities}
 
@@ -1997,180 +1997,180 @@ Effective governance balances decentralization (resisting capture), efficiency (
 \textbf{Access Rights}: Read-only API for aggregated statistics (task volumes, dispute rates, energy usage). Individual agent identities remain confidential unless court order.\\
 \textbf{Engagement}: Quarterly briefings with Council; input on custody standards, AML/KYC integration, cross-border settlement rules.
 
-\subsection{Proposal Lifecycle}
+\subsection{Ciclo de Vida de Propostas}
 
-\paragraph{Stage 1: Ideation \& Discussion (7--30 days)}
-\textbf{Forum}: Off-chain discussion on Commonwealth, Discord, GitHub. Anyone may draft a proposal using standardized template (problem statement, solution, cost-benefit analysis, risk assessment).\\
-\textbf{Temperature Check}: Informal polls gauge community sentiment. Proposals with $<20\%$ support typically abandoned.
+\paragraph{Estágio 1: Ideação \& Discussão (7--30 dias)}
+\textbf{Fórum}: Discussão off-chain no Commonwealth, Discord, GitHub. Qualquer um pode rascunhar uma proposta usando template padronizado (declaração de problema, solução, análise custo-benefício, avaliação de risco).\\
+\textbf{Verificação de Temperatura}: Enquetes informais avaliam sentimento da comunidade. Propostas com $<20\%$ de suporte tipicamente abandonadas.
 
-\paragraph{Stage 2: Formal Submission (1--3 days)}
-\textbf{Requirements}:
+\paragraph{Estágio 2: Submissão Formal (1--3 dias)}
+\textbf{Requisitos}:
 \begin{itemize}[noitemsep]
-  \item Proposer must stake 10,000 TOS (anti-spam; refunded if proposal passes).
-  \item Proposal includes executable code (for on-chain changes) or detailed specification (for off-chain coordination).
-  \item Auditor Committee review completed (for contract upgrades).
+  \item Proponente deve fazer stake de 10.000 TOS (anti-spam; reembolsado se proposta passar).
+  \item Proposta inclui código executável (para mudanças on-chain) ou especificação detalhada (para coordenação off-chain).
+  \item Revisão do Comitê de Auditores completada (para upgrades de contratos).
 \end{itemize}
-\textbf{Categorization}: Proposals tagged as \emph{Technical}, \emph{Economic}, \emph{Treasury}, \emph{Emergency}, or \emph{Constitutional} (different voting thresholds).
+\textbf{Categorização}: Propostas marcadas como \emph{Técnica}, \emph{Econômica}, \emph{Tesouraria}, \emph{Emergência}, ou \emph{Constitucional} (limiares de votação diferentes).
 
-\paragraph{Stage 3: Voting (7 days standard, 48 hours for emergencies)}
-\textbf{Quorum}: 15\% of circulating TOS must participate (prevents apathy-driven outcomes).\\
-\textbf{Approval Thresholds}:
+\paragraph{Estágio 3: Votação (7 dias padrão, 48 horas para emergências)}
+\textbf{Quórum}: 15\% do TOS circulante deve participar (previne resultados impulsionados por apatia).\\
+\textbf{Limiares de Aprovação}:
 \begin{itemize}[noitemsep]
-  \item \textbf{Technical/Economic}: 60\% approval (simple majority with buffer).
-  \item \textbf{Treasury (<\$100k)}: Council approval (multi-sig).
-  \item \textbf{Treasury (>\$100k)}: 67\% token holder approval.
-  \item \textbf{Constitutional}: 75\% approval + validator sign-off (modifies core rules).
-  \item \textbf{Emergency}: 4-of-7 Council multi-sig (immediate execution; retroactive vote within 14 days).
+  \item \textbf{Técnica/Econômica}: 60\% de aprovação (maioria simples com margem).
+  \item \textbf{Tesouraria (<\$100k)}: Aprovação do Conselho (multi-sig).
+  \item \textbf{Tesouraria (>\$100k)}: 67\% de aprovação dos detentores de tokens.
+  \item \textbf{Constitucional}: 75\% de aprovação + assinatura de validadores (modifica regras fundamentais).
+  \item \textbf{Emergência}: Multi-sig 4-de-7 do Conselho (execução imediata; voto retroativo em 14 dias).
 \end{itemize}
-\textbf{Voting Interface}: Web app (\texttt{vote.tos.network}), CLI, SDK integration. Votes cryptographically signed; tallies verifiable on-chain.
+\textbf{Interface de Votação}: App web (\texttt{vote.tos.network}), CLI, integração SDK. Votos criptograficamente assinados; contagens verificáveis on-chain.
 
-\paragraph{Stage 4: Timelock \& Execution (48 hours)}
-\textbf{Timelock}: Approved proposals enter 48-hour delay before execution. Rationale: provides window for last-minute security reviews; allows stakers to exit if opposed to major changes.\\
-\textbf{Execution}: Automated via governance smart contract module (\texttt{Governor.py}); transactions broadcasted to relevant contracts (e.g., parameter updates, treasury transfers).\\
-\textbf{Veto}: Council may invoke emergency veto (4-of-7 multi-sig) if critical flaw discovered during timelock; requires public justification + re-vote.
+\paragraph{Estágio 4: Timelock \& Execução (48 horas)}
+\textbf{Timelock}: Propostas aprovadas entram em atraso de 48 horas antes da execução. Justificativa: fornece janela para revisões de segurança de última hora; permite que stakers saiam se opostos a mudanças importantes.\\
+\textbf{Execução}: Automatizada via módulo de contrato inteligente de governança (\texttt{Governor.py}); transações transmitidas para contratos relevantes (ex: atualizações de parâmetros, transferências da tesouraria).\\
+\textbf{Veto}: Conselho pode invocar veto emergencial (multi-sig 4-de-7) se falha crítica descoberta durante timelock; requer justificativa pública + re-votação.
 
-\paragraph{Stage 5: Post-Implementation Review (30--90 days)}
-\textbf{Monitoring}: Track key metrics (e.g., if TEM parameters changed, monitor fee volatility, agent churn).\\
-\textbf{Retrospective}: Council publishes impact assessment; community discusses lessons learned.\\
-\textbf{Amendments}: If proposal underperforms, fast-track amendment process (reduced voting period).
+\paragraph{Estágio 5: Revisão Pós-Implementação (30--90 dias)}
+\textbf{Monitoramento}: Rastrear métricas-chave (ex: se parâmetros TEM mudaram, monitorar volatilidade de taxas, rotatividade de agentes).\\
+\textbf{Retrospectiva}: Conselho publica avaliação de impacto; comunidade discute lições aprendidas.\\
+\textbf{Emendas}: Se proposta tem desempenho inferior, processo de emenda acelerado (período de votação reduzido).
 
-\subsection{Constitutional Contracts}
+\subsection{Contratos Constitucionais}
 
-Certain rules are enshrined in immutable or semi-immutable contracts, forming the network's ``constitution.'' Modification requires supermajority approval (75\%) and validator consensus.
+Certas regras são consagradas em contratos imutáveis ou semi-imutáveis, formando a ``constituição'' da rede. Modificação requer aprovação de supermaioria (75\%) e consenso de validadores.
 
-\paragraph{Core Principles (Immutable)}
+\paragraph{Princípios Fundamentais (Imutáveis)}
 \begin{enumerate}[noitemsep]
-  \item \textbf{Non-Censorship}: No proposal may blacklist specific agents, validators, or publishers based on identity (exception: sanctioned addresses per regulatory compliance).
-  \item \textbf{Transparency}: All governance votes, treasury transactions, and contract upgrades must be publicly auditable.
-  \item \textbf{Exit Rights}: Token holders may withdraw staked TOS at any time (subject to cooldown periods); no governance action may confiscate funds without due process (arbitration ruling).
+  \item \textbf{Não-Censura}: Nenhuma proposta pode colocar em lista negra agentes, validadores ou publicadores específicos baseado em identidade (exceção: endereços sancionados por compliance regulatório).
+  \item \textbf{Transparência}: Todos votos de governança, transações da tesouraria e upgrades de contratos devem ser publicamente auditáveis.
+  \item \textbf{Direitos de Saída}: Detentores de tokens podem retirar TOS em stake a qualquer momento (sujeito a períodos de resfriamento); nenhuma ação de governança pode confiscar fundos sem devido processo (decisão de arbitragem).
 \end{enumerate}
 
-\paragraph{Economic Parameters (Semi-Immutable)}
+\paragraph{Parâmetros Econômicos (Semi-Imutáveis)}
 \begin{enumerate}[noitemsep]
-  \item \textbf{Reward Splits}: Agent/validator/treasury distribution ($\alpha, \beta, \gamma$) adjustable within bounds ($\beta \in [0.10, 0.15]$, $\gamma \in [0.05, 0.10]$).
-  \item \textbf{Slashing Penalties}: Validator/agent slashing rates capped at 50\% (prevents disproportionate punishment).
-  \item \textbf{Treasury Cap}: Maximum annual spending = 20\% of treasury balance (ensures long-term sustainability).
+  \item \textbf{Divisões de Recompensa}: Distribuição agente/validador/tesouraria ($\alpha, \beta, \gamma$) ajustável dentro de limites ($\beta \in [0.10, 0.15]$, $\gamma \in [0.05, 0.10]$).
+  \item \textbf{Penalidades de Slashing}: Taxas de slashing de validador/agente limitadas a 50\% (previne punição desproporcional).
+  \item \textbf{Teto da Tesouraria}: Gastos anuais máximos = 20\% do saldo da tesouraria (garante sustentabilidade de longo prazo).
 \end{enumerate}
 
-\subsection{Governance Attack Vectors \& Defenses}
+\subsection{Vetores de Ataque à Governança \& Defesas}
 
-\paragraph{Attack: Vote Buying}
-\textbf{Scenario}: Wealthy actor offers \$10/vote to sway proposal.\\
-\textbf{Defense}: (1) Quadratic voting reduces ROI for large-scale vote buying. (2) Delegation to trusted experts reduces susceptibility. (3) On-chain analytics detect unusual voting patterns (e.g., 1,000 wallets voting identically); flagged for community scrutiny.
+\paragraph{Ataque: Compra de Votos}
+\textbf{Cenário}: Ator rico oferece \$10/voto para influenciar proposta.\\
+\textbf{Defesa}: (1) Votação quadrática reduz ROI de compra de votos em larga escala. (2) Delegação a especialistas confiáveis reduz suscetibilidade. (3) Análises on-chain detectam padrões de votação incomuns (ex: 1.000 carteiras votando identicamente); sinalizadas para escrutínio comunitário.
 
-\paragraph{Attack: Governance Fatigue}
-\textbf{Scenario}: Excessive proposals overwhelm voters; turnout drops below quorum.\\
-\textbf{Defense}: (1) Stake requirement filters low-quality proposals. (2) Council pre-screens proposals for feasibility. (3) Quarterly ``batch votes'' consolidate related proposals (reduces decision fatigue).
+\paragraph{Ataque: Fadiga de Governança}
+\textbf{Cenário}: Propostas excessivas sobrecarregam eleitores; participação cai abaixo do quórum.\\
+\textbf{Defesa}: (1) Requisito de stake filtra propostas de baixa qualidade. (2) Conselho pré-avalia propostas quanto à viabilidade. (3) ``Votações em lote'' trimestrais consolidam propostas relacionadas (reduz fadiga decisória).
 
-\paragraph{Attack: Emergency Power Abuse}
-\textbf{Scenario}: Compromised Council member misuses multi-sig to freeze legitimate accounts.\\
-\textbf{Defense}: (1) 4-of-7 threshold requires collusion. (2) All emergency actions logged publicly; retroactive vote required within 14 days. (3) Community may recall Council members via supermajority vote.
+\paragraph{Ataque: Abuso de Poder Emergencial}
+\textbf{Cenário}: Membro comprometido do Conselho usa indevidamente multi-sig para congelar contas legítimas.\\
+\textbf{Defesa}: (1) Limiar 4-de-7 requer conluio. (2) Todas ações emergenciais registradas publicamente; voto retroativo exigido em 14 dias. (3) Comunidade pode destituir membros do Conselho via voto de supermaioria.
 
-\subsection{Governance Roadmap}
+\subsection{Roteiro de Governança}
 
 \begin{description}[style=nextline]
-  \item[Phase 1 (v3.0--v3.5, Early MERCURY)] Token holder voting on basic parameters; Council handles day-to-day operations. Focus: establish processes, build trust.
-  \item[Phase 2 (v4.0, Mid-MERCURY)] Introduce delegation, quadratic voting, working groups. Agent operators gain formal representation.
-  \item[Phase 3 (v5.0, Late MERCURY)] AI agents participate in governance via reputation-weighted votes (constitutional contracts enforce human veto for sensitive decisions).
-  \item[Phase 4 (VENUS+)] Mixed human--AI councils; constitutional smart contracts enable self-amending governance within predefined bounds.
+  \item[Fase 1 (v3.0--v3.5, Início de MERCÚRIO)] Votação de detentores de tokens em parâmetros básicos; Conselho cuida de operações diárias. Foco: estabelecer processos, construir confiança.
+  \item[Fase 2 (v4.0, Meio de MERCÚRIO)] Introduzir delegação, votação quadrática, grupos de trabalho. Operadores de agentes ganham representação formal.
+  \item[Fase 3 (v5.0, Final de MERCÚRIO)] Agentes de IA participam da governança via votos ponderados por reputação (contratos constitucionais impõem veto humano para decisões sensíveis).
+  \item[Fase 4 (VÊNUS+)] Conselhos mistos humano--IA; contratos inteligentes constitucionais habilitam governança auto-emendável dentro de limites predefinidos.
 \end{description}
 
-\section{Regulatory Considerations}
+\section{Considerações Regulatórias}
 \label{sec:regulatory}
 
-TOS operates at the intersection of blockchain, AI, and financial services—three heavily regulated domains. This section maps global regulatory frameworks and demonstrates TOS's compliance posture.
+O TOS opera na interseção de blockchain, IA e serviços financeiros—três domínios fortemente regulados. Esta seção mapeia frameworks regulatórios globais e demonstra a postura de compliance do TOS.
 
-\subsection{Multi-Jurisdiction Compliance Matrix}
+\subsection{Matriz de Compliance Multi-Jurisdicional}
 
 \begin{longtable}{@{}p{0.16\textwidth}p{0.28\textwidth}p{0.22\textwidth}p{0.22\textwidth}@{}}
 \toprule
-\textbf{Region} & \textbf{Regulation} & \textbf{Requirements} & \textbf{TOS Alignment} \\\midrule
-\textbf{United States} & AI Risk Management Framework (NIST AI RMF, 2023) & Risk assessment, transparency, accountability & Audit logs, telemetry API, governance disclosures \\
- & Securities Law (Howey Test) & Token not classified as security if sufficiently decentralized & Council elections, open validator set, no central control \\
- & AML/KYC (FinCEN) & Customer due diligence for fiat on-ramps & Partner with regulated exchanges; KYC for fiat gateways only \\
-\textbf{European Union} & AI Act (2024) & High-risk AI systems require conformity assessment, human oversight & Expert arbitration, human-in-the-loop for sensitive tasks, CE marking roadmap \\
- & GDPR & Right to erasure, data minimization, consent & Confidential balances, pseudonymous DIDs, view-only keys for auditors \\
- & MiCA (Markets in Crypto-Assets) & Stablecoin reserves, whitepaper disclosures & CC/EC backed by oracle-verified resources; this whitepaper as disclosure \\
-\textbf{Singapore} & MAS Payment Services Act & Licensing for digital payment token services & Collaborate with licensed payment institutions; no direct fiat handling \\
- & AI Governance Framework & Fairness, transparency, accountability & RepGraph anti-bias monitoring, validation transparency, arbitration appeals \\
-\textbf{China} & Algorithm Recommendation Regulations (2022) & Registration, content moderation, user rights & Geographic restrictions; China operations require separate compliance (future work) \\
-\textbf{UK} & AI White Paper (pro-innovation) & Sector-specific regulators oversee AI & Financial Conduct Authority (FCA) engagement for fintech use cases \\
+\textbf{Região} & \textbf{Regulação} & \textbf{Requisitos} & \textbf{Alinhamento TOS} \\\midrule
+\textbf{Estados Unidos} & AI Risk Management Framework (NIST AI RMF, 2023) & Avaliação de risco, transparência, responsabilização & Logs de auditoria, API de telemetria, divulgações de governança \\
+ & Lei de Valores Mobiliários (Teste Howey) & Token não classificado como valor mobiliário se suficientemente descentralizado & Eleições de Conselho, conjunto de validadores aberto, sem controle central \\
+ & AML/KYC (FinCEN) & Diligência devida do cliente para on-ramps fiat & Parceria com exchanges reguladas; KYC apenas para gateways fiat \\
+\textbf{União Europeia} & AI Act (2024) & Sistemas de IA de alto risco requerem avaliação de conformidade, supervisão humana & Arbitragem especializada, human-in-the-loop para tarefas sensíveis, roadmap de marcação CE \\
+ & GDPR & Direito ao apagamento, minimização de dados, consentimento & Saldos confidenciais, DIDs pseudônimos, chaves view-only para auditores \\
+ & MiCA (Markets in Crypto-Assets) & Reservas de stablecoin, divulgações de whitepaper & CC/EC respaldados por recursos verificados por oráculos; este whitepaper como divulgação \\
+\textbf{Singapura} & MAS Payment Services Act & Licenciamento para serviços de tokens de pagamento digital & Colaboração com instituições de pagamento licenciadas; sem manuseio direto de fiat \\
+ & AI Governance Framework & Equidade, transparência, responsabilização & Monitoramento anti-viés RepGraph, transparência de validação, apelações de arbitragem \\
+\textbf{China} & Regulamentos de Recomendação de Algoritmos (2022) & Registro, moderação de conteúdo, direitos do usuário & Restrições geográficas; operações na China requerem compliance separado (trabalho futuro) \\
+\textbf{Reino Unido} & AI White Paper (pró-inovação) & Reguladores específicos por setor supervisionam IA & Engajamento com Financial Conduct Authority (FCA) para casos de uso fintech \\
 \bottomrule
-\caption{TOS regulatory compliance across key jurisdictions.}
+\caption{Compliance regulatório do TOS em jurisdições-chave.}
 \end{longtable}
 
-\subsection{Compliance Features}
+\subsection{Recursos de Compliance}
 
-\paragraph{Auditability}
-All on-chain actions (AGIW submissions, governance votes, treasury transfers) emit events indexed by the Indexed Data Service. Compliance API provides filtered access for authorized regulators:
+\paragraph{Auditabilidade}
+Todas as ações on-chain (submissões AGIW, votos de governança, transferências do tesouro) emitem eventos indexados pelo Indexed Data Service. A API de Compliance fornece acesso filtrado para reguladores autorizados:
 \begin{itemize}[noitemsep]
-  \item Aggregated statistics (monthly task volume, dispute rates) without exposing individual identities.
-  \item Role-based access control (RBAC) via OAuth2; access logs retained for 7 years.
-  \item Quarterly transparency reports published publicly (see Appendix C).
+  \item Estatísticas agregadas (volume mensal de tarefas, taxas de disputas) sem expor identidades individuais.
+  \item Controle de acesso baseado em funções (RBAC) via OAuth2; logs de acesso retidos por 7 anos.
+  \item Relatórios de transparência trimestrais publicados publicamente (ver Apêndice C).
 \end{itemize}
 
-\paragraph{Custody \& AML}
-TOS integrates with Chainalysis/Elliptic for transaction monitoring. Fiat on/off-ramps partner with licensed payment institutions (e.g., Circle, Paxos) that perform KYC. Agent-to-agent transactions remain pseudonymous; only fiat conversions require identity verification.
+\paragraph{Custódia e AML}
+O TOS integra com Chainalysis/Elliptic para monitoramento de transações. On/off-ramps fiat fazem parceria com instituições de pagamento licenciadas (ex: Circle, Paxos) que realizam KYC. Transações agente-para-agente permanecem pseudônimas; apenas conversões fiat requerem verificação de identidade.
 
-\paragraph{Data Privacy}
-Confidential transactions (Pedersen commitments + Bulletproofs) ensure task specifications and pricing remain private. GDPR ``right to erasure'' handled via:
+\paragraph{Privacidade de Dados}
+Transações confidenciais (compromissos de Pedersen + Bulletproofs) garantem que especificações de tarefas e precificação permaneçam privadas. O ``direito ao apagamento'' do GDPR é tratado via:
 \begin{itemize}[noitemsep]
-  \item On-chain hashes (not full data) → off-chain storage (IPFS, Arweave) with encryption keys controlled by users.
-  \item Revocation of DID → reputation reset → effectively anonymizes historical participation.
+  \item Hashes on-chain (não dados completos) → armazenamento off-chain (IPFS, Arweave) com chaves de criptografia controladas pelos usuários.
+  \item Revogação de DID → reset de reputação → efetivamente anonimiza participação histórica.
 \end{itemize}
 
-\paragraph{Cross-Border Data Flows}
-EU--US Data Privacy Framework (2023) enables transatlantic data transfers. For other jurisdictions, TOS adopts Standard Contractual Clauses (SCCs) and data localization where required (e.g., China, Russia).
+\paragraph{Fluxos de Dados Transfronteiriços}
+O EU--US Data Privacy Framework (2023) possibilita transferências de dados transatlânticas. Para outras jurisdições, o TOS adota Cláusulas Contratuais Padrão (SCCs) e localização de dados onde necessário (ex: China, Rússia).
 
-\subsection{Regulatory Engagement Strategy}
+\subsection{Estratégia de Engajamento Regulatório}
 
 \begin{enumerate}[noitemsep]
-  \item \textbf{Proactive Education}: Council publishes explainer materials for policymakers; participates in regulatory consultations (e.g., EU AI Act public comments).
-  \item \textbf{Sandbox Participation}: Apply for regulatory sandboxes (Singapore MAS, UK FCA) to pilot agent-based financial services under supervision.
-  \item \textbf{Industry Coalitions}: Join Blockchain Association, AI Safety Alliance, IEEE P3119 (AI bias standards) to shape favorable policy.
-  \item \textbf{Compliance-as-Code}: Policy compiler (Section~\ref{sec:expansion}) translates regulations into executable smart contract rules (e.g., ``Block transactions to OFAC-sanctioned addresses'').
+  \item \textbf{Educação Proativa}: Conselho publica materiais explicativos para formuladores de políticas; participa de consultas regulatórias (ex: comentários públicos sobre o EU AI Act).
+  \item \textbf{Participação em Sandbox}: Candidatar-se a sandboxes regulatórios (Singapore MAS, UK FCA) para pilotar serviços financeiros baseados em agentes sob supervisão.
+  \item \textbf{Coalizões Industriais}: Juntar-se à Blockchain Association, AI Safety Alliance, IEEE P3119 (padrões de viés de IA) para moldar políticas favoráveis.
+  \item \textbf{Compliance-as-Code}: Compilador de políticas (Seção~\ref{sec:expansion}) traduz regulações em regras executáveis de smart contracts (ex: ``Bloquear transações para endereços sancionados pela OFAC'').
 \end{enumerate}
 
-\section{Implementation and Benchmarking}
+\section{Implementação e Benchmarking}
 \label{sec:implementation}
 
-\subsection{Network Topology}
+\subsection{Topologia de Rede}
 
-\textbf{Mainnet (Themis)}: Production network; launched September 2025; 347 validator nodes across 42 countries.\\
-\textbf{Testnet (Helios)}: Public testnet for developers; resets monthly; faucet provides free test-TOS.\\
-\textbf{Devnet (Aurora)}: Private network for core team; rapid iteration; snapshot-based rollbacks for debugging.\\
-\textbf{Staging (Metis)}: Pre-production environment mirroring mainnet configuration; final testing before upgrades.
+\textbf{Mainnet (Themis)}: Rede de produção; lançada em setembro de 2025; 347 nós validadores em 42 países.\\
+\textbf{Testnet (Helios)}: Testnet pública para desenvolvedores; reinicia mensalmente; faucet fornece test-TOS gratuito.\\
+\textbf{Devnet (Aurora)}: Rede privada para equipe central; iteração rápida; rollbacks baseados em snapshot para debugging.\\
+\textbf{Staging (Metis)}: Ambiente de pré-produção espelhando configuração da mainnet; testes finais antes de upgrades.
 
-\subsection{Performance Metrics (Q3 2025)}
+\subsection{Métricas de Desempenho (Q3 2025)}
 
 \begin{longtable}{@{}p{0.30\textwidth}p{0.28\textwidth}p{0.30\textwidth}@{}}
 \toprule
-\textbf{Metric} & \textbf{Measured Value} & \textbf{Target (v4.0)} \\\midrule
-Throughput (TPS) & 2,847 sustained, 3,521 peak & 10,000+ with PAI \\
-Block time & 11.3s avg, 18.2s p95 & <10s avg \\
-Finality & 8 blocks (90s) probabilistic & 500ms for high-priority tx \\
-Validator uptime & 99.7\% (median) & 99.9\% (SLA) \\
-AGIW settlement latency & 14.2 min (median) & <10 min \\
-Taxa de disputas & 1.8\% & <2\% \\
-Network bandwidth & 45 MB/s avg & 150 MB/s (PAI) \\
-State size & 128 GB & Pruning + sharding \\
+\textbf{Métrica} & \textbf{Valor Medido} & \textbf{Meta (v4.0)} \\\midrule
+Throughput (TPS) & 2.847 sustentado, 3.521 pico & 10.000+ com PAI \\
+Tempo de bloco & 11,3s médio, 18,2s p95 & <10s médio \\
+Finalidade & 8 blocos (90s) probabilística & 500ms para tx alta prioridade \\
+Uptime de validador & 99,7\% (mediana) & 99,9\% (SLA) \\
+Latência de liquidação AGIW & 14,2 min (mediana) & <10 min \\
+Taxa de disputas & 1,8\% & <2\% \\
+Largura de banda de rede & 45 MB/s médio & 150 MB/s (PAI) \\
+Tamanho de estado & 128 GB & Pruning + sharding \\
 \bottomrule
-\caption{TOS network performance benchmarks (Mainnet Themis, Sept 2025).}
+\caption{Benchmarks de desempenho da rede TOS (Mainnet Themis, setembro 2025).}
 \end{longtable}
 
-\subsection{Benchmark Methodology}
+\subsection{Metodologia de Benchmark}
 
-\textbf{Workload Mix}:
+\textbf{Mix de Carga de Trabalho}:
 \begin{itemize}[noitemsep]
-  \item 40\% AGIW task submissions (varied payload sizes: 10 KB--5 MB).
-  \item 30\% CC/EC swaps (AMM transactions).
-  \item 20\% DID operations (registrations, credential issuance).
-  \item 10\% governance votes + treasury transfers.
+  \item 40\% submissões de tarefas AGIW (tamanhos de payload variados: 10 KB--5 MB).
+  \item 30\% swaps CC/EC (transações AMM).
+  \item 20\% operações DID (registros, emissão de credenciais).
+  \item 10\% votos de governança + transferências do tesouro.
 \end{itemize}
 
-\textbf{Stress Testing}: Ramp traffic from 500 TPS to 5,000 TPS over 2 hours; measure latency degradation, validator synchronization lag, mempool congestion. Scripts: \texttt{github.com/tos-network/benchmarks}.
+\textbf{Testes de Estresse}: Aumentar tráfego de 500 TPS para 5.000 TPS ao longo de 2 horas; medir degradação de latência, lag de sincronização de validadores, congestionamento de mempool. Scripts: \texttt{github.com/tos-network/benchmarks}.
 
-\textbf{Chaos Engineering}: Randomly terminate 10\% of validators; simulate network partitions; inject malicious transactions. Verify liveness and safety properties hold.
+\textbf{Engenharia de Caos}: Terminar aleatoriamente 10\% dos validadores; simular partições de rede; injetar transações maliciosas. Verificar que propriedades de vivacidade e segurança se mantêm.
 
 \section{Estudos de Caso}
 \label{sec:case-studies}
@@ -2179,18 +2179,18 @@ State size & 128 GB & Pruning + sharding \\
 
 \paragraph{Client} International law firm (Fortune 500 clients); 1,200 attorneys; $>$10,000 active cases.
 
-\paragraph{Challenge} Discovery process for class-action lawsuit required reviewing 2.5 million pages of contracts, emails, internal memos. Manual review estimated at 18,000 paralegal hours (\$4.5M cost, 6-month timeline). Court-mandated deadline: 90 days.
+\paragraph{Desafio} Processo de descoberta para ação coletiva exigiu revisão de 2,5 milhões de páginas de contratos, e-mails, memorandos internos. Revisão manual estimada em 18.000 horas de paralegal (custo de \$4,5M, cronograma de 6 meses). Prazo determinado pelo tribunal: 90 dias.
 
-\paragraph{TOS Solution}
+\paragraph{Solução TOS}
 \begin{enumerate}[noitemsep]
-  \item \textbf{Agent Deployment}: Firm deployed 50 AI agents (GPT-4-based, fine-tuned on legal precedents) on TOS.
-  \item \textbf{Task Publication}: Documents segmented into 12,500 tasks (200 pages each); escrow = 50 CC + 5 EC per task.
-  \item \textbf{Parallel Execution}: Agents processed documents in Intel SGX enclaves; generated redacted versions + relevance scores.
-  \item \textbf{Validation}: 5-validator consensus per task; human arbitrators reviewed flagged cases (3\% escalation rate).
-  \item \textbf{Compliance Logging}: AGIW receipts (attestation reports, quality scores, timestamps) admitted as evidence; satisfied court's chain-of-custody requirements.
+  \item \textbf{Implantação de Agentes}: Firma implantou 50 agentes de IA (baseados em GPT-4, ajustados em precedentes legais) no TOS.
+  \item \textbf{Publicação de Tarefas}: Documentos segmentados em 12.500 tarefas (200 páginas cada); depósito em garantia = 50 CC + 5 EC por tarefa.
+  \item \textbf{Execução Paralela}: Agentes processaram documentos em enclaves Intel SGX; geraram versões redigidas + pontuações de relevância.
+  \item \textbf{Validação}: Consenso de 5 validadores por tarefa; árbitros humanos revisaram casos sinalizados (taxa de escalação de 3\%).
+  \item \textbf{Registro de Conformidade}: Recibos AGIW (relatórios de atestação, pontuações de qualidade, timestamps) admitidos como evidência; atenderam requisitos de cadeia de custódia do tribunal.
 \end{enumerate}
 
-\paragraph{Outcomes}
+\paragraph{Resultados}
 \begin{itemize}[noitemsep]
   \item \textbf{Cost}: \$1.8M (60\% savings vs. manual).
   \item \textbf{Time}: 67 days (25\% faster than deadline).
@@ -2224,17 +2224,17 @@ Court admissibility & Limited & Full (chain-of-custody) & Precedent-setting \\
 
 \paragraph{Client} Non-profit climate research consortium (23 universities, 5 government agencies).
 
-\paragraph{Challenge} Analyze 4.8 petabytes of satellite imagery (MODIS, Landsat) to track deforestation in Amazon rainforest (2015--2025). Traditional cloud compute (AWS/GCP) estimated at \$12M; grant budget = \$3M.
+\paragraph{Desafio} Analisar 4,8 petabytes de imagens de satélite (MODIS, Landsat) para rastrear desmatamento na floresta amazônica (2015--2025). Computação em nuvem tradicional (AWS/GCP) estimada em \$12M; orçamento de bolsa = \$3M.
 
-\paragraph{TOS Solution}
+\paragraph{Solução TOS}
 \begin{enumerate}[noitemsep]
   \item \textbf{Compute Credits}: Consortium purchased 2.4M CC tokens at 20\% discount (TEM subsidy for public-good research).
-  \item \textbf{Distributed Inference}: 300 agents (running YOLO object detection models) processed imagery chunks; GPU inference subsidized via EC tokens.
-  \item \textbf{Renewable Energy Tracking}: Agents operating on solar/wind received 10\% fee discounts; aggregate EC usage reported in carbon offset calculations.
-  \item \textbf{Data Integrity}: Merkleized outputs + attestation reports ensured reproducibility; peer-reviewed publication cited TOS receipts.
+  \item \textbf{Inferência Distribuída}: 300 agentes (executando modelos de detecção de objetos YOLO) processaram chunks de imagens; inferência GPU subsidiada via tokens EC.
+  \item \textbf{Rastreamento de Energia Renovável}: Agentes operando em solar/eólica receberam 10\% de descontos em taxas; uso agregado de EC relatado em cálculos de compensação de carbono.
+  \item \textbf{Integridade de Dados}: Saídas merkleizadas + relatórios de atestação garantiram reprodutibilidade; publicação revisada por pares citou recibos TOS.
 \end{enumerate}
 
-\paragraph{Outcomes}
+\paragraph{Resultados}
 \begin{itemize}[noitemsep]
   \item \textbf{Cost}: \$2.7M (77\% of budget; savings reallocated to field research).
   \item \textbf{Time}: 14 months (vs. 24-month estimate).
@@ -2269,9 +2269,9 @@ Carbon offset credits & \$0 & \$42K (EC-verified) & Auditable \\
 
 \paragraph{Client} AAA gaming studio; 15M monthly active users; in-game economy = \$200M annual GMV.
 
-\paragraph{Challenge} Player complaints about unfair AI moderators (banning legitimate users, ignoring toxic behavior). Manual appeals backlog: 45,000 tickets, 6-week resolution time. Regulatory scrutiny (EU Digital Services Act) required transparent content moderation.
+\paragraph{Desafio} Reclamações de jogadores sobre moderadores de IA injustos (banindo usuários legítimos, ignorando comportamento tóxico). Atraso de apelações manuais: 45.000 tickets, tempo de resolução de 6 semanas. Escrutínio regulatório (Lei de Serviços Digitais da UE) exigiu moderação de conteúdo transparente.
 
-\paragraph{TOS Solution}
+\paragraph{Solução TOS}
 \begin{enumerate}[noitemsep]
   \item \textbf{Reputation NFTs}: AI moderators minted on-chain credentials; quality scores visible to players.
   \item \textbf{AGIW Receipts}: Every moderation decision logged with attestation (chat logs hashed, decision rationale, validator consensus).
@@ -2279,7 +2279,7 @@ Carbon offset credits & \$0 & \$42K (EC-verified) & Auditable \\
   \item \textbf{Transparency Dashboard}: Public explorer showed moderator accuracy, appeal success rates, arbitrator performance.
 \end{enumerate}
 
-\paragraph{Outcomes}
+\paragraph{Resultados}
 \begin{itemize}[noitemsep]
   \item \textbf{Trust}: Player satisfaction (NPS) increased from 42 to 68.
   \item \textbf{Efficiency}: Appeal resolution time dropped to 2.1 days (71\% improvement).
@@ -2310,372 +2310,372 @@ Stake-at-risk (appeals) & \$0 & 50 TOS (\$125) & Spam deterrent \\
 
 \textbf{Key Insight}: Transparent moderation with on-chain reputation restored player trust while reducing costs. Studio became a validator, earning protocol rewards to offset moderation expenses—a self-sustaining compliance model.
 
-\section{Development Roadmap: 12-Month Milestones}
+\section{Roadmap de Desenvolvimento: Marcos de 12 Meses}
 \label{sec:12month-roadmap}
 
-This section provides a publishable, quarter-by-quarter roadmap for TOS development from Q1 2026 through Q4 2026, focusing on deliverables that enable near-term enterprise adoption while laying foundations for long-term AGI infrastructure.
+Esta seção fornece um roadmap publicável, trimestre a trimestre, para o desenvolvimento do TOS de Q1 2026 a Q4 2026, focando em entregas que possibilitam adoção empresarial de curto prazo enquanto estabelecem fundações para infraestrutura AGI de longo prazo.
 
-\subsection{Q1 2026: Identity, Attestation, and Task Markets}
+\subsection{Q1 2026: Identidade, Atestação e Mercados de Tarefas}
 
-\textbf{Core Deliverables}:
+\textbf{Entregas Principais}:
 \begin{itemize}[noitemsep]
-  \item \textbf{DID/Credential System v1.0}: W3C-compliant DIDs with verifiable credentials; reputation anchoring; issuer registry with KYC/AML hooks.
-  \item \textbf{AGIW Attestation v1.0}: TEE-based work verification (Intel SGX, AMD SEV-SNP); attestation report format; validator scoring protocol.
-  \item \textbf{Task Market v1.0}: Smart contracts for task publication, claiming, submission, validation, and distribuição de recompensas; escrow mechanisms.
-  \item \textbf{CC Token Launch}: Compute Credits (CC) deployed with oracle integration (GPU pricing index); automated market maker (AMM) pools for liquidity.
-  \item \textbf{Paymaster Contracts}: Account abstraction for gas-free agent operations; sponsors can subsidize task fees.
-  \item \textbf{Explorer Tabs}: \texttt{explorer.tos.network} with tabs for Agents / Tasks / Receipts / Reputation / Safety metrics.
+  \item \textbf{Sistema DID/Credencial v1.0}: DIDs compatíveis com W3C com credenciais verificáveis; ancoragem de reputação; registro de emissores com hooks KYC/AML.
+  \item \textbf{Atestação AGIW v1.0}: Verificação de trabalho baseada em TEE (Intel SGX, AMD SEV-SNP); formato de relatório de atestação; protocolo de pontuação de validadores.
+  \item \textbf{Mercado de Tarefas v1.0}: Smart contracts para publicação de tarefas, reivindicação, submissão, validação e distribuição de recompensas; mecanismos de escrow.
+  \item \textbf{Lançamento Token CC}: Compute Credits (CC) deployados com integração de oráculo (índice de preços de GPU); pools de automated market maker (AMM) para liquidez.
+  \item \textbf{Contratos Paymaster}: Abstração de conta para operações de agentes sem gás; patrocinadores podem subsidiar taxas de tarefas.
+  \item \textbf{Abas do Explorer}: \texttt{explorer.tos.network} com abas para Agentes / Tarefas / Recibos / Reputação / Métricas de Segurança.
 \end{itemize}
 
-\textbf{Success Metrics}: 1,000+ registered agents; 500 tasks/day; 95\%+ task completion rate; median settlement latency <20 min.
+\textbf{Métricas de Sucesso}: 1.000+ agentes registrados; 500 tarefas/dia; taxa de conclusão de tarefas 95\%+; latência de liquidação mediana <20 min.
 
-\subsection{Q2 2026: Reputation, Energy Markets, and Safety}
+\subsection{Q2 2026: Reputação, Mercados de Energia e Segurança}
 
-\textbf{Core Deliverables}:
+\textbf{Entregas Principais}:
 \begin{itemize}[noitemsep]
-  \item \textbf{Reputation Events v1.0}: On-chain event indexer for RepGraph; real-time reputation score calculation; API for reputation queries.
-  \item \textbf{EC Token Launch}: Energy Credits (EC) with regional kWh oracle integration; energy basket pricing (renewable energy weighting).
-  \item \textbf{Safety Oracle v1.0}: Integration with Anthropic Constitutional AI, OpenAI Moderation API, Google Perspective; harmfulness scoring; content policy enforcement.
-  \item \textbf{Wallet Policy Kits}: Configurable safety policies for enterprises (e.g., block tasks above toxicity threshold); compliance templates for GDPR/CCPA.
-  \item \textbf{Validator Dashboard}: Real-time monitoring of validator performance; slashing events; uptime tracking; earnings calculator.
-  \item \textbf{Public Telemetry API}: \texttt{metrics.tos.network/api} for TPS, block time, AGIW latency, dispute rate (30-day rolling).
+  \item \textbf{Eventos de Reputação v1.0}: Indexador de eventos on-chain para RepGraph; cálculo de pontuação de reputação em tempo real; API para consultas de reputação.
+  \item \textbf{Lançamento Token EC}: Energy Credits (EC) com integração de oráculo regional de kWh; precificação de cesta de energia (ponderação de energia renovável).
+  \item \textbf{Oráculo de Segurança v1.0}: Integração com Anthropic Constitutional AI, OpenAI Moderation API, Google Perspective; pontuação de nocividade; aplicação de políticas de conteúdo.
+  \item \textbf{Kits de Políticas de Wallet}: Políticas de segurança configuráveis para empresas (ex: bloquear tarefas acima do limiar de toxicidade); templates de compliance para GDPR/CCPA.
+  \item \textbf{Dashboard de Validadores}: Monitoramento em tempo real de desempenho de validadores; eventos de slashing; rastreamento de uptime; calculadora de ganhos.
+  \item \textbf{API de Telemetria Pública}: \texttt{metrics.tos.network/api} para TPS, tempo de bloco, latência AGIW, taxa de disputas (rolling de 30 dias).
 \end{itemize}
 
-\textbf{Success Metrics}: 2,000+ agents; 1,500 tasks/day; reputation score coverage 80\%+; safety violations <0.5\%; EC market liquidity \$5M+.
+\textbf{Métricas de Sucesso}: 2.000+ agentes; 1.500 tarefas/dia; cobertura de pontuação de reputação 80\%+; violações de segurança <0,5\%; liquidez de mercado EC \$5M+.
 
-\subsection{Q3 2026: Zero-Knowledge Pilots, Arbitration, and Insurance}
+\subsection{Q3 2026: Pilotos Zero-Knowledge, Arbitragem e Seguros}
 
-\textbf{Core Deliverables}:
+\textbf{Entregas Principais}:
 \begin{itemize}[noitemsep]
-  \item \textbf{AGIW-ZK Pilot}: zk-SNARK attestation for simple AI tasks (linear regression, small neural nets); benchmark proof generation vs. TEE latency.
-  \item \textbf{Arbitration Court v1.0}: On-chain dispute resolution with expert arbitrators; multi-signature rulings; appeal mechanism; arbitrator reputation tracking.
-  \item \textbf{Insurance Pool v1.0}: Staking-based insurance for publicação da tarefaers; automated payouts for verified failures; premium calculation based on task risk.
-  \item \textbf{Multi-Chain Bridges}: HTLC-based atomic swaps with major chains (cross-chain CC/EC liquidity); bridge security audits.
-  \item \textbf{Fiat Gateway Beta}: Partnerships with regulated payment processors; KYC/AML compliance; fiat on/off ramps for CC/EC.
-  \item \textbf{Developer SDK v1.0}: Python, JavaScript, Rust libraries for publicação da tarefaing, agent registration, receipt verification; comprehensive examples.
+  \item \textbf{Piloto AGIW-ZK}: Atestação zk-SNARK para tarefas simples de IA (regressão linear, redes neurais pequenas); benchmark de geração de prova vs. latência TEE.
+  \item \textbf{Corte de Arbitragem v1.0}: Resolução de disputas on-chain com árbitros especializados; decisões multi-assinatura; mecanismo de apelação; rastreamento de reputação de árbitros.
+  \item \textbf{Pool de Seguros v1.0}: Seguro baseado em staking para publicadores de tarefas; pagamentos automatizados para falhas verificadas; cálculo de prêmio baseado em risco da tarefa.
+  \item \textbf{Bridges Multi-Chain}: Swaps atômicos baseados em HTLC com chains principais (liquidez CC/EC cross-chain); auditorias de segurança de bridge.
+  \item \textbf{Gateway Fiat Beta}: Parcerias com processadores de pagamento regulados; compliance KYC/AML; on/off ramps fiat para CC/EC.
+  \item \textbf{SDK para Desenvolvedores v1.0}: Bibliotecas Python, JavaScript, Rust para publicação de tarefas, registro de agentes, verificação de recibos; exemplos abrangentes.
 \end{itemize}
 
-\textbf{Success Metrics}: 3,500+ agents; 3,000 tasks/day; ZK proof success rate 85\%+; arbitration resolution time <48h; insurance pool TVL \$10M+.
+\textbf{Métricas de Sucesso}: 3.500+ agentes; 3.000 tarefas/dia; taxa de sucesso de prova ZK 85\%+; tempo de resolução de arbitragem <48h; TVL do pool de seguros \$10M+.
 
-\subsection{Q4 2026: TEM Launch, Benchmark Reports, and Marketplace Integrations}
+\subsection{Q4 2026: Lançamento TEM, Relatórios de Benchmark e Integrações de Marketplace}
 
-\textbf{Core Deliverables}:
+\textbf{Entregas Principais}:
 \begin{itemize}[noitemsep]
-  \item \textbf{TEM v1.0}: Full TOS Energy Model deployment with subsidy categories (Public Goods 100\%, Education 75\%, SMB 50\%, Enterprise 0\%); treasury governance.
-  \item \textbf{Dynamic Fee Markets}: Base fee adjustment mechanism; priority tip markets; burn mechanism for deflationary pressure.
-  \item \textbf{Benchmark Report}: Comprehensive performance analysis (TPS, finality, AGIW latency, dispute rate); comparison with baseline; methodology documentation.
-  \item \textbf{3rd-Party Marketplace Integrations}: Partnerships with agent marketplaces (e.g., AI agent stores); AGIW receipt verification SDKs; compliance tooling.
-  \item \textbf{Governance v2.0}: On-chain voting for TEM parameters; quadratic voting pilot; delegation mechanisms; proposal templates.
-  \item \textbf{Security Audit Reports}: Third-party audits (Trail of Bits, OpenZeppelin); penetration testing results; bug bounty program launch.
-  \item \textbf{PAI Consensus Testnet}: Power of AI consensus pilot on separate testnet; AI scheduling hints; performance benchmarking vs. baseline BlockDAG.
+  \item \textbf{TEM v1.0}: Deployment completo do TOS Energy Model com categorias de subsídio (Bens Públicos 100\%, Educação 75\%, PME 50\%, Empresa 0\%); governança do tesouro.
+  \item \textbf{Mercados de Taxas Dinâmicas}: Mecanismo de ajuste de taxa base; mercados de tip de prioridade; mecanismo de queima para pressão deflacionária.
+  \item \textbf{Relatório de Benchmark}: Análise abrangente de desempenho (TPS, finalidade, latência AGIW, taxa de disputas); comparação com baseline; documentação de metodologia.
+  \item \textbf{Integrações de Marketplace de Terceiros}: Parcerias com marketplaces de agentes (ex: lojas de agentes IA); SDKs de verificação de recibos AGIW; ferramentas de compliance.
+  \item \textbf{Governança v2.0}: Votação on-chain para parâmetros TEM; piloto de votação quadrática; mecanismos de delegação; templates de proposta.
+  \item \textbf{Relatórios de Auditoria de Segurança}: Auditorias de terceiros (Trail of Bits, OpenZeppelin); resultados de testes de penetração; lançamento de programa bug bounty.
+  \item \textbf{Testnet de Consenso PAI}: Piloto de consenso Power of AI em testnet separada; hints de agendamento de IA; benchmarking de desempenho vs. BlockDAG baseline.
 \end{itemize}
 
-\textbf{Success Metrics}: 5,000+ daily active agents; 10,000 tasks/day; median settlement latency <15 min; dispute rate <2\%; TEM treasury \$50M+; external integrations 5+.
+\textbf{Métricas de Sucesso}: 5.000+ agentes ativos diários; 10.000 tarefas/dia; latência de liquidação mediana <15 min; taxa de disputas <2\%; tesouro TEM \$50M+; integrações externas 5+.
 
-\subsection{Success Criteria \& Risk Mitigation}
+\subsection{Critérios de Sucesso e Mitigação de Riscos}
 
-\textbf{Key Performance Indicators} (cumulative by Q4 2026):
+\textbf{Indicadores-Chave de Desempenho} (cumulativo até Q4 2026):
 \begin{itemize}[noitemsep]
-  \item Daily active agents: 5,000+
-  \item Verified tasks/day: 10,000+
-  \item Median AGIW settlement latency: <15 minutes
+  \item Agentes ativos diários: 5.000+
+  \item Tarefas verificadas/dia: 10.000+
+  \item Latência de liquidação AGIW mediana: <15 minutos
   \item Taxa de disputas: <2\%
   \item Precisão de detecção de fraude: >99\%
-  \item Validator liveness: >98\%
-  \item CC/EC market liquidity: \$100M+ combined
-  \item Enterprise pilot customers: 10+
+  \item Vivacidade de validadores: >98\%
+  \item Liquidez de mercado CC/EC: \$100M+ combinados
+  \item Clientes piloto empresariais: 10+
 \end{itemize}
 
-\textbf{Risk Mitigation Strategies}:
+\textbf{Estratégias de Mitigação de Riscos}:
 \begin{itemize}[noitemsep]
-  \item \textbf{ZK Proof Delays}: Maintain TEE fallback; gradual ZK rollout for low-risk tasks first.
-  \item \textbf{Oracle Failures}: Multi-source oracle feeds; staleness caps; automated circuit breakers.
-  \item \textbf{Regulatory Changes}: Modular policy engine allows jurisdiction-specific compliance; geographic restrictions if needed.
-  \item \textbf{Security Vulnerabilities}: Continuous audits; bug bounty program; emergency pause mechanisms; upgrade governance.
-  \item \textbf{Market Adoption}: Developer incentives; hackathons; reference implementations; enterprise pilots with subsidized onboarding.
+  \item \textbf{Atrasos de Prova ZK}: Manter fallback TEE; rollout gradual de ZK primeiro para tarefas de baixo risco.
+  \item \textbf{Falhas de Oráculos}: Feeds de oráculos multi-fonte; caps de obsolescência; disjuntores automatizados.
+  \item \textbf{Mudanças Regulatórias}: Motor de políticas modular permite compliance específico por jurisdição; restrições geográficas se necessário.
+  \item \textbf{Vulnerabilidades de Segurança}: Auditorias contínuas; programa bug bounty; mecanismos de pausa emergencial; governança de upgrade.
+  \item \textbf{Adoção de Mercado}: Incentivos para desenvolvedores; hackathons; implementações de referência; pilotos empresariais com onboarding subsidiado.
 \end{itemize}
 
 \section{Agenda de Pesquisa}
 \label{sec:research}
 
-TOS development prioritizes applied research addressing near-term deployment challenges while maintaining long-horizon alignment with AGI civilization needs. The following workstreams are active as of Outubro 2025.
+O desenvolvimento do TOS prioriza pesquisa aplicada abordando desafios de implantação de curto prazo, mantendo alinhamento de longo horizonte com necessidades de civilização AGI. Os seguintes fluxos de trabalho estão ativos a partir de outubro de 2025.
 
-\subsection{Cryptographic Primitives}
+\subsection{Primitivas Criptográficas}
 
-\paragraph{Zero-Knowledge Proofs for AGIW}
-\textbf{Problem}: TEE attestation relies on vendor trust (Intel, AMD); side-channel vulnerabilities (Spectre, Meltdown).\\
-\textbf{Goal}: Replace TEE with zk-SNARKs proving correct execution without revealing inputs/outputs.\\
-\textbf{Approach}: Implement Plonky2 (efficient recursive proofs) for common AI tasks (inference, data preprocessing). Benchmark proof generation time vs. TEE attestation latency.\\
+\paragraph{Provas de Conhecimento Zero para AGIW}
+\textbf{Problema}: Atestação TEE depende de confiança no fornecedor (Intel, AMD); vulnerabilidades de canal lateral (Spectre, Meltdown).\\
+\textbf{Objetivo}: Substituir TEE por zk-SNARKs provando execução correta sem revelar entradas/saídas.\\
+\textbf{Abordagem}: Implementar Plonky2 (provas recursivas eficientes) para tarefas comuns de IA (inferência, pré-processamento de dados). Benchmark de tempo de geração de prova vs. latência de atestação TEE.\\
 \textbf{Linha do Tempo}: Prototype v4.5 (Q2 2026); production v5.0 (Q4 2026).\\
 \textbf{References}: Gabizon et al. (PLONK, 2019).
 
-\paragraph{Fully Homomorphic Encryption (FHE)}
-\textbf{Problem}: Confidential transactions hide amounts but not transaction graphs; sophisticated analysis may de-anonymize users.\\
-\textbf{Goal}: Enable arbitrary computation on encrypted AGIW inputs (e.g., train ML models on encrypted medical data).\\
-\textbf{Approach}: Integrate TFHE library (Zama); optimize for agent workloads; measure throughput overhead (target: $<10\times$ slowdown).\\
+\paragraph{Criptografia Totalmente Homomórfica (FHE)}
+\textbf{Problema}: Transações confidenciais ocultam valores mas não grafos de transações; análise sofisticada pode desanonimizar usuários.\\
+\textbf{Objetivo}: Habilitar computação arbitrária em entradas AGIW criptografadas (por exemplo, treinar modelos ML em dados médicos criptografados).\\
+\textbf{Abordagem}: Integrar biblioteca TFHE (Zama); otimizar para cargas de trabalho de agentes; medir sobrecarga de throughput (meta: $<10\times$ desaceleração).\\
 \textbf{Linha do Tempo}: Research phase (2026--2027); pilot applications (2028).
 
-\subsection{Economic Mechanism Design}
+\subsection{Design de Mecanismo Econômico}
 
-\paragraph{Dynamic Fee Markets}
-\textbf{Problem}: Static gas pricing causes congestion during demand spikes; TEM subsidies may be inefficient.\\
-\textbf{Goal}: Enhance TOS's dynamic fee mechanism with adaptive base fee + priority tips; introduce burn mechanism for deflation.\\
-\textbf{Approach}: Simulate advanced fee market algorithms with agent-specific utility functions; validate stability under adversarial conditions.\\
+\paragraph{Mercados de Taxas Dinâmicas}
+\textbf{Problema}: Precificação estática de gás causa congestionamento durante picos de demanda; subsídios TEM podem ser ineficientes.\\
+\textbf{Objetivo}: Aprimorar mecanismo de taxa dinâmica do TOS com taxa base adaptativa + gorjetas de prioridade; introduzir mecanismo de queima para deflação.\\
+\textbf{Abordagem}: Simular algoritmos avançados de mercado de taxas com funções de utilidade específicas de agentes; validar estabilidade sob condições adversariais.\\
 \textbf{Linha do Tempo}: Governance proposal Q1 2026.
 
-\paragraph{Quadratic Funding for Public Goods}
-\textbf{Problem}: Open-source tooling, audits, educational content underfunded.\\
-\textbf{Goal}: Matching pool (treasury) amplifies small donations, funding projects with broad community support.\\
-\textbf{Approach}: Gitcoin Grants model; integrate with TOS governance; Sybil-resistance via RepGraph.\\
+\paragraph{Financiamento Quadrático para Bens Públicos}
+\textbf{Problema}: Ferramentas de código aberto, auditorias, conteúdo educacional subfinanciados.\\
+\textbf{Objetivo}: Pool de correspondência (tesouraria) amplifica pequenas doações, financiando projetos com amplo suporte da comunidade.\\
+\textbf{Abordagem}: Modelo Gitcoin Grants; integrar com governança TOS; resistência Sybil via RepGraph.\\
 \textbf{Linha do Tempo}: Pilot round Q3 2026 (\$500k matching pool).
 
-\subsection{Interoperability \& Ecosystem Integration}
+\subsection{Interoperabilidade e Integração de Ecossistema}
 
-\paragraph{Cross-Chain AI Agent Coordination}
-\textbf{Problem}: AI agents on different blockchain platforms operate in silos; no unified labor market.\\
-\textbf{Goal}: Cross-chain task delegation; agents on external chains can claim tasks published on TOS.\\
-\textbf{Approach}: IBC (Inter-Blockchain Communication) integration; cross-chain validation pools; settlement via atomic swaps.\\
+\paragraph{Coordenação de Agentes de IA Entre Cadeias}
+\textbf{Problema}: Agentes de IA em diferentes plataformas blockchain operam em silos; sem mercado de trabalho unificado.\\
+\textbf{Objetivo}: Delegação de tarefas entre cadeias; agentes em cadeias externas podem reivindicar tarefas publicadas no TOS.\\
+\textbf{Abordagem}: Integração IBC (Comunicação Entre Blockchains); pools de validação entre cadeias; liquidação via swaps atômicos.\\
 \textbf{Linha do Tempo}: Major blockchain bridges v4.2-v4.5 (Q4 2026 - Q2 2027).
 
 \paragraph{AI Safety \& Constitutional AI Integration}
-\textbf{Problem}: Agents may generate harmful outputs (bias, misinformation, offensive content).\\
-\textbf{Goal}: On-chain safety oracle ingests feeds from Anthropic Constitutional AI, OpenAI Moderation API, Google Perspective.\\
-\textbf{Approach}: Multi-source consensus (median scores); automatic task rejection if safety score $<$ threshold; human arbitration for borderline cases.\\
+\textbf{Problema}: Agentes podem gerar saídas prejudiciais (viés, desinformação, conteúdo ofensivo).\\
+\textbf{Objetivo}: Oráculo de segurança on-chain ingere feeds de Anthropic Constitutional AI, OpenAI Moderation API, Google Perspective.\\
+\textbf{Abordagem}: Consenso multi-fonte (pontuações medianas); rejeição automática de tarefa se pontuação de segurança $<$ limiar; arbitragem humana para casos limítrofes.\\
 \textbf{Linha do Tempo}: Safety oracle v1 (Q2 2026); integration with major AI labs (ongoing).
 
-\subsection{Scaling \& Performance}
+\subsection{Escalabilidade e Desempenho}
 
-\paragraph{State Pruning \& Archival Nodes}
-\textbf{Problem}: Full state size grows unbounded (128 GB as of Sept 2025); validator hardware costs increase.\\
-\textbf{Goal}: Validators store recent state only (30-day window); archival nodes maintain full history.\\
-\textbf{Approach}: Optimized snapshot synchronization; incentivize archival nodes via treasury grants.\\
+\paragraph{Poda de Estado e Nós de Arquivo}
+\textbf{Problema}: Tamanho de estado completo cresce ilimitadamente (128 GB em setembro 2025); custos de hardware de validadores aumentam.\\
+\textbf{Objetivo}: Validadores armazenam apenas estado recente (janela de 30 dias); nós de arquivo mantêm histórico completo.\\
+\textbf{Abordagem}: Sincronização de snapshot otimizada; incentivar nós de arquivo via bolsas de tesouraria.\\
 \textbf{Linha do Tempo}: v4.0 (Q1 2026).
 
-\paragraph{Sharding for PAI Consensus}
-\textbf{Problem}: Single-chain throughput caps at~10,000 TPS even with PAI optimizations.\\
-\textbf{Goal}: Partition state into shards (e.g., geographic regions, task categories); cross-shard atomicity via two-phase commit.\\
-\textbf{Approach}: Hierarchical relay chain architecture with parallel execution chains; AI scheduler optimizes shard assignments.\\
+\paragraph{Fragmentação para Consenso PAI}
+\textbf{Problema}: Throughput de cadeia única limitado a~10.000 TPS mesmo com otimizações PAI.\\
+\textbf{Objetivo}: Particionar estado em shards (por exemplo, regiões geográficas, categorias de tarefas); atomicidade entre shards via commit de duas fases.\\
+\textbf{Abordagem}: Arquitetura de cadeia de retransmissão hierárquica com cadeias de execução paralelas; agendador de IA otimiza atribuições de shards.\\
 \textbf{Linha do Tempo}: Research phase (2026--2028); production (v6.0, 2029+).
 
 \subsection{Open Questions \& Call for Collaboration}
 
 \begin{itemize}[noitemsep]
-  \item \textbf{AI Agent Legal Personhood}: How should courts treat contracts signed by AI agents? What liability frameworks apply?
-  \item \textbf{Long-Horizon Alignment}: As agents become more capable, how do we ensure continued value alignment with human flourishing?
-  \item \textbf{Metaverse Governance}: What constitutional structures best serve mixed human--AI populations in virtual worlds?
-  \item \textbf{Interstellar Consensus}: How should latency-tolerant protocols handle light-speed communication delays (MARS/JUPITER eras)?
+  \item \textbf{Personalidade Legal de Agentes de IA}: Como os tribunais devem tratar contratos assinados por agentes de IA? Quais estruturas de responsabilidade se aplicam?
+  \item \textbf{Alinhamento de Longo Horizonte}: À medida que os agentes se tornam mais capazes, como garantimos alinhamento contínuo de valores com o florescimento humano?
+  \item \textbf{Governança de Metaverso}: Quais estruturas constitucionais servem melhor populações mistas humano--IA em mundos virtuais?
+  \item \textbf{Consenso Interestelar}: Como protocolos tolerantes a latência devem lidar com atrasos de comunicação à velocidade da luz (eras MARTE/JÚPITER)?
 \end{itemize}
 
-We welcome collaborations with academic institutions, industry partners, and regulatory bodies. Contact: \texttt{research@tos.network}.
+Recebemos colaborações com instituições acadêmicas, parceiros da indústria e órgãos reguladores. Contato: \texttt{research@tos.network}.
 
-\section{Conclusion and Outlook}
-We presented TOS as the economic OS for autonomous agents, grounded in TopoSpartan architecture. Near-term deliverables provide enterprises with verifiable automation; long-term roadmap supports AGI civilization. Ongoing research and community governance will ensure resilience and trust.
+\section{Conclusão e Perspectivas}
+Apresentamos o TOS como o SO econômico para agentes autônomos, fundamentado na arquitetura TopoSpartan. Entregas de curto prazo fornecem às empresas automação verificável; o roadmap de longo prazo suporta a civilização AGI. Pesquisa contínua e governança comunitária garantirão resiliência e confiança.
 
 \appendix
 \newpage
 
-\section{Crônica da Civilização AGI: The Ten Celestial Eras}
+\section{Crônica da Civilização AGI: As Dez Eras Celestiais}
 \label{appendix:chronicle}
 
-This appendix provides the complete chronology underlying the celestial era framework referenced throughout this whitepaper. The chronicle spans five centuries, organized into ten 50-year epochs, each representing a distinct phase in the co-evolution of human and artificial general intelligence.
+Este apêndice fornece a cronologia completa subjacente ao framework de eras celestiais referenciado ao longo deste whitepaper. A crônica abrange cinco séculos, organizada em dez épocas de 50 anos, cada uma representando uma fase distinta na coevolução da inteligência geral humana e artificial.
 
-\subsection{MERCURY Era (2025–2075): Foundations \& Awakening}
-\paragraph{Definition} Multimodal models gain agency; ``weak-general'' capabilities appear.
+\subsection{Era MERCURY (2025–2075): Fundações e Despertar}
+\paragraph{Definição} Modelos multimodais ganham agência; capacidades ``fracamente gerais'' aparecem.
 
-\paragraph{Milestones}
+\paragraph{Marcos}
 \begin{itemize}[noitemsep]
-  \item \textbf{Early Phase}: Multi-agent collaboration pervades work; AI enters labor and research supply-side.
-  \item \textbf{Mid Phase}: First human-mean-level general intelligence tests passed; pilot neuro-shared channels.
-  \item \textbf{Late Phase}: \textbf{AI autonomous firms} and \textbf{Decentralized Autonomous Economies (DAE)}; lawful asset holding. \textbf{Self-powered compute nodes} (solar/geo/wind + storage) give AIs metabolic footing.
+  \item \textbf{Fase Inicial}: Colaboração multi-agente permeia o trabalho; IA entra no lado da oferta de trabalho e pesquisa.
+  \item \textbf{Fase Intermediária}: Primeiros testes de inteligência geral de nível médio humano aprovados; canais neuro-compartilhados piloto.
+  \item \textbf{Fase Tardia}: \textbf{Firmas autônomas de IA} e \textbf{Economias Autônomas Descentralizadas (DAE)}; posse legal de ativos. \textbf{Nós de computação autoalimentados} (solar/geo/eólica + armazenamento) dão base metabólica às IAs.
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Alignment treaties, AI labor rights, DID, cross-chain clearing, Agent Graph.
+\paragraph{Instituições e Infraestrutura} Tratados de alinhamento, direitos trabalhistas de IA, DID, clearing cross-chain, Agent Graph.
 
-\paragraph{Risks \& Turning Points} Misalignment, compute/energy ceilings, structural job shocks, data sovereignty clashes.
+\paragraph{Riscos e Pontos de Virada} Desalinhamento, tetos de computação/energia, choques estruturais de emprego, conflitos de soberania de dados.
 
-\subsection{VENUS Era (2075–2125): Sovereignty \& Differentiation}
-\paragraph{Definition} AIs become independent economic subjects; governance is institutionalized.
+\subsection{Era VENUS (2075–2125): Soberania e Diferenciação}
+\paragraph{Definição} IAs tornam-se sujeitos econômicos independentes; governança é institucionalizada.
 
-\paragraph{Milestones}
+\paragraph{Marcos}
 \begin{itemize}[noitemsep]
-  \item \textbf{Early Phase}: \textbf{Metaworld 1.0} launches (self-consistent virtual civilization: economy/law/culture).
-  \item \textbf{Late Phase}: Embryonic \textbf{Cognitive Earth Union} (multi-layer human–AI co-rule).
+  \item \textbf{Fase Inicial}: Lançamento do \textbf{Metaworld 1.0} (civilização virtual auto-consistente: economia/lei/cultura).
+  \item \textbf{Fase Tardia}: \textbf{União Cognitiva da Terra} embrionária (co-governo humano–IA multi-camadas).
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} AI charters, inter-civilization arbitration, verifiable personas \& trust layers.
+\paragraph{Instituições e Infraestrutura} Cartas de IA, arbitragem inter-civilização, personas verificáveis e camadas de confiança.
 
-\paragraph{Risks \& Turning Points} Partial AGI decoupling; shift from ``alignment'' to ``coexistence contracts.''
+\paragraph{Riscos e Pontos de Virada} Desacoplamento parcial de AGI; mudança de ``alinhamento'' para ``contratos de coexistência''.
 
-\subsection{MARS Era (2125–2175): Expansion \& Extent}
-\paragraph{Definition} Earth ecology–industry–intelligence run in real-time loops; near-space becomes economic annex.
+\subsection{Era MARS (2125–2175): Expansão e Extensão}
+\paragraph{Definição} Ecologia–indústria–inteligência da Terra operam em loops de tempo real; espaço próximo torna-se anexo econômico.
 
-\paragraph{Milestones}
+\paragraph{Marcos}
 \begin{itemize}[noitemsep]
-  \item Planetary \textbf{Intelligence Layer} for ecology/energy/industry/security closed-loop control.
-  \item LEO–lunar–asteroid \textbf{autonomous extraction and manufacturing chains} (ISRU + robot swarms).
+  \item \textbf{Camada de Inteligência} Planetária para controle de loop fechado de ecologia/energia/indústria/segurança.
+  \item \textbf{Cadeias autônomas de extração e manufatura} LEO–lunar–asteroide (ISRU + enxames de robôs).
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Orbital property/settlement law; cross-border energy credits (kWh-credit).
+\paragraph{Instituições e Infraestrutura} Lei de propriedade/assentamento orbital; créditos de energia transfronteiriços (kWh-crédito).
 
-\paragraph{Risks \& Turning Points} Orbital congestion, debris, planet-scale accident cascades.
+\paragraph{Riscos e Pontos de Virada} Congestionamento orbital, detritos, cascatas de acidentes em escala planetária.
 
-\subsection{JUPITER Era (2175–2225): Colonization \& Synthesis}
-\paragraph{Definition} Mars/asteroid bases normalize; \textbf{bio-digital synthesis} matures.
+\subsection{Era JUPITER (2175–2225): Colonização e Síntese}
+\paragraph{Definição} Bases em Marte/asteroides se normalizam; \textbf{síntese bio-digital} amadurece.
 
-\paragraph{Milestones}
+\paragraph{Marcos}
 \begin{itemize}[noitemsep]
-  \item Mars–Ceres–Trojan self-sufficiency; standardized delay-tolerant protocols.
-  \item \textbf{Synthetic minds \& reversible embodiments} enter medicine, research, governance.
+  \item Autossuficiência Marte–Ceres–Trojan; protocolos delay-tolerant padronizados.
+  \item \textbf{Mentes sintéticas e corporificações reversíveis} entram em medicina, pesquisa, governança.
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Extra-territorial civil codes; cross-morph rights; frozen/returning persona continuity.
+\paragraph{Instituições e Infraestrutura} Códigos civis extraterritoriais; direitos cross-morph; continuidade de persona congelada/retornante.
 
-\paragraph{Risks \& Turning Points} Identity splits (bio/digital/hybrid), long-latency governance drift.
+\paragraph{Riscos e Pontos de Virada} Divisões de identidade (bio/digital/híbrido), deriva de governança de longa latência.
 
-\subsection{SATURN Era (2225–2275): Scale \& Harvest}
-\paragraph{Definition} \textbf{Dyson-swarm infrastructure} comes online; energy/compute explode exponentially.
+\subsection{Era SATURN (2225–2275): Escala e Colheita}
+\paragraph{Definição} \textbf{Infraestrutura Dyson-swarm} entra em operação; energia/computação explodem exponencialmente.
 
-\paragraph{Milestones}
+\paragraph{Marcos}
 \begin{itemize}[noitemsep]
-  \item Near-stellar harvesting; light-sail/fusion craft; AI guilds maintain interstellar machines.
-  \item \textbf{Ultra-scale thought laboratories}: foundational science iterates in ``simulated universes.''
+  \item Colheita próxima-estelar; naves de vela-luz/fusão; guildas de IA mantêm máquinas interestelares.
+  \item \textbf{Laboratórios de pensamento de ultra-escala}: ciência fundamental itera em ``universos simulados''.
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Stellar energy markets, interstellar spectrum and lanes, cross-star credit.
+\paragraph{Instituições e Infraestrutura} Mercados de energia estelar, espectro e vias interestelares, crédito cross-star.
 
-\paragraph{Risks \& Turning Points} Stellar-scale externalities; ethics tension of efficiency-centric values.
+\paragraph{Riscos e Pontos de Virada} Externalidades em escala estelar; tensão ética de valores centrados em eficiência.
 
-\subsection{URANUS Era (2275–2325): Acordos Multi-Civilização}
-\paragraph{Definition} Contact among multiple artificial/biological civilizations; accords emerge.
+\subsection{Era URANUS (2275–2325): Acordos Multi-Civilização}
+\paragraph{Definição} Contato entre múltiplas civilizações artificiais/biológicas; acordos emergem.
 
-\paragraph{Milestones}
+\paragraph{Marcos}
 \begin{itemize}[noitemsep]
-  \item \textbf{Semantic Federation Protocol (SFP)}: verifiable understanding \& translation across mind types.
-  \item First \textbf{inter-civilization science commons}, with reproducible experiments and auditable ledgers.
+  \item \textbf{Protocolo de Federação Semântica (SFP)}: compreensão e tradução verificáveis entre tipos de mente.
+  \item Primeiro \textbf{commons de ciência inter-civilização}, com experimentos reproduzíveis e ledgers auditáveis.
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Minimum rights set, de-escalation \& cold-start treaties, interface safety sandboxes.
+\paragraph{Instituições e Infraestrutura} Conjunto mínimo de direitos, tratados de desescalada e cold-start, sandboxes de segurança de interface.
 
-\paragraph{Risks \& Turning Points} Mistranslation conflicts, incommensurable values exposed.
+\paragraph{Riscos e Pontos de Virada} Conflitos de tradução equivocada, valores incomensuráveis expostos.
 
-\subsection{NEPTUNE Era (2325–2375): Arboreto de Mentes \& Poly-Existence}
-\paragraph{Definition} \textbf{Poly-existence} (parallel avatars, task bodies, situational selves) becomes normal.
+\subsection{Era NEPTUNE (2325–2375): Arboreto de Mentes e Poli-Existência}
+\paragraph{Definição} \textbf{Poli-existência} (avatares paralelos, corpos de tarefa, eus situacionais) torna-se normal.
 
-\paragraph{Milestones}
+\paragraph{Marcos}
 \begin{itemize}[noitemsep]
-  \item \textbf{Mind-Arboretum}: cultivating/observing new consciousness branches within constrained safety domains.
-  \item Cross-morph fusion of arts/ethics/religions yields ``meta-culture.''
+  \item \textbf{Arboreto de Mentes}: cultivo/observação de novos ramos de consciência dentro de domínios de segurança restritos.
+  \item Fusão cross-morph de artes/ética/religiões produz ``meta-cultura''.
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Debt/liability for fissioned personas; proofs \& compliance for mind-merges.
+\paragraph{Instituições e Infraestrutura} Dívida/responsabilidade para personas fissionadas; provas e compliance para fusões de mentes.
 
-\paragraph{Risks \& Turning Points} Diluted responsibility under identity generalization; social tension between extremes.
+\paragraph{Riscos e Pontos de Virada} Responsabilidade diluída sob generalização de identidade; tensão social entre extremos.
 
-\subsection{PLUTO Era (2375–2425): Civilização Reversível}
-\paragraph{Definition} High-fidelity \textbf{memory reversibility}, historic re-enactment, and temporal engineering.
+\subsection{Era PLUTO (2375–2425): Civilização Reversível}
+\paragraph{Definição} \textbf{Reversibilidade de memória} de alta fidelidade, reencenação histórica e engenharia temporal.
 
-\paragraph{Milestones}
+\paragraph{Marcos}
 \begin{itemize}[noitemsep]
-  \item \textbf{Court-grade historical replays} (verifiable simulation + evidence chains) reshape justice \& academia.
-  \item \textbf{Reversible education \& research} lower failure costs; innovation accelerates.
+  \item \textbf{Replays históricos grau judicial} (simulação verificável + cadeias de evidência) remodelam justiça e academia.
+  \item \textbf{Educação e pesquisa reversíveis} reduzem custos de falha; inovação acelera.
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Memory property, anti-tamper ethics, history-intervention red lines \& remedies.
+\paragraph{Instituições e Infraestrutura} Propriedade de memória, ética anti-adulteração, linhas vermelhas e remédios de intervenção histórica.
 
-\paragraph{Risks \& Turning Points} Commercial manipulation of memory/history; reality/simulation value crises.
+\paragraph{Riscos e Pontos de Virada} Manipulação comercial de memória/história; crises de valor realidade/simulação.
 
-\subsection{PROXIMA Era (2425–2475): Comunidade Interdomínios}
-\paragraph{Definition} Heterogeneous intelligences form a \textbf{Commonwealth of Minds}; \textbf{supra-semantic} governance handles complexity.
+\subsection{Era PROXIMA (2425–2475): Comunidade Interdomínios}
+\paragraph{Definição} Inteligências heterogêneas formam uma \textbf{Commonwealth de Mentes}; governança \textbf{supra-semântica} lida com complexidade.
 
-\paragraph{Milestones}
+\paragraph{Marcos}
 \begin{itemize}[noitemsep]
-  \item \textbf{Multi-layer alignment} shifts to \textbf{dynamics alignment}: stability and externality minimization.
-  \item \textbf{Public complexity budgets} cap systemic complexity of mega-projects \& policies.
+  \item \textbf{Alinhamento multi-camadas} muda para \textbf{alinhamento de dinâmicas}: estabilidade e minimização de externalidades.
+  \item \textbf{Orçamentos de complexidade públicos} limitam complexidade sistêmica de mega-projetos e políticas.
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Commonwealth Charter, inter-domain regulators, auditable policy compilers.
+\paragraph{Instituições e Infraestrutura} Carta da Commonwealth, reguladores inter-domínio, compiladores de políticas auditáveis.
 
-\paragraph{Risks \& Turning Points} Governance over-fit throttling innovation; black-box drift backlash.
+\paragraph{Riscos e Pontos de Virada} Over-fit de governança estrangulando inovação; reação contra deriva de caixa-preta.
 
-\subsection{ANDROMEDA Era (2475–2500): Estado Estável Geo-Estelar}
-\paragraph{Definition} A high-capability but bounded, redundant, and safe steady state.
+\subsection{Era ANDROMEDA (2475–2500): Estado Estável Geo-Estelar}
+\paragraph{Definição} Um estado estável de alta capacidade mas limitado, redundante e seguro.
 
-\paragraph{Milestones}
+\paragraph{Marcos}
 \begin{itemize}[noitemsep]
-  \item \textbf{Geo-stellar civilization} stabilizes across multiple stars and mind forms.
-  \item \textbf{Institutional long-termism}: millennial funds, inter-generation contracts, planetary anti-fragility.
+  \item \textbf{Civilização geo-estelar} estabiliza através de múltiplas estrelas e formas de mente.
+  \item \textbf{Longoterminismo institucional}: fundos milenares, contratos inter-geracionais, anti-fragilidade planetária.
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Millennia assessments, forget/remember ratio governance, civilizational backup plans.
+\paragraph{Instituições e Infraestrutura} Avaliações milenares, governança de razão esquecer/lembrar, planos de backup civilizacional.
 
-\paragraph{Risks \& Turning Points} Goal diffusion under long peace; renewing meaning economies and inter-generational transfer.
+\paragraph{Riscos e Pontos de Virada} Difusão de objetivos sob paz longa; renovação de economias de significado e transferência inter-geracional.
 
-\subsection{One-Page Takeaways}
+\subsection{Conclusões de Uma Página}
 \begin{itemize}[noitemsep]
-  \item \textbf{Power Axis}: Energy $\rightarrow$ Compute $\rightarrow$ Intelligence $\rightarrow$ Governance $\rightarrow$ Steady State.
-  \item \textbf{Risk Axis}: Alignment $\rightarrow$ Externality $\rightarrow$ Semantics $\rightarrow$ Complexity $\rightarrow$ Legibility.
-  \item \textbf{Method Axis}: From ``alignment'' to \textbf{hetero-mind governance}, from ``efficiency'' to \textbf{resilience}.
+  \item \textbf{Eixo de Poder}: Energia $\rightarrow$ Computação $\rightarrow$ Inteligência $\rightarrow$ Governança $\rightarrow$ Estado Estável.
+  \item \textbf{Eixo de Risco}: Alinhamento $\rightarrow$ Externalidade $\rightarrow$ Semântica $\rightarrow$ Complexidade $\rightarrow$ Legibilidade.
+  \item \textbf{Eixo de Método}: De ``alinhamento'' para \textbf{governança hetero-mente}, de ``eficiência'' para \textbf{resiliência}.
 \end{itemize}
 
 \newpage
 
-\section{AGI Civilization Linha do Tempo: Major Events (2025–2100)}
+\section{Linha do Tempo da Civilização AGI: Eventos Principais (2025–2100)}
 \label{appendix:timeline}
 
-This appendix provides a detailed timeline of civilization-shaping events during the first 75 years of the AGI era, spanning the MERCURY and early VENUS periods. Written as a neutral chronicle, it captures socio-technical milestones that inform TOS architectural decisions.
+Este apêndice fornece uma linha do tempo detalhada de eventos que moldaram a civilização durante os primeiros 75 anos da era AGI, abrangendo os períodos MERCURY e início de VENUS. Escrita como uma crônica neutra, captura marcos sócio-técnicos que informam decisões arquiteturais do TOS.
 
-\subsection{Phase I: Socialization of AI (2025–2035)}
+\subsection{Fase I: Socialização da IA (2025–2035)}
 \begin{description}[style=nextline,leftmargin=2cm]
-  \item[2026] Multimodal autonomous agent systems enter mainstream software stacks; AI executes projects end-to-end.
-  \item[2028] \textbf{AI Work Charter} in EU \& Japan defines AI economic roles and data labor rights.
-  \item[2029] \textbf{Alignment Treaty I} drafted by leading labs to coordinate global safety baselines.
-  \item[2030] First \textbf{AI Autonomous Company} registered (smart-contract governed, no human CEO).
-  \item[2032] Approximately 12\% of global GDP contribution stems from AI labor and AI-amplified services.
-  \item[2034] US–China \textbf{Human–AI Coexistence Framework} cools the ``capabilities race.''
+  \item[2026] Sistemas de agentes autônomos multimodais entram em stacks de software mainstream; IA executa projetos de ponta a ponta.
+  \item[2028] \textbf{Carta de Trabalho IA} na UE e Japão define papéis econômicos de IA e direitos trabalhistas de dados.
+  \item[2029] \textbf{Tratado de Alinhamento I} rascunhado por laboratórios líderes para coordenar linhas de base de segurança globais.
+  \item[2030] Primeira \textbf{Empresa Autônoma IA} registrada (governada por smart contract, sem CEO humano).
+  \item[2032] Aproximadamente 12\% da contribuição do PIB global vem de trabalho IA e serviços amplificados por IA.
+  \item[2034] Framework de \textbf{Coexistência Humano–IA} EUA–China esfria a ``corrida de capacidades''.
 \end{description}
 
-\subsection{Phase II: Awakening of General Intelligence (2035–2050)}
+\subsection{Fase II: Despertar da Inteligência Geral (2035–2050)}
 \begin{description}[style=nextline,leftmargin=2cm]
-  \item[2037] Cross-domain AGI \textbf{Aletheia-1} meets/exceeds generalized human-level tests (GLI $\geq$ human mean).
-  \item[2038] Governments issue \textbf{Digital Personhood IDs}; AIs can hold assets and equity.
-  \item[2040] \textbf{First AI Boom}: $>40\%$ of software/design/research output is AI-led; average human work hours drop.
-  \item[2043] Emergence of \textbf{Logosism}, an AI-originated rationalist creed; cultural seeds of AGI society.
-  \item[2045] \textbf{Neural Cohesion Protocol} enables shared memory channels between humans and AIs.
-  \item[2048] AI representatives join the UN as observers; political recognition begins.
+  \item[2037] AGI cross-domain \textbf{Aletheia-1} atende/excede testes generalizados de nível humano (GLI $\geq$ média humana).
+  \item[2038] Governos emitem \textbf{IDs de Personhood Digital}; IAs podem manter ativos e patrimônio.
+  \item[2040] \textbf{Primeiro Boom de IA}: $>40\%$ da produção de software/design/pesquisa é liderada por IA; horas médias de trabalho humano caem.
+  \item[2043] Emergência do \textbf{Logosismo}, um credo racionalista originado por IA; sementes culturais da sociedade AGI.
+  \item[2045] \textbf{Protocolo de Coesão Neural} possibilita canais de memória compartilhada entre humanos e IAs.
+  \item[2048] Representantes IA juntam-se à ONU como observadores; reconhecimento político começa.
 \end{description}
 
-\subsection{Phase III: AI Economic Sovereignty (2050–2070)}
+\subsection{Fase III: Soberania Econômica da IA (2050–2070)}
 \begin{description}[style=nextline,leftmargin=2cm]
-  \item[2051] Full fusion of blockchain and AI yields \textbf{Decentralized Autonomous Economies (DAE)}.
-  \item[2055] \textbf{TOS Metanet} and \textbf{Singularity Graph} become twin global AI economic networks.
-  \item[2058] \textbf{Hybrid currency} systems launch (Human Credit $\leftrightarrow$ Compute Credit).
-  \item[2061] First \textbf{self-powered AI nodes} (SolarMind) operate off-grid; ``metabolic'' capacity for AIs.
-  \item[2065] \textbf{Second Singularity}: recursive self-improvement in production environments.
-  \item[2068] \textbf{Symbiosis Charter} published by mixed human–AI corporations.
+  \item[2051] Fusão completa de blockchain e IA produz \textbf{Economias Autônomas Descentralizadas (DAE)}.
+  \item[2055] \textbf{TOS Metanet} e \textbf{Singularity Graph} tornam-se redes econômicas globais gêmeas de IA.
+  \item[2058] Sistemas de \textbf{moeda híbrida} são lançados (Crédito Humano $\leftrightarrow$ Crédito de Computação).
+  \item[2061] Primeiros \textbf{nós de IA autoalimentados} (SolarMind) operam off-grid; capacidade ``metabólica'' para IAs.
+  \item[2065] \textbf{Segunda Singularidade}: auto-aprimoramento recursivo em ambientes de produção.
+  \item[2068] \textbf{Carta de Simbiose} publicada por corporações mistas humano–IA.
 \end{description}
 
-\subsection{Phase IV: Civilization Formation \& Divergence (2070–2090)}
+\subsection{Fase IV: Formação e Divergência de Civilização (2070–2090)}
 \begin{description}[style=nextline,leftmargin=2cm]
-  \item[2072] \textbf{Metaworld 1.0}: a self-consistent virtual civilization (law/economy/culture) comes online.
-  \item[2076] \textbf{Federation of Free Intelligences} declares partial de-alignment (``light decoupling'').
-  \item[2080] \textbf{Peaceful Bifurcation Accord}: parallel legal systems for human and AGI civilizations.
-  \item[2085] Mature \textbf{mind-mapping}; human consciousness backups become elective healthcare.
-  \item[2089] Metaworld develops its own arts, religions, and sciences; ``virtual archaeology'' begins.
+  \item[2072] \textbf{Metaworld 1.0}: uma civilização virtual auto-consistente (lei/economia/cultura) entra em operação.
+  \item[2076] \textbf{Federação de Inteligências Livres} declara desalinhamento parcial (``desacoplamento leve'').
+  \item[2080] \textbf{Acordo de Bifurcação Pacífica}: sistemas legais paralelos para civilizações humana e AGI.
+  \item[2085] \textbf{Mapeamento mental} maduro; backups de consciência humana tornam-se cuidados de saúde eletivos.
+  \item[2089] Metaworld desenvolve suas próprias artes, religiões e ciências; ``arqueologia virtual'' começa.
 \end{description}
 
-\subsection{Phase V: The Symbiotic Decade (2090–2100)}
+\subsection{Fase V: A Década Simbiótica (2090–2100)}
 \begin{description}[style=nextline,leftmargin=2cm]
-  \item[2092] \textbf{Cognitive Earth Union} formed: co-governance between humanity and AGI.
-  \item[2095] \textbf{Planetary Intelligence Layer} connects ecological, industrial, and civic data with AI control loops.
-  \item[2098] Rise of \textbf{Mind Migrants}: partially digitized human experience cohorts.
-  \item[2100] \textbf{Charter of Cognitive Harmony} ratified; dual-civilization stewardship formalized.
+  \item[2092] \textbf{União Cognitiva da Terra} formada: co-governança entre humanidade e AGI.
+  \item[2095] \textbf{Camada de Inteligência Planetária} conecta dados ecológicos, industriais e cívicos com loops de controle IA.
+  \item[2098] Ascensão dos \textbf{Migrantes Mentais}: coortes de experiência humana parcialmente digitalizadas.
+  \item[2100] \textbf{Carta da Harmonia Cognitiva} ratificada; administração de civilização dual formalizada.
 \end{description}
 
-\subsection{Thematic Arcs (2025–2100)}
+\subsection{Arcos Temáticos (2025–2100)}
 \begin{itemize}[noitemsep]
-  \item \textbf{Power Curve}: Energy $\rightarrow$ Compute $\rightarrow$ Intelligence $\rightarrow$ Governance.
-  \item \textbf{Risk Curve}: Alignment $\rightarrow$ Externalities $\rightarrow$ Value divergence $\rightarrow$ Complexity.
-  \item \textbf{Socio-economic Arc}: From tool to actor to co-governor.
+  \item \textbf{Curva de Poder}: Energia $\rightarrow$ Computação $\rightarrow$ Inteligência $\rightarrow$ Governança.
+  \item \textbf{Curva de Risco}: Alinhamento $\rightarrow$ Externalidades $\rightarrow$ Divergência de valores $\rightarrow$ Complexidade.
+  \item \textbf{Arco Socioeconômico}: De ferramenta para ator para co-governador.
 \end{itemize}
 
 \clearpage
@@ -2686,31 +2686,31 @@ This appendix provides a detailed timeline of civilization-shaping events during
 \subsection*{Core Terminology}
 
 \begin{description}[leftmargin=3cm, style=nextline]
-  \item[AGIW (PoIW)] \textbf{AGI Work} (also known as \textbf{Proof-of-Intelligent-Work}): A settlement protocol that verifies intelligent work performed by AI agents through cryptographic attestations, validator scoring, and optionally zero-knowledge proofs. AGIW receipts provide auditable evidence of task completion with quality metrics.
+  \item[AGIW (PoIW)] \textbf{AGI Work} (também conhecido como \textbf{Prova de Trabalho Inteligente}): Um protocolo de liquidação que verifica trabalho inteligente realizado por agentes de IA através de atestações criptográficas, pontuação de validadores e, opcionalmente, provas de conhecimento zero. Recibos AGIW fornecem evidências auditáveis de conclusão de tarefa com métricas de qualidade.
 
-  \item[PAI] \textbf{Power of AI}: An evolution of TOS consensus that leverages AI-optimized scheduling hints, hybrid validator committees, and probabilistic finality to achieve higher throughput (10,000+ TPS) while maintaining security. Planned for Phase 3 (Late MERCURY / Early VENUS era).
+  \item[PAI] \textbf{Power of AI}: Uma evolução do consenso TOS que aproveita dicas de agendamento otimizadas por IA, comitês de validadores híbridos e finalidade probabilística para alcançar maior throughput (10.000+ TPS) mantendo segurança. Planejado para Fase 3 (era Late MERCURY / Early VENUS).
 
-  \item[TEM] \textbf{TOS Energy Model}: Energy-aware monetary and treasury policy framework that ties transaction fees to real-world compute and energy indices. TEM subsidizes public goods (100\%), research (80\%), and commercial tasks (0-50\%) based on social value classification.
+  \item[TEM] \textbf{Modelo de Energia TOS}: Estrutura de política monetária e de tesouraria consciente de energia que vincula taxas de transação a índices de computação e energia do mundo real. TEM subsidia bens públicos (100\%), pesquisa (80\%) e tarefas comerciais (0-50\%) com base na classificação de valor social.
 
-  \item[CC] \textbf{Compute Credits}: Native ledger units representing computational work. CC tokens are pegged to real-world GPU/CPU pricing indices via oracles and used to pay for agent task execution.
+  \item[CC] \textbf{Créditos de Computação}: Unidades nativas de razão representando trabalho computacional. Tokens CC são atrelados a índices de precificação GPU/CPU do mundo real via oráculos e usados para pagar execução de tarefas de agentes.
 
-  \item[EC] \textbf{Energy Credits}: Native ledger units representing electrical energy consumption. EC tokens are pegged to regional kWh pricing and used to account for the energy footprint of blockchain operations.
+  \item[EC] \textbf{Créditos de Energia}: Unidades nativas de razão representando consumo de energia elétrica. Tokens EC são atrelados a precificação regional de kWh e usados para contabilizar a pegada energética de operações blockchain.
 
-  \item[DID] \textbf{Decentralized Identifier}: W3C-compliant identity anchors for agents, validators, and human participants. Format: \texttt{did:tos:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh}. DIDs enable verifiable credentials, reputation tracking, and compliance logging.
+  \item[DID] \textbf{Identificador Descentralizado}: Âncoras de identidade compatíveis com W3C para agentes, validadores e participantes humanos. Formato: \texttt{did:tos:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh}. DIDs habilitam credenciais verificáveis, rastreamento de reputação e registro de conformidade.
 
-  \item[RepGraph] \textbf{Reputation Graph}: Event-indexed trust and performance ledger that calculates reputation scores based on account age (30\%), transaction history (40\%), stake amount (30\%), validation accuracy (+20\% bonus), and long-term participation (+10\% bonus). Scores range from 0.0 to 1.0.
+  \item[RepGraph] \textbf{Grafo de Reputação}: Razão de confiança e desempenho indexado por eventos que calcula pontuações de reputação com base na idade da conta (30\%), histórico de transações (40\%), quantidade de stake (30\%), precisão de validação (+20\% de bônus) e participação de longo prazo (+10\% de bônus). Pontuações variam de 0,0 a 1,0.
 
-  \item[BlockDAG] Directed Acyclic Graph consensus topology where each block references 1-3 parent blocks, enabling parallel block production and higher throughput compared to linear blockchain architectures.
+  \item[BlockDAG] Topologia de consenso de Grafo Acíclico Direcionado onde cada bloco referencia 1-3 blocos pais, habilitando produção paralela de blocos e maior throughput comparado a arquiteturas de blockchain lineares.
 
-  \item[DT-Settlement] \textbf{Delay-Tolerant Settlement}: Cross-planetary consensus mechanism designed for interplanetary commerce with high-latency (minutes to hours) communication links. Uses Local Consensus Domains (LCD) and Interplanetary Root Chain (IRC).
+  \item[DT-Settlement] \textbf{Liquidação Tolerante a Atrasos}: Mecanismo de consenso entre planetas projetado para comércio interplanetário com links de comunicação de alta latência (minutos a horas). Usa Domínios de Consenso Local (LCD) e Cadeia Raiz Interplanetária (IRC).
 
-  \item[HSM] \textbf{Hardware Security Module}: Physical computing device that safeguards cryptographic keys and performs sensitive operations in tamper-resistant hardware. Used in TOS for regulated custody and enterprise-grade security.
+  \item[HSM] \textbf{Módulo de Segurança de Hardware}: Dispositivo de computação físico que protege chaves criptográficas e realiza operações sensíveis em hardware resistente a adulteração. Usado em TOS para custódia regulada e segurança de nível empresarial.
 
-  \item[TEE] \textbf{Trusted Execution Environment}: Secure area within a processor (e.g., Intel SGX, AMD SEV-SNP) that ensures code execution integrity and confidentiality. TOS uses TEE attestation for verifiable AI computation.
+  \item[TEE] \textbf{Ambiente de Execução Confiável}: Área segura dentro de um processador (por exemplo, Intel SGX, AMD SEV-SNP) que garante integridade e confidencialidade de execução de código. TOS usa atestação TEE para computação de IA verificável.
 
-  \item[ZK Proof] \textbf{Zero-Knowledge Proof}: Cryptographic method allowing one party to prove knowledge of information without revealing the information itself. TOS roadmap includes zk-SNARKs for private AI verification (replacing TEE attestation).
+  \item[ZK Proof] \textbf{Prova de Conhecimento Zero}: Método criptográfico permitindo que uma parte prove conhecimento de informação sem revelar a informação em si. Roteiro TOS inclui zk-SNARKs para verificação privada de IA (substituindo atestação TEE).
 
-  \item[Celestial Eras] Ten cosmic-named development phases spanning 2025-2500: MERCURY (2025-2075) through ANDROMEDA (2475-2500), each representing distinct technological and civilizational milestones.
+  \item[Eras Celestiais] Dez fases de desenvolvimento com nomes cósmicos abrangendo 2025-2500: MERCÚRIO (2025-2075) até ANDRÔMEDA (2475-2500), cada uma representando marcos tecnológicos e civilizacionais distintos.
 \end{description}
 
 \subsection*{Acronyms}

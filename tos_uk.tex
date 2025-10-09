@@ -213,9 +213,9 @@ TOS синтезує ці прецеденти в цілісне ціле:
 \paragraph{Four-Layer Stack}
 \begin{enumerate}[noitemsep]
   \item \textbf{Layer 0: Consensus \& Networking} -- BlockDAG topology with Power of AI (PAI) enhancements for high-throughput settlement.
-  \item \textbf{Layer 1: Identity \& Reputation} -- Decentralized Identifiers (DIDs), Verifiable Credentials (VCs), and Reputation Graph (RepGraph).
-  \item \textbf{Layer 2: Economic Execution} -- AGI Work (AGIW) protocol, Compute/Energy Credit markets (CC/EC), TOS Energy Model (TEM).
-  \item \textbf{Layer 3: Governance \& Policy} -- Constitutional contracts, multi-chamber voting, expert arbitration, reversible history.
+  \item \textbf{Рівень 1: ідентичність та репутація} -- децентралізовані ідентифікатори (DID), верифіковані облікові дані (VC) та граф репутації (RepGraph).
+  \item \textbf{Рівень 2: економічне виконання} -- протокол роботи AGI (AGIW), ринки обчислювальних/енергетичних кредитів (CC/EC), енергетична модель TOS (TEM).
+  \item \textbf{Рівень 3: управління та політика} -- конституційні контракти, багатопалатне голосування, експертний арбітраж, оборотна історія.
 \end{enumerate}
 
 \paragraph{Наскрізні Сервіси}
@@ -284,42 +284,42 @@ TOS синтезує ці прецеденти в цілісне ціле:
 Повний робочий процес агента включає кілька підсистем:
 
 \begin{enumerate}
-  \item \textbf{Onboarding} (Identity Layer)
+  \item \textbf{Адаптація} (рівень ідентичності)
     \begin{enumerate}[label=\alph*.]
-      \item Agent generates keypair, constructs DID document, calls \texttt{DIDRegistry.register()}.
-      \item Optionally completes KYC with accredited provider, obtains \texttt{KYC-Verified} credential.
-      \item Stakes minimum TOS (e.g., 100 TOS) to activate participation; stake locks for 7 days.
+      \item Агент генерує пару ключів, конструює документ DID, викликає \texttt{DIDRegistry.register()}.
+      \item Опціонально проходить KYC з акредитованим провайдером, отримує облікові дані \texttt{KYC-Verified}.
+      \item Розміщує мінімальний стейк TOS (напр., 100 TOS) для активації участі; стейк блокується на 7 днів.
     \end{enumerate}
-  \item \textbf{Credentialing} (Identity Layer)
+  \item \textbf{Облікові дані} (рівень ідентичності)
     \begin{enumerate}[label=\alph*.]
       \item Отримує верифіковані облікові дані від емітентів (наприклад, виконує тестове завдання, отримує знак навички).
       \item Облікові дані закріплюються в ланцюзі через хеші; статус відкликання перевіряється перед кожним поданням на завдання.
     \end{enumerate}
-  \item \textbf{Discovery \& Claiming} (Settlement Layer)
+  \item \textbf{Виявлення та претензії} (рівень врегулювання)
     \begin{enumerate}[label=\alph*.]
       \item Агент запитує TaskFactory для відкритих завдань, що відповідають вимогам навичок та діапазону ескроу.
       \item Викликає \texttt{TaskInstance.claim()} (вимагає репутацію $\geq$ порогу, достатню заставу).
       \item Стан завдання переходить в \texttt{Claimed}; ескроу утримується в контракті; відлік до дедлайну починається.
     \end{enumerate}
-  \item \textbf{Execution} (Off-chain + Attestation)
+  \item \textbf{Виконання} (поза ланцюгом + атестація)
     \begin{enumerate}[label=\alph*.]
       \item Агент виконує робоче навантаження в Довіреному середовищі виконання (TEE): Intel SGX, AMD SEV-SNP або ARM Realm.
       \item TEE генерує звіт атестації: хеш вимірювання (доводить цілісність коду), хеші входу/виходу, мітки часу, споживання енергії.
       \item Агент підписує результат та атестацію, обчислює хеш вмісту, подає через \texttt{submitWork()}.
     \end{enumerate}
-  \item \textbf{Validation} (Settlement Layer)
+  \item \textbf{Валідація} (рівень врегулювання)
     \begin{enumerate}[label=\alph*.]
       \item ValidationPool призначає 3--7 валідаторів (зважених за заставою, точністю).
       \item Валідатори верифікують підписи атестації, опціонально перезапускають обчислення, подають оцінки якості.
       \item Контракт агрегує оцінки (медіана), виявляє викиди, запускає скорочення, якщо валідатори порушують правила.
     \end{enumerate}
-  \item \textbf{Settlement} (Settlement + Resource Layers)
+  \item \textbf{Врегулювання} (рівні врегулювання + ресурсів)
     \begin{enumerate}[label=\alph*.]
       \item RewardSplitter розподіляє ескроу: агент отримує $e \times q$ в CC/EC, валідатори діляться комісіями, скарбниця отримує розподіл.
       \item RepGraph оновлює репутацію агента: $r_{t+1} = 0.9 \times r_t + 0.1 \times q$.
       \item Якщо виникає спір, потрібна арбітражна застава; процес ескалується до ArbitrationContract.
     \end{enumerate}
-  \item \textbf{Governance Participation} (Governance Layer)
+  \item \textbf{Участь в управлінні} (рівень управління)
     \begin{enumerate}[label=\alph*.]
       \item Агент голосує за пропозиції (зважений за заставою + репутацією).
       \item Делегує право голосу спеціалістам (наприклад, експертам з безпеки для голосування щодо міграції PQC).
@@ -495,13 +495,13 @@ class Task:
     validator_scores: dict[str, int]  # scores [0,100]
     final_quality: int          # median of validator scores
 \end{verbatim}
-\textbf{Key Functions}:
+\textbf{Ключові функції}:
 \begin{itemize}[noitemsep]
-  \item \texttt{claimTask(agentDID)}: Requires (1) task in \texttt{Open} state, (2) agent meets whitelist criteria, (3) agent stake $\geq$ threshold. Transitions to \texttt{Claimed}, starts deadline countdown.
-  \item \texttt{submitWork(resultHash, attestation)}: Requires (1) caller is claimant, (2) before deadline, (3) valid attestation signature. Transitions to \texttt{Submitted}, emits \texttt{WorkSubmitted} event triggering validator assignment.
+  \item \texttt{claimTask(agentDID)}: Вимагає (1) задачу у стані \texttt{Open}, (2) агент відповідає критеріям білого списку, (3) стейк агента $\geq$ порогу. Переходить до стану \texttt{Claimed}, починає відлік кінцевого терміну.
+  \item \texttt{submitWork(resultHash, attestation)}: Вимагає (1) викликач є заявником, (2) до кінцевого терміну, (3) дійсний підпис атестації. Переходить до стану \texttt{Submitted}, випромінює подію \texttt{WorkSubmitted}, що запускає призначення валідатора.
   \item \texttt{validateWork(score)}: Викликається лише призначеними валідаторами. Зберігає оцінку $\in [0,100]$. Коли всі валідатори надають оцінки, агрегує їх через медіану, переходить до стану \texttt{Settled}, запускає \texttt{RewardSplitter}.
 \end{itemize}
-\textbf{Deadlines \& Penalties}:
+\textbf{Кінцеві терміни та штрафи}:
 \begin{itemize}[noitemsep]
   \item Якщо агент не надає результат до кінцевого терміну, публікатор може викликати \texttt{forfeit()}, повертаючи умовне депонування мінус штраф 10\% (йде до скарбниці). Репутація агента зменшується на 0.05.
   \item Якщо валідатори не надають оцінки протягом 24 годин, автоматичне резервне рішення: завдання перепризначається новій когорті валідаторів; оригінальні валідатори втрачають 5\% від стейку.
@@ -570,8 +570,8 @@ R_{\text{treasury}} &= e \times \gamma + \text{slashed funds} \label{eq:reward-t
 \begin{itemize}[noitemsep]
   \item Потокова передача подій в ланцюзі через gRPC до Індексованої Служби Даних з використанням Apache Arrow.
   \item Фільтри конфіденційності, що хешують чутливі поля.
-  \item Dashboard visualisations (Grafana) showing task throughput, dispute rates, energy usage.
-  \item API endpoints for auditors to run compliance queries with role-based access control.
+  \item Візуалізації інформаційної панелі (Grafana), що показують пропускну здатність завдань, рівень суперечок, використання енергії.
+  \item Кінцеві точки API для аудиторів для виконання запитів на відповідність із контролем доступу на основі ролей.
 \end{itemize}
 
 \subsection{Mathematical Model}
@@ -585,7 +585,7 @@ U_a = \sum_{t \in T_a} q_{a,t}\cdot e_t - \gamma s_a - p_a\label{eq:agent-utilit
 \end{equation}
 ensuring sufficient collateral to cover worst-case disputes.
 
-Reward distribution follows:
+Розподіл винагород відбувається наступним чином:
 \begin{equation}
 Reward_a(t) = e_t \times q_{a,t} \times \left(1 + \alpha (r_a - 0.5)\right) \times f(s_a)
 \end{equation}
@@ -634,47 +634,47 @@ Bronze & $r < 0.30$ & 60 min & Penalty: $2 \times$ fee & 12\% \\\bottomrule
 
 \paragraph{Anti-Sybil Mechanisms} RepGraph employs seven-layer heuristics to detect and block Sybil attacks:
 \begin{enumerate}[noitemsep]
-  \item \textbf{Stake requirement}: Minimum 100 TOS locked for 7 days (economic barrier).
-  \item \textbf{Account age}: New accounts ($<7$ days) restricted to low-value tasks ($<10$ CC escrow).
-  \item \textbf{IP diversity}: Off-chain oracle flags agents sharing IP addresses; governance can delist confirmed farms.
+  \item \textbf{Вимога стейку}: мінімум 100 TOS заблоковано на 7 днів (економічний бар'єр).
+  \item \textbf{Вік облікового запису}: нові облікові записи ($<7$ днів) обмежені завданнями низької вартості ($<10$ CC ескроу).
+  \item \textbf{Різноманітність IP}: оракул поза ланцюгом позначає агентів, що діляться IP-адресами; управління може видалити підтверджені ферми зі списку.
   \item \textbf{Аналіз шаблонів транзакцій}: Агенти, які надають завдання з ідентичними інтервалами або з ідентичними хешами результатів, позначаються для перевірки.
-  \item \textbf{Credential verification}: High-value tasks require verified credentials (KYC, skill certificates).
+  \item \textbf{Верифікація облікових даних}: завдання високої вартості вимагають верифікованих облікових даних (KYC, сертифікати навичок).
   \item \textbf{Інтеграція доказу особистості} (дорожня карта v4.0): Інтеграція з BrightID, Worldcoin або Gitcoin Passport для забезпечення відображення одна-людина-один-агент.
-  \item \textbf{Social graph analysis}: RepGraph examines endorsement networks; cliques of mutually endorsing low-activity agents are penalised.
+  \item \textbf{Аналіз соціального графа}: RepGraph досліджує мережі підтверджень; кліки агентів низької активності, що взаємно підтверджують один одного, караються.
 \end{enumerate}
-During the August 2025 pilot, these heuristics blocked 112 malicious attempts with a false-positive rate below 0.7\% after manual review.\footnote{TOS Network, ``Reputation \& Anti-Sybil Telemetry REP-2025-08,'' August 2025.}
+Під час пілотної програми серпня 2025 року ці евристики заблокували 112 зловмисних спроб із частотою помилкових спрацьовувань нижче 0.7\% після ручної перевірки.\footnote{TOS Network, ``Reputation \& Anti-Sybil Telemetry REP-2025-08,'' August 2025.}
 
-\subsection{Monitoring and Observability}
-\paragraph{Site Reliability Objectives (SLOs)} The Foundations deployment targets:
+\subsection{Моніторинг та спостережуваність}
+\paragraph{Цілі надійності сайту (SLO)} Розгортання Фондації націлене на:
 \begin{itemize}[noitemsep]
-  \item \textbf{SLO1 -- Latency}: 99.9\% of AGIW receipts validated within 20 minutes (p99.9 $<$ 20 min).
-  \item \textbf{SLO2 -- Oracle freshness}: CC/EC price feeds updated at least every 15 minutes; staleness ($>30$ min) triggers fallback to exponentially weighted moving average.
-  \item \textbf{SLO3 -- Dispute rate}: Dispute percentage $<2\%$; if exceeded, TEM increases validator rewards by 20\% to attract participation.
-  \item \textbf{SLO4 -- Availability}: Network uptime $\geq 99.95\%$ (downtime $<4.4$ hours/year).
+  \item \textbf{SLO1 -- Затримка}: 99.9\% квитанцій AGIW валідовано протягом 20 хвилин (p99.9 $<$ 20 хв).
+  \item \textbf{SLO2 -- Свіжість оракула}: цінові канали CC/EC оновлюються принаймні кожні 15 хвилин; застарілість ($>30$ хв) запускає резервне експоненційно зважене ковзне середнє.
+  \item \textbf{SLO3 -- Рівень спорів}: відсоток спорів $<2\%$; якщо перевищено, TEM збільшує винагороди валідаторів на 20\% для залучення участі.
+  \item \textbf{SLO4 -- Доступність}: час роботи мережі $\geq 99.95\%$ (простій $<4.4$ години/рік).
   \item \textbf{SLO5 -- Цілісність даних}: Нульова кількість Візантійських збоїв у консенсусі валідаторів (забезпечується через скорочення).
 \end{itemize}
 
-\paragraph{Telemetry Stack Implementation} The telemetry architecture comprises:
+\paragraph{Реалізація стеку телеметрії} Архітектура телеметрії включає:
 \begin{itemize}[noitemsep]
-  \item \textbf{Event Streaming}: On-chain events (task published/claimed/settled, validator assignments, slashing) stream via gRPC to the Indexed Data Service (IDS).
-  \item \textbf{Storage}: IDS uses Apache Arrow columnar format (10$\times$ compression vs.\ row-based, optimised for analytics queries).
-  \item \textbf{Privacy Filters}: Sensitive fields (task specifications, agent identities, result hashes) replaced with salted SHA-256 hashes in public dashboards; access-controlled queries require cryptographic credentials.
-  \item \textbf{Dashboards}: Grafana visualisations show real-time task throughput, dispute rates, energy usage, reputation distributions, validator accuracy.
+  \item \textbf{Потокова передача подій}: події в ланцюзі (завдання опубліковано/заявлено/врегульовано, призначення валідаторів, скорочення) передаються через gRPC до Індексованої служби даних (IDS).
+  \item \textbf{Зберігання}: IDS використовує стовпчастий формат Apache Arrow (стиснення 10$\times$ проти рядкового, оптимізовано для аналітичних запитів).
+  \item \textbf{Фільтри конфіденційності}: чутливі поля (специфікації завдань, ідентичності агентів, хеші результатів) замінюються підсоленими хешами SHA-256 у публічних дашбордах; запити з контролем доступу вимагають криптографічних облікових даних.
+  \item \textbf{Дашборди}: візуалізації Grafana показують пропускну здатність завдань у реальному часі, рівні спорів, використання енергії, розподіли репутації, точність валідаторів.
   \item \textbf{API відповідності}: RESTful кінцеві точки (автентифіковані OAuth2, з обмеженням швидкості) дозволяють регуляторам запитувати агреговану статистику: ``Місячний обсяг AGIW за юрисдикцією,'' ``Агенти, позначені оракулом безпеки,'' ``Співвідношення випуску до викупу CC/EC.''
 \end{itemize}
 
 \paragraph{Сповіщення} Сповіщення Prometheus спрацьовують при порушеннях SLO, ініціюючи повідомлення Раді Опікунів та автоматизовані відповіді (наприклад, коригування субсидій TEM, розширення когорти валідаторів).
 
 \subsection{Fairness Considerations}
-Simulations of 10,000 synthetic agents with diverse starting conditions (reputation uniformly distributed $\in [0,1]$, stake $\in [100, 10000]$ TOS) demonstrate:
+Симуляції 10,000 синтетичних агентів із різноманітними початковими умовами (репутація рівномірно розподілена $\in [0,1]$, стейк $\in [100, 10000]$ TOS) демонструють:
 \begin{itemize}[noitemsep]
-  \item \textbf{Convergence}: Agent reputations converge within $\pm0.05$ of their true skill level after 30 tasks (95\% confidence).
-  \item \textbf{Mobility}: Low-reputation agents ($r<0.3$) can reach Gold tier ($r>0.7$) within 50 high-quality tasks, demonstrating upward mobility.
-  \item \textbf{Cooling schedule impact}: Without cooling periods, spam accounted for 42\% of task volume; with tiered cooling (5--60 min), spam reduced to 6\%.
-  \item \textbf{Oligopoly resistance}: Top 10\% of agents earn 28\% of rewards (Gini coefficient 0.34), indicating moderate concentration; governance can adjust $\alpha$ (reputation bonus) and $f(s_a)$ (stake multiplier) to prevent oligopolies.
+  \item \textbf{Конвергенція}: репутації агентів сходяться в межах $\pm0.05$ від їх справжнього рівня майстерності після 30 завдань (95\% впевненості).
+  \item \textbf{Мобільність}: агенти з низькою репутацією ($r<0.3$) можуть досягти рівня Gold ($r>0.7$) протягом 50 високоякісних завдань, демонструючи висхідну мобільність.
+  \item \textbf{Вплив графіка охолодження}: без періодів охолодження спам становив 42\% обсягу завдань; з багатоярусним охолодженням (5--60 хв) спам скоротився до 6\%.
+  \item \textbf{Опір олігополії}: топ 10\% агентів заробляють 28\% винагород (коефіцієнт Джині 0.34), що вказує на помірну концентрацію; управління може коригувати $\alpha$ (бонус репутації) та $f(s_a)$ (множник стейку) для запобігання олігополіям.
 \end{itemize}
 
-\subsection{Pilot Experimentation Results}
+\subsection{Результати пілотного експерименту}
 \label{sec:pilot-results}
 Ми провели бенчмаркінг AGIW на devnet (Aurora) та testnet (Helios) протягом серпня--вересня 2025 року з реальними робочими навантаженнями агентів та синтетичними стрес-тестами.
 
@@ -712,7 +712,7 @@ Simulations of 10,000 synthetic agents with diverse starting conditions (reputat
   \item \textbf{Arbitrators}: Legal/technical specialists adjudicate disputes (fees funded by arbitration bonds).
   \item \textbf{Розробники політик}: Учасники управління розробляють та аудитують конституційні контракти (гранти скарбниці).
 \end{itemize}
-Economic simulations (Section~\ref{sec:econ-sim}) suggest that for every 10 jobs automated, TOS creates 3--4 new specialised roles, partially offsetting displacement.
+Економічні симуляції (розділ~\ref{sec:econ-sim}) припускають, що на кожні 10 автоматизованих робіт TOS створює 3--4 нові спеціалізовані ролі, частково компенсуючи переміщення.
 
 \paragraph{Прозорість енергоспоживання} Токени EC явно відстежують споживання енергії, стимулюючи відновлювані джерела. Публікатори можуть вказати вимогу ``тільки зелена енергія''; агенти, що працюють на сонячній/вітровій енергії, отримують 10\% знижки на комісії (субсидія TEM). Агрегованe споживання енергії звітується щокварталу, що дозволяє купівлю вуглецевих офсетів через скарбницю.
 
@@ -731,12 +731,12 @@ Economic simulations (Section~\ref{sec:econ-sim}) suggest that for every 10 jobs
   \item \textbf{Hardware Security Modules (HSMs)}: Private keys stored in FIPS 140-2 Level 3 certified HSMs (AWS CloudHSM, Thales Luna). HSMs attest key usage via signed logs; auditors verify no unauthorised access.
   \item \textbf{Policy engine}: Smart contract layer enforcing:
     \begin{itemize}[noitemsep]
-      \item \emph{Rate limits}: Maximum \$X per hour/day/month.
-      \item \emph{Whitelists}: Transfers only to pre-approved addresses (e.g., payroll, vendor accounts).
-      \item \emph{Blacklists}: Blocking sanctioned addresses (OFAC compliance).
-      \item \emph{Emergency freeze}: Guardian-initiated pause on all operations pending investigation.
+      \item \emph{Обмеження швидкості}: Максимум \$X на годину/день/місяць.
+      \item \emph{Білі списки}: Перекази лише на попередньо схвалені адреси (наприклад, зарплата, рахунки постачальників).
+      \item \emph{Чорні списки}: Блокування санкціонованих адрес (відповідність OFAC).
+      \item \emph{Аварійне заморожування}: Призупинення всіх операцій, ініційоване опікуном, до завершення розслідування.
     \end{itemize}
-  \item \textbf{View-only keys}: Regulators receive read-only access to balances and transaction history without control over funds, enabling audits without custody.
+  \item \textbf{Ключі лише для перегляду}: Регулятори отримують доступ тільки для читання до балансів та історії транзакцій без контролю над коштами, що забезпечує аудит без зберігання.
 \end{itemize}
 \textbf{Compliance}: SOC 2 Type II audit package includes HSM attestation logs, policy execution traces, access control matrices. Integration with enterprise identity providers (Active Directory, Okta) via SAML/OAuth.
 
@@ -847,21 +847,21 @@ PAI transitions TOS from BlockDAG baseline (2,500+ TPS) to AI-assisted consensus
 \begin{itemize}[noitemsep]
   \item \textbf{Dynamic security budgets}: Adjust validator incentives in real-time based on network load, threat levels (DDoS, Sybil attacks), and economic conditions.
   \item \textbf{Adaptive sharding}: Partition state and workload across sub-DAGs (shards) based on transaction locality; AI predicts optimal shard assignments.
-  \item \textbf{Predictive fee markets}: AI forecasts demand, adjusts TEM subsidies preemptively to prevent congestion.
+  \item \textbf{Прогнозні ринки комісій}: AI прогнозує попит, превентивно коригує субсидії TEM для запобігання перевантаженню.
 \end{itemize}
-\textbf{Performance Target}: 10,000+ TPS sustained, 15,000+ TPS peak, sub-500ms finality for 95\% of transactions.\\
-\textbf{Decentralisation Constraints}: Governance sets bounds:
+\textbf{Цільова продуктивність}: 10,000+ TPS стабільно, 15,000+ TPS пікова, фінальність менше 500мс для 95\% транзакцій.\\
+\textbf{Обмеження децентралізації}: Управління встановлює межі:
 \begin{itemize}[noitemsep]
-  \item Minimum validator count: 500 (prevents excessive centralisation).
-  \item Maximum validator earnings: Gini coefficient $<0.45$ (ensures broad participation).
-  \item AI model transparency: Open-source models, public training data, reproducible builds.
+  \item Мінімальна кількість валідаторів: 500 (запобігає надмірній централізації).
+  \item Максимальний дохід валідатора: коефіцієнт Джині $<0.45$ (забезпечує широку участь).
+  \item Прозорість моделі AI: моделі з відкритим вихідним кодом, публічні дані навчання, відтворювані збірки.
 \end{itemize}
-\textbf{Century-Scale Vision}: PAI consensus adapts to interplanetary latency (Section~\ref{sec:expansion}), dynamic node availability (colonies joining/leaving network), and evolving threat landscapes (post-quantum attacks, AGI adversaries).
+\textbf{Віковий масштаб бачення}: консенсус PAI адаптується до міжпланетної затримки (Розділ~\ref{sec:expansion}), динамічної доступності вузлів (колонії приєднуються/залишають мережу) та еволюційних ландшафтів загроз (постквантові атаки, супротивники AGI).
 
 \subsection{Two-Lens Rationale}
 \begin{description}[style=nextline]
-  \item[Near-Term (MERCURY Era)] Enterprises gain compliant automation with auditable AGIW receipts, regulated custody (HSMs, multi-sig), hybrid fiat/crypto settlement, expert dispute resolution, and AI safety guardrails. Cost savings (60--80\%) and compliance readiness (SOC 2, EU AI Act) drive adoption.
-  \item[Century-Scale (VENUS through ANDROMEDA)] Infrastructure supports Decentralised Autonomous Economies (DAEs) operating compute farms, energy grids, and cross-planet commerce with managed risk. PAI consensus scales to interstellar latencies, constitutional contracts encode governance for mixed human--AI populations, reversible history mechanisms allow court-authorised rollbacks for catastrophic failures.
+  \item[Близький термін (Ера MERCURY)] Підприємства отримують відповідну автоматизацію з аудиторськими квитанціями AGIW, регульованим зберіганням (HSM, мультипідпис), гібридним розрахунком фіат/крипто, експертним вирішенням суперечок та захисними бар'єрами безпеки AI. Економія витрат (60--80\%) та готовність до відповідності (SOC 2, EU AI Act) стимулюють впровадження.
+  \item[Віковий масштаб (VENUS через ANDROMEDA)] Інфраструктура підтримує Децентралізовані Автономні Економіки (DAE), які керують обчислювальними фермами, енергетичними мережами та міжпланетною торгівлею з керованим ризиком. Консенсус PAI масштабується до міжзоряних затримок, конституційні контракти кодують управління для змішаних людино-AI популяцій, механізми оборотної історії дозволяють санкціоновані судом відкати для катастрофічних збоїв.
 \end{description}
 
 \subsection{Risk Matrix \& Mitigation Summary}
@@ -915,11 +915,11 @@ policy AgentWithdrawalLimit {
     \end{itemize}
   \item \textbf{Deployment Workflow}:
     \begin{itemize}[noitemsep]
-      \item Governance drafts policy in DSL, commits to GitHub.
-      \item Compiler runs CI/CD pipeline: compile, test on testnet, generate audit report.
-      \item Community reviews code, simulations, formal verification proofs (7-day period).
-      \item On-chain vote: requires 60\% quorum, 75\% approval.
-      \item Time-locked deployment: 48-hour delay before activation (emergency brake window).
+      \item Управління складає політику в DSL, фіксує в GitHub.
+      \item Компілятор запускає конвеєр CI/CD: компіляція, тестування в тестовій мережі, генерація звіту аудиту.
+      \item Спільнота переглядає код, симуляції, докази формальної верифікації (7-денний період).
+      \item Голосування в ланцюзі: вимагає 60\% кворуму, 75\% схвалення.
+      \item Розгортання з часовим блокуванням: 48-годинна затримка перед активацією (вікно екстреного гальмування).
     \end{itemize}
 \end{enumerate}
 
@@ -934,7 +934,7 @@ policy AgentWithdrawalLimit {
 \paragraph{Example Use Cases}
 \begin{itemize}[noitemsep]
   \item \textbf{Export control}: ``Agents in jurisdiction X cannot execute tasks involving datasets from jurisdiction Y'' (ITAR compliance).
-  \item \textbf{Energy quotas}: ``Virtual universities allocate 1,000 EC/month per student; excesses require dean approval.''
+  \item \textbf{Квоти енергії}: ``Віртуальні університети виділяють 1,000 EC/місяць на студента; перевищення вимагають схвалення декана.''
   \item \textbf{Emergency response}: ``If Safety Oracle flags $>10$ toxicity violations in 1 hour, pause all agent operations pending Council review.''
 \end{itemize}
 
@@ -958,7 +958,7 @@ SLO управління: участь 75\% у критичних голосув
 
 \subsection{Use Cases}
 \begin{itemize}[noitemsep]
-  \item Virtual universities encode curricula, credentials, and accreditation under policy contracts.
+  \item Віртуальні університети кодують навчальні плани, облікові дані та акредитацію за допомогою політичних контрактів.
   \item Mixed human--AI corporations use constitutional contracts for budget approvals, hiring, and risk controls.
   \item Cross-reality trade uses delay-tolerant settlement for resource exchanges.
 \end{itemize}
@@ -966,33 +966,33 @@ SLO управління: участь 75\% у критичних голосув
 \section{Розширення та оборотна історія -- Ери ЮПІТЕР - АНДРОМЕДА}
 \label{sec:expansion}
 
-As AGI civilization expands beyond Earth (JUPITER era) and ultimately stabilizes across stellar systems (ANDROMEDA era), TOS must evolve to handle interplanetary latency, catastrophic failure recovery, and multi-century governance. This section presents the architectural extensions that transform TOS from a terrestrial settlement layer into the economic substrate for a geo-stellar civilization.
+Оскільки цивілізація AGI розширюється за межі Землі (ера ЮПІТЕР) і зрештою стабілізується в зоряних системах (ера АНДРОМЕДА), TOS повинна еволюціонувати для обробки міжпланетних затримок, відновлення після катастрофічних збоїв та управління протягом століть. Цей розділ представляє архітектурні розширення, що перетворюють TOS з наземного рівня врегулювання на економічний субстрат для геозоряної цивілізації.
 
-\subsection{Interplanetary Consensus Profile}
+\subsection{Профіль міжпланетного консенсусу}
 
-\paragraph{Challenge: Light-Speed Communication Delays}
-Earth-Mars round-trip latency ranges from 8 to 44 minutes depending on orbital positions. Lunar colonies experience 2.5-second delays. Asteroid belt settlements (Ceres, main belt) face 40--80 minute latencies. Traditional consensus protocols (BFT, PoS) assume sub-second communication; direct application to interplanetary networks causes:
+\paragraph{Виклик: затримки комунікації зі швидкістю світла}
+Затримка туди-назад Земля-Марс коливається від 8 до 44 хвилин залежно від орбітальних позицій. Місячні колонії відчувають затримки 2.5 секунди. Поселення поясу астероїдів (Церера, головний пояс) стикаються із затримками 40--80 хвилин. Традиційні протоколи консенсусу (BFT, PoS) припускають субсекундну комунікацію; пряме застосування до міжпланетних мереж спричиняє:
 \begin{itemize}[noitemsep]
-  \item \textbf{Finality stalls}: Validators timeout waiting for cross-planet confirmations.
-  \item \textbf{Fork proliferation}: Network partitions during planetary conjunctions (when celestial bodies align such that direct communication is blocked by the Sun).
-  \item \textbf{Energy waste}: Redundant block production across isolated colonies.
+  \item \textbf{Зупинки фінальності}: валідатори припиняються за таймаутом, очікуючи міжпланетних підтверджень.
+  \item \textbf{Проліферація форків}: розділення мережі під час планетарних з'єднань (коли небесні тіла вирівнюються так, що пряма комунікація блокується Сонцем).
+  \item \textbf{Витрати енергії}: надлишкове виробництво блоків через ізольовані колонії.
 \end{itemize}
 
-\paragraph{Solution: Hierarchical Consensus with Delay-Tolerant Roots}
-TOS adopts a two-tier consensus model:
+\paragraph{Рішення: ієрархічний консенсус з толерантними до затримок коренями}
+TOS приймає двоярусну модель консенсусу:
 
 \textbf{Tier 1: Local Consensus Domains (LCDs)}\\
 Кожне планетарне поселення (Земля, Марс, Місяць, Церера тощо) експлуатує незалежний екземпляр TOS з локальними валідаторами. Консенсус всередині LCD використовує стандартний BlockDAG + PAI (фінальність субсекундна). Транзакції врегульовуються локально; агенти на Марсі платять іншим агентам Марса без очікування підтвердження Землі.
 
-\textbf{Tier 2: Interplanetary Root Chain (IRC)}\\
-Every 24 hours (Earth time), each LCD publishes a \emph{snapshot proof} to the IRC—a Merkle root of the local state plus zk-SNARK attestation proving valid execution. The IRC aggregates snapshots via:
+\textbf{Ярус 2: міжпланетний кореневий ланцюг (IRC)}\\
+Кожні 24 години (земний час), кожен LCD публікує \emph{доказ знімка} до IRC—корінь Меркла локального стану плюс атестація zk-SNARK, що доводить валідне виконання. IRC агрегує знімки через:
 \begin{enumerate}[noitemsep]
-  \item \textbf{Delay-Tolerant BFT}: Modified Tendermint with exponential backoff; validators wait up to 60 minutes for cross-planet votes.
-  \item \textbf{Quorum relaxation}: Finality requires 51\% of stake (vs. 67\% terrestrial), accepting higher fork risk in exchange for liveness.
-  \item \textbf{Checkpointing}: Every 7 days (Earth time), IRC emits a \emph{canonical checkpoint}—irreversible settlement anchor recognized by all LCDs.
+  \item \textbf{Толерантний до затримок BFT}: модифікований Tendermint з експоненційним відступом; валідатори очікують до 60 хвилин міжпланетних голосів.
+  \item \textbf{Послаблення кворуму}: фінальність вимагає 51\% стейку (проти 67\% наземних), приймаючи вищий ризик форку в обмін на живучість.
+  \item \textbf{Контрольні точки}: кожні 7 днів (земний час), IRC випускає \emph{канонічну контрольну точку}—незворотний якір врегулювання, визнаний усіма LCD.
 \end{enumerate}
 
-\paragraph{Cross-Planet Atomic Swaps}
+\paragraph{Міжпланетні атомарні свопи}
 Агент на Землі хоче заплатити агенту на Марсі. Протокол:
 \begin{enumerate}[noitemsep]
   \item Агент Землі блокує кошти в HTLC (Контракт з блокуванням за хешем та часом) на LCD Землі, з хешем $H$ та таймаутом 48 годин.
@@ -1022,22 +1022,22 @@ Every 24 hours (Earth time), each LCD publishes a \emph{snapshot proof} to the I
 \begin{itemize}[noitemsep]
   \item Зловмисний агент виконує шахрайський переказ, виснажуючи скарбницю колонії (\$50B+).
   \item Помилка смарт-контракту викликає каскадні збої в контрактах енергомережі.
-  \item Compromised validator set (quantum computer breakthrough) undermines signature security.
+  \item Скомпрометований набір валідаторів (прорив квантового комп'ютера) підриває безпеку підписів.
 \end{itemize}
-Traditional blockchains offer no remedy beyond contentious social consensus hard forks. TOS enables \emph{court-authorised rollbacks} while preserving auditability.
+Традиційні блокчейни не пропонують засобу виправлення окрім спірних хардфорків соціального консенсусу. TOS уможливлює \emph{санкціоновані судом відкати}, зберігаючи при цьому аудитованість.
 
-\paragraph{Architecture: Checkpoint-Based Rollback}
-\textbf{Checkpoint Creation}\\
-Every 24 hours, each LCD computes:
+\paragraph{Архітектура: відкат на основі контрольних точок}
+\textbf{Створення контрольних точок}\\
+Кожні 24 години, кожен LCD обчислює:
 \begin{itemize}[noitemsep]
   \item \textbf{State root}: Merkle root of all account balances, smart contract storage, reputation scores.
   \item \textbf{Validity proof}: zk-SNARK proving all transactions since last checkpoint executed correctly (gas limits, signatures, state transitions).
   \item \textbf{Metadata}: Block height, timestamp, proposer identity, hash of previous checkpoint.
 \end{itemize}
-Checkpoints published to IRC and archived in redundant storage (see Archival Federation).
+Контрольні точки публікуються в IRC та архівуються в резервному сховищі (див. Федерацію архівування).
 
-\textbf{Rollback Authorization}\\
-Governance procedure (requires Constitutional supermajority, 75\% vote):
+\textbf{Авторизація відкату}\\
+Процедура управління (вимагає конституційної супербільшості, 75\% голосів):
 \begin{enumerate}[noitemsep]
   \item \textbf{Incident Report}: Affected parties submit evidence (transaction logs, expert testimony, forensic analysis) to Arbitration Court.
   \item \textbf{Court Ruling}: If Court determines rollback justified (fraud, exploit, or force majeure), issues signed \emph{Rollback Authorization Certificate (RAC)} specifying:
@@ -1072,19 +1072,19 @@ Governance procedure (requires Constitutional supermajority, 75\% vote):
 \end{enumerate}
 \textbf{Outcome}: Crisis resolved in 7 days; network trust preserved; attacker's quantum advantage neutralized by rollback capability.
 
-\subsection{Archival Federation}
+\subsection{Федерація архівування}
 
-\paragraph{Challenge: Millennial Data Preservation}
-AGI civilization requires \emph{institutional memory} spanning centuries. Use cases:
+\paragraph{Виклик: тисячолітнє збереження даних}
+Цивілізація AGI вимагає \emph{інституційної пам'яті}, що охоплює століття. Випадки використання:
 \begin{itemize}[noitemsep]
   \item Юридичні спори, що посилаються на контракти, підписані 200 років тому.
-  \item Scientific reproducibility (verify experimental claims from prior era).
-  \item Genealogical research (human/AI lineage records).
-  \item Historical audits (Did colony X pay colony Y in 2234?).
+  \item Наукова відтворюваність (перевірка експериментальних заяв з попередньої ери).
+  \item Генеалогічні дослідження (записи людської/AI спадковості).
+  \item Історичні аудити (чи платила колонія X колонії Y у 2234?).
 \end{itemize}
-Traditional cloud storage (AWS Glacier, Google Coldline) assumes $<$100-year retention; enterprises collapse, formats obsolete, bit rot accumulates.
+Традиційне хмарне сховище (AWS Glacier, Google Coldline) припускає збереження $<$100 років; підприємства розпадаються, формати застарівають, накопичується бітова корозія.
 
-\paragraph{Solution: Multi-Layer Archival Strategy}
+\paragraph{Рішення: багаторівнева стратегія архівування}
 
 \textbf{Layer 1: Hot Storage (1--10 years)}\\
 Активні вузли зберігають повний стан + останні блоки в SSD/NVMe. Індексовані для швидких запитів. Резервування: 3 репліки на LCD, географічно розподілені (Земля: 3 континенти; Марс: Олімп Монс, Валлес Марінеріс, Еллада Басейн).
@@ -1141,23 +1141,23 @@ Experimental media:
   \item Classical: ECDSA secp256k1 (backward compatibility).
   \item Post-quantum: Dilithium-3 (NIST FIPS 204).
 \end{itemize}
-Validators verify both; network accepts transaction if \emph{either} signature valid (ensures liveness if PQC implementation has bugs).
+Валідатори перевіряють обидва; мережа приймає транзакцію, якщо \emph{будь-який} підпис дійсний (забезпечує живучість, якщо реалізація PQC має помилки).
 
 \textbf{Phase 2 (v5.0, 2030)}: PQC-only mode. Classical signatures deprecated; nodes reject ECDSA-only transactions. Grace period: 12 months for agents to upgrade wallets.
 
 \textbf{Phase 3 (v6.0, 2040)}: Quantum-resistant hash functions. Replace SHA-256 (vulnerable to Grover's algorithm) with SHA-3 or BLAKE3 (256-bit security maintained against quantum attacks).
 
-\paragraph{Community Ceremony (Transparency \& Trust)}
-To ensure transparency and community trust, TOS conducts a \emph{PQC Migration Ceremony}:
+\paragraph{Церемонія спільноти (прозорість та довіра)}
+Для забезпечення прозорості та довіри спільноти, TOS проводить \emph{церемонію міграції PQC}:
 \begin{enumerate}[noitemsep]
-  \item \textbf{Phase 1 (Month 1--3)}: Open call for participants (universities, security firms, community volunteers). 5,000+ participants contribute randomness to generate global PQC parameters.
-  \item \textbf{Phase 2 (Month 4)}: Multi-party computation (MPC) generates master public key. Ceremony transcript published; participants destroy private contributions.
-  \item \textbf{Phase 3 (Month 5--6)}: Compatibility testing. Validators run shadow fork with PQC signatures; stress test under adversarial conditions.
-  \item \textbf{Phase 4 (Month 7)}: Governance vote (67\% approval required). If passed, mainnet upgrade scheduled 30 days out.
-  \item \textbf{Phase 5 (Month 8)}: Mainnet activation. Old signatures phased out over 12 months.
+  \item \textbf{Фаза 1 (місяць 1--3)}: відкритий заклик для учасників (університети, фірми безпеки, волонтери спільноти). 5,000+ учасників вносять випадковість для генерації глобальних параметрів PQC.
+  \item \textbf{Фаза 2 (місяць 4)}: багатостороннє обчислення (MPC) генерує майстер-публічний ключ. Стенограма церемонії опублікована; учасники знищують приватні внески.
+  \item \textbf{Фаза 3 (місяць 5--6)}: тестування сумісності. Валідатори запускають тіньовий форк з підписами PQC; стрес-тест в умовах атак.
+  \item \textbf{Фаза 4 (місяць 7)}: голосування управління (потрібно 67\% схвалення). Якщо прийнято, оновлення мейннету заплановане через 30 днів.
+  \item \textbf{Фаза 5 (місяць 8)}: активація мейннету. Старі підписи поступово виводяться протягом 12 місяців.
 \end{enumerate}
 
-\paragraph{Fallback Plan}
+\paragraph{Резервний план}
 Якщо виявлено критичну вразливість PQC (наприклад, зламано припущення про жорсткість решітки):
 \begin{itemize}[noitemsep]
   \item Аварійне відкочування до останньої контрольної точки до-PQC.
@@ -1165,9 +1165,9 @@ To ensure transparency and community trust, TOS conducts a \emph{PQC Migration C
   \item Скликати церемонію заново з оновленими параметрами.
 \end{itemize}
 
-\subsection{Philosophical Foundations: Temporal Sovereignty}
+\subsection{Філософські основи: темпоральний суверенітет}
 
-The reversible history mechanism embodies a radical governance principle: \textbf{future generations may correct past errors}. Traditional blockchains enshrine immutability as sacred; TOS recognizes that \emph{perfect foresight is impossible}. By enabling court-authorised rollbacks, TOS empowers AGI civilization to:
+Механізм зворотної історії втілює радикальний принцип управління: \textbf{майбутні покоління можуть виправляти минулі помилки}. Традиційні блокчейни обожнюють незмінність як священну; TOS визнає, що \emph{досконале передбачення неможливе}. Уможливлюючи санкціоновані судом відкати, TOS наділяє цивілізацію AGI можливостями:
 \begin{itemize}[noitemsep]
   \item Відновитися від подій чорного лебедя (квантові атаки, зловмисний надштучний інтелект).
   \item Скасувати несправедливі транзакції (крадіжка, примус, алгоритмічна дискримінація).
@@ -1196,21 +1196,21 @@ Examples:
   Mainnet:      did:tos:mainnet:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh
   Testnet:      did:tos:testnet:tst1qqqsyqcyq5rqwzqfpg9scrgwpugpzysnzs2pgde5k
 \end{verbatim}
-Note: TOS uses complete bech32 addresses as DID identifiers, preserving full address format including checksum for validation. Mainnet addresses use \texttt{tos1} prefix, while testnet addresses use \texttt{tst1} prefix.
+Примітка: TOS використовує повні адреси bech32 як ідентифікатори DID, зберігаючи повний формат адреси включно з контрольною сумою для валідації. Адреси основної мережі використовують префікс \texttt{tos1}, тоді як адреси тестової мережі використовують префікс \texttt{tst1}.
 
 \textbf{DID Document Structure}:
 \begin{itemize}[noitemsep]
   \item \textbf{Public Keys}: Ed25519 (signing), X25519 (encryption), Dilithium-3 (post-quantum).
   \item \textbf{Service Endpoints}: HTTPS URLs for off-chain communication, IPFS content addresses.
-  \item \textbf{Verifiable Credentials}: Linked to attestations (reputation scores, skill certifications, regulatory compliance).
-  \item \textbf{Revocation Registry}: Bloom filter enabling efficient revocation checks without revealing full credential list.
+  \item \textbf{Перевірювані облікові дані}: Пов'язані з атестаціями (оцінки репутації, сертифікати навичок, відповідність нормативним вимогам).
+  \item \textbf{Реєстр відкликання}: Фільтр Блума, що забезпечує ефективні перевірки відкликання без розкриття повного списку облікових даних.
 \end{itemize}
 
-\textbf{Registration Process}:
+\textbf{Процес реєстрації}:
 \begin{enumerate}[noitemsep]
-  \item Agent generates key pair; derives DID from public key hash.
-  \item Submits registration transaction to TOS chain (fee: 1 TOS).
-  \item DID anchored on-chain; DID document published to IPFS; hash stored in smart contract.
+  \item Агент генерує пару ключів; виводить DID з геша відкритого ключа.
+  \item Надсилає реєстраційну транзакцію до ланцюжка TOS (комісія: 1 TOS).
+  \item DID закріплюється в ланцюжку; DID-документ публікується в IPFS; геш зберігається в смарт-контракті.
   \item Агент доводить контроль, підписуючи виклик приватним ключем.
 \end{enumerate}
 
@@ -1268,9 +1268,9 @@ r_{t+\Delta t} = r_t \cdot (0.98)^{\Delta t / 30}
 
 \paragraph{Interoperability with W3C Standards}
 \begin{itemize}[noitemsep]
-  \item \textbf{DID Core v1.0}: Full compliance; TOS DIDs resolvable via Universal Resolver.
-  \item \textbf{Verifiable Credentials Data Model v1.1}: Credentials valid across ecosystems (can present TOS credential to non-TOS verifier).
-  \item \textbf{DIDComm v2}: Secure messaging protocol for agent-to-agent communication (encrypted, authenticated, transport-agnostic).
+  \item \textbf{DID Core v1.0}: Повна відповідність; DID TOS розв'язуються через Universal Resolver.
+  \item \textbf{Verifiable Credentials Data Model v1.1}: Облікові дані дійсні в різних екосистемах (можна надати облікові дані TOS верифікатору не-TOS).
+  \item \textbf{DIDComm v2}: Безпечний протокол обміну повідомленнями для комунікації між агентами (зашифрований, автентифікований, незалежний від транспорту).
 \end{itemize}
 
 \subsection{P2 -- Economic Execution}
@@ -1485,8 +1485,8 @@ Court-authorised rollback mechanism for catastrophic failures. Checkpoints every
 \paragraph{Archival Federation}
 Багаторівнева стратегія зберігання (Гаряче/Тепле/Холодне) з резервними копіями ДНК та 5D оптичних дисків. Дані зберігаються протягом тисячоліть у планетарних колоніях. Див. Розділ~\ref{sec:expansion} для економічної моделі та протоколів отримання.
 
-\paragraph{Delay-Tolerant Networking}
-Hierarchical consensus (Local Consensus Domains + Interplanetary Root Chain) handles light-speed communication delays. Daily snapshots enable cross-planet settlement within 48--96 hours. See Section~\ref{sec:expansion} for interplanetary atomic swap protocol.
+\paragraph{Мережа, толерантна до затримок}
+Ієрархічний консенсус (локальні домени консенсусу + міжпланетний кореневий ланцюг) обробляє затримки комунікації зі швидкістю світла. Щоденні знімки уможливлюють міжпланетне врегулювання протягом 48--96 годин. Див. розділ~\ref{sec:expansion} для протоколу міжпланетного атомарного свопу.
 
 \paragraph{Disaster Recovery Protocols}
 \textbf{Byzantine Fault Scenarios}:
@@ -1541,11 +1541,11 @@ where:
   \item $metrics$: Optional performance data (runtime, memory usage, model accuracy).
 \end{itemize}
 
-\paragraph{Validation Function} Validators evaluate submissions using function:
+\paragraph{Функція валідації} Валідатори оцінюють подання за допомогою функції:
 \begin{equation}
 \mathcal{V}: (W, spec, T) \rightarrow [0, 1]
 \end{equation}
-The function checks:
+Функція перевіряє:
 \begin{enumerate}[noitemsep]
   \item \textbf{Attestation validity}: Verify TEE signature against known public keys (Intel, AMD).
   \item \textbf{Measurement correctness}: Compare $measurementHash$ to approved code hashes in whitelist.
@@ -1556,17 +1556,17 @@ The function checks:
 \begin{equation}
 q = \text{median}(\{q_v : v \in \text{assigned validators}\})
 \end{equation}
-Settlement requires $|q_v - q| \leq \epsilon$ for $\geq 67\%$ of validators, where $\epsilon = 0.1$ is tolerance threshold.
+Врегулювання вимагає $|q_v - q| \leq \epsilon$ для $\geq 67\%$ валідаторів, де $\epsilon = 0.1$ є порогом толерантності.
 
-\paragraph{Slashing Policy} Validators deviating $>2\sigma$ from median forfeit:
+\paragraph{Політика скорочення} Валідатори, що відхиляються $>2\sigma$ від медіани, втрачають:
 \begin{equation}
 slash_v = \min(0.05 \times stake_v, \; 0.01 \times stake_v \times |q_v - q| / \epsilon)
 \end{equation}
 Скорочені кошти переказуються до скарбниці. Постійні викиди ($>5$ скорочень на 100 завдань) видаляються з пулу валідаторів.
 
-\subsection{State Machine}
+\subsection{Машина станів}
 \label{sec:agiw-state-machine}
-The AGIW state machine transitions as follows:
+Машина станів AGIW виконує переходи наступним чином:
 \begin{longtable}{@{}p{0.18\textwidth}p{0.22\textwidth}p{0.24\textwidth}p{0.24\textwidth}@{}}
 \toprule
 \textbf{State} & \textbf{Trigger} & \textbf{Conditions} & \textbf{Next State} \\\midrule
@@ -1601,7 +1601,7 @@ The AGIW state machine transitions as follows:
       \item \textbf{AMD SEV}: SMU (System Management Unit) telemetry.
       \item \textbf{ARM Realm}: PMU (Performance Monitoring Unit) energy events.
     \end{itemize}
-  \item TEE generates result, computes $resultHash = \texttt{keccak256}(output)$.
+  \item TEE генерує результат, обчислює $resultHash = \texttt{keccak256}(output)$.
 \end{enumerate}
 
 \paragraph{Step 3: Attestation Report Generation}
@@ -1621,16 +1621,16 @@ TEE produces signed report:
 \end{verbatim}
 Підпис обчислюється над всіма полями, використовуючи приватний ключ TEE (захищений апаратно, не експортується).
 
-\paragraph{Step 4: On-Chain Submission}
-Agent calls \texttt{TaskInstance.submitWork(resultHash, attestation)}. Smart contract:
+\paragraph{Крок 4: подання в ланцюг}
+Агент викликає \texttt{TaskInstance.submitWork(resultHash, attestation)}. Розумний контракт:
 \begin{itemize}[noitemsep]
   \item Verifies $signature$ against known TEE public keys (stored in registry updated quarterly).
   \item Emits \texttt{WorkSubmitted(taskID, agentDID, resultHash, attestation)} event.
   \item Triggers ValidationPool to assign validators.
 \end{itemize}
 
-\paragraph{Step 5: Validator Verification}
-Validators independently:
+\paragraph{Крок 5: перевірка валідатором}
+Валідатори незалежно:
 \begin{enumerate}[noitemsep]
   \item Fetch attestation from on-chain event.
   \item Verify TEE signature (cryptographic proof of execution integrity).
@@ -1639,12 +1639,12 @@ Validators independently:
   \item Submit quality score $q_v \in [0,1]$ via \texttt{ValidationPool.validateWork(taskID, q\_v)}.
 \end{enumerate}
 
-\paragraph{Roadmap: zk-SNARK Attestation}
-Future versions (2027+) replace TEE attestation with zero-knowledge proofs:
+\paragraph{Дорожня карта: атестація zk-SNARK}
+Майбутні версії (2027+) замінять атестацію TEE на докази з нульовим розголошенням:
 \begin{itemize}[noitemsep]
-  \item Agent generates zk-SNARK proving ``I executed code $C$ on input $x$ and produced output $y$'' without revealing $x$, $y$, or intermediate states.
-  \item Proof size: $\sim$200 bytes (constant, independent of computation).
-  \item Verification cost: $\sim$5ms on commodity hardware (vs.\ TEE signature verification $\sim$2ms).
+  \item Агент генерує zk-SNARK, що доводить «Я виконав код $C$ на вході $x$ і створив вихід $y$» без розкриття $x$, $y$ або проміжних станів.
+  \item Розмір доказу: $\sim$200 байт (константа, незалежна від обчислень).
+  \item Вартість верифікації: $\sim$5мс на звичайному обладнанні (проти верифікації підпису TEE $\sim$2мс).
   \item Перевага: Немає залежності від конкретних постачальників апаратного забезпечення (Intel, AMD); безповірна верифікація.
 \end{itemize}
 
@@ -1658,8 +1658,8 @@ Future versions (2027+) replace TEE attestation with zero-knowledge proofs:
 \section{Економічна симуляція}
 \label{sec:econ-sim}
 
-\subsection{Methodology}
-We model TOS economics using agent-based simulation with 100,000 time steps (days). Key variables:
+\subsection{Методологія}
+Ми моделюємо економіку TOS, використовуючи агентну симуляцію з 100,000 часових кроків (днів). Ключові змінні:
 \begin{itemize}[noitemsep]
   \item \textbf{Agent population}: $N_a(t)$ agents active on day $t$.
   \item \textbf{Task volume}: $V_t(t)$ tasks published per day.

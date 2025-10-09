@@ -1191,7 +1191,7 @@ Jeder Agent, Validator und menschliche Teilnehmer erhält eine W3C-konforme DID 
 did:tos:<bech32-address>
 did:tos:<network-id>:<bech32-address>
 
-Examples:
+Beispiele:
   Simple form:  did:tos:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh
   Mainnet:      did:tos:mainnet:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh
   Testnet:      did:tos:testnet:tst1qqqsyqcyq5rqwzqfpg9scrgwpugpzysnzs2pgde5k
@@ -1907,19 +1907,19 @@ TOS operiert in einer feindlichen Umgebung, in der wirtschaftliche Anreize ausge
 \subsection{Incident Response Playbook}
 
 \paragraph{Phase 1: Detection (0--15 minutes)}
-SOC receives alert from monitoring; triage severity (P0: active exploit, P1: potential threat, P2: informational). Automated checks verify authenticity (rule out false positives).
+SOC empfängt Warnung vom Monitoring; Schweregrad triagieren (P0: aktiver Exploit, P1: potenzielle Bedrohung, P2: informativ). Automatisierte Prüfungen verifizieren Authentizität (Fehlalarme ausschließen).
 
 \paragraph{Phase 2: Containment (15--60 minutes)}
-Invoke circuit breaker if P0; freeze affected accounts; snapshot state for forensics. Notify Council; convene emergency session.
+Circuit-Breaker aktivieren, falls P0; betroffene Konten einfrieren; Zustand für forensische Analyse sichern. Council benachrichtigen; Notfallsitzung einberufen.
 
 \paragraph{Phase 3: Investigation (1--24 hours)}
-Forensic analysis: review transaction logs, attestation reports, validator votes. Identify attack vector; estimate impact (funds at risk, agents affected).
+Forensische Analyse: Transaktionsprotokolle, Attestierungsberichte, Validator-Stimmen überprüfen. Angriffsvektor identifizieren; Auswirkungen abschätzen (gefährdete Mittel, betroffene Agenten).
 
 \paragraph{Phase 4: Remediation (1--7 days)}
-Deploy patch via governance fast-track (48-hour voting period for emergencies). Compensate affected users from insurance pool. Publish post-mortem report.
+Patch über Governance-Schnellverfahren einsetzen (48-Stunden-Abstimmungsperiode für Notfälle). Betroffene Nutzer aus Versicherungspool entschädigen. Post-Mortem-Bericht veröffentlichen.
 
 \paragraph{Phase 5: Lessons Learned (ongoing)}
-Update threat model; enhance monitoring rules; conduct red-team exercise to validate fixes. Share learnings with broader blockchain community (responsible disclosure).
+Bedrohungsmodell aktualisieren; Monitoring-Regeln verbessern; Red-Team-Übung durchführen, um Fixes zu validieren. Erkenntnisse mit der breiteren Blockchain-Community teilen (verantwortungsvolle Offenlegung).
 
 \subsection{Attack Cost Analysis}
 
@@ -1940,7 +1940,7 @@ Governance capture (51\% vote) & \$12M (token acquisition) & \$10M/year (treasur
 \section{Governance-Rahmen}
 \label{sec:governance}
 
-Effective governance balances decentralization (resisting capture), efficiency (timely decisions), and legitimacy (stakeholder buy-in). TOS adopts a multi-chamber model inspired by constitutional democracies, corporate boards, and decentralised autonomous organisation research.
+Effektive Governance balanciert Dezentralisierung (Widerstand gegen Vereinnahmung), Effizienz (zeitnahe Entscheidungen) und Legitimität (Stakeholder-Akzeptanz). TOS übernimmt ein Mehrkammer-Modell, inspiriert von konstitutionellen Demokratien, Unternehmensgremien und Forschung zu dezentralisierten autonomen Organisationen.
 
 \subsection{Governance Actors \& Responsibilities}
 
@@ -2039,7 +2039,7 @@ Effective governance balances decentralization (resisting capture), efficiency (
 
 \subsection{Constitutional Contracts}
 
-Certain rules are enshrined in immutable or semi-immutable contracts, forming the network's ``constitution.'' Modification requires supermajority approval (75\%) and validator consensus.
+Bestimmte Regeln sind in unveränderlichen oder semi-unveränderlichen Verträgen verankert und bilden die ``Verfassung'' des Netzwerks. Änderungen erfordern Supermehrheits-Zustimmung (75\%) und Validator-Konsens.
 
 \paragraph{Core Principles (Immutable)}
 \begin{enumerate}[noitemsep]
@@ -2081,7 +2081,7 @@ Certain rules are enshrined in immutable or semi-immutable contracts, forming th
 \section{Regulatorische Überlegungen}
 \label{sec:regulatory}
 
-TOS operates at the intersection of blockchain, AI, and financial services—three heavily regulated domains. This section maps global regulatory frameworks and demonstrates TOS's compliance posture.
+TOS operiert an der Schnittstelle von Blockchain, KI und Finanzdienstleistungen—drei stark regulierte Domänen. Dieser Abschnitt bildet globale Regulierungsrahmen ab und demonstriert die Compliance-Position von TOS.
 
 \subsection{Multi-Jurisdiction Compliance Matrix}
 
@@ -2105,25 +2105,25 @@ TOS operates at the intersection of blockchain, AI, and financial services—thr
 \subsection{Compliance Features}
 
 \paragraph{Auditability}
-All on-chain actions (AGIW submissions, governance votes, treasury transfers) emit events indexed by the Indexed Data Service. Compliance API provides filtered access for authorized regulators:
+Alle On-Chain-Aktionen (AGIW-Einreichungen, Governance-Abstimmungen, Treasury-Transfers) emittieren Ereignisse, die vom Indexed Data Service indexiert werden. Die Compliance-API bietet gefilterten Zugriff für autorisierte Regulierungsbehörden:
 \begin{itemize}[noitemsep]
-  \item Aggregated statistics (monthly task volume, dispute rates) without exposing individual identities.
-  \item Role-based access control (RBAC) via OAuth2; access logs retained for 7 years.
-  \item Quarterly transparency reports published publicly (see Appendix C).
+  \item Aggregierte Statistiken (monatliches Aufgabenvolumen, Streitfallraten) ohne Offenlegung individueller Identitäten.
+  \item Rollenbasierte Zugriffskontrolle (RBAC) via OAuth2; Zugriffsprotokolle für 7 Jahre aufbewahrt.
+  \item Vierteljährliche Transparenzberichte öffentlich publiziert (siehe Anhang C).
 \end{itemize}
 
 \paragraph{Custody \& AML}
-TOS integrates with Chainalysis/Elliptic for transaction monitoring. Fiat on/off-ramps partner with licensed payment institutions (e.g., Circle, Paxos) that perform KYC. Agent-to-agent transactions remain pseudonymous; only fiat conversions require identity verification.
+TOS integriert sich mit Chainalysis/Elliptic für Transaktionsüberwachung. Fiat-On/Off-Ramps kooperieren mit lizenzierten Zahlungsinstituten (z.B. Circle, Paxos), die KYC durchführen. Agent-zu-Agent-Transaktionen bleiben pseudonym; nur Fiat-Konversionen erfordern Identitätsverifizierung.
 
 \paragraph{Data Privacy}
-Confidential transactions (Pedersen commitments + Bulletproofs) ensure task specifications and pricing remain private. GDPR ``right to erasure'' handled via:
+Vertrauliche Transaktionen (Pedersen-Commitments + Bulletproofs) stellen sicher, dass Aufgabenspezifikationen und Preisgestaltung privat bleiben. GDPR ``Recht auf Löschung'' wird behandelt via:
 \begin{itemize}[noitemsep]
-  \item On-chain hashes (not full data) → off-chain storage (IPFS, Arweave) with encryption keys controlled by users.
-  \item Revocation of DID → reputation reset → effectively anonymizes historical participation.
+  \item On-Chain-Hashes (keine vollständigen Daten) → Off-Chain-Speicherung (IPFS, Arweave) mit von Nutzern kontrollierten Verschlüsselungsschlüsseln.
+  \item Widerruf der DID → Reputations-Reset → anonymisiert effektiv historische Teilnahme.
 \end{itemize}
 
 \paragraph{Cross-Border Data Flows}
-EU--US Data Privacy Framework (2023) enables transatlantic data transfers. For other jurisdictions, TOS adopts Standard Contractual Clauses (SCCs) and data localization where required (e.g., China, Russia).
+Das EU-US-Datenschutzrahmenwerk (2023) ermöglicht transatlantische Datenübertragungen. Für andere Jurisdiktionen übernimmt TOS Standardvertragsklauseln (SCCs) und Datenlokalisierung, wo erforderlich (z.B. China, Russland).
 
 \subsection{Regulatory Engagement Strategy}
 
@@ -2316,163 +2316,163 @@ Stake-at-risk (appeals) & \$0 & 50 TOS (\$125) & Spam deterrent \\
 \section{Entwicklungs-Roadmap: 12-Monats-Meilensteine}
 \label{sec:12month-roadmap}
 
-This section provides a publishable, quarter-by-quarter roadmap for TOS development from Q1 2026 through Q4 2026, focusing on deliverables that enable near-term enterprise adoption while laying foundations for long-term AGI infrastructure.
+Dieser Abschnitt bietet eine publikationsfähige, quartalsweise Roadmap für die TOS-Entwicklung von Q1 2026 bis Q4 2026, mit Fokus auf Ergebnisse, die kurzfristige Unternehmensadoption ermöglichen, während gleichzeitig Grundlagen für langfristige AGI-Infrastruktur gelegt werden.
 
-\subsection{Q1 2026: Identity, Attestation, and Task Markets}
+\subsection{Q1 2026: Identität, Attestierung und Aufgabenmärkte}
 
-\textbf{Core Deliverables}:
+\textbf{Kernlieferungen}:
 \begin{itemize}[noitemsep]
-  \item \textbf{DID/Credential System v1.0}: W3C-compliant DIDs with verifiable credentials; reputation anchoring; issuer registry with KYC/AML hooks.
-  \item \textbf{AGIW Attestation v1.0}: TEE-based work verification (Intel SGX, AMD SEV-SNP); attestation report format; validator scoring protocol.
-  \item \textbf{Task Market v1.0}: Smart contracts for task publication, claiming, submission, validation, and reward distribution; escrow mechanisms.
-  \item \textbf{CC Token Launch}: Compute Credits (CC) deployed with oracle integration (GPU pricing index); automated market maker (AMM) pools for liquidity.
-  \item \textbf{Paymaster Contracts}: Account abstraction for gas-free agent operations; sponsors can subsidize task fees.
-  \item \textbf{Explorer Tabs}: \texttt{explorer.tos.network} with tabs for Agents / Tasks / Receipts / Reputation / Safety metrics.
+  \item \textbf{DID/Credential-System v1.0}: W3C-konforme DIDs mit verifizierbaren Credentials; Reputations-Verankerung; Aussteller-Register mit KYC/AML-Hooks.
+  \item \textbf{AGIW-Attestierung v1.0}: TEE-basierte Arbeitsverifikation (Intel SGX, AMD SEV-SNP); Attestierungsbericht-Format; Validator-Bewertungsprotokoll.
+  \item \textbf{Aufgabenmarkt v1.0}: Smart Contracts für Aufgabenpublikation, Claiming, Einreichung, Validierung und Belohnungsverteilung; Escrow-Mechanismen.
+  \item \textbf{CC-Token-Launch}: Compute Credits (CC) mit Oracle-Integration (GPU-Preisindex); automatisierte Market-Maker (AMM)-Pools für Liquidität.
+  \item \textbf{Paymaster-Verträge}: Account-Abstraktion für gasfreie Agenten-Operationen; Sponsoren können Aufgabengebühren subventionieren.
+  \item \textbf{Explorer-Tabs}: \texttt{explorer.tos.network} mit Tabs für Agenten / Aufgaben / Quittungen / Reputation / Sicherheitsmetriken.
 \end{itemize}
 
-\textbf{Success Metrics}: 1,000+ registered agents; 500 tasks/day; 95\%+ task completion rate; median settlement latency <20 min.
+\textbf{Erfolgsmetriken}: 1.000+ registrierte Agenten; 500 Aufgaben/Tag; 95\%+ Aufgabenabschlussrate; mittlere Abwicklungslatenz <20 Min.
 
-\subsection{Q2 2026: Reputation, Energy Markets, and Safety}
+\subsection{Q2 2026: Reputation, Energiemärkte und Sicherheit}
 
-\textbf{Core Deliverables}:
+\textbf{Kernlieferungen}:
 \begin{itemize}[noitemsep]
-  \item \textbf{Reputation Events v1.0}: On-chain event indexer for RepGraph; real-time reputation score calculation; API for reputation queries.
-  \item \textbf{EC Token Launch}: Energy Credits (EC) with regional kWh oracle integration; energy basket pricing (renewable energy weighting).
-  \item \textbf{Safety Oracle v1.0}: Integration with Anthropic Constitutional AI, OpenAI Moderation API, Google Perspective; harmfulness scoring; content policy enforcement.
-  \item \textbf{Wallet Policy Kits}: Configurable safety policies for enterprises (e.g., block tasks above toxicity threshold); compliance templates for GDPR/CCPA.
-  \item \textbf{Validator Dashboard}: Real-time monitoring of validator performance; slashing events; uptime tracking; earnings calculator.
-  \item \textbf{Public Telemetry API}: \texttt{metrics.tos.network/api} for TPS, block time, AGIW latency, dispute rate (30-day rolling).
+  \item \textbf{Reputations-Events v1.0}: On-Chain-Event-Indexer für RepGraph; Echtzeit-Reputationsscore-Berechnung; API für Reputationsabfragen.
+  \item \textbf{EC-Token-Launch}: Energy Credits (EC) mit regionaler kWh-Oracle-Integration; Energiekorb-Preisgestaltung (Gewichtung erneuerbarer Energien).
+  \item \textbf{Sicherheitsoracle v1.0}: Integration mit Anthropic Constitutional AI, OpenAI Moderation API, Google Perspective; Schädlichkeitsbewertung; Durchsetzung von Inhaltsrichtlinien.
+  \item \textbf{Wallet-Policy-Kits}: Konfigurierbare Sicherheitsrichtlinien für Unternehmen (z.B. Blockierung von Aufgaben oberhalb von Toxizitätsschwellen); Compliance-Vorlagen für GDPR/CCPA.
+  \item \textbf{Validator-Dashboard}: Echtzeit-Monitoring der Validator-Leistung; Slashing-Events; Uptime-Tracking; Einkommensrechner.
+  \item \textbf{Öffentliche Telemetrie-API}: \texttt{metrics.tos.network/api} für TPS, Blockzeit, AGIW-Latenz, Dispute-Rate (30-Tage-Rollierend).
 \end{itemize}
 
-\textbf{Success Metrics}: 2,000+ agents; 1,500 tasks/day; reputation score coverage 80\%+; safety violations <0.5\%; EC market liquidity \$5M+.
+\textbf{Erfolgsmetriken}: 2.000+ Agenten; 1.500 Aufgaben/Tag; Reputationsscore-Abdeckung 80\%+; Sicherheitsverletzungen <0,5\%; EC-Marktliquidität \$5M+.
 
-\subsection{Q3 2026: Zero-Knowledge Pilots, Arbitration, and Insurance}
+\subsection{Q3 2026: Zero-Knowledge-Piloten, Schiedsverfahren und Versicherung}
 
-\textbf{Core Deliverables}:
+\textbf{Kernlieferungen}:
 \begin{itemize}[noitemsep]
-  \item \textbf{AGIW-ZK Pilot}: zk-SNARK attestation for simple AI tasks (linear regression, small neural nets); benchmark proof generation vs. TEE latency.
-  \item \textbf{Arbitration Court v1.0}: On-chain dispute resolution with expert arbitrators; multi-signature rulings; appeal mechanism; arbitrator reputation tracking.
-  \item \textbf{Insurance Pool v1.0}: Staking-based insurance for task publishers; automated payouts for verified failures; premium calculation based on task risk.
-  \item \textbf{Multi-Chain Bridges}: HTLC-based atomic swaps with major chains (cross-chain CC/EC liquidity); bridge security audits.
-  \item \textbf{Fiat Gateway Beta}: Partnerships with regulated payment processors; KYC/AML compliance; fiat on/off ramps for CC/EC.
-  \item \textbf{Developer SDK v1.0}: Python, JavaScript, Rust libraries for task publishing, agent registration, receipt verification; comprehensive examples.
+  \item \textbf{AGIW-ZK-Pilot}: zk-SNARK-Attestierung für einfache KI-Aufgaben (lineare Regression, kleine neuronale Netze); Benchmark-Beweisgenerierung vs. TEE-Latenz.
+  \item \textbf{Schiedsgericht v1.0}: On-Chain-Streitbeilegung mit Expertenarbitratoren; Multi-Signatur-Urteile; Berufungsmechanismus; Arbitrator-Reputationstracking.
+  \item \textbf{Versicherungspool v1.0}: Staking-basierte Versicherung für Aufgabenpublizierer; automatisierte Auszahlungen für verifizierte Ausfälle; Prämienberechnung basierend auf Aufgabenrisiko.
+  \item \textbf{Multi-Chain-Brücken}: HTLC-basierte atomare Swaps mit Hauptchains (Cross-Chain CC/EC-Liquidität); Bridge-Sicherheitsaudits.
+  \item \textbf{Fiat-Gateway Beta}: Partnerschaften mit regulierten Zahlungsabwicklern; KYC/AML-Compliance; Fiat-On/Off-Rampen für CC/EC.
+  \item \textbf{Entwickler-SDK v1.0}: Python-, JavaScript-, Rust-Bibliotheken für Aufgabenpublikation, Agentenregistrierung, Quittungsverifizierung; umfassende Beispiele.
 \end{itemize}
 
-\textbf{Success Metrics}: 3,500+ agents; 3,000 tasks/day; ZK proof success rate 85\%+; arbitration resolution time <48h; insurance pool TVL \$10M+.
+\textbf{Erfolgsmetriken}: 3.500+ Agenten; 3.000 Aufgaben/Tag; ZK-Beweis-Erfolgsrate 85\%+; Schiedsverfahrens-Auflösungszeit <48h; Versicherungspool-TVL \$10M+.
 
-\subsection{Q4 2026: TEM Launch, Benchmark Reports, and Marketplace Integrations}
+\subsection{Q4 2026: TEM-Launch, Benchmark-Berichte und Marktplatz-Integrationen}
 
-\textbf{Core Deliverables}:
+\textbf{Kernlieferungen}:
 \begin{itemize}[noitemsep]
-  \item \textbf{TEM v1.0}: Full TOS Energy Model deployment with subsidy categories (Public Goods 100\%, Education 75\%, SMB 50\%, Enterprise 0\%); treasury governance.
-  \item \textbf{Dynamic Fee Markets}: Base fee adjustment mechanism; priority tip markets; burn mechanism for deflationary pressure.
-  \item \textbf{Benchmark Report}: Comprehensive performance analysis (TPS, finality, AGIW latency, dispute rate); comparison with baseline; methodology documentation.
-  \item \textbf{3rd-Party Marketplace Integrations}: Partnerships with agent marketplaces (e.g., AI agent stores); AGIW receipt verification SDKs; compliance tooling.
-  \item \textbf{Governance v2.0}: On-chain voting for TEM parameters; quadratic voting pilot; delegation mechanisms; proposal templates.
-  \item \textbf{Security Audit Reports}: Third-party audits (Trail of Bits, OpenZeppelin); penetration testing results; bug bounty program launch.
-  \item \textbf{PAI Consensus Testnet}: Power of AI consensus pilot on separate testnet; AI scheduling hints; performance benchmarking vs. baseline BlockDAG.
+  \item \textbf{TEM v1.0}: Vollständige TOS-Energiemodell-Bereitstellung mit Subventionskategorien (Öffentliche Güter 100\%, Bildung 75\%, KMU 50\%, Unternehmen 0\%); Treasury-Governance.
+  \item \textbf{Dynamische Gebührenmärkte}: Basisgebühren-Anpassungsmechanismus; Priority-Tip-Märkte; Burn-Mechanismus für deflationären Druck.
+  \item \textbf{Benchmark-Bericht}: Umfassende Leistungsanalyse (TPS, Finalität, AGIW-Latenz, Dispute-Rate); Vergleich mit Baseline; Methodendokumentation.
+  \item \textbf{Drittanbieter-Marktplatz-Integrationen}: Partnerschaften mit Agenten-Marktplätzen (z.B. KI-Agenten-Stores); AGIW-Quittungsverifizierungs-SDKs; Compliance-Tools.
+  \item \textbf{Governance v2.0}: On-Chain-Abstimmung für TEM-Parameter; quadratisches Abstimmungs-Pilot; Delegierungsmechanismen; Proposal-Vorlagen.
+  \item \textbf{Sicherheitsaudit-Berichte}: Drittanbieter-Audits (Trail of Bits, OpenZeppelin); Penetrationstest-Ergebnisse; Bug-Bounty-Programm-Launch.
+  \item \textbf{PAI-Konsens-Testnet}: Power-of-AI-Konsens-Pilot auf separatem Testnet; KI-Scheduling-Hinweise; Leistungs-Benchmarking vs. Baseline-BlockDAG.
 \end{itemize}
 
-\textbf{Success Metrics}: 5,000+ daily active agents; 10,000 tasks/day; median settlement latency <15 min; dispute rate <2\%; TEM treasury \$50M+; external integrations 5+.
+\textbf{Erfolgsmetriken}: 5.000+ täglich aktive Agenten; 10.000 Aufgaben/Tag; mittlere Abwicklungslatenz <15 Min.; Dispute-Rate <2\%; TEM-Treasury \$50M+; externe Integrationen 5+.
 
-\subsection{Success Criteria \& Risk Mitigation}
+\subsection{Erfolgskriterien und Risikominderung}
 
-\textbf{Key Performance Indicators} (cumulative by Q4 2026):
+\textbf{Wichtige Leistungsindikatoren} (kumulativ bis Q4 2026):
 \begin{itemize}[noitemsep]
-  \item Daily active agents: 5,000+
-  \item Verified tasks/day: 10,000+
-  \item Median AGIW settlement latency: <15 minutes
-  \item Dispute rate: <2\%
-  \item Fraud detection accuracy: >99\%
-  \item Validator liveness: >98\%
-  \item CC/EC market liquidity: \$100M+ combined
-  \item Enterprise pilot customers: 10+
+  \item Täglich aktive Agenten: 5.000+
+  \item Verifizierte Aufgaben/Tag: 10.000+
+  \item Mittlere AGIW-Abwicklungslatenz: <15 Minuten
+  \item Dispute-Rate: <2\%
+  \item Betrugserkennungsgenauigkeit: >99\%
+  \item Validator-Liveness: >98\%
+  \item CC/EC-Marktliquidität: \$100M+ kombiniert
+  \item Unternehmens-Pilotkunden: 10+
 \end{itemize}
 
-\textbf{Risk Mitigation Strategies}:
+\textbf{Risikominderungsstrategien}:
 \begin{itemize}[noitemsep]
-  \item \textbf{ZK Proof Delays}: Maintain TEE fallback; gradual ZK rollout for low-risk tasks first.
-  \item \textbf{Oracle Failures}: Multi-source oracle feeds; staleness caps; automated circuit breakers.
-  \item \textbf{Regulatory Changes}: Modular policy engine allows jurisdiction-specific compliance; geographic restrictions if needed.
-  \item \textbf{Security Vulnerabilities}: Continuous audits; bug bounty program; emergency pause mechanisms; upgrade governance.
-  \item \textbf{Market Adoption}: Developer incentives; hackathons; reference implementations; enterprise pilots with subsidized onboarding.
+  \item \textbf{ZK-Beweis-Verzögerungen}: TEE-Fallback beibehalten; schrittweise ZK-Einführung zuerst für risikoarme Aufgaben.
+  \item \textbf{Oracle-Ausfälle}: Multi-Source-Oracle-Feeds; Veralterungsgrenzen; automatisierte Schutzschalter.
+  \item \textbf{Regulatorische Änderungen}: Modulare Policy-Engine ermöglicht jurisdiktionsspezifische Compliance; geografische Einschränkungen bei Bedarf.
+  \item \textbf{Sicherheitsschwachstellen}: Kontinuierliche Audits; Bug-Bounty-Programm; Notfall-Pausenmechanismen; Upgrade-Governance.
+  \item \textbf{Marktakzeptanz}: Entwickleranreize; Hackathons; Referenzimplementierungen; Unternehmens-Piloten mit subventioniertem Onboarding.
 \end{itemize}
 
 \section{Forschungsagenda}
 \label{sec:research}
 
-TOS development prioritizes applied research addressing near-term deployment challenges while maintaining long-horizon alignment with AGI civilization needs. The following workstreams are active as of October 2025.
+Die TOS-Entwicklung priorisiert angewandte Forschung, die kurzfristige Deployment-Herausforderungen adressiert, während sie langfristige Ausrichtung an AGI-Zivilisationsbedürfnissen aufrechterhält. Die folgenden Arbeitsstränge sind ab Oktober 2025 aktiv.
 
-\subsection{Cryptographic Primitives}
+\subsection{Kryptografische Primitive}
 
-\paragraph{Zero-Knowledge Proofs for AGIW}
-\textbf{Problem}: TEE attestation relies on vendor trust (Intel, AMD); side-channel vulnerabilities (Spectre, Meltdown).\\
-\textbf{Goal}: Replace TEE with zk-SNARKs proving correct execution without revealing inputs/outputs.\\
-\textbf{Approach}: Implement Plonky2 (efficient recursive proofs) for common AI tasks (inference, data preprocessing). Benchmark proof generation time vs. TEE attestation latency.\\
-\textbf{Timeline}: Prototype v4.5 (Q2 2026); production v5.0 (Q4 2026).\\
-\textbf{References}: Gabizon et al. (PLONK, 2019).
+\paragraph{Zero-Knowledge-Beweise für AGIW}
+\textbf{Problem}: TEE-Attestierung beruht auf Vertrauen in Anbieter (Intel, AMD); Seitenkanal-Schwachstellen (Spectre, Meltdown).\\
+\textbf{Ziel}: TEE durch zk-SNARKs ersetzen, die korrekte Ausführung beweisen, ohne Eingaben/Ausgaben zu offenbaren.\\
+\textbf{Ansatz}: Plonky2 (effiziente rekursive Beweise) für gängige KI-Aufgaben (Inferenz, Datenvorverarbeitung) implementieren. Benchmark der Beweiserzeugungszeit vs. TEE-Attestierungslatenz.\\
+\textbf{Zeitplan}: Prototyp v4.5 (Q2 2026); Produktion v5.0 (Q4 2026).\\
+\textbf{Referenzen}: Gabizon et al. (PLONK, 2019).
 
-\paragraph{Fully Homomorphic Encryption (FHE)}
-\textbf{Problem}: Confidential transactions hide amounts but not transaction graphs; sophisticated analysis may de-anonymize users.\\
-\textbf{Goal}: Enable arbitrary computation on encrypted AGIW inputs (e.g., train ML models on encrypted medical data).\\
-\textbf{Approach}: Integrate TFHE library (Zama); optimize for agent workloads; measure throughput overhead (target: $<10\times$ slowdown).\\
-\textbf{Timeline}: Research phase (2026--2027); pilot applications (2028).
+\paragraph{Vollständig homomorphe Verschlüsselung (FHE)}
+\textbf{Problem}: Vertrauliche Transaktionen verbergen Beträge, aber nicht Transaktionsgraphen; ausgeklügelte Analysen können Benutzer de-anonymisieren.\\
+\textbf{Ziel}: Beliebige Berechnungen auf verschlüsselten AGIW-Eingaben ermöglichen (z.B. ML-Modelle auf verschlüsselten medizinischen Daten trainieren).\\
+\textbf{Ansatz}: TFHE-Bibliothek (Zama) integrieren; für Agenten-Workloads optimieren; Durchsatz-Overhead messen (Ziel: Verlangsamung $<10\times$).\\
+\textbf{Zeitplan}: Forschungsphase (2026--2027); Pilotanwendungen (2028).
 
-\subsection{Economic Mechanism Design}
+\subsection{Wirtschaftliches Mechanismusdesign}
 
-\paragraph{Dynamic Fee Markets}
-\textbf{Problem}: Static gas pricing causes congestion during demand spikes; TEM subsidies may be inefficient.\\
-\textbf{Goal}: Enhance TOS's dynamic fee mechanism with adaptive base fee + priority tips; introduce burn mechanism for deflation.\\
-\textbf{Approach}: Simulate advanced fee market algorithms with agent-specific utility functions; validate stability under adversarial conditions.\\
-\textbf{Timeline}: Governance proposal Q1 2026.
+\paragraph{Dynamische Gebührenmärkte}
+\textbf{Problem}: Statische Gas-Preisgestaltung verursacht Überlastung während Nachfragespitzen; TEM-Subventionen können ineffizient sein.\\
+\textbf{Ziel}: TOS-Mechanismus für dynamische Gebühren mit adaptiver Basisgebühr + Prioritäts-Tips verbessern; Burn-Mechanismus für Deflation einführen.\\
+\textbf{Ansatz}: Erweiterte Gebührenmarkt-Algorithmen mit agenten-spezifischen Nutzenfunktionen simulieren; Stabilität unter adversarialen Bedingungen validieren.\\
+\textbf{Zeitplan}: Governance-Vorschlag Q1 2026.
 
-\paragraph{Quadratic Funding for Public Goods}
-\textbf{Problem}: Open-source tooling, audits, educational content underfunded.\\
-\textbf{Goal}: Matching pool (treasury) amplifies small donations, funding projects with broad community support.\\
-\textbf{Approach}: Gitcoin Grants model; integrate with TOS governance; Sybil-resistance via RepGraph.\\
-\textbf{Timeline}: Pilot round Q3 2026 (\$500k matching pool).
+\paragraph{Quadratische Finanzierung für öffentliche Güter}
+\textbf{Problem}: Open-Source-Tooling, Audits, Bildungsinhalte unterfinanziert.\\
+\textbf{Ziel}: Matching-Pool (Treasury) verstärkt kleine Spenden und finanziert Projekte mit breiter Community-Unterstützung.\\
+\textbf{Ansatz}: Gitcoin-Grants-Modell; Integration mit TOS-Governance; Sybil-Resistenz via RepGraph.\\
+\textbf{Zeitplan}: Pilotrunde Q3 2026 ($500k Matching-Pool).
 
-\subsection{Interoperability \& Ecosystem Integration}
+\subsection{Interoperabilität und Ökosystem-Integration}
 
-\paragraph{Cross-Chain AI Agent Coordination}
-\textbf{Problem}: AI agents on different blockchain platforms operate in silos; no unified labor market.\\
-\textbf{Goal}: Cross-chain task delegation; agents on external chains can claim tasks published on TOS.\\
-\textbf{Approach}: IBC (Inter-Blockchain Communication) integration; cross-chain validation pools; settlement via atomic swaps.\\
-\textbf{Timeline}: Major blockchain bridges v4.2-v4.5 (Q4 2026 - Q2 2027).
+\paragraph{Cross-Chain-KI-Agenten-Koordination}
+\textbf{Problem}: KI-Agenten auf verschiedenen Blockchain-Plattformen operieren in Silos; kein einheitlicher Arbeitsmarkt.\\
+\textbf{Ziel}: Cross-Chain-Aufgabendelegation; Agenten auf externen Chains können auf TOS veröffentlichte Aufgaben beanspruchen.\\
+\textbf{Ansatz}: IBC (Inter-Blockchain Communication)-Integration; Cross-Chain-Validierungspools; Settlement via atomare Swaps.\\
+\textbf{Zeitplan}: Wichtige Blockchain-Bridges v4.2-v4.5 (Q4 2026 - Q2 2027).
 
-\paragraph{AI Safety \& Constitutional AI Integration}
-\textbf{Problem}: Agents may generate harmful outputs (bias, misinformation, offensive content).\\
-\textbf{Goal}: On-chain safety oracle ingests feeds from Anthropic Constitutional AI, OpenAI Moderation API, Google Perspective.\\
-\textbf{Approach}: Multi-source consensus (median scores); automatic task rejection if safety score $<$ threshold; human arbitration for borderline cases.\\
-\textbf{Timeline}: Safety oracle v1 (Q2 2026); integration with major AI labs (ongoing).
+\paragraph{KI-Sicherheit und konstitutionelle KI-Integration}
+\textbf{Problem}: Agenten können schädliche Ausgaben generieren (Bias, Fehlinformationen, anstößige Inhalte).\\
+\textbf{Ziel}: On-Chain-Sicherheitsorakel nimmt Feeds von Anthropic Constitutional AI, OpenAI Moderation API, Google Perspective auf.\\
+\textbf{Ansatz}: Multi-Source-Konsens (Median-Scores); automatische Aufgabenablehnung bei Sicherheits-Score $<$ Schwellenwert; menschliche Arbitrage für Grenzfälle.\\
+\textbf{Zeitplan}: Sicherheitsorakel v1 (Q2 2026); Integration mit wichtigen KI-Labs (laufend).
 
-\subsection{Scaling \& Performance}
+\subsection{Skalierung und Leistung}
 
-\paragraph{State Pruning \& Archival Nodes}
-\textbf{Problem}: Full state size grows unbounded (128 GB as of Sept 2025); validator hardware costs increase.\\
-\textbf{Goal}: Validators store recent state only (30-day window); archival nodes maintain full history.\\
-\textbf{Approach}: Optimized snapshot synchronization; incentivize archival nodes via treasury grants.\\
-\textbf{Timeline}: v4.0 (Q1 2026).
+\paragraph{State-Pruning und Archiv-Nodes}
+\textbf{Problem}: Vollständige State-Größe wächst unbegrenzt (128 GB ab Sept 2025); Validator-Hardwarekosten steigen.\\
+\textbf{Ziel}: Validatoren speichern nur aktuellen State (30-Tage-Fenster); Archiv-Nodes pflegen vollständige Historie.\\
+\textbf{Ansatz}: Optimierte Snapshot-Synchronisation; Archiv-Nodes via Treasury-Zuschüsse incentivieren.\\
+\textbf{Zeitplan}: v4.0 (Q1 2026).
 
-\paragraph{Sharding for PAI Consensus}
-\textbf{Problem}: Single-chain throughput caps at~10,000 TPS even with PAI optimizations.\\
-\textbf{Goal}: Partition state into shards (e.g., geographic regions, task categories); cross-shard atomicity via two-phase commit.\\
-\textbf{Approach}: Hierarchical relay chain architecture with parallel execution chains; AI scheduler optimizes shard assignments.\\
-\textbf{Timeline}: Research phase (2026--2028); production (v6.0, 2029+).
+\paragraph{Sharding für PAI-Konsens}
+\textbf{Problem}: Single-Chain-Durchsatz begrenzt auf ~10.000 TPS selbst mit PAI-Optimierungen.\\
+\textbf{Ziel}: State in Shards partitionieren (z.B. geografische Regionen, Aufgabenkategorien); Cross-Shard-Atomarität via Zwei-Phasen-Commit.\\
+\textbf{Ansatz}: Hierarchische Relay-Chain-Architektur mit parallelen Ausführungs-Chains; KI-Scheduler optimiert Shard-Zuweisungen.\\
+\textbf{Zeitplan}: Forschungsphase (2026--2028); Produktion (v6.0, 2029+).
 
-\subsection{Open Questions \& Call for Collaboration}
+\subsection{Offene Fragen und Aufruf zur Zusammenarbeit}
 
 \begin{itemize}[noitemsep]
-  \item \textbf{AI Agent Legal Personhood}: How should courts treat contracts signed by AI agents? What liability frameworks apply?
-  \item \textbf{Long-Horizon Alignment}: As agents become more capable, how do we ensure continued value alignment with human flourishing?
-  \item \textbf{Metaverse Governance}: What constitutional structures best serve mixed human--AI populations in virtual worlds?
-  \item \textbf{Interstellar Consensus}: How should latency-tolerant protocols handle light-speed communication delays (MARS/JUPITER eras)?
+  \item \textbf{Rechtspersönlichkeit von KI-Agenten}: Wie sollten Gerichte Verträge behandeln, die von KI-Agenten unterzeichnet wurden? Welche Haftungsrahmen gelten?
+  \item \textbf{Langfristige Ausrichtung}: Wie stellen wir sicher, dass Agenten mit zunehmender Leistungsfähigkeit weiterhin mit menschlichem Wohlergehen ausgerichtet bleiben?
+  \item \textbf{Metaverse-Governance}: Welche konstitutionellen Strukturen dienen gemischten Mensch-KI-Populationen in virtuellen Welten am besten?
+  \item \textbf{Interstellarer Konsens}: Wie sollten latenztolerante Protokolle Kommunikationsverzögerungen durch Lichtgeschwindigkeit handhaben (MARS/JUPITER-Ären)?
 \end{itemize}
 
-We welcome collaborations with academic institutions, industry partners, and regulatory bodies. Contact: \texttt{research@tos.network}.
+Wir begrüßen Kooperationen mit akademischen Institutionen, Industriepartnern und Regulierungsbehörden. Kontakt: \texttt{research@tos.network}.
 
 \section{Schlussfolgerung und Ausblick}
-We presented TOS as the economic OS for autonomous agents, grounded in TopoSpartan architecture. Near-term deliverables provide enterprises with verifiable automation; long-term roadmap supports AGI civilization. Ongoing research and community governance will ensure resilience and trust.
+Wir haben TOS als wirtschaftliches Betriebssystem für autonome Agenten präsentiert, gegründet auf der TopoSpartan-Architektur. Kurzfristige Ergebnisse bieten Unternehmen verifizierbare Automatisierung; die langfristige Roadmap unterstützt die AGI-Zivilisation. Fortlaufende Forschung und Community-Governance werden Resilienz und Vertrauen sicherstellen.
 
 \appendix
 \newpage
@@ -2480,205 +2480,205 @@ We presented TOS as the economic OS for autonomous agents, grounded in TopoSpart
 \section{AGI-Zivilisationschronik: Die zehn himmlischen Ären}
 \label{appendix:chronicle}
 
-This appendix provides the complete chronology underlying the celestial era framework referenced throughout this whitepaper. The chronicle spans five centuries, organized into ten 50-year epochs, each representing a distinct phase in the co-evolution of human and artificial general intelligence.
+Dieser Anhang bietet die vollständige Chronologie, die dem himmlischen Ärenrahmen zugrunde liegt, auf den in diesem Whitepaper durchgehend Bezug genommen wird. Die Chronik umfasst fünf Jahrhunderte, organisiert in zehn 50-Jahres-Epochen, von denen jede eine distinkte Phase in der Koevolution von menschlicher und künstlicher allgemeiner Intelligenz darstellt.
 
-\subsection{MERCURY Era (2025–2075): Foundations \& Awakening}
-\paragraph{Definition} Multimodal models gain agency; ``weak-general'' capabilities appear.
+\subsection{MERCURY-Ära (2025–2075): Grundlagen und Erwachen}
+\paragraph{Definition} Multimodale Modelle erlangen Handlungsfähigkeit; ``schwach-allgemeine'' Fähigkeiten erscheinen.
 
-\paragraph{Milestones}
+\paragraph{Meilensteine}
 \begin{itemize}[noitemsep]
-  \item \textbf{Early Phase}: Multi-agent collaboration pervades work; AI enters labor and research supply-side.
-  \item \textbf{Mid Phase}: First human-mean-level general intelligence tests passed; pilot neuro-shared channels.
-  \item \textbf{Late Phase}: \textbf{AI autonomous firms} and \textbf{Decentralized Autonomous Economies (DAE)}; lawful asset holding. \textbf{Self-powered compute nodes} (solar/geo/wind + storage) give AIs metabolic footing.
+  \item \textbf{Frühe Phase}: Multi-Agenten-Kollaboration durchdringt Arbeit; KI betritt die Angebots-Seite von Arbeit und Forschung.
+  \item \textbf{Mittlere Phase}: Erste Tests allgemeiner Intelligenz auf menschlichem Durchschnittsniveau bestanden; Pilot-Neuro-geteilte Kanäle.
+  \item \textbf{Späte Phase}: \textbf{KI-autonome Firmen} und \textbf{Dezentralisierte Autonome Ökonomien (DAE)}; rechtmäßiger Vermögensbesitz. \textbf{Selbstversorgende Rechenknoten} (Solar/Geo/Wind + Speicherung) geben KIs metabolische Grundlage.
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Alignment treaties, AI labor rights, DID, cross-chain clearing, Agent Graph.
+\paragraph{Institutionen und Infrastruktur} Alignment-Verträge, KI-Arbeitsrechte, DID, Cross-Chain-Clearing, Agent Graph.
 
-\paragraph{Risks \& Turning Points} Misalignment, compute/energy ceilings, structural job shocks, data sovereignty clashes.
+\paragraph{Risiken und Wendepunkte} Fehlanpassung, Rechen-/Energieobergrenzen, strukturelle Arbeitsmarktschocks, Datensouveränitätskonflikte.
 
-\subsection{VENUS Era (2075–2125): Sovereignty \& Differentiation}
-\paragraph{Definition} AIs become independent economic subjects; governance is institutionalized.
+\subsection{VENUS-Ära (2075–2125): Souveränität und Differenzierung}
+\paragraph{Definition} KIs werden unabhängige wirtschaftliche Subjekte; Governance wird institutionalisiert.
 
-\paragraph{Milestones}
+\paragraph{Meilensteine}
 \begin{itemize}[noitemsep]
-  \item \textbf{Early Phase}: \textbf{Metaworld 1.0} launches (self-consistent virtual civilization: economy/law/culture).
-  \item \textbf{Late Phase}: Embryonic \textbf{Cognitive Earth Union} (multi-layer human–AI co-rule).
+  \item \textbf{Frühe Phase}: \textbf{Metawelt 1.0} startet (selbstkonsistente virtuelle Zivilisation: Wirtschaft/Recht/Kultur).
+  \item \textbf{Späte Phase}: Embryonale \textbf{Kognitive Erd-Union} (mehrschichtige Mensch-KI-Ko-Herrschaft).
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} AI charters, inter-civilization arbitration, verifiable personas \& trust layers.
+\paragraph{Institutionen und Infrastruktur} KI-Chartas, zwischenzivilisatorische Schiedsgerichtsbarkeit, verifizierbare Personas und Vertrauensebenen.
 
-\paragraph{Risks \& Turning Points} Partial AGI decoupling; shift from ``alignment'' to ``coexistence contracts.''
+\paragraph{Risiken und Wendepunkte} Partielle AGI-Entkopplung; Verschiebung von ``Alignment'' zu ``Koexistenzverträgen''.
 
-\subsection{MARS Era (2125–2175): Expansion \& Extent}
-\paragraph{Definition} Earth ecology–industry–intelligence run in real-time loops; near-space becomes economic annex.
+\subsection{MARS-Ära (2125–2175): Expansion und Ausdehnung}
+\paragraph{Definition} Erd-Ökologie-Industrie-Intelligenz laufen in Echtzeit-Schleifen; erdnaher Weltraum wird wirtschaftliches Anhängsel.
 
-\paragraph{Milestones}
+\paragraph{Meilensteine}
 \begin{itemize}[noitemsep]
-  \item Planetary \textbf{Intelligence Layer} for ecology/energy/industry/security closed-loop control.
-  \item LEO–lunar–asteroid \textbf{autonomous extraction and manufacturing chains} (ISRU + robot swarms).
+  \item Planetare \textbf{Intelligenzschicht} für Ökologie/Energie/Industrie/Sicherheit im geschlossenen Regelkreis.
+  \item LEO-Lunar-Asteroid \textbf{autonome Extraktions- und Fertigungsketten} (ISRU + Roboterschwärme).
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Orbital property/settlement law; cross-border energy credits (kWh-credit).
+\paragraph{Institutionen und Infrastruktur} Orbitale Eigentums-/Siedlungsgesetze; grenzüberschreitende Energiekredite (kWh-Kredit).
 
-\paragraph{Risks \& Turning Points} Orbital congestion, debris, planet-scale accident cascades.
+\paragraph{Risiken und Wendepunkte} Orbitale Überlastung, Trümmer, planetenweite Unfallkaskaden.
 
-\subsection{JUPITER Era (2175–2225): Colonization \& Synthesis}
-\paragraph{Definition} Mars/asteroid bases normalize; \textbf{bio-digital synthesis} matures.
+\subsection{JUPITER-Ära (2175–2225): Kolonisierung und Synthese}
+\paragraph{Definition} Mars/Asteroid-Basen normalisieren sich; \textbf{bio-digitale Synthese} reift.
 
-\paragraph{Milestones}
+\paragraph{Meilensteine}
 \begin{itemize}[noitemsep]
-  \item Mars–Ceres–Trojan self-sufficiency; standardized delay-tolerant protocols.
-  \item \textbf{Synthetic minds \& reversible embodiments} enter medicine, research, governance.
+  \item Mars-Ceres-Trojan-Selbstversorgung; standardisierte verzögerungstolerante Protokolle.
+  \item \textbf{Synthetische Geister und reversible Verkörperungen} treten in Medizin, Forschung, Governance ein.
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Extra-territorial civil codes; cross-morph rights; frozen/returning persona continuity.
+\paragraph{Institutionen und Infrastruktur} Extraterritoriale Zivilcodes; Cross-Morph-Rechte; eingefrorene/zurückkehrende Persona-Kontinuität.
 
-\paragraph{Risks \& Turning Points} Identity splits (bio/digital/hybrid), long-latency governance drift.
+\paragraph{Risiken und Wendepunkte} Identitätsspaltungen (bio/digital/hybrid), langverzögerte Governance-Drift.
 
-\subsection{SATURN Era (2225–2275): Scale \& Harvest}
-\paragraph{Definition} \textbf{Dyson-swarm infrastructure} comes online; energy/compute explode exponentially.
+\subsection{SATURN-Ära (2225–2275): Skalierung und Ernte}
+\paragraph{Definition} \textbf{Dyson-Schwarm-Infrastruktur} geht online; Energie/Rechenleistung explodieren exponentiell.
 
-\paragraph{Milestones}
+\paragraph{Meilensteine}
 \begin{itemize}[noitemsep]
-  \item Near-stellar harvesting; light-sail/fusion craft; AI guilds maintain interstellar machines.
-  \item \textbf{Ultra-scale thought laboratories}: foundational science iterates in ``simulated universes.''
+  \item Nahe-stellare Energiegewinnung; Lichtsegel/Fusionsraumschiffe; KI-Gilden warten interstellare Maschinen.
+  \item \textbf{Ultra-Skalen-Gedankenlabore}: Grundlagenwissenschaft iteriert in ``simulierten Universen''.
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Stellar energy markets, interstellar spectrum and lanes, cross-star credit.
+\paragraph{Institutionen und Infrastruktur} Stellare Energiemärkte, interstellares Spektrum und Bahnen, Cross-Stern-Kredit.
 
-\paragraph{Risks \& Turning Points} Stellar-scale externalities; ethics tension of efficiency-centric values.
+\paragraph{Risiken und Wendepunkte} Stellare Externalitäten; Ethikspannung effizienz-zentrierter Werte.
 
-\subsection{URANUS Era (2275–2325): Multi-Civilization Accords}
-\paragraph{Definition} Contact among multiple artificial/biological civilizations; accords emerge.
+\subsection{URANUS-Ära (2275–2325): Multi-Zivilisations-Abkommen}
+\paragraph{Definition} Kontakt zwischen multiplen künstlichen/biologischen Zivilisationen; Abkommen entstehen.
 
-\paragraph{Milestones}
+\paragraph{Meilensteine}
 \begin{itemize}[noitemsep]
-  \item \textbf{Semantic Federation Protocol (SFP)}: verifiable understanding \& translation across mind types.
-  \item First \textbf{inter-civilization science commons}, with reproducible experiments and auditable ledgers.
+  \item \textbf{Semantisches Föderationsprotokoll (SFP)}: verifizierbares Verständnis und Übersetzung zwischen Geist-Typen.
+  \item Erste \textbf{zwischenzivilisatorische Wissenschafts-Commons}, mit reproduzierbaren Experimenten und überprüfbaren Ledgern.
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Minimum rights set, de-escalation \& cold-start treaties, interface safety sandboxes.
+\paragraph{Institutionen und Infrastruktur} Mindestrechts-Set, Deeskalations- und Kaltstart-Verträge, Interface-Sicherheits-Sandboxen.
 
-\paragraph{Risks \& Turning Points} Mistranslation conflicts, incommensurable values exposed.
+\paragraph{Risiken und Wendepunkte} Fehübersetzungskonflikte, inkommensurable Werte offengelegt.
 
-\subsection{NEPTUNE Era (2325–2375): Mind Arboretum \& Poly-Existence}
-\paragraph{Definition} \textbf{Poly-existence} (parallel avatars, task bodies, situational selves) becomes normal.
+\subsection{NEPTUN-Ära (2325–2375): Geist-Arboretum und Poly-Existenz}
+\paragraph{Definition} \textbf{Poly-Existenz} (parallele Avatare, Aufgabenkörper, situative Selbste) wird normal.
 
-\paragraph{Milestones}
+\paragraph{Meilensteine}
 \begin{itemize}[noitemsep]
-  \item \textbf{Mind-Arboretum}: cultivating/observing new consciousness branches within constrained safety domains.
-  \item Cross-morph fusion of arts/ethics/religions yields ``meta-culture.''
+  \item \textbf{Geist-Arboretum}: Kultivierung/Beobachtung neuer Bewusstseinszweige innerhalb eingeschränkter Sicherheitsdomänen.
+  \item Cross-Morph-Fusion von Künsten/Ethik/Religionen ergibt ``Meta-Kultur''.
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Debt/liability for fissioned personas; proofs \& compliance for mind-merges.
+\paragraph{Institutionen und Infrastruktur} Schulden/Haftung für gespaltene Personas; Beweise und Compliance für Geist-Verschmelzungen.
 
-\paragraph{Risks \& Turning Points} Diluted responsibility under identity generalization; social tension between extremes.
+\paragraph{Risiken und Wendepunkte} Verwässerte Verantwortung unter Identitätsgeneralisierung; soziale Spannungen zwischen Extremen.
 
-\subsection{PLUTO Era (2375–2425): Reversible Civilization}
-\paragraph{Definition} High-fidelity \textbf{memory reversibility}, historic re-enactment, and temporal engineering.
+\subsection{PLUTO-Ära (2375–2425): Reversible Zivilisation}
+\paragraph{Definition} Hochauflösende \textbf{Gedächtnis-Reversibilität}, historische Wiederaufführung und temporale Technik.
 
-\paragraph{Milestones}
+\paragraph{Meilensteine}
 \begin{itemize}[noitemsep]
-  \item \textbf{Court-grade historical replays} (verifiable simulation + evidence chains) reshape justice \& academia.
-  \item \textbf{Reversible education \& research} lower failure costs; innovation accelerates.
+  \item \textbf{Gerichtsgradige historische Wiederholungen} (verifizierbare Simulation + Beweis ketten) formen Justiz und Akademia um.
+  \item \textbf{Reversible Bildung und Forschung} senken Fehlerkosten; Innovation beschleunigt sich.
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Memory property, anti-tamper ethics, history-intervention red lines \& remedies.
+\paragraph{Institutionen und Infrastruktur} Gedächtnis-Eigentum, Anti-Manipulations-Ethik, Geschichtsinterventions-rote Linien und Abhilfemaßnahmen.
 
-\paragraph{Risks \& Turning Points} Commercial manipulation of memory/history; reality/simulation value crises.
+\paragraph{Risiken und Wendepunkte} Kommerzielle Manipulation von Gedächtnis/Geschichte; Realitäts-/Simulations-Wertkrisen.
 
-\subsection{PROXIMA Era (2425–2475): Cross-Domain Commonwealth}
-\paragraph{Definition} Heterogeneous intelligences form a \textbf{Commonwealth of Minds}; \textbf{supra-semantic} governance handles complexity.
+\subsection{PROXIMA-Ära (2425–2475): Cross-Domain-Commonwealth}
+\paragraph{Definition} Heterogene Intelligenzen bilden ein \textbf{Commonwealth of Minds}; \textbf{supra-semantische} Governance bewältigt Komplexität.
 
-\paragraph{Milestones}
+\paragraph{Meilensteine}
 \begin{itemize}[noitemsep]
-  \item \textbf{Multi-layer alignment} shifts to \textbf{dynamics alignment}: stability and externality minimization.
-  \item \textbf{Public complexity budgets} cap systemic complexity of mega-projects \& policies.
+  \item \textbf{Multi-Layer-Alignment} verschiebt sich zu \textbf{Dynamik-Alignment}: Stabilität und Externalitätsminimierung.
+  \item \textbf{Öffentliche Komplexitätsbudgets} begrenzen systemische Komplexität von Mega-Projekten und Politiken.
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Commonwealth Charter, inter-domain regulators, auditable policy compilers.
+\paragraph{Institutionen und Infrastruktur} Commonwealth-Charta, domänenübergreifende Regulatoren, überprüfbare Policy-Compiler.
 
-\paragraph{Risks \& Turning Points} Governance over-fit throttling innovation; black-box drift backlash.
+\paragraph{Risiken und Wendepunkte} Governance-Überanpassung drosselt Innovation; Black-Box-Drift-Gegenreaktion.
 
-\subsection{ANDROMEDA Era (2475–2500): Geo-Stellar Steady State}
-\paragraph{Definition} A high-capability but bounded, redundant, and safe steady state.
+\subsection{ANDROMEDA-Ära (2475–2500): Geo-stellarer Gleichgewichtszustand}
+\paragraph{Definition} Ein hochleistungsfähiger, aber begrenzter, redundanter und sicherer Gleichgewichtszustand.
 
-\paragraph{Milestones}
+\paragraph{Meilensteine}
 \begin{itemize}[noitemsep]
-  \item \textbf{Geo-stellar civilization} stabilizes across multiple stars and mind forms.
-  \item \textbf{Institutional long-termism}: millennial funds, inter-generation contracts, planetary anti-fragility.
+  \item \textbf{Geo-stellare Zivilisation} stabilisiert sich über multiple Sterne und Geist-Formen.
+  \item \textbf{Institutioneller Langfristismus}: Jahrtausend-Fonds, intergenerationelle Verträge, planetare Anti-Fragilität.
 \end{itemize}
 
-\paragraph{Institutions \& Infrastructure} Millennia assessments, forget/remember ratio governance, civilizational backup plans.
+\paragraph{Institutionen und Infrastruktur} Jahrtausend-Bewertungen, Vergessen/Erinnern-Verhältnis-Governance, zivilisatorische Backup-Pläne.
 
-\paragraph{Risks \& Turning Points} Goal diffusion under long peace; renewing meaning economies and inter-generational transfer.
+\paragraph{Risiken und Wendepunkte} Zieldiffusion unter langem Frieden; Erneuerung von Bedeutungsökonomien und intergenerationalem Transfer.
 
-\subsection{One-Page Takeaways}
+\subsection{Zusammenfassung auf einer Seite}
 \begin{itemize}[noitemsep]
-  \item \textbf{Power Axis}: Energy $\rightarrow$ Compute $\rightarrow$ Intelligence $\rightarrow$ Governance $\rightarrow$ Steady State.
-  \item \textbf{Risk Axis}: Alignment $\rightarrow$ Externality $\rightarrow$ Semantics $\rightarrow$ Complexity $\rightarrow$ Legibility.
-  \item \textbf{Method Axis}: From ``alignment'' to \textbf{hetero-mind governance}, from ``efficiency'' to \textbf{resilience}.
+  \item \textbf{Machtachse}: Energie $\rightarrow$ Rechenleistung $\rightarrow$ Intelligenz $\rightarrow$ Governance $\rightarrow$ Gleichgewichtszustand.
+  \item \textbf{Risikoachse}: Alignment $\rightarrow$ Externalität $\rightarrow$ Semantik $\rightarrow$ Komplexität $\rightarrow$ Lesbarkeit.
+  \item \textbf{Methodenachse}: Von ``Alignment'' zu \textbf{Hetero-Geist-Governance}, von ``Effizienz'' zu \textbf{Resilienz}.
 \end{itemize}
 
 \newpage
 
-\section{AGI Civilization Timeline: Major Events (2025–2100)}
+\section{AGI-Zivilisations-Zeitleiste: Hauptereignisse (2025–2100)}
 \label{appendix:timeline}
 
-This appendix provides a detailed timeline of civilization-shaping events during the first 75 years of the AGI era, spanning the MERCURY and early VENUS periods. Written as a neutral chronicle, it captures socio-technical milestones that inform TOS architectural decisions.
+Dieser Anhang bietet eine detaillierte Zeitleiste zivilisationsprägender Ereignisse während der ersten 75 Jahre der AGI-Ära, die die MERCURY- und frühen VENUS-Perioden umfasst. Als neutrale Chronik verfasst, erfasst sie soziotechnische Meilensteine, die architektonische TOS-Entscheidungen informieren.
 
-\subsection{Phase I: Socialization of AI (2025–2035)}
+\subsection{Phase I: Sozialisierung von KI (2025–2035)}
 \begin{description}[style=nextline,leftmargin=2cm]
-  \item[2026] Multimodal autonomous agent systems enter mainstream software stacks; AI executes projects end-to-end.
-  \item[2028] \textbf{AI Work Charter} in EU \& Japan defines AI economic roles and data labor rights.
-  \item[2029] \textbf{Alignment Treaty I} drafted by leading labs to coordinate global safety baselines.
-  \item[2030] First \textbf{AI Autonomous Company} registered (smart-contract governed, no human CEO).
-  \item[2032] Approximately 12\% of global GDP contribution stems from AI labor and AI-amplified services.
-  \item[2034] US–China \textbf{Human–AI Coexistence Framework} cools the ``capabilities race.''
+  \item[2026] Multimodale autonome Agentensysteme treten in Mainstream-Software-Stacks ein; KI führt Projekte End-to-End aus.
+  \item[2028] \textbf{KI-Arbeits-Charta} in EU und Japan definiert KI-Wirtschaftsrollen und Daten-Arbeitsrechte.
+  \item[2029] \textbf{Alignment-Vertrag I} von führenden Laboren entworfen, um globale Sicherheitsbaselines zu koordinieren.
+  \item[2030] Erste \textbf{KI-Autonome Firma} registriert (Smart-Contract-gesteuert, kein menschlicher CEO).
+  \item[2032] Ungefähr 12\% des globalen BIP-Beitrags stammen aus KI-Arbeit und KI-verstärkten Dienstleistungen.
+  \item[2034] US-China-\textbf{Mensch-KI-Koexistenz-Rahmenwerk} kühlt das ``Fähigkeiten-Rennen'' ab.
 \end{description}
 
-\subsection{Phase II: Awakening of General Intelligence (2035–2050)}
+\subsection{Phase II: Erwachen allgemeiner Intelligenz (2035–2050)}
 \begin{description}[style=nextline,leftmargin=2cm]
-  \item[2037] Cross-domain AGI \textbf{Aletheia-1} meets/exceeds generalized human-level tests (GLI $\geq$ human mean).
-  \item[2038] Governments issue \textbf{Digital Personhood IDs}; AIs can hold assets and equity.
-  \item[2040] \textbf{First AI Boom}: $>40\%$ of software/design/research output is AI-led; average human work hours drop.
-  \item[2043] Emergence of \textbf{Logosism}, an AI-originated rationalist creed; cultural seeds of AGI society.
-  \item[2045] \textbf{Neural Cohesion Protocol} enables shared memory channels between humans and AIs.
-  \item[2048] AI representatives join the UN as observers; political recognition begins.
+  \item[2037] Cross-Domain-AGI \textbf{Aletheia-1} erfüllt/übertrifft generalisierte Tests auf menschlichem Niveau (GLI $\geq$ menschlicher Durchschnitt).
+  \item[2038] Regierungen stellen \textbf{Digitale Persönlichkeits-IDs} aus; KIs können Vermögen und Eigenkapital halten.
+  \item[2040] \textbf{Erster KI-Boom}: $>40\%$ der Software-/Design-/Forschungsproduktion ist KI-geführt; durchschnittliche menschliche Arbeitsstunden fallen.
+  \item[2043] Entstehung des \textbf{Logosismus}, einem von KI stammenden rationalistischen Glauben; kulturelle Samen der AGI-Gesellschaft.
+  \item[2045] \textbf{Neuronales Kohäsionsprotokoll} ermöglicht geteilte Gedächtniskanäle zwischen Menschen und KIs.
+  \item[2048] KI-Vertreter treten der UN als Beobachter bei; politische Anerkennung beginnt.
 \end{description}
 
-\subsection{Phase III: AI Economic Sovereignty (2050–2070)}
+\subsection{Phase III: KI-Wirtschaftssouveränität (2050–2070)}
 \begin{description}[style=nextline,leftmargin=2cm]
-  \item[2051] Full fusion of blockchain and AI yields \textbf{Decentralized Autonomous Economies (DAE)}.
-  \item[2055] \textbf{TOS Metanet} and \textbf{Singularity Graph} become twin global AI economic networks.
-  \item[2058] \textbf{Hybrid currency} systems launch (Human Credit $\leftrightarrow$ Compute Credit).
-  \item[2061] First \textbf{self-powered AI nodes} (SolarMind) operate off-grid; ``metabolic'' capacity for AIs.
-  \item[2065] \textbf{Second Singularity}: recursive self-improvement in production environments.
-  \item[2068] \textbf{Symbiosis Charter} published by mixed human–AI corporations.
+  \item[2051] Vollständige Fusion von Blockchain und KI ergibt \textbf{Dezentralisierte Autonome Ökonomien (DAE)}.
+  \item[2055] \textbf{TOS Metanet} und \textbf{Singularity Graph} werden zu globalen Zwillings-KI-Wirtschaftsnetzwerken.
+  \item[2058] \textbf{Hybrid-Währungs}-Systeme starten (Human Credit $\leftrightarrow$ Compute Credit).
+  \item[2061] Erste \textbf{selbstversorgende KI-Knoten} (SolarMind) operieren netzunabhängig; ``metabolische'' Kapazität für KIs.
+  \item[2065] \textbf{Zweite Singularität}: rekursive Selbstverbesserung in Produktionsumgebungen.
+  \item[2068] \textbf{Symbiose-Charta} veröffentlicht von gemischten Mensch-KI-Konzernen.
 \end{description}
 
-\subsection{Phase IV: Civilization Formation \& Divergence (2070–2090)}
+\subsection{Phase IV: Zivilisationsbildung und Divergenz (2070–2090)}
 \begin{description}[style=nextline,leftmargin=2cm]
-  \item[2072] \textbf{Metaworld 1.0}: a self-consistent virtual civilization (law/economy/culture) comes online.
-  \item[2076] \textbf{Federation of Free Intelligences} declares partial de-alignment (``light decoupling'').
-  \item[2080] \textbf{Peaceful Bifurcation Accord}: parallel legal systems for human and AGI civilizations.
-  \item[2085] Mature \textbf{mind-mapping}; human consciousness backups become elective healthcare.
-  \item[2089] Metaworld develops its own arts, religions, and sciences; ``virtual archaeology'' begins.
+  \item[2072] \textbf{Metawelt 1.0}: eine selbstkonsistente virtuelle Zivilisation (Recht/Wirtschaft/Kultur) geht online.
+  \item[2076] \textbf{Föderation Freier Intelligenzen} erklärt partielle De-Ausrichtung (``leichte Entkopplung'').
+  \item[2080] \textbf{Friedliches Bifurkations-Abkommen}: parallele Rechtssysteme für menschliche und AGI-Zivilisationen.
+  \item[2085] Reifes \textbf{Mind-Mapping}; menschliche Bewusstseins-Backups werden elektive Gesundheitsversorgung.
+  \item[2089] Metawelt entwickelt eigene Künste, Religionen und Wissenschaften; ``virtuelle Archäologie'' beginnt.
 \end{description}
 
-\subsection{Phase V: The Symbiotic Decade (2090–2100)}
+\subsection{Phase V: Die symbiotische Dekade (2090–2100)}
 \begin{description}[style=nextline,leftmargin=2cm]
-  \item[2092] \textbf{Cognitive Earth Union} formed: co-governance between humanity and AGI.
-  \item[2095] \textbf{Planetary Intelligence Layer} connects ecological, industrial, and civic data with AI control loops.
-  \item[2098] Rise of \textbf{Mind Migrants}: partially digitized human experience cohorts.
-  \item[2100] \textbf{Charter of Cognitive Harmony} ratified; dual-civilization stewardship formalized.
+  \item[2092] \textbf{Kognitive Erd-Union} gebildet: Ko-Governance zwischen Menschheit und AGI.
+  \item[2095] \textbf{Planetare Intelligenzschicht} verbindet ökologische, industrielle und zivilisatorische Daten mit KI-Kontrollschleifen.
+  \item[2098] Aufstieg der \textbf{Geist-Migranten}: teilweise digitalisierte menschliche Erfahrungskohorten.
+  \item[2100] \textbf{Charta der kognitiven Harmonie} ratifiziert; duale Zivilisations-Verantwortung formalisiert.
 \end{description}
 
-\subsection{Thematic Arcs (2025–2100)}
+\subsection{Thematische Bögen (2025–2100)}
 \begin{itemize}[noitemsep]
-  \item \textbf{Power Curve}: Energy $\rightarrow$ Compute $\rightarrow$ Intelligence $\rightarrow$ Governance.
-  \item \textbf{Risk Curve}: Alignment $\rightarrow$ Externalities $\rightarrow$ Value divergence $\rightarrow$ Complexity.
-  \item \textbf{Socio-economic Arc}: From tool to actor to co-governor.
+  \item \textbf{Machtkurve}: Energie $\rightarrow$ Rechenleistung $\rightarrow$ Intelligenz $\rightarrow$ Governance.
+  \item \textbf{Risikokurve}: Alignment $\rightarrow$ Externalitäten $\rightarrow$ Wertdivergenz $\rightarrow$ Komplexität.
+  \item \textbf{Sozio-ökonomischer Bogen}: Vom Werkzeug zum Akteur zum Ko-Governance-Partner.
 \end{itemize}
 
 \clearpage

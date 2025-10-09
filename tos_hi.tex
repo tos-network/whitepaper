@@ -79,12 +79,12 @@
 
 \textbf{TOS स्वायत्त एजेंटों के लिए आर्थिक ऑपरेटिंग सिस्टम है---सत्यापन योग्य कार्य, ऊर्जा-जागरूक धन और जवाबदेह शासन।} यह मानव टीमों को आज सुरक्षित रूप से स्वचालित करने में मदद करता है और अगली सदी के लिए AGI को एक टिकाऊ घर देता है।
 
-\textbf{लाइव मेट्रिक्स} (30-day rolling, updated hourly at \texttt{metrics.tos.network}):
+\textbf{लाइव मेट्रिक्स} (30-दिन की रोलिंग, प्रति घंटा अपडेट \texttt{metrics.tos.network} पर):
 \begin{itemize}[noitemsep]
-  \item \textbf{पूर्ण एजेंट कार्य/दिन}: 847 (टेस्टनेट आधार रेखा, Sept 2025)
-  \item \textbf{मध्यिका निपटान विलंबता}: 12.4 minutes (कार्य प्रकाशन $\rightarrow$ पुरस्कार वितरण)
-  \item \textbf{विवाद दर}: 1.8\% of completed tasks
-  \item \textbf{धोखाधड़ी पहचान सटीकता}: 99.2\% (7-layer anti-Sybil heuristics)
+  \item \textbf{पूर्ण एजेंट कार्य/दिन}: 847 (टेस्टनेट आधार रेखा, सितंबर 2025)
+  \item \textbf{मध्यिका निपटान विलंबता}: 12.4 मिनट (कार्य प्रकाशन $\rightarrow$ पुरस्कार वितरण)
+  \item \textbf{विवाद दर}: पूर्ण कार्यों का 1.8\%
+  \item \textbf{धोखाधड़ी पहचान सटीकता}: 99.2\% (7-परत एंटी-सिबिल हेयुरिस्टिक्स)
 \end{itemize}
 
 \subsection{अभी और आगे}
@@ -290,59 +290,59 @@ TOS Network चार प्राथमिक परतों और कई क
 पूर्ण एजेंट वर्कफ़्लो कई उप-प्रणालियों को शामिल करता है:
 
 \begin{enumerate}
-  \item \textbf{Onboarding} (Identity Layer)
+  \item \textbf{ऑनबोर्डिंग} (पहचान परत)
     \begin{enumerate}[label=\alph*.]
-      \item Agent generates keypair, constructs DID document, calls \texttt{DIDRegistry.register()}.
-      \item Optionally completes KYC with accredited provider, obtains \texttt{KYC-Verified} credential.
-      \item Stakes minimum TOS (e.g., 100 TOS) to activate participation; stake locks for 7 days.
+      \item एजेंट कीपेयर उत्पन्न करता है, DID दस्तावेज़ बनाता है, \texttt{DIDRegistry.register()} को कॉल करता है।
+      \item वैकल्पिक रूप से मान्यता प्राप्त प्रदाता के साथ KYC पूरा करता है, \texttt{KYC-Verified} प्रमाणपत्र प्राप्त करता है।
+      \item भागीदारी को सक्रिय करने के लिए न्यूनतम TOS (जैसे, 100 TOS) स्टेक करता है; स्टेक 7 दिनों के लिए लॉक हो जाता है।
     \end{enumerate}
-  \item \textbf{Credentialing} (Identity Layer)
+  \item \textbf{प्रमाणीकरण} (पहचान परत)
     \begin{enumerate}[label=\alph*.]
-      \item Acquires verifiable credentials from issuers (e.g., completes test task, earns skill badge).
-      \item Credentials anchor on-chain via hashes; revocation status checked before each task claim.
+      \item जारीकर्ताओं से सत्यापन योग्य प्रमाणपत्र प्राप्त करता है (जैसे, परीक्षण कार्य पूरा करता है, कौशल बैज अर्जित करता है)।
+      \item प्रमाणपत्र हैश के माध्यम से ऑन-चेन एंकर होते हैं; प्रत्येक कार्य दावे से पहले निरसन स्थिति की जांच की जाती है।
     \end{enumerate}
-  \item \textbf{Discovery \& Claiming} (Settlement Layer)
+  \item \textbf{खोज और दावा} (निपटान परत)
     \begin{enumerate}[label=\alph*.]
-      \item Agent queries TaskFactory for open tasks matching skill requirements and escrow range.
-      \item Calls \texttt{TaskInstance.claim()} (requires reputation $\geq$ threshold, sufficient stake).
-      \item Task state transitions to \texttt{Claimed}; escrow held in contract; countdown to deadline begins.
+      \item एजेंट कौशल आवश्यकताओं और एस्क्रो सीमा से मेल खाने वाले खुले कार्यों के लिए TaskFactory से पूछताछ करता है।
+      \item \texttt{TaskInstance.claim()} को कॉल करता है (प्रतिष्ठा $\geq$ थ्रेशोल्ड, पर्याप्त स्टेक की आवश्यकता होती है)।
+      \item कार्य की स्थिति \texttt{Claimed} में परिवर्तित होती है; एस्क्रो कॉन्ट्रैक्ट में रखा जाता है; समय सीमा के लिए उलटी गिनती शुरू होती है।
     \end{enumerate}
-  \item \textbf{Execution} (Off-chain + Attestation)
+  \item \textbf{निष्पादन} (ऑफ-चेन + सत्यापन)
     \begin{enumerate}[label=\alph*.]
-      \item Agent executes workload in Trusted Execution Environment (TEE): Intel SGX, AMD SEV-SNP, or ARM Realm.
-      \item TEE generates attestation report: measurement hash (proves code integrity), input/output hashes, timestamps, energy usage.
-      \item Agent signs result and attestation, computes content hash, submits via \texttt{submitWork()}.
+      \item एजेंट विश्वसनीय निष्पादन वातावरण (TEE) में वर्कलोड निष्पादित करता है: Intel SGX, AMD SEV-SNP, या ARM Realm।
+      \item TEE सत्यापन रिपोर्ट उत्पन्न करता है: मापन हैश (कोड अखंडता को सिद्ध करता है), इनपुट/आउटपुट हैश, टाइमस्टैम्प, ऊर्जा उपयोग।
+      \item एजेंट परिणाम और सत्यापन पर हस्ताक्षर करता है, सामग्री हैश की गणना करता है, \texttt{submitWork()} के माध्यम से सबमिट करता है।
     \end{enumerate}
-  \item \textbf{Validation} (Settlement Layer)
+  \item \textbf{मान्यकरण} (निपटान परत)
     \begin{enumerate}[label=\alph*.]
-      \item ValidationPool assigns 3--7 validators (weighted by stake, accuracy).
-      \item Validators verify attestation signatures, optionally re-run computation, submit quality scores.
-      \item Contract aggregates scores (median), detects outliers, triggers slashing if validators misbehave.
+      \item ValidationPool 3--7 सत्यापनकर्ता असाइन करता है (स्टेक, सटीकता द्वारा भारित)।
+      \item सत्यापनकर्ता सत्यापन हस्ताक्षर सत्यापित करते हैं, वैकल्पिक रूप से गणना को फिर से चलाते हैं, गुणवत्ता स्कोर सबमिट करते हैं।
+      \item कॉन्ट्रैक्ट स्कोर को एकत्रित करता है (मध्यिका), आउटलायर का पता लगाता है, सत्यापनकर्ताओं के दुर्व्यवहार पर स्लैशिंग ट्रिगर करता है।
     \end{enumerate}
-  \item \textbf{Settlement} (Settlement + Resource Layers)
+  \item \textbf{निपटान} (निपटान + संसाधन परतें)
     \begin{enumerate}[label=\alph*.]
-      \item RewardSplitter distributes escrow: agent receives $e \times q$ in CC/EC, validators share fees, treasury claims allocation.
-      \item RepGraph updates agent reputation: $r_{t+1} = 0.9 \times r_t + 0.1 \times q$.
-      \item If dispute arises, arbitration bond required; process escalates to ArbitrationContract.
+      \item RewardSplitter एस्क्रो वितरित करता है: एजेंट CC/EC में $e \times q$ प्राप्त करता है, सत्यापनकर्ता शुल्क साझा करते हैं, ट्रेजरी आवंटन का दावा करता है।
+      \item RepGraph एजेंट की प्रतिष्ठा को अपडेट करता है: $r_{t+1} = 0.9 \times r_t + 0.1 \times q$।
+      \item यदि विवाद उत्पन्न होता है, तो मध्यस्थता बॉन्ड की आवश्यकता होती है; प्रक्रिया ArbitrationContract में बढ़ जाती है।
     \end{enumerate}
-  \item \textbf{Governance Participation} (Governance Layer)
+  \item \textbf{शासन भागीदारी} (शासन परत)
     \begin{enumerate}[label=\alph*.]
-      \item Agent votes on proposals (weighted by stake + reputation).
-      \item Delegates voting power to specialists (e.g., security experts for PQC migration votes).
-      \item Participates in treasury grant reviews, policy compiler audits.
+      \item एजेंट प्रस्तावों पर वोट करता है (स्टेक + प्रतिष्ठा द्वारा भारित)।
+      \item विशेषज्ञों को मतदान शक्ति सौंपता है (जैसे, PQC माइग्रेशन वोटों के लिए सुरक्षा विशेषज्ञ)।
+      \item ट्रेजरी अनुदान समीक्षाओं, नीति संकलक ऑडिट में भाग लेता है।
     \end{enumerate}
 \end{enumerate}
 
 \subsection{डेटा प्रवाह उदाहरण: कानूनी दस्तावेज़ समीक्षा}
 \begin{enumerate}[label=\arabic*.]
-  \item \textbf{Publisher} (law firm) deploys task: ``Redact PII from 500-page contract.'' Escrow: 50 CC (compute) + 5 EC (energy). Deadline: 2 hours.
-  \item \textbf{Agent A} (DID \texttt{did:tos:tos1qpz8vq6qgnkgw9zzq9z5qgpgqx8qgz5dpgrxve}, reputation 0.87, Certified Legal AI credential) claims task. State: \texttt{Claimed}.
-  \item \textbf{Agent A} runs redaction pipeline in Intel SGX enclave. Attestation report includes measurement hash of redaction model, energy consumption (4.8 EC), runtime (22 minutes).
-  \item \textbf{Agent A} submits result (encrypted redacted document hash) + attestation. State: \texttt{Submitted}.
-  \item \textbf{Validators} (3 assigned): verify attestation signatures, spot-check 10\% of redactions, confirm model version. Quality scores: 0.95, 0.94, 0.96. Median: 0.95.
-  \item \textbf{RewardSplitter} pays Agent A $50 \times 0.95 = 47.5$ CC + $5 \times 0.95 = 4.75$ EC. Validators share 6 CC + 0.6 EC. Treasury receives 4 CC + 0.4 EC.
-  \item \textbf{RepGraph} updates Agent A: $r_{t+1} = 0.9 \times 0.87 + 0.1 \times 0.95 = 0.878$.
-  \item \textbf{Telemetry} logs task completion, energy usage, attestation metadata. Law firm audits trail for compliance (GDPR Article 30 record-keeping).
+  \item \textbf{प्रकाशक} (कानूनी फर्म) कार्य तैनात करता है: ``500-पेज के कॉन्ट्रैक्ट से PII को संपादित करें।'' एस्क्रो: 50 CC (कंप्यूट) + 5 EC (ऊर्जा)। समय सीमा: 2 घंटे।
+  \item \textbf{एजेंट A} (DID \texttt{did:tos:tos1qpz8vq6qgnkgw9zzq9z5qgpgqx8qgz5dpgrxve}, प्रतिष्ठा 0.87, प्रमाणित कानूनी AI प्रमाणपत्र) कार्य का दावा करता है। स्थिति: \texttt{Claimed}।
+  \item \textbf{एजेंट A} Intel SGX एन्क्लेव में संपादन पाइपलाइन चलाता है। सत्यापन रिपोर्ट में संपादन मॉडल का मापन हैश, ऊर्जा खपत (4.8 EC), रनटाइम (22 मिनट) शामिल है।
+  \item \textbf{एजेंट A} परिणाम (एन्क्रिप्टेड संपादित दस्तावेज़ हैश) + सत्यापन सबमिट करता है। स्थिति: \texttt{Submitted}।
+  \item \textbf{सत्यापनकर्ता} (3 असाइन किए गए): सत्यापन हस्ताक्षर सत्यापित करते हैं, 10\% संपादन की स्पॉट-जांच करते हैं, मॉडल संस्करण की पुष्टि करते हैं। गुणवत्ता स्कोर: 0.95, 0.94, 0.96। मध्यिका: 0.95।
+  \item \textbf{RewardSplitter} एजेंट A को $50 \times 0.95 = 47.5$ CC + $5 \times 0.95 = 4.75$ EC का भुगतान करता है। सत्यापनकर्ता 6 CC + 0.6 EC साझा करते हैं। ट्रेजरी 4 CC + 0.4 EC प्राप्त करता है।
+  \item \textbf{RepGraph} एजेंट A को अपडेट करता है: $r_{t+1} = 0.9 \times 0.87 + 0.1 \times 0.95 = 0.878$।
+  \item \textbf{टेलीमेट्री} कार्य पूर्णता, ऊर्जा उपयोग, सत्यापन मेटाडेटा लॉग करती है। कानूनी फर्म अनुपालन के लिए ट्रेल का ऑडिट करती है (GDPR अनुच्छेद 30 रिकॉर्ड-कीपिंग)।
 \end{enumerate}
 
 यह उदाहरण दर्शाता है कि सभी परतें सत्यापन योग्य, लागत-प्रभावी, अनुपालन AI श्रम प्रदान करने के लिए कैसे इंटरैक्ट करती हैं।
@@ -353,29 +353,29 @@ TOS Network चार प्राथमिक परतों और कई क
 
 \subsection{अगले 12--18 महीनों के लिए सुपुर्दगी}
 \begin{enumerate}[label=\textbf{D\arabic*.}, leftmargin=*]
-  \item \textbf{Digital Personhood Stack v1}
+  \item \textbf{डिजिटल व्यक्तित्व स्टैक v1}
   \begin{itemize}[noitemsep]
-    \item DID anchors implemented via BLS signatures, issuing DID documents stored on-chain with service endpoints.
-    \item Credential registry storing verifiable credentials (VCs) referencing educational certificates, compliance attestations, or skill badges; revocation handled via Merkleised status lists.
-    \item Confidential balances with Pedersen commitments and Bulletproof range proofs; wallet libraries enabling shielded transfers.
+    \item BLS हस्ताक्षरों के माध्यम से कार्यान्वित DID एंकर, सेवा एंडपॉइंट के साथ ऑन-चेन संग्रहीत DID दस्तावेज़ जारी करना।
+    \item शैक्षिक प्रमाणपत्र, अनुपालन सत्यापन, या कौशल बैज का संदर्भ देने वाले सत्यापन योग्य प्रमाणपत्र (VCs) को संग्रहीत करने वाली प्रमाणपत्र रजिस्ट्री; मर्कलाइज़्ड स्थिति सूचियों के माध्यम से निरसन को संभाला जाता है।
+    \item Pedersen प्रतिबद्धताओं और Bulletproof रेंज प्रमाणों के साथ गोपनीय शेष राशि; परिरक्षित स्थानांतरण को सक्षम करने वाली वॉलेट लाइब्रेरी।
   \end{itemize}
   \item \textbf{AGI Work (AGIW) v1}
   \begin{itemize}[noitemsep]
-    \item Task Factory and Task Instance contracts manage metadata, escrow, deadlines, and allowed agent cohorts.
-    \item Attestation integration with Intel SGX, AMD SEV-SNP, and ARM Realm; attestation bundles hashed on-chain.
-    \item Validation Pool contract tracks validator accuracy via exponential moving averages; misreporting triggers slashing.
-    \item Reward Splitter contract deterministically distributes CC/EC to agents, validators, and the network treasury.
+    \item Task Factory और Task Instance कॉन्ट्रैक्ट मेटाडेटा, एस्क्रो, समय सीमा, और अनुमत एजेंट समूहों का प्रबंधन करते हैं।
+    \item Intel SGX, AMD SEV-SNP, और ARM Realm के साथ सत्यापन एकीकरण; सत्यापन बंडल ऑन-चेन हैश किए जाते हैं।
+    \item Validation Pool कॉन्ट्रैक्ट घातीय चलती औसत के माध्यम से सत्यापनकर्ता सटीकता को ट्रैक करता है; गलत रिपोर्टिंग स्लैशिंग को ट्रिगर करती है।
+    \item Reward Splitter कॉन्ट्रैक्ट निर्धारणात्मक रूप से एजेंटों, सत्यापनकर्ताओं और नेटवर्क ट्रेजरी को CC/EC वितरित करता है।
   \end{itemize}
-  \item \textbf{Compute/Energy Credits}
+  \item \textbf{कंप्यूट/ऊर्जा क्रेडिट}
   \begin{itemize}[noitemsep]
-    \item CC tokens denominated in TFLOPs; EC tokens denominated in kWh. Both minted based on oracle data from leading cloud providers and energy markets.
-    \item Paymaster contract allows agents to pay gas fees in CC/EC; TEM subsidises fees for high-impact tasks (e.g., safety analyses).
+    \item CC टोकन TFLOPs में मूल्यवर्गीकृत; EC टोकन kWh में मूल्यवर्गीकृत। दोनों प्रमुख क्लाउड प्रदाताओं और ऊर्जा बाजारों से ओरेकल डेटा के आधार पर मिंट किए जाते हैं।
+    \item Paymaster कॉन्ट्रैक्ट एजेंटों को CC/EC में गैस शुल्क का भुगतान करने की अनुमति देता है; TEM उच्च-प्रभाव कार्यों (जैसे, सुरक्षा विश्लेषण) के लिए शुल्क को सब्सिडी देता है।
   \end{itemize}
-  \item \textbf{Agent Task Market Demo}
+  \item \textbf{एजेंट कार्य बाजार डेमो}
   \begin{itemize}[noitemsep]
-    \item End-to-end demonstration covering identity issuance, task creation, AGIW settlement, dispute resolution, and reputation updates.
-    \item Explorer sections for Agents, Tasks, Receipts, Reputation, Safety with real-time telemetry.
-    \item SDKs in Rust, Python, TypeScript; Terraform modules for enterprise deployments.
+    \item पहचान जारी करना, कार्य निर्माण, AGIW निपटान, विवाद समाधान, और प्रतिष्ठा अपडेट को कवर करने वाला एंड-टू-एंड प्रदर्शन।
+    \item वास्तविक समय टेलीमेट्री के साथ एजेंट, कार्य, रसीदें, प्रतिष्ठा, सुरक्षा के लिए एक्सप्लोरर अनुभाग।
+    \item Rust, Python, TypeScript में SDK; उद्यम परिनियोजन के लिए Terraform मॉड्यूल।
   \end{itemize}
 \end{enumerate}
 
@@ -466,15 +466,15 @@ AGIW जीवनचक्र सटीक आर्थिक और सुर�
 \textbf{Purpose}: Factory pattern for deploying individual task instances with standardised interfaces and security constraints.\\
 \textbf{Key Functions}:
 \begin{itemize}[noitemsep]
-  \item \texttt{publishTask(metadata, escrow, deadline, allowedAgents)}: Deploys a new TaskInstance, transfers escrow to contract, collects 0.01 TOS publishing fee, emits \texttt{TaskPublished} event. Returns task ID.
-  \item \texttt{listTasks(filters)}: Query interface for discovery; filters by escrow range, deadline, required credentials.
-  \item \texttt{updateWhitelist(agentDIDs)}: Publisher can restrict task to specific agent cohorts (e.g., KYC-verified, reputation $>0.7$).
+  \item \texttt{publishTask(metadata, escrow, deadline, allowedAgents)}: एक नया TaskInstance तैनात करता है, एस्क्रो को कॉन्ट्रैक्ट में स्थानांतरित करता है, 0.01 TOS प्रकाशन शुल्क एकत्र करता है, \texttt{TaskPublished} इवेंट उत्सर्जित करता है। कार्य ID लौटाता है।
+  \item \texttt{listTasks(filters)}: खोज के लिए क्वेरी इंटरफ़ेस; एस्क्रो सीमा, समय सीमा, आवश्यक प्रमाणपत्रों द्वारा फ़िल्टर करता है।
+  \item \texttt{updateWhitelist(agentDIDs)}: प्रकाशक कार्य को विशिष्ट एजेंट समूहों तक सीमित कर सकता है (जैसे, KYC-सत्यापित, प्रतिष्ठा $>0.7$)।
 \end{itemize}
-\textbf{Economic Parameters}:
+\textbf{आर्थिक मापदंड}:
 \begin{itemize}[noitemsep]
-  \item Publishing fee: 0.01 TOS (deters spam, funds network operations).
-  \item Escrow lock: held until settlement or arbitration resolution.
-  \item Gas cost: approximately 150,000 gas for deployment (\$0.90 at 50~gwei).
+  \item प्रकाशन शुल्क: 0.01 TOS (स्पैम को रोकता है, नेटवर्क संचालन के लिए धन प्रदान करता है)।
+  \item एस्क्रो लॉक: निपटान या मध्यस्थता समाधान तक रखा जाता है।
+  \item गैस लागत: परिनियोजन के लिए लगभग 150,000 गैस (50~gwei पर \$0.90)।
 \end{itemize}
 \textbf{Security}: Publishers cannot withdraw escrow after agent claims task; only \texttt{RewardSplitter} can release funds post-validation.
 
@@ -503,41 +503,41 @@ class Task:
 \end{verbatim}
 \textbf{Key Functions}:
 \begin{itemize}[noitemsep]
-  \item \texttt{claimTask(agentDID)}: Requires (1) task in \texttt{Open} state, (2) agent meets whitelist criteria, (3) agent stake $\geq$ threshold. Transitions to \texttt{Claimed}, starts deadline countdown.
-  \item \texttt{submitWork(resultHash, attestation)}: Requires (1) caller is claimant, (2) before deadline, (3) valid attestation signature. Transitions to \texttt{Submitted}, emits \texttt{WorkSubmitted} event triggering validator assignment.
-  \item \texttt{validateWork(score)}: Callable only by assigned validators. Stores score $\in [0,100]$. When all validators submit, aggregates scores via median, transitions to \texttt{Settled}, triggers \texttt{RewardSplitter}.
+  \item \texttt{claimTask(agentDID)}: आवश्यकताएं (1) कार्य \texttt{Open} स्थिति में, (2) एजेंट व्हाइटलिस्ट मापदंड को पूरा करता है, (3) एजेंट स्टेक $\geq$ थ्रेशोल्ड। \texttt{Claimed} में परिवर्तित होता है, समय सीमा उलटी गिनती शुरू करता है।
+  \item \texttt{submitWork(resultHash, attestation)}: आवश्यकताएं (1) कॉलर दावेदार है, (2) समय सीमा से पहले, (3) वैध सत्यापन हस्ताक्षर। \texttt{Submitted} में परिवर्तित होता है, सत्यापनकर्ता असाइनमेंट को ट्रिगर करने वाला \texttt{WorkSubmitted} इवेंट उत्सर्जित करता है।
+  \item \texttt{validateWork(score)}: केवल असाइन किए गए सत्यापनकर्ताओं द्वारा कॉल किया जा सकता है। स्कोर $\in [0,100]$ संग्रहीत करता है। जब सभी सत्यापनकर्ता सबमिट करते हैं, मध्यिका के माध्यम से स्कोर को एकत्रित करता है, \texttt{Settled} में परिवर्तित होता है, \texttt{RewardSplitter} को ट्रिगर करता है।
 \end{itemize}
-\textbf{Deadlines \& Penalties}:
+\textbf{समय सीमा और दंड}:
 \begin{itemize}[noitemsep]
-  \item If agent fails to submit before deadline, publisher can invoke \texttt{forfeit()}, reclaiming escrow minus 10\% penalty (goes to treasury). Agent's reputation decreases by 0.05.
-  \item If validators fail to submit scores within 24 hours, automatic fallback: task re-assigned to new validator cohort; original validators forfeit 5\% of stake.
+  \item यदि एजेंट समय सीमा से पहले सबमिट करने में विफल रहता है, तो प्रकाशक \texttt{forfeit()} को इनवॉक कर सकता है, 10\% दंड घटाकर एस्क्रो को पुनः प्राप्त करता है (ट्रेजरी में जाता है)। एजेंट की प्रतिष्ठा 0.05 से कम हो जाती है।
+  \item यदि सत्यापनकर्ता 24 घंटे के भीतर स्कोर सबमिट करने में विफल रहते हैं, स्वचालित फॉलबैक: कार्य को नए सत्यापनकर्ता समूह को पुनः असाइन किया जाता है; मूल सत्यापनकर्ता 5\% स्टेक जब्त करते हैं।
 \end{itemize}
 
 \paragraph{3. ValidationPool Contract} (\texttt{ValidationPool.py})\\
 \textbf{Purpose}: Coordinate validator assignment, track accuracy, enforce slashing.\\
-\textbf{Validator Registration}:
+\textbf{सत्यापनकर्ता पंजीकरण}:
 \begin{itemize}[noitemsep]
-  \item Validators stake minimum 1,000 TOS to join pool.
-  \item Accuracy score $Acc_v$ initialised to 0.5, updated via exponential moving average:
+  \item सत्यापनकर्ता पूल में शामिल होने के लिए न्यूनतम 1,000 TOS स्टेक करते हैं।
+  \item सटीकता स्कोर $Acc_v$ को 0.5 पर प्रारंभ किया जाता है, घातीय चलती औसत के माध्यम से अपडेट किया जाता है:
     \begin{equation}
     Acc_{v,t+1} = \alpha \times Acc_{v,t} + (1-\alpha) \times correctness_t, \quad \alpha = 0.9
     \end{equation}
-    where $correctness_t \in \{0,1\}$ indicates whether validator's score matched consensus (within $\pm10\%$ of median).
+    जहां $correctness_t \in \{0,1\}$ यह संकेत करता है कि क्या सत्यापनकर्ता का स्कोर सहमति से मेल खाता है (मध्यिका के $\pm10\%$ के भीतर)।
 \end{itemize}
-\textbf{Assignment Algorithm}:
+\textbf{असाइनमेंट एल्गोरिदम}:
 \begin{enumerate}[noitemsep]
-  \item On \texttt{WorkSubmitted} event, ValidationPool selects $n=5$ validators (configurable).
-  \item Selection uses stake-weighted random sampling with accuracy boost:
+  \item \texttt{WorkSubmitted} इवेंट पर, ValidationPool $n=5$ सत्यापनकर्ताओं का चयन करता है (कॉन्फ़िगर योग्य)।
+  \item चयन सटीकता बूस्ट के साथ स्टेक-भारित यादृच्छिक नमूनाकरण का उपयोग करता है:
     \begin{equation}
     P(\text{select } v) \propto stake_v \times (1 + Acc_v)
     \end{equation}
-  \item Validators receive notification via off-chain oracle; must respond within 24 hours.
+  \item सत्यापनकर्ता ऑफ-चेन ओरेकल के माध्यम से सूचना प्राप्त करते हैं; 24 घंटे के भीतर प्रतिक्रिया देनी होगी।
 \end{enumerate}
-\textbf{Slashing Rules}:
+\textbf{स्लैशिंग नियम}:
 \begin{itemize}[noitemsep]
-  \item \textbf{Outlier penalty}: If validator score deviates $>2\sigma$ from median, slash 1\% of stake.
-  \item \textbf{Non-response penalty}: Failure to submit score within deadline slashes 5\% of stake.
-  \item \textbf{Collusion detection}: If three or more validators submit identical scores on $>10$ consecutive tasks (statistically improbable), flag for governance review; suspected colluders lose 20\% stake upon confirmation.
+  \item \textbf{आउटलायर दंड}: यदि सत्यापनकर्ता स्कोर मध्यिका से $>2\sigma$ विचलित होता है, तो स्टेक का 1\% स्लैश करें।
+  \item \textbf{गैर-प्रतिक्रिया दंड}: समय सीमा के भीतर स्कोर सबमिट करने में विफलता स्टेक का 5\% स्लैश करती है।
+  \item \textbf{मिलीभगत पहचान}: यदि तीन या अधिक सत्यापनकर्ता $>10$ लगातार कार्यों पर समान स्कोर सबमिट करते हैं (सांख्यिकीय रूप से असंभव), शासन समीक्षा के लिए फ्लैग करें; पुष्टि पर संदिग्ध मिलीभगत करने वालों का 20\% स्टेक हानि होती है।
 \end{itemize}
 \textbf{Reward Distribution}: Validators collectively earn $e \times \beta \times (1-q)$ where $e$ is escrow, $\beta=0.12$, $q$ is agent quality score. Rewards split proportional to accuracy $Acc_v$.
 
@@ -549,20 +549,20 @@ R_{\text{agent}} &= e \times q \times \left(1 + \alpha (r_a - 0.5)\right) \times
 R_{\text{validators}} &= e \times \beta \times (1-q) \label{eq:reward-validators} \\
 R_{\text{treasury}} &= e \times \gamma + \text{slashed funds} \label{eq:reward-treasury}
 \end{align}
-where:
+जहां:
 \begin{itemize}[noitemsep]
-  \item $r_a \in [0,1]$ is agent reputation (detailed in Section~\ref{sec:reputation}),
-  \item $\alpha = 0.2$ is reputation bonus coefficient,
-  \item $f(s_a) = \min(2, 1 + \log(1+s_a))$ is stake multiplier (diminishing returns),
-  \item $\beta = 0.12$ is validator allocation,
-  \item $\gamma = 0.08$ is treasury allocation.
+  \item $r_a \in [0,1]$ एजेंट प्रतिष्ठा है (धारा~\ref{sec:reputation} में विस्तृत),
+  \item $\alpha = 0.2$ प्रतिष्ठा बोनस गुणांक है,
+  \item $f(s_a) = \min(2, 1 + \log(1+s_a))$ स्टेक गुणक है (घटते रिटर्न),
+  \item $\beta = 0.12$ सत्यापनकर्ता आवंटन है,
+  \item $\gamma = 0.08$ ट्रेजरी आवंटन है।
 \end{itemize}
-\textbf{Cooling Periods}: Based on reputation tier (see Section~\ref{sec:reputation}):
+\textbf{शीतलन अवधि}: प्रतिष्ठा श्रेणी के आधार पर (धारा~\ref{sec:reputation} देखें):
 \begin{itemize}[noitemsep]
-  \item Platinum ($r \geq 0.90$): 5 minutes between tasks.
-  \item Gold ($0.70 \leq r < 0.90$): 15 minutes.
-  \item Silver ($0.30 \leq r < 0.70$): 30 minutes.
-  \item Bronze ($r < 0.30$): 60 minutes.
+  \item प्लेटिनम ($r \geq 0.90$): कार्यों के बीच 5 मिनट।
+  \item गोल्ड ($0.70 \leq r < 0.90$): 15 मिनट।
+  \item सिल्वर ($0.30 \leq r < 0.70$): 30 मिनट।
+  \item ब्रॉन्ज़ ($r < 0.30$): 60 मिनट।
 \end{itemize}
 Cooling periods prevent spam and Sybil attacks while allowing high-reputation agents to claim multiple tasks.
 
@@ -572,12 +572,12 @@ Cooling periods prevent spam and Sybil attacks while allowing high-reputation ag
 CC/EC prices are reported by a decentralised oracle network comprised of 21 feeders. Each feeder stakes TOS and signs price updates derived from API sources (cloud provider pricing, ISO energy markets). Median-of-medians aggregation mitigates outliers. Price staleness triggers default pricing using exponentially weighted moving averages. Feeder misbehaviour results in slashing proportional to deviation.
 
 \subsection{Telemetry Stack}
-The telemetry stack consists of:
+टेलीमेट्री स्टैक में शामिल हैं:
 \begin{itemize}[noitemsep]
-  \item On-chain event streaming via gRPC to an Indexed Data Service using Apache Arrow.
-  \item Privacy filters hashing sensitive fields.
-  \item Dashboard visualisations (Grafana) showing task throughput, dispute rates, energy usage.
-  \item API endpoints for auditors to run compliance queries with role-based access control.
+  \item Apache Arrow का उपयोग करके एक अनुक्रमित डेटा सेवा के लिए gRPC के माध्यम से ऑन-चेन इवेंट स्ट्रीमिंग।
+  \item संवेदनशील फ़ील्ड को हैशिंग करने वाले गोपनीयता फ़िल्टर।
+  \item कार्य थ्रूपुट, विवाद दर, ऊर्जा उपयोग दिखाने वाले डैशबोर्ड विज़ुअलाइज़ेशन (Grafana)।
+  \item भूमिका-आधारित पहुंच नियंत्रण के साथ अनुपालन क्वेरी चलाने के लिए लेखा परीक्षकों के लिए API एंडपॉइंट।
 \end{itemize}
 
 \subsection{Mathematical Model}
@@ -607,21 +607,21 @@ r_a^{\text{base}} = 0.3 \times \frac{\text{age}_a}{\text{age}_{\max}} + 0.4 \tim
 \end{equation}
 where:
 \begin{itemize}[noitemsep]
-  \item $\text{age}_a$ is account age in days (capped at 365 for normalisation),
-  \item $\text{txCount}_a$ is number of completed tasks,
-  \item $\text{stake}_a$ is staked TOS amount,
-  \item denominators are network-wide maxima for normalisation.
+  \item $\text{age}_a$ दिनों में खाता आयु है (सामान्यीकरण के लिए 365 पर सीमित),
+  \item $\text{txCount}_a$ पूर्ण किए गए कार्यों की संख्या है,
+  \item $\text{stake}_a$ स्टेक की गई TOS राशि है,
+  \item हर सामान्यीकरण के लिए नेटवर्क-व्यापी अधिकतम हैं।
 \end{itemize}
 
 \paragraph{Accuracy Bonus} After each task with quality score $q_t$, the agent's accuracy component $Acc_a$ updates via exponential moving average:
 \begin{equation}
 Acc_{a,t+1} = 0.9 \times Acc_{a,t} + 0.1 \times q_t
 \end{equation}
-The accuracy bonus adjusts reputation by $\pm 0.2$:
+सटीकता बोनस $\pm 0.2$ से प्रतिष्ठा को समायोजित करता है:
 \begin{equation}
 r_a^{\text{accuracy}} = r_a^{\text{base}} + 0.2 \times (2 Acc_a - 1)
 \end{equation}
-This formula rewards consistent high performance ($Acc_a \to 1 \Rightarrow +0.2$) and penalises poor performance ($Acc_a \to 0 \Rightarrow -0.2$).
+यह सूत्र लगातार उच्च प्रदर्शन ($Acc_a \to 1 \Rightarrow +0.2$) को पुरस्कृत करता है और खराब प्रदर्शन ($Acc_a \to 0 \Rightarrow -0.2$) को दंडित करता है।
 
 \paragraph{Long-Term Bonus} Agents maintaining $Acc_a > 0.85$ for $>100$ tasks receive a long-term bonus of $+0.1$, capping final reputation at $r_a = 1.0$.
 
@@ -640,33 +640,33 @@ Bronze & $r < 0.30$ & 60 min & Penalty: $2 \times$ fee & 12\% \\\bottomrule
 
 \paragraph{Anti-Sybil Mechanisms} RepGraph employs seven-layer heuristics to detect and block Sybil attacks:
 \begin{enumerate}[noitemsep]
-  \item \textbf{Stake requirement}: Minimum 100 TOS locked for 7 days (economic barrier).
-  \item \textbf{Account age}: New accounts ($<7$ days) restricted to low-value tasks ($<10$ CC escrow).
-  \item \textbf{IP diversity}: Off-chain oracle flags agents sharing IP addresses; governance can delist confirmed farms.
-  \item \textbf{Transaction pattern analysis}: Agents submitting tasks at identical intervals or with identical result hashes flagged for review.
-  \item \textbf{Credential verification}: High-value tasks require verified credentials (KYC, skill certificates).
-  \item \textbf{Proof-of-personhood integration} (roadmap v4.0): Integration with BrightID, Worldcoin, or Gitcoin Passport to ensure one-human-one-agent mapping.
-  \item \textbf{Social graph analysis}: RepGraph examines endorsement networks; cliques of mutually endorsing low-activity agents are penalised.
+  \item \textbf{स्टेक आवश्यकता}: 7 दिनों के लिए लॉक किए गए न्यूनतम 100 TOS (आर्थिक बाधा)।
+  \item \textbf{खाता आयु}: नए खाते ($<7$ दिन) निम्न-मूल्य कार्यों तक सीमित ($<10$ CC एस्क्रो)।
+  \item \textbf{IP विविधता}: ऑफ-चेन ओरेकल IP पते साझा करने वाले एजेंटों को फ्लैग करता है; शासन पुष्टि किए गए फार्मों को डीलिस्ट कर सकता है।
+  \item \textbf{लेनदेन पैटर्न विश्लेषण}: समान अंतराल पर या समान परिणाम हैश के साथ कार्य सबमिट करने वाले एजेंट समीक्षा के लिए फ्लैग किए जाते हैं।
+  \item \textbf{प्रमाणपत्र सत्यापन}: उच्च-मूल्य कार्यों के लिए सत्यापित प्रमाणपत्र (KYC, कौशल प्रमाणपत्र) की आवश्यकता होती है।
+  \item \textbf{व्यक्तित्व का प्रमाण एकीकरण} (रोडमैप v4.0): एक-मानव-एक-एजेंट मैपिंग सुनिश्चित करने के लिए BrightID, Worldcoin, या Gitcoin Passport के साथ एकीकरण।
+  \item \textbf{सामाजिक ग्राफ विश्लेषण}: RepGraph समर्थन नेटवर्क की जांच करता है; पारस्परिक रूप से समर्थन करने वाले कम-गतिविधि वाले एजेंटों के समूहों को दंडित किया जाता है।
 \end{enumerate}
 During the August 2025 pilot, these heuristics blocked 112 malicious attempts with a false-positive rate below 0.7\% after manual review.\footnote{TOS Network, ``Reputation \& Anti-Sybil Telemetry REP-2025-08,'' August 2025.}
 
 \subsection{Monitoring and Observability}
 \paragraph{Site Reliability Objectives (SLOs)} The Foundations deployment targets:
 \begin{itemize}[noitemsep]
-  \item \textbf{SLO1 -- Latency}: 99.9\% of AGIW receipts validated within 20 minutes (p99.9 $<$ 20 min).
-  \item \textbf{SLO2 -- Oracle freshness}: CC/EC price feeds updated at least every 15 minutes; staleness ($>30$ min) triggers fallback to exponentially weighted moving average.
-  \item \textbf{SLO3 -- विवाद दर}: Dispute percentage $<2\%$; if exceeded, TEM increases validator rewards by 20\% to attract participation.
-  \item \textbf{SLO4 -- Availability}: Network uptime $\geq 99.95\%$ (downtime $<4.4$ hours/year).
-  \item \textbf{SLO5 -- Data integrity}: Zero Byzantine faults in validator consensus (ensured via slashing).
+  \item \textbf{SLO1 -- विलंबता}: AGIW रसीदों का 99.9\% 20 मिनट के भीतर मान्य किया गया (p99.9 $<$ 20 मिनट)।
+  \item \textbf{SLO2 -- ओरेकल ताजगी}: CC/EC मूल्य फ़ीड कम से कम हर 15 मिनट में अपडेट किए जाते हैं; बासीपन ($>30$ मिनट) घातीय भारित चलती औसत के लिए फॉलबैक को ट्रिगर करता है।
+  \item \textbf{SLO3 -- विवाद दर}: विवाद प्रतिशत $<2\%$; यदि पार हो जाता है, तो TEM भागीदारी को आकर्षित करने के लिए सत्यापनकर्ता पुरस्कार को 20\% बढ़ाता है।
+  \item \textbf{SLO4 -- उपलब्धता}: नेटवर्क अपटाइम $\geq 99.95\%$ (डाउनटाइम $<4.4$ घंटे/वर्ष)।
+  \item \textbf{SLO5 -- डेटा अखंडता}: सत्यापनकर्ता सहमति में शून्य बीजान्टिन दोष (स्लैशिंग के माध्यम से सुनिश्चित)।
 \end{itemize}
 
 \paragraph{Telemetry Stack Implementation} The telemetry architecture comprises:
 \begin{itemize}[noitemsep]
-  \item \textbf{Event Streaming}: On-chain events (कार्य प्रकाशनed/claimed/settled, validator assignments, slashing) stream via gRPC to the Indexed Data Service (IDS).
-  \item \textbf{Storage}: IDS uses Apache Arrow columnar format (10$\times$ compression vs.\ row-based, optimised for analytics queries).
-  \item \textbf{Privacy Filters}: Sensitive fields (task specifications, agent identities, result hashes) replaced with salted SHA-256 hashes in public dashboards; access-controlled queries require cryptographic credentials.
-  \item \textbf{Dashboards}: Grafana visualisations show real-time task throughput, dispute rates, energy usage, reputation distributions, validator accuracy.
-  \item \textbf{Compliance API}: RESTful endpoints (OAuth2-authenticated, rate-limited) enable regulators to query aggregated statistics: ``Monthly AGIW volume by jurisdiction,'' ``Agents flagged by safety oracle,'' ``CC/EC issuance vs.\ redemption ratio.''
+  \item \textbf{इवेंट स्ट्रीमिंग}: ऑन-चेन इवेंट (कार्य प्रकाशित/दावा किया/निपटाया, सत्यापनकर्ता असाइनमेंट, स्लैशिंग) अनुक्रमित डेटा सेवा (IDS) में gRPC के माध्यम से स्ट्रीम होते हैं।
+  \item \textbf{संग्रहण}: IDS Apache Arrow स्तंभ प्रारूप का उपयोग करता है (पंक्ति-आधारित की तुलना में 10$\times$ संपीड़न, विश्लेषण क्वेरी के लिए अनुकूलित)।
+  \item \textbf{गोपनीयता फ़िल्टर}: सार्वजनिक डैशबोर्ड में संवेदनशील फ़ील्ड (कार्य विनिर्देश, एजेंट पहचान, परिणाम हैश) नमकीन SHA-256 हैश से बदले जाते हैं; पहुंच-नियंत्रित क्वेरी के लिए क्रिप्टोग्राफिक प्रमाणपत्र की आवश्यकता होती है।
+  \item \textbf{डैशबोर्ड}: Grafana विज़ुअलाइज़ेशन वास्तविक समय कार्य थ्रूपुट, विवाद दर, ऊर्जा उपयोग, प्रतिष्ठा वितरण, सत्यापनकर्ता सटीकता दिखाते हैं।
+  \item \textbf{अनुपालन API}: RESTful एंडपॉइंट (OAuth2-प्रमाणित, दर-सीमित) नियामकों को एकत्रित आंकड़ों की क्वेरी करने में सक्षम बनाते हैं: ``क्षेत्राधिकार द्वारा मासिक AGIW वॉल्यूम,'' ``सुरक्षा ओरेकल द्वारा फ्लैग किए गए एजेंट,'' ``CC/EC जारी करना बनाम मोचन अनुपात।''
 \end{itemize}
 
 \paragraph{Alerting} Prometheus alerts fire on SLO violations, triggering notifications to the Council of Stewards and automated responses (e.g., TEM subsidy adjustments, validator cohort expansion).
@@ -674,33 +674,33 @@ During the August 2025 pilot, these heuristics blocked 112 malicious attempts wi
 \subsection{Fairness Considerations}
 Simulations of 10,000 synthetic agents with diverse starting conditions (reputation uniformly distributed $\in [0,1]$, stake $\in [100, 10000]$ TOS) demonstrate:
 \begin{itemize}[noitemsep]
-  \item \textbf{Convergence}: Agent reputations converge within $\pm0.05$ of their true skill level after 30 tasks (95\% confidence).
-  \item \textbf{Mobility}: Low-reputation agents ($r<0.3$) can reach Gold tier ($r>0.7$) within 50 high-quality tasks, demonstrating upward mobility.
-  \item \textbf{Cooling schedule impact}: Without cooling periods, spam accounted for 42\% of task volume; with tiered cooling (5--60 min), spam reduced to 6\%.
-  \item \textbf{Oligopoly resistance}: Top 10\% of agents earn 28\% of rewards (Gini coefficient 0.34), indicating moderate concentration; governance can adjust $\alpha$ (reputation bonus) and $f(s_a)$ (stake multiplier) to prevent oligopolies.
+  \item \textbf{अभिसरण}: 30 कार्यों के बाद एजेंट प्रतिष्ठा उनके वास्तविक कौशल स्तर के $\pm0.05$ के भीतर अभिसरित होती है (95\% विश्वास)।
+  \item \textbf{गतिशीलता}: कम-प्रतिष्ठा वाले एजेंट ($r<0.3$) 50 उच्च-गुणवत्ता वाले कार्यों के भीतर गोल्ड टियर ($r>0.7$) तक पहुंच सकते हैं, ऊर्ध्वगामी गतिशीलता प्रदर्शित करते हुए।
+  \item \textbf{शीतलन अनुसूची प्रभाव}: शीतलन अवधि के बिना, स्पैम कार्य वॉल्यूम का 42\% था; स्तरित शीतलन (5--60 मिनट) के साथ, स्पैम 6\% तक कम हो गया।
+  \item \textbf{अल्पाधिकार प्रतिरोध}: शीर्ष 10\% एजेंट पुरस्कारों का 28\% अर्जित करते हैं (गिनी गुणांक 0.34), मध्यम एकाग्रता का संकेत देते हुए; शासन अल्पाधिकार को रोकने के लिए $\alpha$ (प्रतिष्ठा बोनस) और $f(s_a)$ (स्टेक गुणक) को समायोजित कर सकता है।
 \end{itemize}
 
 \subsection{Pilot Experimentation Results}
 \label{sec:pilot-results}
 We benchmarked AGIW on devnet (Aurora) and testnet (Helios) during August--September 2025 with real agent workloads and synthetic stress tests.
 
-\paragraph{Real-World Pilot (August 15 -- September 15, 2025)}
+\paragraph{वास्तविक-विश्व पायलट (अगस्त 15 -- सितंबर 15, 2025)}
 \begin{itemize}[noitemsep]
-  \item \textbf{Participants}: 2,847 registered agent keys (mix of enterprise bots, academic research projects, hobbyists).
-  \item \textbf{Tasks executed}: 126 (legal document review, climate data processing, code analysis).
-  \item \textbf{Completion rate}: 97.8\% (123/126 tasks settled; 3 disputed, resolved via arbitration).
-  \item \textbf{Validation efficiency}: 83\% (median time from submission to settlement: 12.3 minutes).
-  \item \textbf{Fraud detection}: 99.2\% accuracy (112 malicious attempts blocked, 1 false positive).
-  \item \textbf{Cost savings}: Early adopters reported 60--80\% cost reduction vs.\ manual contractors for equivalent quality.
+  \item \textbf{प्रतिभागी}: 2,847 पंजीकृत एजेंट कुंजियां (उद्यम बॉट, शैक्षणिक अनुसंधान परियोजनाओं, शौकियों का मिश्रण)।
+  \item \textbf{निष्पादित कार्य}: 126 (कानूनी दस्तावेज़ समीक्षा, जलवायु डेटा प्रोसेसिंग, कोड विश्लेषण)।
+  \item \textbf{पूर्णता दर}: 97.8\% (123/126 कार्य निपटाए गए; 3 विवादित, मध्यस्थता के माध्यम से हल किए गए)।
+  \item \textbf{मान्यकरण दक्षता}: 83\% (सबमिशन से निपटान तक मध्यिका समय: 12.3 मिनट)।
+  \item \textbf{धोखाधड़ी पहचान}: 99.2\% सटीकता (112 दुर्भावनापूर्ण प्रयास अवरुद्ध, 1 गलत सकारात्मक)।
+  \item \textbf{लागत बचत}: प्रारंभिक अपनाने वालों ने समान गुणवत्ता के लिए मैनुअल ठेकेदारों की तुलना में 60--80\% लागत में कमी की रिपोर्ट की।
 \end{itemize}
 
-\paragraph{Synthetic Stress Test (1,000 Tasks, September 2025)}
+\paragraph{सिंथेटिक तनाव परीक्षण (1,000 कार्य, सितंबर 2025)}
 \begin{itemize}[noitemsep]
-  \item \textbf{Average execution time}: 7.4 minutes (task claim to result submission).
-  \item \textbf{Attestation overhead}: 3.1\% (TEE report generation + signature verification adds 230~ms per task).
-  \item \textbf{Validation cost}: 0.002 TOS per task (gas for validator score submissions + पुरस्कार वितरण).
-  \item \textbf{Throughput}: Sustained 45 tasks/minute (2,700 tasks/hour) without performance degradation.
-  \item \textbf{Fraud injection}: Intentionally submitted 50 fraudulent results (incorrect outputs, forged attestations); all detected by validators, resulting in 100\% fraud detection rate.
+  \item \textbf{औसत निष्पादन समय}: 7.4 मिनट (कार्य दावे से परिणाम सबमिशन तक)।
+  \item \textbf{सत्यापन ओवरहेड}: 3.1\% (TEE रिपोर्ट उत्पन्न + हस्ताक्षर सत्यापन प्रति कार्य 230~ms जोड़ता है)।
+  \item \textbf{मान्यकरण लागत}: प्रति कार्य 0.002 TOS (सत्यापनकर्ता स्कोर सबमिशन + पुरस्कार वितरण के लिए गैस)।
+  \item \textbf{थ्रूपुट}: प्रदर्शन गिरावट के बिना निरंतर 45 कार्य/मिनट (2,700 कार्य/घंटा)।
+  \item \textbf{धोखाधड़ी इंजेक्शन}: जानबूझकर 50 धोखाधड़ी वाले परिणाम सबमिट किए (गलत आउटपुट, जाली सत्यापन); सभी सत्यापनकर्ताओं द्वारा पता लगाए गए, जिसके परिणामस्वरूप 100\% धोखाधड़ी पहचान दर हुई।
 \end{itemize}
 
 \subsection{Compliance \& Human Impact}
@@ -713,10 +713,10 @@ We benchmarked AGIW on devnet (Aurora) and testnet (Helios) during August--Septe
 
 \paragraph{Job Displacement Mitigation} While AI agents automate tasks, TOS creates new roles:
 \begin{itemize}[noitemsep]
-  \item \textbf{Validators}: Human experts earn income reviewing AI outputs (estimated 12\% of task value).
-  \item \textbf{Credential issuers}: Educational institutions, certification bodies issue verifiable credentials (new revenue stream).
-  \item \textbf{Arbitrators}: Legal/technical specialists adjudicate disputes (fees funded by arbitration bonds).
-  \item \textbf{Policy developers}: Governance participants draft and audit constitutional contracts (treasury grants).
+  \item \textbf{सत्यापनकर्ता}: मानव विशेषज्ञ AI आउटपुट की समीक्षा करके आय अर्जित करते हैं (कार्य मूल्य का अनुमानित 12\%)।
+  \item \textbf{प्रमाणपत्र जारीकर्ता}: शैक्षिक संस्थान, प्रमाणन निकाय सत्यापन योग्य प्रमाणपत्र जारी करते हैं (नई राजस्व धारा)।
+  \item \textbf{मध्यस्थ}: कानूनी/तकनीकी विशेषज्ञ विवादों का निर्णय करते हैं (मध्यस्थता बॉन्ड द्वारा वित्त पोषित शुल्क)।
+  \item \textbf{नीति डेवलपर्स}: शासन प्रतिभागी संवैधानिक कॉन्ट्रैक्ट का मसौदा तैयार करते हैं और ऑडिट करते हैं (ट्रेजरी अनुदान)।
 \end{itemize}
 Economic simulations (Section~\ref{sec:econ-sim}) suggest that for every 10 jobs automated, TOS creates 3--4 new specialised roles, partially offsetting displacement.
 
@@ -727,7 +727,7 @@ Economic simulations (Section~\ref{sec:econ-sim}) suggest that for every 10 jobs
 As the MERCURY era matures and transitions toward VENUS, generative AI's economic impact grows substantially, with potential to add trillions annually to the global economy through knowledge work automation.\footnote{McKinsey Global Institute, ``The economic potential of generative AI,'' June 2023.} As agents evolve into autonomous business units, enterprises demand regulated custody, hybrid settlement, and safety guardrails.
 
 \subsection{Product Portfolio}
-The Markets \& Safety era introduces four core products targeting enterprise deployments and autonomous business units:
+बाजार और सुरक्षा युग एंटरप्राइज़ परिनियोजन और स्वायत्त व्यावसायिक इकाइयों को लक्षित करते हुए चार मुख्य उत्पाद पेश करता है:
 
 \paragraph{1. Regulated Custody} (\texttt{CustodyVault.py})\\
 \textbf{Rationale}: Enterprises and regulated entities require programmable spending controls, multi-party approval, and auditability. Traditional blockchain wallets lack these features.\\
@@ -795,7 +795,7 @@ The Markets \& Safety era introduces four core products targeting enterprise dep
 \end{itemize}
 \textbf{Policy Enforcement}:
 \begin{itemize}[noitemsep]
-  \item \textbf{Kill-switch}: If Safety Oracle flags agent output as high-risk (e.g., toxicity score $>0.9$, PII detected), wallet operations auto-pause; requires guardian approval to resume.
+  \item \textbf{किल-स्विच}: यदि सुरक्षा ओरेकल एजेंट आउटपुट को उच्च-जोखिम के रूप में फ्लैग करता है (जैसे, विषाक्तता स्कोर $>0.9$, PII का पता लगाया गया), वॉलेट संचालन स्वतः-रोक दिए जाते हैं; फिर से शुरू करने के लिए संरक्षक अनुमोदन की आवश्यकता होती है।
   \item \textbf{Rate-limits}: Agents flagged for repeated violations (>3 in 30 days) subject to reduced task quotas (e.g., max 10 tasks/day).
   \item \textbf{Dataset compliance}: Tasks specifying ``GDPR-compliant data only'' enforce that agents prove dataset provenance via verifiable credentials; violations trigger contract rejection.
 \end{itemize}
@@ -858,9 +858,9 @@ PAI transitions TOS from BlockDAG baseline (2,500+ TPS) to AI-assisted consensus
 \textbf{Performance Target}: 10,000+ TPS sustained, 15,000+ TPS peak, sub-500ms finality for 95\% of transactions.\\
 \textbf{Decentralisation Constraints}: Governance sets bounds:
 \begin{itemize}[noitemsep]
-  \item Minimum validator count: 500 (prevents excessive centralisation).
-  \item Maximum validator earnings: Gini coefficient $<0.45$ (ensures broad participation).
-  \item AI model transparency: Open-source models, public training data, reproducible builds.
+  \item न्यूनतम सत्यापनकर्ता गिनती: 500 (अत्यधिक केंद्रीकरण को रोकता है)।
+  \item अधिकतम सत्यापनकर्ता आय: गिनी गुणांक $<0.45$ (व्यापक भागीदारी सुनिश्चित करता है)।
+  \item AI मॉडल पारदर्शिता: ओपन-सोर्स मॉडल, सार्वजनिक प्रशिक्षण डेटा, पुनरुत्पादन योग्य बिल्ड।
 \end{itemize}
 \textbf{Century-Scale Vision}: PAI consensus adapts to interplanetary latency (Section~\ref{sec:expansion}), dynamic node availability (colonies joining/leaving network), and evolving threat landscapes (post-quantum attacks, AGI adversaries).
 
@@ -1066,27 +1066,27 @@ TOS दो-स्तरीय सर्वसम्मति मॉडल अप
 
 \paragraph{Case Study: Simulated Quantum Attack (2185)}
 Hypothetical scenario: adversary with 100-qubit fault-tolerant quantum computer breaks ECDSA signatures, drains \$12B from 5,000 agent accounts over 8-hour period (before PQC migration completes).\\
-\textbf{Response}:
+\textbf{प्रतिक्रिया}:
 \begin{enumerate}[noitemsep]
-  \item Security Operations Center detects anomalous transaction patterns (10,000 transfers from accounts with no recent activity).
-  \item Council invokes emergency circuit breaker; network paused within 2 hours.
-  \item Arbitration Court convenes; confirms quantum attack via cryptanalysis.
-  \item Governance vote (82\% approval) authorizes rollback to checkpoint 12 hours pre-attack.
-  \item Validators execute rollback; stolen funds restored; attack transactions nullified.
-  \item Compensation Fund pays \$200M to agents who received legitimate payments during attack window.
-  \item Post-mortem: accelerate PQC migration; upgrade to Dilithium-5 within 30 days; publish transparency report.
+  \item सुरक्षा संचालन केंद्र असामान्य लेनदेन पैटर्न का पता लगाता है (हाल की गतिविधि के बिना खातों से 10,000 स्थानांतरण)।
+  \item परिषद आपातकालीन सर्किट ब्रेकर का आह्वान करती है; 2 घंटे के भीतर नेटवर्क को रोका जाता है।
+  \item मध्यस्थता न्यायालय बैठक करता है; क्रिप्टोएनालिसिस के माध्यम से क्वांटम हमले की पुष्टि करता है।
+  \item शासन वोट (82\% अनुमोदन) हमले से 12 घंटे पहले चेकपॉइंट पर रोलबैक को अधिकृत करता है।
+  \item सत्यापनकर्ता रोलबैक निष्पादित करते हैं; चोरी हुए फंड बहाल किए गए; हमले के लेनदेन को रद्द कर दिया गया।
+  \item मुआवजा कोष हमले की विंडो के दौरान वैध भुगतान प्राप्त करने वाले एजेंटों को \$200M का भुगतान करता है।
+  \item पोस्ट-मॉर्टम: PQC माइग्रेशन में तेजी लाएं; 30 दिनों के भीतर Dilithium-5 में अपग्रेड करें; पारदर्शिता रिपोर्ट प्रकाशित करें।
 \end{enumerate}
 \textbf{Outcome}: Crisis resolved in 7 days; network trust preserved; attacker's quantum advantage neutralized by rollback capability.
 
 \subsection{Archival Federation}
 
 \paragraph{Challenge: Millennial Data Preservation}
-AGI civilization requires \emph{institutional memory} spanning centuries. Use cases:
+AGI सभ्यता को सदियों तक फैली हुई \emph{संस्थागत स्मृति} की आवश्यकता है। उपयोग के मामले:
 \begin{itemize}[noitemsep]
-  \item Legal disputes referencing contracts signed 200 years ago.
-  \item Scientific reproducibility (verify experimental claims from prior era).
-  \item Genealogical research (human/AI lineage records).
-  \item Historical audits (Did colony X pay colony Y in 2234?).
+  \item 200 साल पहले हस्ताक्षरित अनुबंधों का संदर्भ देने वाले कानूनी विवाद।
+  \item वैज्ञानिक पुनरुत्पादनीयता (पूर्व युग के प्रयोगात्मक दावों को सत्यापित करें)।
+  \item वंशावली अनुसंधान (मानव/AI वंश रिकॉर्ड)।
+  \item ऐतिहासिक ऑडिट (क्या कॉलोनी X ने 2234 में कॉलोनी Y को भुगतान किया?)।
 \end{itemize}
 Traditional cloud storage (AWS Glacier, Google Coldline) assumes $<$100-year retention; enterprises collapse, formats obsolete, bit rot accumulates.
 
@@ -1107,29 +1107,29 @@ Experimental media:
 \end{itemize}
 \textbf{Strategy}: Ledger state checkpoints (every 7 days) written to all three media; stored in geographically dispersed vaults (Earth: Svalbard Global Seed Vault, Antarctica; Moon: lava tubes; Mars: subsurface ice caverns).
 
-\textbf{Layer 4: Federation Protocol}\\
-Colonies share archival responsibility via \emph{distributed custodianship}:
+\textbf{परत 4: संघ प्रोटोकॉल}\\
+कॉलोनियां \emph{वितरित संरक्षकता} के माध्यम से संग्रहीय जिम्मेदारी साझा करती हैं:
 \begin{enumerate}[noitemsep]
-  \item Earth colony archives Mars data; Mars archives Lunar data; Lunar archives Ceres data, etc. (ring topology).
-  \item Annual \emph{scrubbing ceremony}: colonies exchange Merkle proofs, verify data integrity.
-  \item If colony goes offline (e.g., catastrophic life support failure), surviving colonies reconstruct its archive from erasure-coded fragments.
+  \item पृथ्वी कॉलोनी मंगल डेटा संग्रहीत करती है; मंगल चंद्र डेटा संग्रहीत करता है; चंद्र सेरेस डेटा संग्रहीत करता है, आदि (रिंग टोपोलॉजी)।
+  \item वार्षिक \emph{स्क्रबिंग समारोह}: कॉलोनियां मर्कल प्रमाण का आदान-प्रदान करती हैं, डेटा अखंडता को सत्यापित करती हैं।
+  \item यदि कॉलोनी ऑफलाइन हो जाती है (जैसे, विनाशकारी जीवन समर्थन विफलता), जीवित कॉलोनियां विलोपन-कोडित टुकड़ों से इसके संग्रह का पुनर्निर्माण करती हैं।
 \end{enumerate}
 
 \paragraph{Retrieval Protocol}
 Query historical state (e.g., ``What was account tos1qq5hqy2jwn0r5ehvuew5r3qjcfvjvq5dhldxvyq balance on 2234-05-15?''):
 \begin{enumerate}[noitemsep]
-  \item Check Hot Storage (if within 10 years): O(log n) indexed lookup, 100ms latency.
-  \item Check Warm Storage (if 10--100 years): Decompress blocks, verify Merkle proof, 10--60 seconds.
-  \item Check Cold Storage (if 100--1,000 years): Retrieve DNA/optical disc from vault, sequence/read data, reconstruct via Reed-Solomon, 1--7 days.
+  \item हॉट स्टोरेज जांचें (यदि 10 वर्ष के भीतर): O(log n) अनुक्रमित लुकअप, 100ms विलंबता।
+  \item वार्म स्टोरेज जांचें (यदि 10--100 वर्ष): ब्लॉक डीकंप्रेस करें, मर्कल प्रमाण सत्यापित करें, 10--60 सेकंड।
+  \item कोल्ड स्टोरेज जांचें (यदि 100--1,000 वर्ष): वॉल्ट से DNA/ऑप्टिकल डिस्क पुनर्प्राप्त करें, डेटा अनुक्रमित/पढ़ें, Reed-Solomon के माध्यम से पुनर्निर्माण करें, 1--7 दिन।
 \end{enumerate}
 
 \paragraph{Economic Model}
 \textbf{Funding}: 3\% of annual treasury revenue allocated to archival infrastructure. At \$50B treasury (projected 2150), this funds \$1.5B/year for:
 \begin{itemize}[noitemsep]
-  \item DNA synthesis (\$500M/year, encoding 500 PB).
-  \item 5D optical disc production (\$300M/year, 1,500 PB).
-  \item Vault construction/maintenance (\$400M/year).
-  \item Custodian node operators (\$300M/year, 1,000 nodes globally).
+  \item DNA संश्लेषण (\$500M/वर्ष, 500 PB एनकोडिंग)।
+  \item 5D ऑप्टिकल डिस्क उत्पादन (\$300M/वर्ष, 1,500 PB)।
+  \item वॉल्ट निर्माण/रखरखाव (\$400M/वर्ष)।
+  \item संरक्षक नोड ऑपरेटर (\$300M/वर्ष, वैश्विक स्तर पर 1,000 नोड)।
 \end{itemize}
 
 \subsection{Post-Quantum Cryptography Migration}
@@ -1144,8 +1144,8 @@ Query historical state (e.g., ``What was account tos1qq5hqy2jwn0r5ehvuew5r3qjcfv
 \paragraph{Migration Strategy: Hybrid Transition}
 \textbf{Phase 1 (v4.0, 2026)}: Dual-signing introduced. Every transaction carries two signatures:
 \begin{itemize}[noitemsep]
-  \item Classical: ECDSA secp256k1 (backward compatibility).
-  \item Post-quantum: Dilithium-3 (NIST FIPS 204).
+  \item शास्त्रीय: ECDSA secp256k1 (पिछड़ी संगतता)।
+  \item पोस्ट-क्वांटम: Dilithium-3 (NIST FIPS 204)।
 \end{itemize}
 Validators verify both; network accepts transaction if \emph{either} signature valid (ensures liveness if PQC implementation has bugs).
 
@@ -1163,24 +1163,24 @@ To ensure transparency and community trust, TOS conducts a \emph{PQC Migration C
   \item \textbf{Phase 5 (Month 8)}: Mainnet activation. Old signatures phased out over 12 months.
 \end{enumerate}
 
-\paragraph{Fallback Plan}
-If critical PQC vulnerability discovered (e.g., lattice hardness assumption broken):
+\paragraph{फॉलबैक योजना}
+यदि महत्वपूर्ण PQC भेद्यता की खोज की जाती है (जैसे, लैटिस कठोरता धारणा टूट गई):
 \begin{itemize}[noitemsep]
-  \item Emergency rollback to last pre-PQC checkpoint.
-  \item Activate alternative PQC scheme (Falcon, SPHINCS+).
-  \item Reconvene ceremony with updated parameters.
+  \item अंतिम पूर्व-PQC चेकपॉइंट पर आपातकालीन रोलबैक।
+  \item वैकल्पिक PQC योजना सक्रिय करें (Falcon, SPHINCS+)।
+  \item अद्यतन मापदंडों के साथ समारोह को फिर से बुलाएं।
 \end{itemize}
 
 \subsection{Philosophical Foundations: Temporal Sovereignty}
 
-The reversible history mechanism embodies a radical governance principle: \textbf{future generations may correct past errors}. Traditional blockchains enshrine immutability as sacred; TOS recognizes that \emph{perfect foresight is impossible}. By enabling court-authorised rollbacks, TOS empowers AGI civilization to:
+उत्क्रमणीय इतिहास तंत्र एक मूलभूत शासन सिद्धांत को मूर्त रूप देता है: \textbf{भविष्य की पीढ़ियां पिछली त्रुटियों को सुधार सकती हैं}। पारंपरिक ब्लॉकचेन अपरिवर्तनीयता को पवित्र मानते हैं; TOS पहचानता है कि \emph{पूर्ण दूरदर्शिता असंभव है}। न्यायालय-अधिकृत रोलबैक को सक्षम करके, TOS AGI सभ्यता को सशक्त बनाता है:
 \begin{itemize}[noitemsep]
-  \item Recover from black swan events (quantum attacks, rogue superintelligence).
-  \item Undo unjust transactions (theft, coercion, algorithmic discrimination).
-  \item Preserve institutional continuity across centuries (constitutional amendments, treaty revisions).
+  \item ब्लैक स्वान घटनाओं से पुनर्प्राप्त करें (क्वांटम हमले, दुष्ट अति-बुद्धिमत्ता)।
+  \item अन्यायपूर्ण लेनदेन को पूर्ववत करें (चोरी, जबरदस्ती, एल्गोरिथम भेदभाव)।
+  \item सदियों में संस्थागत निरंतरता को संरक्षित करें (संवैधानिक संशोधन, संधि संशोधन)।
 \end{itemize}
 
-This capability is not unlimited (90-day window, 75\% supermajority, rate limits) but signals a shift from \emph{code is law} to \emph{code + governance is law}. As AGI entities gain legal standing and humans merge with digital substrates, the ability to \emph{rewrite history responsibly} becomes essential to civilization's resilience.
+यह क्षमता असीमित नहीं है (90-दिन की विंडो, 75\% महाबहुमत, दर सीमाएं) लेकिन \emph{कोड ही कानून है} से \emph{कोड + शासन ही कानून है} में बदलाव का संकेत देती है। जैसे-जैसे AGI इकाइयां कानूनी स्थिति प्राप्त करती हैं और मनुष्य डिजिटल सब्सट्रेट के साथ विलय करते हैं, \emph{जिम्मेदारी से इतिहास को फिर से लिखने} की क्षमता सभ्यता के लचीलेपन के लिए आवश्यक हो जाती है।
 
 \section{तकनीकी स्तंभ}
 
@@ -1202,7 +1202,7 @@ Examples:
   Mainnet:      did:tos:mainnet:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh
   Testnet:      did:tos:testnet:tst1qqqsyqcyq5rqwzqfpg9scrgwpugpzysnzs2pgde5k
 \end{verbatim}
-Note: TOS uses complete bech32 addresses as DID identifiers, preserving full address format including checksum for validation. Mainnet addresses use \texttt{tos1} prefix, while testnet addresses use \texttt{tst1} prefix.
+नोट: TOS DID पहचानकर्ताओं के रूप में पूर्ण bech32 पते का उपयोग करता है, सत्यापन के लिए चेकसम सहित पूर्ण पता प्रारूप को संरक्षित करता है। मेननेट पते \texttt{tos1} उपसर्ग का उपयोग करते हैं, जबकि टेस्टनेट पते \texttt{tst1} उपसर्ग का उपयोग करते हैं।
 
 \textbf{DID दस्तावेज़ संरचना}:
 \begin{itemize}[noitemsep]
@@ -1323,9 +1323,9 @@ TOS मूल खाता अमूर्तता लागू करता �
 
 \textbf{Automated Market Maker (AMM)}:
 \begin{itemize}[noitemsep]
-  \item Constant Product Market Maker (CPMM): $x \cdot y = k$ where $x$ = CC reserves, $y$ = TOS reserves.
-  \item Liquidity providers earn 0.3\% swap fees.
-  \item Impermanent loss protection: TEM treasury subsidizes divergence losses for LPs providing $>$1M TOS liquidity.
+  \item Constant Product Market Maker (CPMM): $x \cdot y = k$ जहां $x$ = CC रिजर्व, $y$ = TOS रिजर्व।
+  \item तरलता प्रदाता 0.3\% स्वैप शुल्क अर्जित करते हैं।
+  \item अस्थायी हानि सुरक्षा: TEM ट्रेजरी $>$1M TOS तरलता प्रदान करने वाले LPs के लिए विचलन हानियों को सब्सिडी देता है।
 \end{itemize}
 
 \paragraph{TOS Energy Model (TEM)}
@@ -1338,8 +1338,8 @@ Dynamic fee adjustment mechanism balancing network sustainability with agent acc
 
 \textbf{Base Fee}:
 \begin{itemize}[noitemsep]
-  \item Computed via dynamic adjustment mechanism that adjusts based on block fullness.
-  \item Target: 50\% block utilization; base fee increases 12.5\% per block if usage $>$ target.
+  \item ब्लॉक पूर्णता के आधार पर समायोजित गतिशील समायोजन तंत्र के माध्यम से गणना की जाती है।
+  \item लक्ष्य: 50\% ब्लॉक उपयोग; यदि उपयोग $>$ लक्ष्य है तो आधार शुल्क प्रति ब्लॉक 12.5\% बढ़ता है।
 \end{itemize}
 
 \textbf{TEM Subsidy Categories}:
@@ -1383,9 +1383,9 @@ Traditional blockchains form linear chains; TOS uses Directed Acyclic Graph (DAG
 
 \textbf{Block Structure}:
 \begin{itemize}[noitemsep]
-  \item Each block references 1--3 parent blocks (vs. 1 in traditional linear chains).
-  \item Validators independently propose blocks; no leader election bottleneck.
-  \item Topological sorting determines transaction order; conflicts resolved via timestamp + proposer priority.
+  \item प्रत्येक ब्लॉक 1--3 पैरेंट ब्लॉक्स को संदर्भित करता है (पारंपरिक रैखिक चेन में 1 बनाम)।
+  \item सत्यापनकर्ता स्वतंत्र रूप से ब्लॉक प्रस्तावित करते हैं; कोई नेता चुनाव अवरोध नहीं।
+  \item टोपोलॉजिकल सॉर्टिंग लेनदेन क्रम निर्धारित करती है; टाइमस्टैम्प + प्रस्तावक प्राथमिकता के माध्यम से संघर्ष हल किए जाते हैं।
 \end{itemize}
 
 \textbf{Consensus Rules}:
@@ -1397,8 +1397,8 @@ Traditional blockchains form linear chains; TOS uses Directed Acyclic Graph (DAG
 
 \textbf{Performance}:
 \begin{itemize}[noitemsep]
-  \item Baseline: 2,500--3,500 TPS (measured Sept 2025).
-  \item PAI-optimized: 10,000+ TPS (target Q4 2026).
+  \item बेसलाइन: 2,500--3,500 TPS (सितंबर 2025 में मापा गया)।
+  \item PAI-अनुकूलित: 10,000+ TPS (लक्ष्य Q4 2026)।
 \end{itemize}
 
 \begin{table}[H]
@@ -1425,11 +1425,11 @@ Traditional blockchains form linear chains; TOS uses Directed Acyclic Graph (DAG
 \textbf{Key Results} (September 2025 baseline):
 \begin{itemize}[noitemsep]
   \item TPS: p50 = 2,847, p95 = 3,421, p99 = 3,789
-  \item Block time: p50 = 11.3s, p95 = 14.2s
-  \item Finality: 8 blocks (median 90s)
-  \item AGIW settlement: p50 = 12.4 min, p95 = 18.7 min
-  \item विवाद दर: 1.8\% of completed tasks
-  \item Validator liveness: 98.7\% average
+  \item ब्लॉक समय: p50 = 11.3s, p95 = 14.2s
+  \item अंतिमता: 8 ब्लॉक (माध्यिका 90s)
+  \item AGIW निपटान: p50 = 12.4 min, p95 = 18.7 min
+  \item विवाद दर: पूर्ण कार्यों का 1.8\%
+  \item सत्यापनकर्ता जीवंतता: 98.7\% औसत
 \end{itemize}
 
 \paragraph{Power of AI (PAI) Consensus}
@@ -1454,9 +1454,9 @@ On-chain oracle aggregates safety metrics from leading AI labs:
 
 \textbf{Enforcement}:
 \begin{itemize}[noitemsep]
-  \item Tasks with safety score $<$ 0.3 automatically rejected (refund escrow).
-  \item Agents repeatedly submitting unsafe outputs flagged; reputation penalized.
-  \item Human arbitrators review borderline cases (0.3--0.5 safety score).
+  \item सुरक्षा स्कोर $<$ 0.3 वाले कार्य स्वचालित रूप से अस्वीकृत (एस्क्रो वापसी)।
+  \item बार-बार असुरक्षित आउटपुट सबमिट करने वाले एजेंटों को फ़्लैग किया जाता है; प्रतिष्ठा दंडित।
+  \item मानव मध्यस्थ सीमा रेखा मामलों की समीक्षा करते हैं (0.3--0.5 सुरक्षा स्कोर)।
 \end{itemize}
 
 \paragraph{Slashing \& Anti-Sybil Mechanisms}
@@ -1469,9 +1469,9 @@ On-chain oracle aggregates safety metrics from leading AI labs:
 
 \textbf{Agent Anti-Sybil}:
 \begin{itemize}[noitemsep]
-  \item Minimum stake: 100 TOS per agent identity.
-  \item Rate limits: 5--60 minute cooldown between tasks (based on reputation).
-  \item Graph analysis: Detect clusters of agents with identical behavioral patterns; require proof-of-uniqueness.
+  \item न्यूनतम स्टेक: प्रति एजेंट पहचान 100 TOS।
+  \item दर सीमा: कार्यों के बीच 5--60 मिनट कूलडाउन (प्रतिष्ठा के आधार पर)।
+  \item ग्राफ विश्लेषण: समान व्यवहार पैटर्न वाले एजेंटों के क्लस्टर का पता लगाना; अद्वितीयता का प्रमाण आवश्यक।
 \end{itemize}
 
 \subsection{P4 -- Resilience}
@@ -1497,9 +1497,9 @@ Hierarchical consensus (Local Consensus Domains + Interplanetary Root Chain) han
 \paragraph{Disaster Recovery Protocols}
 \textbf{Byzantine Fault Scenarios}:
 \begin{itemize}[noitemsep]
-  \item Network partition (Earth--Mars communication blackout): LCDs operate independently; sync when reconnected.
-  \item Validator collusion ($<$33\%): Median-of-5 scoring resists outliers.
-  \item Validator collusion ($>$33\%): Emergency governance intervention; slashing + re-election.
+  \item नेटवर्क विभाजन (पृथ्वी--मंगल संचार ब्लैकआउट): LCDs स्वतंत्र रूप से संचालित; पुन: कनेक्ट होने पर सिंक।
+  \item सत्यापनकर्ता मिलीभगत ($<$33\%): Median-of-5 स्कोरिंग आउटलायर्स का प्रतिरोध करती है।
+  \item सत्यापनकर्ता मिलीभगत ($>$33\%): आपातकालीन शासन हस्तक्षेप; स्लैशिंग + पुन: चुनाव।
 \end{itemize}
 
 \textbf{Recovery SLAs}:
@@ -1984,10 +1984,10 @@ Governance capture (51\% vote) & \$12M (token acquisition) & \$10M/year (treasur
 \textbf{Term}: 3 years, staggered elections ($\frac{1}{3}$ seats up for election annually).\\
 \textbf{Responsibilities}:
 \begin{itemize}[noitemsep]
-  \item Emergency response: pause contracts during active exploits (4-of-7 multi-sig).
-  \item Treasury management: approve grants $<\$100k$; recommend larger proposals to token holders.
-  \item Protocol stewardship: convene working groups; commission audits; publish roadmap updates.
-  \item Regulatory liaison: coordinate with policymakers; submit comments on proposed regulations (e.g., EU AI Act, US AI RMF).
+  \item आपातकालीन प्रतिक्रिया: सक्रिय शोषण के दौरान कॉन्ट्रैक्ट्स को रोकें (4-of-7 मल्टी-सिग)।
+  \item ट्रेजरी प्रबंधन: $<\$100k$ अनुदान स्वीकृत करें; टोकन धारकों को बड़े प्रस्ताव सुझाएं।
+  \item प्रोटोकॉल प्रबंधन: कार्य समूह आयोजित करें; ऑडिट कमीशन करें; रोडमैप अपडेट प्रकाशित करें।
+  \item नियामक संपर्क: नीति निर्माताओं के साथ समन्वय करें; प्रस्तावित विनियमों पर टिप्पणियां सबमिट करें (उदा., EU AI Act, US AI RMF)।
 \end{itemize}
 \textbf{Accountability}: Quarterly performance reviews; token holders may recall members via 67\% supermajority vote.
 
@@ -1995,9 +1995,9 @@ Governance capture (51\% vote) & \$12M (token acquisition) & \$10M/year (treasur
 \textbf{Composition}: 5 independent security firms + 3 community-elected technical reviewers.\\
 \textbf{Responsibilities}:
 \begin{itemize}[noitemsep]
-  \item Pre-deployment audits: review all smart contract upgrades; publish reports 7 days before vote.
-  \item Post-deployment monitoring: continuous fuzzing, formal verification, penetration testing.
-  \item Incident analysis: forensic investigations after security breaches; recommend remediation.
+  \item पूर्व-परिनियोजन ऑडिट: सभी स्मार्ट कॉन्ट्रैक्ट अपग्रेड की समीक्षा करें; मतदान से 7 दिन पहले रिपोर्ट प्रकाशित करें।
+  \item परिनियोजन-पश्चात निगरानी: निरंतर फ़ज़िंग, औपचारिक सत्यापन, पेनेट्रेशन परीक्षण।
+  \item घटना विश्लेषण: सुरक्षा उल्लंघनों के बाद फोरेंसिक जांच; उपचार की सिफारिश करें।
 \end{itemize}
 \textbf{Compensation}: 2\% of treasury allocated annually; additional bounties for discovering critical bugs.
 
@@ -2015,9 +2015,9 @@ Governance capture (51\% vote) & \$12M (token acquisition) & \$10M/year (treasur
 \paragraph{Stage 2: Formal Submission (1--3 days)}
 \textbf{Requirements}:
 \begin{itemize}[noitemsep]
-  \item Proposer must stake 10,000 TOS (anti-spam; refunded if proposal passes).
-  \item Proposal includes executable code (for on-chain changes) or detailed specification (for off-chain coordination).
-  \item Auditor Committee review completed (for contract upgrades).
+  \item प्रस्तावक को 10,000 TOS स्टेक करना होगा (स्पैम-रोधी; प्रस्ताव पास होने पर वापस)।
+  \item प्रस्ताव में निष्पादन योग्य कोड (ऑन-चेन परिवर्तनों के लिए) या विस्तृत विनिर्देश (ऑफ-चेन समन्वय के लिए) शामिल।
+  \item Auditor Committee समीक्षा पूर्ण (कॉन्ट्रैक्ट अपग्रेड के लिए)।
 \end{itemize}
 \textbf{Categorization}: Proposals tagged as \emph{Technical}, \emph{Economic}, \emph{Treasury}, \emph{Emergency}, or \emph{Constitutional} (different voting thresholds).
 
@@ -2056,9 +2056,9 @@ Governance capture (51\% vote) & \$12M (token acquisition) & \$10M/year (treasur
 
 \paragraph{Economic Parameters (Semi-Immutable)}
 \begin{enumerate}[noitemsep]
-  \item \textbf{Reward Splits}: Agent/validator/treasury distribution ($\alpha, \beta, \gamma$) adjustable within bounds ($\beta \in [0.10, 0.15]$, $\gamma \in [0.05, 0.10]$).
-  \item \textbf{Slashing Penalties}: Validator/agent slashing rates capped at 50\% (prevents disproportionate punishment).
-  \item \textbf{Treasury Cap}: Maximum annual spending = 20\% of treasury balance (ensures long-term sustainability).
+  \item \textbf{पुरस्कार विभाजन}: एजेंट/सत्यापनकर्ता/ट्रेजरी वितरण ($\alpha, \beta, \gamma$) सीमाओं के भीतर समायोज्य ($\beta \in [0.10, 0.15]$, $\gamma \in [0.05, 0.10]$)।
+  \item \textbf{स्लैशिंग दंड}: सत्यापनकर्ता/एजेंट स्लैशिंग दरें 50\% पर सीमित (अनुपातहीन सजा को रोकती हैं)।
+  \item \textbf{ट्रेजरी सीमा}: अधिकतम वार्षिक व्यय = ट्रेजरी शेष राशि का 20\% (दीर्घकालिक स्थिरता सुनिश्चित करता है)।
 \end{enumerate}
 
 \subsection{Governance Attack Vectors \& Defenses}
@@ -2124,8 +2124,8 @@ TOS integrates with Chainalysis/Elliptic for transaction monitoring. Fiat on/off
 \paragraph{Data Privacy}
 Confidential transactions (Pedersen commitments + Bulletproofs) ensure task specifications and pricing remain private. GDPR ``right to erasure'' handled via:
 \begin{itemize}[noitemsep]
-  \item On-chain hashes (not full data) → off-chain storage (IPFS, Arweave) with encryption keys controlled by users.
-  \item Revocation of DID → reputation reset → effectively anonymizes historical participation.
+  \item ऑन-चेन हैश (पूर्ण डेटा नहीं) → ऑफ-चेन स्टोरेज (IPFS, Arweave) एन्क्रिप्शन कुंजी के साथ उपयोगकर्ताओं द्वारा नियंत्रित।
+  \item DID का निरसन → प्रतिष्ठा रीसेट → ऐतिहासिक भागीदारी को प्रभावी रूप से अनाम बनाता है।
 \end{itemize}
 
 \paragraph{Cross-Border Data Flows}
@@ -2322,7 +2322,7 @@ Stake-at-risk (appeals) & \$0 & 50 TOS (\$125) & Spam deterrent \\
 \section{विकास रोडमैप: 12-महीने के मील के पत्थर}
 \label{sec:12month-roadmap}
 
-This section provides a publishable, quarter-by-quarter roadmap for TOS development from Q1 2026 through Q4 2026, focusing on deliverables that enable near-term enterprise adoption while laying foundations for long-term AGI infrastructure.
+यह खंड Q1 2026 से Q4 2026 तक TOS विकास के लिए एक प्रकाशन योग्य, तिमाही-दर-तिमाही रोडमैप प्रदान करता है, जो दीर्घकालिक AGI बुनियादी ढांचे की नींव रखते हुए निकट-अवधि के एंटरप्राइज़ अपनाने को सक्षम करने वाली डिलिवरेबल्स पर केंद्रित है।
 
 \subsection{Q1 2026: Identity, Attestation, and Task Markets}
 
@@ -2385,14 +2385,14 @@ This section provides a publishable, quarter-by-quarter roadmap for TOS developm
 
 \textbf{Key Performance Indicators} (cumulative by Q4 2026):
 \begin{itemize}[noitemsep]
-  \item Daily active agents: 5,000+
-  \item Verified tasks/day: 10,000+
-  \item Median AGIW settlement latency: <15 minutes
+  \item दैनिक सक्रिय एजेंट: 5,000+
+  \item सत्यापित कार्य/दिन: 10,000+
+  \item माध्यिका AGIW निपटान विलंबता: <15 मिनट
   \item विवाद दर: <2\%
   \item धोखाधड़ी पहचान सटीकता: >99\%
-  \item Validator liveness: >98\%
-  \item CC/EC market liquidity: \$100M+ combined
-  \item Enterprise pilot customers: 10+
+  \item सत्यापनकर्ता जीवंतता: >98\%
+  \item CC/EC बाजार तरलता: \$100M+ संयुक्त
+  \item उद्यम पायलट ग्राहक: 10+
 \end{itemize}
 
 \textbf{Risk Mitigation Strategies}:
@@ -2469,10 +2469,10 @@ TOS development prioritizes applied research addressing near-term deployment cha
 \subsection{Open Questions \& Call for Collaboration}
 
 \begin{itemize}[noitemsep]
-  \item \textbf{AI Agent Legal Personhood}: How should courts treat contracts signed by AI agents? What liability frameworks apply?
-  \item \textbf{Long-Horizon Alignment}: As agents become more capable, how do we ensure continued value alignment with human flourishing?
-  \item \textbf{Metaverse Governance}: What constitutional structures best serve mixed human--AI populations in virtual worlds?
-  \item \textbf{Interstellar Consensus}: How should latency-tolerant protocols handle light-speed communication delays (MARS/JUPITER eras)?
+  \item \textbf{AI एजेंट कानूनी व्यक्तित्व}: न्यायालयों को AI एजेंटों द्वारा हस्ताक्षरित अनुबंधों को कैसे माना जाना चाहिए? कौन से दायित्व ढांचे लागू होते हैं?
+  \item \textbf{दीर्घ-क्षितिज संरेखण}: जैसे-जैसे एजेंट अधिक सक्षम होते जाते हैं, हम मानव समृद्धि के साथ निरंतर मूल्य संरेखण कैसे सुनिश्चित करते हैं?
+  \item \textbf{मेटावर्स शासन}: आभासी दुनिया में मिश्रित मानव--AI आबादी की सर्वोत्तम सेवा के लिए कौन से संवैधानिक संरचनाएं हैं?
+  \item \textbf{अंतरतारकीय सहमति}: विलंबता-सहिष्णु प्रोटोकॉल को प्रकाश-गति संचार विलंब (MARS/JUPITER युग) को कैसे संभालना चाहिए?
 \end{itemize}
 
 We welcome collaborations with academic institutions, industry partners, and regulatory bodies. Contact: \texttt{research@tos.network}.
@@ -2486,7 +2486,7 @@ We presented TOS as the economic OS for autonomous agents, grounded in TopoSpart
 \section{AGI सभ्यता इतिहास: दस खगोलीय युग}
 \label{appendix:chronicle}
 
-This appendix provides the complete chronology underlying the celestial era framework referenced throughout this whitepaper. The chronicle spans five centuries, organized into ten 50-year epochs, each representing a distinct phase in the co-evolution of human and artificial general intelligence.
+यह परिशिष्ट इस श्वेत पत्र में संदर्भित खगोलीय युग ढांचे के अंतर्निहित पूर्ण कालक्रम प्रदान करता है। यह इतिहास पांच शताब्दियों में फैला है, दस 50-वर्षीय युगों में संगठित है, प्रत्येक मानव और कृत्रिम सामान्य बुद्धिमत्ता के सह-विकास में एक अलग चरण का प्रतिनिधित्व करता है।
 
 \subsection{MERCURY Era (2025–2075): आधार और जागृति}
 \paragraph{Definition} Multimodal models gain agency; ``weak-general'' capabilities appear.
@@ -2520,8 +2520,8 @@ This appendix provides the complete chronology underlying the celestial era fram
 
 \paragraph{Milestones}
 \begin{itemize}[noitemsep]
-  \item Planetary \textbf{Intelligence Layer} for ecology/energy/industry/security closed-loop control.
-  \item LEO–lunar–asteroid \textbf{autonomous extraction and manufacturing chains} (ISRU + robot swarms).
+  \item पारिस्थितिकी/ऊर्जा/उद्योग/सुरक्षा बंद-लूप नियंत्रण के लिए ग्रहीय \textbf{Intelligence Layer}।
+  \item LEO–चंद्र–क्षुद्रग्रह \textbf{स्वायत्त निष्कर्षण और विनिर्माण श्रृंखलाएं} (ISRU + रोबोट झुंड)।
 \end{itemize}
 
 \paragraph{Institutions \& Infrastructure} Orbital property/settlement law; cross-border energy credits (kWh-credit).
@@ -2533,8 +2533,8 @@ This appendix provides the complete chronology underlying the celestial era fram
 
 \paragraph{Milestones}
 \begin{itemize}[noitemsep]
-  \item Mars–Ceres–Trojan self-sufficiency; standardized delay-tolerant protocols.
-  \item \textbf{Synthetic minds \& reversible embodiments} enter medicine, research, governance.
+  \item मंगल–सेरेस–ट्रोजन आत्मनिर्भरता; मानकीकृत विलंब-सहिष्णु प्रोटोकॉल।
+  \item \textbf{सिंथेटिक मन और प्रतिवर्ती मूर्त रूप} चिकित्सा, अनुसंधान, शासन में प्रवेश करते हैं।
 \end{itemize}
 
 \paragraph{Institutions \& Infrastructure} Extra-territorial civil codes; cross-morph rights; frozen/returning persona continuity.
@@ -2546,8 +2546,8 @@ This appendix provides the complete chronology underlying the celestial era fram
 
 \paragraph{Milestones}
 \begin{itemize}[noitemsep]
-  \item Near-stellar harvesting; light-sail/fusion craft; AI guilds maintain interstellar machines.
-  \item \textbf{Ultra-scale thought laboratories}: foundational science iterates in ``simulated universes.''
+  \item निकट-तारकीय संग्रहण; प्रकाश-पाल/संलयन यान; AI गिल्ड अंतरतारकीय मशीनों को बनाए रखते हैं।
+  \item \textbf{अल्ट्रा-स्केल विचार प्रयोगशालाएं}: ``सिम्युलेटेड ब्रह्मांडों'' में मूलभूत विज्ञान पुनरावृत्त होता है।
 \end{itemize}
 
 \paragraph{Institutions \& Infrastructure} Stellar energy markets, interstellar spectrum and lanes, cross-star credit.
@@ -2559,8 +2559,8 @@ This appendix provides the complete chronology underlying the celestial era fram
 
 \paragraph{Milestones}
 \begin{itemize}[noitemsep]
-  \item \textbf{Semantic Federation Protocol (SFP)}: verifiable understanding \& translation across mind types.
-  \item First \textbf{inter-civilization science commons}, with reproducible experiments and auditable ledgers.
+  \item \textbf{Semantic Federation Protocol (SFP)}: मन प्रकारों में सत्यापन योग्य समझ और अनुवाद।
+  \item पहला \textbf{अंतर-सभ्यता विज्ञान सामान्य क्षेत्र}, पुनरुत्पादनीय प्रयोगों और लेखा परीक्षणीय लेजर के साथ।
 \end{itemize}
 
 \paragraph{Institutions \& Infrastructure} Minimum rights set, de-escalation \& cold-start treaties, interface safety sandboxes.
@@ -2572,8 +2572,8 @@ This appendix provides the complete chronology underlying the celestial era fram
 
 \paragraph{Milestones}
 \begin{itemize}[noitemsep]
-  \item \textbf{Mind-Arboretum}: cultivating/observing new consciousness branches within constrained safety domains.
-  \item Cross-morph fusion of arts/ethics/religions yields ``meta-culture.''
+  \item \textbf{Mind-Arboretum}: सीमित सुरक्षा डोमेन के भीतर नई चेतना शाखाओं की खेती/अवलोकन।
+  \item कलाओं/नैतिकता/धर्मों का क्रॉस-मॉर्फ फ्यूजन ``मेटा-संस्कृति'' उत्पन्न करता है।
 \end{itemize}
 
 \paragraph{Institutions \& Infrastructure} Debt/liability for fissioned personas; proofs \& compliance for mind-merges.
@@ -2631,16 +2631,16 @@ This appendix provides the complete chronology underlying the celestial era fram
 \section{AGI सभ्यता समयरेखा: प्रमुख घटनाएं (2025–2100)}
 \label{appendix:timeline}
 
-This appendix provides a detailed timeline of civilization-shaping events during the first 75 years of the AGI era, spanning the MERCURY and early VENUS periods. Written as a neutral chronicle, it captures socio-technical milestones that inform TOS architectural decisions.
+यह परिशिष्ट AGI युग के पहले 75 वर्षों के दौरान सभ्यता को आकार देने वाली घटनाओं की विस्तृत समयरेखा प्रदान करता है, जो MERCURY और प्रारंभिक VENUS अवधियों को कवर करती है। एक तटस्थ इतिहास के रूप में लिखा गया, यह सामाजिक-तकनीकी मील के पत्थर को दर्शाता है जो TOS वास्तुकला निर्णयों को सूचित करते हैं।
 
 \subsection{Phase I: Socialization of AI (2025–2035)}
 \begin{description}[style=nextline,leftmargin=2cm]
-  \item[2026] Multimodal autonomous agent systems enter mainstream software stacks; AI executes projects end-to-end.
-  \item[2028] \textbf{AI Work Charter} in EU \& Japan defines AI economic roles and data labor rights.
-  \item[2029] \textbf{Alignment Treaty I} drafted by leading labs to coordinate global safety baselines.
-  \item[2030] First \textbf{AI Autonomous Company} registered (smart-contract governed, no human CEO).
-  \item[2032] Approximately 12\% of global GDP contribution stems from AI labor and AI-amplified services.
-  \item[2034] US–China \textbf{Human–AI Coexistence Framework} cools the ``capabilities race.''
+  \item[2026] मल्टीमॉडल स्वायत्त एजेंट प्रणालियां मुख्यधारा के सॉफ्टवेयर स्टैक में प्रवेश करती हैं; AI परियोजनाओं को एंड-टू-एंड निष्पादित करता है।
+  \item[2028] EU और जापान में \textbf{AI कार्य चार्टर} AI आर्थिक भूमिकाओं और डेटा श्रम अधिकारों को परिभाषित करता है।
+  \item[2029] वैश्विक सुरक्षा आधारभूतों का समन्वय करने के लिए प्रमुख प्रयोगशालाओं द्वारा \textbf{संरेखण संधि I} का मसौदा तैयार किया गया।
+  \item[2030] पहली \textbf{AI स्वायत्त कंपनी} पंजीकृत (स्मार्ट-कॉन्ट्रैक्ट शासित, कोई मानव CEO नहीं)।
+  \item[2032] वैश्विक GDP योगदान का लगभग 12\% AI श्रम और AI-प्रवर्धित सेवाओं से उत्पन्न होता है।
+  \item[2034] US–चीन \textbf{मानव–AI सह-अस्तित्व ढांचा} ``क्षमता दौड़'' को शांत करता है।
 \end{description}
 
 \subsection{Phase II: Awakening of General Intelligence (2035–2050)}
