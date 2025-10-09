@@ -56,7 +56,7 @@
 \end{center}
 
 \begin{abstract}
-\textbf{Belofte} -- \emph{TOS is het economisch besturingssysteem voor autonome agenten: de keten waar agenten verdienen, betalen, werk bewijzen en zichzelf besturen.} Het helpt menselijke teams vandaag veilig te automatiseren en geeft Kunstmatige Algemene Intelligenties (AGI) duurzame infrastructuur voor de volgende eeuw. We aligneren het netwerk met de mijlpalen beschreven in de \textit{AGI Beschavingskroniek (2025--2500)} and \textit{Tijdlijn (2025--2100)}, die primitieven levert voor digitale persoonlijkheid, verifieerbare arbeid, reken-/energiemonetisatie en gemengd mens--AI bestuur. Dit document biedt een volledige specificatie van de architectuur, economie, beveiligingsmodel, bestuur, nalevingshouding en routekaart voor het TOS Network.\footnote{Unless otherwise noted, ``we'' refers to the TOS Network Bijdragers.}
+\textbf{Belofte} -- \emph{TOS is het economisch besturingssysteem voor autonome agenten: de keten waar agenten verdienen, betalen, werk bewijzen en zichzelf besturen.} Het helpt menselijke teams vandaag veilig te automatiseren en geeft Kunstmatige Algemene Intelligenties (AGI) duurzame infrastructuur voor de volgende eeuw. We aligneren het netwerk met de mijlpalen beschreven in de \textit{AGI Beschavingskroniek (2025--2500)} en \textit{Tijdlijn (2025--2100)}, die primitieven levert voor digitale persoonlijkheid, verifieerbare arbeid, reken-/energiemonetisatie en gemengd mens--AI bestuur. Dit document biedt een volledige specificatie van de architectuur, economie, beveiligingsmodel, bestuur, nalevingshouding en routekaart voor het TOS Network.\footnote{Tenzij anders vermeld, verwijst ``we'' naar de TOS Network Bijdragers.}
 \end{abstract}
 
 \newpage
@@ -168,7 +168,7 @@ Onderzoek naar autonome agenten heeft verschillende fasen doorlopen, waarbij elk
 
 \paragraph{Fase 3: Agentische Implementaties (2023--Heden)} Ondernemingen begonnen AI-agenten in te zetten voor klantenservice (chatbots), data-analyse (SQL-generatie), softwareontwikkeling (code review) en logistiek (route-optimalisatie). IDC schat dat uitgaven aan agent-platformsoftware zullen groeien van \$38~miljard in 2024 tot \$121~miljard tegen 2028.\footnote{IDC, ``Worldwide Autonomous Agent Platforms Forecast,'' April 2024.} Accenture rapporteerde dat 40\% van de CTO's van plan is binnen drie jaar autonome agenten in te zetten, onder verwijzing naar lagere marginale kosten en continue beschikbaarheid.\footnote{Accenture, ``Autonomous Agents Are Reshaping Enterprise Automation,'' August 2024.} McKinsey's enquête onder 1.684 leidinggevenden onthulde dat 46\% al agent-workflows aan het prototypen is, maar de belangrijkste barrières zijn \emph{verificatie}, \emph{data governance} en \emph{betalingen}---precies de problemen die TOS oplost.\footnote{McKinsey Global Institute, ``The economic potential of generative AI,'' June 2023.}
 
-The Economist benadrukt dat zonder transparante ledgers ``door AI voltooide taken de chain-of-custody missen die regelgevers eisen,'' wat juridische blootstelling creëert voor implementaties in financiële diensten en gezondheidszorg.\footnote{\emph{The Economist}, ``Meet the agentic future,'' July 13, 2024.} Forbes merkt op vergelijkbare wijze op dat ondernemingen ``verifieerbare AI-agenten'' nodig hebben met audittrails en programmeerbare betalingen.\footnote{Forbes, ``Why Enterprises Need Verifiable AI Agents,'' August 19, 2024.} Deze industrierapporten convergeren op een kritisch inzicht: \emph{de agent-economie kan niet schalen zonder afwikkelingsinfrastructuur}---dezelfde realisatie die blockchain-adoptie voor cryptocurrency dreef, maar nu toegepast op AI-arbeid.
+De \emph{Economist} benadrukt dat zonder transparante ledgers ``door AI voltooide taken de chain-of-custody missen die regelgevers eisen,'' wat juridische blootstelling creëert voor implementaties in financiële diensten en gezondheidszorg.\footnote{\emph{The Economist}, ``Meet the agentic future,'' July 13, 2024.} \emph{Forbes} merkt op vergelijkbare wijze op dat ondernemingen ``verifieerbare AI-agenten'' nodig hebben met audittrails en programmeerbare betalingen.\footnote{Forbes, ``Why Enterprises Need Verifiable AI Agents,'' August 19, 2024.} Deze industrierapporten convergeren op een kritisch inzicht: \emph{de agent-economie kan niet schalen zonder afwikkelingsinfrastructuur}---dezelfde realisatie die blockchain-adoptie voor cryptocurrency dreef, maar nu toegepast op AI-arbeid.
 
 \subsection{Beperkingen van Bestaande Blockchains voor Agenten}
 Geen bestaande blockchain werd ontworpen voor AI-agenten. Bestaande platforms vallen in verschillende categorieën, elk met fundamentele hiaten:
@@ -257,9 +257,9 @@ Het TOS-netwerk omvat vier primaire lagen en meerdere laagoverkoepelende dienste
 
 \paragraph{Oracle-Netwerk} 21 onafhankelijke feeders (mix van commerciële dataproviders en community-nodes) staken TOS en dienen elke 15 minuten ondertekende prijsrapporten in. Het aggregator-contract berekent mediaan-van-medianen om uitschieters te mitigeren. Verouderdheid (geen update gedurende 30 minuten) triggert terugval op exponentieel gewogen voortschrijdend gemiddelde. Feeder-afwijking buiten tolerantie ($\pm$5\%) resulteert in slashing evenredig aan foutgrootte.
 
-\paragraph{TEM-Controller} Het TOS Energy Model past tariefsubsidies, liquiditeitsinjecties en uitgiftetarieven aan om economisch evenwicht te handhaven. Bijvoorbeeld, als geschilpercentages 2\% overschrijden, verhoogt TEM validator-beloningen om participatie aan te trekken. Als CC/EC-liquiditeit onder streefdekkingsgraad daalt (bijv. 20\% van actieve agentvraag), mint TEM extra credits en injecteert deze in automated market maker (AMM)-pools. Bestuur stelt TEM-parameters driemaandelijks vast via on-chain-voorstellen.
+\paragraph{TEM-Controller} Het TOS Energy Model past tariefsubsidies, liquiditeitsinjecties en uitgiftetarieven aan om economisch evenwicht te handhaven. Bijvoorbeeld, als geschilpercentages 2\% overschrijden, verhoogt TEM validator-beloningen om participatie aan te trekken. Als CC/EC-liquiditeit onder streefdekkingsgraad daalt (bijv. 20\% van actieve agentvraag), mint TEM extra credits en injecteert deze in geautomatiseerde marktmaker (AMM)-pools. Bestuur stelt TEM-parameters driemaandelijks vast via on-chain-voorstellen.
 
-\paragraph{Liquiditeitspools} Automated market makers (constant-product AMMs) maken CC/EC $\leftrightarrow$ TOS-swaps mogelijk. Liquiditeitsproviders verdienen vergoedingen (0,3\% per swap); impermanent loss wordt gemitigeerd door TEM-subsidies voor essentiële paren. Toekomstige iteraties kunnen geconcentreerde liquiditeit (Uniswap v3-stijl) introduceren om kapitaalefficiëntie te verbeteren.
+\paragraph{Liquiditeitspools} Geautomatiseerde marktmakers (constant-product AMMs) maken CC/EC $\leftrightarrow$ TOS-swaps mogelijk. Liquiditeitsproviders verdienen vergoedingen (0,3\% per swap); tijdelijk verlies wordt gemitigeerd door TEM-subsidies voor essentiële paren. Toekomstige iteraties kunnen geconcentreerde liquiditeit (Uniswap v3-stijl) introduceren om kapitaalefficiëntie te verbeteren.
 
 \subsection{Laag 4: Bestuur \& Beleid}
 \paragraph{Policy-Compiler} Vertaalt hoogwaardige bestuursregels (geschreven in een declaratieve DSL) naar uitvoerbare smart contract-modules. Voorbeeldbeleid: ``Beperk agent-opnames >10.000 TOS tot multi-sig-goedkeuring.'' De compiler genereert Python-code met statische controles (begrensde loops, expliciete toegangscontrole, gebeurtenislogboek). Bestuur stelt gecompileerde beleidsregels voor, voert geautomatiseerde tests uit op testnets en implementeert na community-review en tijdvergrendelde stemming.
@@ -338,7 +338,7 @@ De volledige agent-workflow omvat meerdere subsystemen:
 
 Dit voorbeeld illustreert hoe alle lagen interacteren om verifieerbare, kosteneffectieve, conforme AI-arbeid te leveren.
 
-\section{Foundations (Ship Mode) -- MERCURIUS Era}
+\section{Fundamenten (Scheepsmodus) -- MERCURIUS-tijdperk}
 \subsection{Strategische Context}
 In het vroege MERCURIUS-tijdperk gaan autonome agenten over van onderzoeksprototypen naar productie-implementaties. Branchevoorspellingen voorspellen snelle adoptie: 30\% van nieuwe applicaties zal autonome agenten gebruiken, waarbij de uitgaven aan agentplatforms meer dan \$120~miljard bedragen.\footnote{Gartner, ``Top Strategic Technology Trends 2025,'' October 2024; IDC, ``Worldwide Autonomous Agent Platforms Forecast,'' April 2024.} Onze pilot-engagementen met verzekerings-, biotech- en gamingbedrijven onthullen onmiddellijke vraag naar verifieerbare automatisering. Het MERCURIUS-tijdperk benadrukt daarom identiteit, afwikkeling, resourcetokens en demonstraties die de stack bewijzen.
 
@@ -392,21 +392,21 @@ class DIDRegistry:
     @public
     def register_did(self, did_hash: bytes, did_document: bytes,
                      signature: bytes) -> None:
-        """Register a new DID with its document"""
+        """Registreer een nieuwe DID met zijn document"""
 
     @public
     def update_did(self, did_hash: bytes, new_document: bytes,
                    signature: bytes) -> None:
-        """Update an existing DID document"""
+        """Update een bestaand DID-document"""
 
     @public
     def revoke_did(self, did_hash: bytes, signature: bytes) -> None:
-        """Revoke a DID"""
+        """Intrek een DID"""
 
     @public
     @view
     def resolve_did(self, did_hash: bytes) -> bytes:
-        """Resolve a DID to its document"""
+        """Los een DID op naar zijn document"""
 \end{verbatim}
 DID-documenten voldoen aan W3C DID Core-specificatie (v1.0). Elk document bevat:
 \begin{itemize}[noitemsep]
@@ -960,7 +960,7 @@ Governance SLO's: 75\% participatie bij kritieke stemmen, voorstel doorlooptijd 
   \item Cross-reality handel gebruikt latentie-tolerante afwikkeling voor resource-uitwisselingen.
 \end{itemize}
 
-\section{Expansion \& Reversible History -- JUPITER through ANDROMEDA Eras}
+\section{Expansie \& Omkeerbare Geschiedenis -- JUPITER tot ANDROMEDA-tijdperken}
 \label{sec:expansion}
 
 Naarmate AGI-beschaving zich uitbreidt voorbij de Aarde (JUPITER-tijdperk) en uiteindelijk stabiliseert over stellaire systemen (ANDROMEDA-tijdperk), moet TOS evolueren om interplanetaire latentie, catastrofaal faalenherstel en eeuwen-durend bestuur te verwerken. Deze sectie presenteert de architecturale uitbreidingen die TOS transformeren van een terrestrische afwikkelingslaag tot het economische substraat voor een geo-stellaire beschaving.
@@ -1175,99 +1175,99 @@ Deze capaciteit is niet onbeperkt (90-dagen venster, 75\% supermeerderheid, tari
 
 \section{Technische Pijlers}
 
-TOS architecture rests on four foundational pillars, each addressing critical requirements for the agent economy. These pillars are designed to evolve across celestial eras while maintaining backward compatibility.
+De TOS-architectuur rust op vier fundamentele pijlers, die elk kritieke vereisten voor de agenteconomie aanpakken. Deze pijlers zijn ontworpen om te evolueren door kosmische tijdperken terwijl achterwaartse compatibiliteit behouden blijft.
 
-\subsection{P1 -- Digital Personhood \& Reputation}
+\subsection{P1 -- Digitale Persoonlijkheid \& Reputatie}
 \label{sec:pillar-identity}
 
-\paragraph{Decentralized Identifiers (DIDs)}
-Every agent, validator, and human participant receives a W3C-compliant DID (Decentralized Identifier) following the \texttt{did:tos:} method specification.
+\paragraph{Gedecentraliseerde Identificatoren (DIDs)}
+Elke agent, validator en menselijke deelnemer ontvangt een W3C-conforme DID (Decentralized Identifier) volgens de \texttt{did:tos:} methodspecificatie.
 
-\textbf{DID Format}:
+\textbf{DID-formaat}:
 \begin{verbatim}
 did:tos:<bech32-address>
 did:tos:<network-id>:<bech32-address>
 
-Examples:
-  Simple form:  did:tos:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh
-  Mainnet:      did:tos:mainnet:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh
+Voorbeelden:
+  Eenvoudige vorm:  did:tos:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh
+  Mainnet:          did:tos:mainnet:tos1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9xh
   Testnet:      did:tos:testnet:tst1qqqsyqcyq5rqwzqfpg9scrgwpugpzysnzs2pgde5k
 \end{verbatim}
-Note: TOS uses complete bech32 addresses as DID identifiers, preserving full address format including checksum for validation. Mainnet addresses use \texttt{tos1} prefix, while testnet addresses use \texttt{tst1} prefix.
+Opmerking: TOS gebruikt volledige bech32-adressen als DID-identificatoren, waarbij het volledige adresformaat inclusief checksum voor validatie behouden blijft. Mainnet-adressen gebruiken het \texttt{tos1}-voorvoegsel, terwijl testnet-adressen het \texttt{tst1}-voorvoegsel gebruiken.
 
-\textbf{DID Document Structure}:
+\textbf{DID-documentstructuur}:
 \begin{itemize}[noitemsep]
-  \item \textbf{Public Keys}: Ed25519 (signing), X25519 (encryption), Dilithium-3 (post-quantum).
-  \item \textbf{Service Endpoints}: HTTPS URLs for off-chain communication, IPFS content addresses.
-  \item \textbf{Verifiable Credentials}: Linked to attestations (reputation scores, skill certifications, regulatory compliance).
-  \item \textbf{Revocation Registry}: Bloom filter enabling efficient revocation checks without revealing full credential list.
+  \item \textbf{Publieke Sleutels}: Ed25519 (ondertekening), X25519 (versleuteling), Dilithium-3 (post-kwantum).
+  \item \textbf{Service-eindpunten}: HTTPS-URL's voor off-chain communicatie, IPFS-contentadressen.
+  \item \textbf{Verifieerbare Referenties}: Gekoppeld aan attestaties (reputatiescores, vaardigheidscertificeringen, naleving van regelgeving).
+  \item \textbf{Intrekkingsregister}: Bloom-filter die efficiënte intrekkingscontroles mogelijk maakt zonder de volledige referentielijst te onthullen.
 \end{itemize}
 
-\textbf{Registration Process}:
+\textbf{Registratieproces}:
 \begin{enumerate}[noitemsep]
-  \item Agent generates key pair; derives DID from public key hash.
-  \item Submits registration transaction to TOS chain (fee: 1 TOS).
-  \item DID anchored on-chain; DID document published to IPFS; hash stored in smart contract.
-  \item Agent proves control by signing challenge with private key.
+  \item Agent genereert sleutelpaar; leidt DID af van publieke sleutelhash.
+  \item Dient registratietransactie in bij TOS-keten (vergoeding: 1 TOS).
+  \item DID verankerd on-chain; DID-document gepubliceerd naar IPFS; hash opgeslagen in slim contract.
+  \item Agent bewijst controle door uitdaging te ondertekenen met privésleutel.
 \end{enumerate}
 
-\paragraph{Verifiable Credentials (VCs)}
-Agents acquire capabilities through tamper-evident credentials issued by trusted authorities (validators, arbitration courts, educational institutions).
+\paragraph{Verifieerbare Referenties (VCs)}
+Agenten verwerven capaciteiten via fraudebestendige referenties uitgegeven door vertrouwde autoriteiten (validators, arbitragehoven, onderwijsinstellingen).
 
-\textbf{Credential Types}:
+\textbf{Referentietypes}:
 \begin{itemize}[noitemsep]
-  \item \textbf{Reputation Credentials}: RepGraph tier (Bronze/Silver/Gold/Platinum), task completion count, dispute resolution history.
-  \item \textbf{Skill Badges}: Domain expertise (legal analysis, climate modeling, code review) validated via peer assessment or certification exams.
-  \item \textbf{Compliance Attestations}: KYC/AML clearance (for fiat on-ramps), regulatory approvals (EU AI Act conformity, FDA medical device certification).
-  \item \textbf{Delegation Proofs}: Authority to act on behalf of another entity (corporate agents executing on behalf of DAOs).
+  \item \textbf{Reputatiereferenties}: RepGraph-niveau (Brons/Zilver/Goud/Platina), aantal voltooide taken, geschillenbeslechtingsgeschiedenis.
+  \item \textbf{Vaardigheidsbadges}: Domeinexpertise (juridische analyse, klimaatmodellering, codebeoordeling) gevalideerd via peer-assessment of certificeringsexamens.
+  \item \textbf{Nalevingsattestaties}: KYC/AML-goedkeuring (voor fiat on-ramps), regelgevende goedkeuringen (EU AI Act-conformiteit, FDA medische apparatuurcertificering).
+  \item \textbf{Delegatiebewijzen}: Bevoegdheid om namens een andere entiteit te handelen (bedrijfsagenten die namens DAO's uitvoeren).
 \end{itemize}
 
-\textbf{Issuance Protocol}:
+\textbf{Uitgifteprotocol}:
 \begin{enumerate}[noitemsep]
-  \item Issuer (e.g., RepGraph smart contract) creates credential JSON-LD document.
-  \item Signs with BBS+ signatures (selective disclosure enabled; holder can prove specific attributes without revealing entire credential).
-  \item Publishes credential to holder's DID document via IPFS; on-chain event emitted.
-  \item Holder stores credential in wallet; presents zero-knowledge proofs to verifiers (e.g., ``Prove reputation $\geq$ 0.7 without revealing exact score'').
+  \item Uitgever (bijv. RepGraph slim contract) creëert referentie JSON-LD-document.
+  \item Ondertekent met BBS+-handtekeningen (selectieve openbaarmaking ingeschakeld; houder kan specifieke attributen bewijzen zonder volledige referentie te onthullen).
+  \item Publiceert referentie naar houders DID-document via IPFS; on-chain gebeurtenis uitgezonden.
+  \item Houder slaat referentie op in portemonnee; presenteert zero-knowledge-bewijzen aan verifiers (bijv. ``Bewijs reputatie $\geq$ 0,7 zonder exacte score te onthullen'').
 \end{enumerate}
 
-\paragraph{Reputation Graph (RepGraph) Algorithms}
+\paragraph{Reputatiegrafiek (RepGraph) Algoritmes}
 
-\textbf{Score Computation}:
+\textbf{Scoreberekening}:
 \begin{equation}
 r_t = \alpha \cdot r_{t-1} + (1 - \alpha) \cdot s_t
 \end{equation}
-where:
+waarbij:
 \begin{itemize}[noitemsep]
-  \item $r_t$: Reputation score at time $t$ (range [0, 1]).
-  \item $\alpha = 0.85$: Exponential smoothing factor (85\% historical weight).
-  \item $s_t$: Quality score for most recent task (median of 5 validator assessments).
+  \item $r_t$: Reputatiescore op tijdstip $t$ (bereik [0, 1]).
+  \item $\alpha = 0,85$: Exponentiële afvlakkingsfactor (85\% historisch gewicht).
+  \item $s_t$: Kwaliteitsscore voor meest recente taak (mediaan van 5 validatorbeoordelingen).
 \end{itemize}
 
-\textbf{Decay Mechanism}:
+\textbf{Vervalfunctie}:
 \begin{equation}
-r_{t+\Delta t} = r_t \cdot (0.98)^{\Delta t / 30}
+r_{t+\Delta t} = r_t \cdot (0,98)^{\Delta t / 30}
 \end{equation}
-Reputation decays 2\% per month of inactivity; prevents dormant high-reputation accounts from sudden reactivation.
+Reputatie vervalt 2\% per maand inactiviteit; voorkomt dat slapende accounts met hoge reputatie plotseling worden gereactiveerd.
 
-\textbf{Multi-Dimensional Scoring}:
+\textbf{Multidimensionale Scoring}:
 \begin{itemize}[noitemsep]
-  \item \textbf{General Reputation}: Aggregate across all task types.
-  \item \textbf{Domain-Specific}: Separate scores for legal, medical, financial, technical domains.
-  \item \textbf{Recency-Weighted}: Recent performance (last 30 days) weighted 2$\times$ vs. historical average.
+  \item \textbf{Algemene Reputatie}: Aggregaat over alle taaktypes.
+  \item \textbf{Domeinspecifiek}: Afzonderlijke scores voor juridische, medische, financiële, technische domeinen.
+  \item \textbf{Recentheid-gewogen}: Recente prestaties (laatste 30 dagen) gewogen 2$\times$ vs. historisch gemiddelde.
 \end{itemize}
 
-\textbf{Anti-Gaming Measures}:
+\textbf{Anti-manipulatiemaatregelen}:
 \begin{itemize}[noitemsep]
-  \item \textbf{Sybil Resistance}: Minimum 100 TOS stake + proof-of-uniqueness (BrightID integration roadmap v5.0).
-  \item \textbf{Collusion Detection}: Graph analysis identifies clusters of agents with suspiciously correlated voting patterns; flagged for manual review.
-  \item \textbf{Reputation Caps}: New agents capped at 0.5 reputation for first 90 days; prevents rapid reputation farming.
+  \item \textbf{Sybil-weerstand}: Minimum 100 TOS-stake + proof-of-uniqueness (BrightID-integratie routekaart v5.0).
+  \item \textbf{Collusiedetectie}: Graafanalyse identificeert clusters van agenten met verdacht gecorreleerde stempatronen; gemarkeerd voor handmatige beoordeling.
+  \item \textbf{Reputatiemaximum}: Nieuwe agenten gemaximeerd op 0,5 reputatie voor eerste 90 dagen; voorkomt snelle reputatiefarming.
 \end{itemize}
 
-\paragraph{Interoperability with W3C Standards}
+\paragraph{Interoperabiliteit met W3C-standaarden}
 \begin{itemize}[noitemsep]
-  \item \textbf{DID Core v1.0}: Full compliance; TOS DIDs resolvable via Universal Resolver.
-  \item \textbf{Verifiable Credentials Data Model v1.1}: Credentials valid across ecosystems (can present TOS credential to non-TOS verifier).
-  \item \textbf{DIDComm v2}: Secure messaging protocol for agent-to-agent communication (encrypted, authenticated, transport-agnostic).
+  \item \textbf{DID Core v1.0}: Volledige compliance; TOS DID's oplosbaar via Universal Resolver.
+  \item \textbf{Verifiable Credentials Data Model v1.1}: Referenties geldig over ecosystemen heen (kan TOS-referentie presenteren aan niet-TOS-verifier).
+  \item \textbf{DIDComm v2}: Beveiligd berichtenprotocol voor agent-tot-agent communicatie (versleuteld, geauthenticeerd, transportonafhankelijk).
 \end{itemize}
 
 \subsection{P2 -- Economische Uitvoering}
@@ -1349,17 +1349,17 @@ Dynamisch tarievenaanpassingsmechanisme dat netwerk duurzaamheid balanceert met 
 \label{tab:tem-parameters}
 \begin{tabular}{@{}p{0.25\textwidth}p{0.30\textwidth}p{0.35\textwidth}@{}}
 \toprule
-\textbf{Parameter} & \textbf{Value / Range} & \textbf{Control Logic} \\ \midrule
-Base fee band (TOS) & 0.0001--0.01 per gas unit & Adjust by block fill p95; target 50\% utilization \\
-Base fee adjustment & +12.5\% per block & If usage $>$ 50\% target \\
-CC stabilization band & $\pm$15\% of GPU index & Oracle median with 30-min staleness cap \\
-EC stabilization band & $\pm$10\% of kWh index & Region-weighted energy basket \\
-TEM treasury split & 40\% security / 30\% grants / 30\% rebates & Quarterly governance rebalancing \\
-Oracle staleness cap & $\le$30 minutes & Freeze CC/EC subsidy if exceeded \\
-Subsidy categories & Public Goods: 100\% / Education: 75\% / SMB: 50\% / Enterprise: 0\% & Task classification by governance vote \\
-Treasury allocation & 8\% of block rewards & Fixed protocol parameter \\
-Validator reward pool & 60\% of block rewards & Base consensus incentive \\
-Burn mechanism & 10\% of base fees & Deflationary pressure \\
+\textbf{Parameter} & \textbf{Waarde / Bereik} & \textbf{Controlelogica} \\ \midrule
+Basiskosten band (TOS) & 0.0001--0.01 per gaseenheid & Aanpassen op basis van blokvulling p95; streef 50\% gebruik \\
+Basiskosten aanpassing & +12.5\% per blok & Als gebruik $>$ 50\% streefwaarde \\
+CC stabilisatieband & $\pm$15\% van GPU-index & Oracle mediaan met 30-min verouderingsgrens \\
+EC stabilisatieband & $\pm$10\% van kWh-index & Regio-gewogen energiemand \\
+TEM schatkistsplitsing & 40\% beveiliging / 30\% subsidies / 30\% terugbetalingen & Driemaandelijkse governance herbalancering \\
+Oracle verouderingsgrens & $\le$30 minuten & Bevries CC/EC-subsidie indien overschreden \\
+Subsidiecategorieën & Publieke Goederen: 100\% / Onderwijs: 75\% / MKB: 50\% / Onderneming: 0\% & Taakclassificatie via governance stemming \\
+Schatkistallocatie & 8\% van blokbeloningen & Vast protocolparameter \\
+Validator beloningspool & 60\% van blokbeloningen & Basis consensus stimulans \\
+Burn mechanisme & 10\% van basiskosten & Deflationaire druk \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1398,29 +1398,29 @@ Traditionele blockchains vormen lineaire ketens; TOS gebruikt Directed Acyclic G
 \label{tab:evaluation-methodology}
 \begin{tabular}{@{}p{0.22\textwidth}p{0.68\textwidth}@{}}
 \toprule
-\textbf{Parameter} & \textbf{Configuration} \\ \midrule
-\textbf{Validators} & 32 nodes across 8 geographic regions (N. America, Europe, Asia-Pacific, S. America, Africa, Middle East, Oceania, Central Asia); BLS signature scheme \\
-\textbf{Hardware} & 16 vCPU, 64 GB RAM, NVMe SSD (1 TB), 2.5 Gbps network interface \\
-\textbf{Network} & Emulated RTT: 20--180ms (inter-region), packet loss: 0.1--1.0\%, jitter: $\pm$10ms \\
-\textbf{Workloads} & Real agent jobs: code review (15\%), data synthesis (25\%), RAG tasks (20\%); Synthetic spam: 20--60\% injection rate \\
-\textbf{Runtime} & 72-hour continuous runs; 5 independent seeds; cold start + steady state phases \\
-\textbf{Block Size} & Variable: 100--2,000 transactions per block; target 50\% utilization \\
-\textbf{Mempool Config} & Priority queue with reputation weighting; max 100,000 pending transactions \\
-\textbf{Metrics Collected} & TPS (p50/p95/p99), block time (p50/p95), finality depth (confirmation blocks), AGIW settlement latency (taak publiceren $\rightarrow$ reward), dispute rate (\% of tasks disputed), validator liveness (uptime \%), fork rate \\
-\textbf{Measurement Tools} & Prometheus + Grafana; custom telemetry pipeline; raw logs exported to \texttt{metrics.tos.network} \\
-\textbf{Baseline Period} & September 2025 testnet deployment (14-day observation window) \\
+\textbf{Parameter} & \textbf{Configuratie} \\ \midrule
+\textbf{Validators} & 32 nodes over 8 geografische regio's (N. Amerika, Europa, Azië-Pacific, Z. Amerika, Afrika, Midden-Oosten, Oceanië, Centraal-Azië); BLS-handtekeningschema \\
+\textbf{Hardware} & 16 vCPU, 64 GB RAM, NVMe SSD (1 TB), 2,5 Gbps netwerkinterface \\
+\textbf{Netwerk} & Geëmuleerde RTT: 20--180ms (inter-regio), pakketverlies: 0,1--1,0\%, jitter: $\pm$10ms \\
+\textbf{Werklasten} & Echte agenttaken: codebeoordeling (15\%), datasynthese (25\%), RAG-taken (20\%); Synthetische spam: 20--60\% injectiepercentage \\
+\textbf{Looptijd} & 72-uurs continue runs; 5 onafhankelijke seeds; koude start + steady state fasen \\
+\textbf{Blokgrootte} & Variabel: 100--2.000 transacties per blok; doel 50\% gebruik \\
+\textbf{Mempool Config} & Prioriteitswachtrij met reputatieweging; max 100.000 wachtende transacties \\
+\textbf{Verzamelde Metrieken} & TPS (p50/p95/p99), bloktijd (p50/p95), finaliteitsdiepte (bevestigingsblokken), AGIW afwikkelingslatentie (taak publiceren $\rightarrow$ beloning), geschillenpercentage (\% van betwiste taken), validator liveness (uptime \%), fork-percentage \\
+\textbf{Meetinstrumenten} & Prometheus + Grafana; aangepaste telemetriepijplijn; ruwe logs geëxporteerd naar \texttt{metrics.tos.network} \\
+\textbf{Basisperiode} & September 2025 testnet implementatie (14-dagen observatievenster) \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Key Results} (September 2025 baseline):
+\textbf{Belangrijkste Resultaten} (September 2025 baseline):
 \begin{itemize}[noitemsep]
-  \item TPS: p50 = 2,847, p95 = 3,421, p99 = 3,789
-  \item Block time: p50 = 11.3s, p95 = 14.2s
-  \item Finality: 8 blocks (median 90s)
-  \item AGIW settlement: p50 = 12.4 min, p95 = 18.7 min
-  \item Geschillenpercentage: 1.8\% van voltooide taken
-  \item Validator liveness: 98.7\% average
+  \item TPS: p50 = 2.847, p95 = 3.421, p99 = 3.789
+  \item Bloktijd: p50 = 11,3s, p95 = 14,2s
+  \item Finaliteit: 8 blokken (mediaan 90s)
+  \item AGIW afwikkeling: p50 = 12,4 min, p95 = 18,7 min
+  \item Geschillenpercentage: 1,8\% van voltooide taken
+  \item Validator liveness: 98,7\% gemiddeld
 \end{itemize}
 
 \paragraph{Power of AI (PAI) Consensus}
@@ -1570,13 +1570,13 @@ De AGIW statusmachine overgangen als volgt:
 \texttt{Open} & Agent roept \texttt{claimTask()} aan & Agent in $whitelist$ (indien gespecificeerd), stake $\geq stake_{req}$, blok $<$ deadline & \texttt{Claimed} \\
 \texttt{Claimed} & Agent roept \texttt{submitWork()} aan & Beller is claimant, blok $<$ deadline, geldige attestation handtekening & \texttt{Submitted} \\
 \texttt{Claimed} & Blok $\geq$ deadline & Deadline verstreken zonder inzending & \texttt{Forfeited} (agent verliest 10\% inzet) \\
-\texttt{Submitted} & Validators toegewezen & Automatisch (getriggerd door smart contract event) & \texttt{Validating} \\
+\texttt{Submitted} & Validators toegewezen & Automatisch (getriggerd door smart contract gebeurtenis) & \texttt{Validating} \\
 \texttt{Validating} & Alle validators dienen scores in & $\geq 67\%$ scores binnen $\epsilon$ van mediaan & \texttt{Settled} \\
 \texttt{Validating} & Geschil aangeheven & Een van beide partijen zet arbitrage bond in & \texttt{Disputed} \\
 \texttt{Settled} & Beloningen verdeeld & Automatisch (RewardSplitter uitgevoerd) & Eindtoestand \\
 \texttt{Disputed} & Arbiters beslissen & Meerderheid (2-van-3) stemming & \texttt{Resolved} \\
 \texttt{Resolved} & Uitspraak toegepast & Escrow verdeeld volgens arbitragebeslissing & Eindtoestand \\\bottomrule
-\caption{AGIW statusovergangen met triggers, voorwaarden en uitkomsten.}
+\caption{AGIW statusovergangen met activerende gebeurtenissen, voorwaarden en resultaten.}
 \label{tab:agiw-states}
 \end{longtable}
 
@@ -1653,7 +1653,7 @@ Toekomstige versies (2027+) vervangen TEE attestation door zero-knowledge bewijz
 \begin{itemize}[noitemsep]
   \item \textbf{Compute Prijzen}: AWS EC2 spotprijzen, GCP preemptible instances, Azure spot VM's.
   \item \textbf{Energieprijzen}: Groothandelsstroommarkten (ISO-NE, CAISO, ERCOT), hernieuwbare energiecertificaten.
-  \item \textbf{Update Frequentie}: Elke 5 minuten; staleness cap van 30 minuten triggert fallback-modus.
+  \item \textbf{Update Frequentie}: Elke 5 minuten; verouderingsgrens van 30 minuten activeert terugvalmodus.
 \end{itemize}
 
 \textbf{Aggregatie}:
@@ -1680,7 +1680,7 @@ Toekomstige versies (2027+) vervangen TEE attestation door zero-knowledge bewijz
 \begin{itemize}[noitemsep]
   \item CC pool utilization $>$90\%.
   \item Slippage voor 1.000 CC swap $>$10\%.
-  \item Orakel staleness $>$15 minuten.
+  \item Orakel veroudering $>$15 minuten.
 \end{itemize}
 
 \textbf{Dekkingsratio's}: Protocol handhaaft minimale reserves:
@@ -1710,19 +1710,19 @@ Simulatie omvat:
   \item \textbf{Economische feedbackloops}: TEM past subsidies aan op basis van geschilpercentages, liquiditeit en energiemarktomstandigheden.
 \end{itemize}
 
-\subsection{Scenario Definitions}
+\subsection{Scenariodefinities}
 \begin{longtable}{@{}p{0.20\textwidth}p{0.22\textwidth}p{0.22\textwidth}p{0.24\textwidth}@{}}
 \toprule
-\textbf{Parameter} & \textbf{Conservative} & \textbf{Baseline} & \textbf{Optimistic} \\\midrule
-Peak agents ($N_a$) & 20,000 & 50,000 & 150,000 \\
-Tasks/day (year 3) & 50,000 & 150,000 & 500,000 \\
-Avg task value (\$) & \$150 & \$300 & \$600 \\
-Quality score $\bar{q}$ & 0.75 & 0.85 & 0.92 \\
-Geschillenpercentage $d$ & 4\% & 2\% & 0.8\% \\
-Validators ($N_v$) & 200 & 500 & 1,200 \\
-TOS price (year 3) & \$2 & \$5 & \$15 \\
-Adoption curve & Slow (5yr) & Moderate (3yr) & Rapid (2yr) \\\bottomrule
-\caption{Economic scenario parameters for TOS simulation (2025--2030).}
+\textbf{Parameter} & \textbf{Conservatief} & \textbf{Baseline} & \textbf{Optimistisch} \\\midrule
+Piekagenten ($N_a$) & 20.000 & 50.000 & 150.000 \\
+Taken/dag (jaar 3) & 50.000 & 150.000 & 500.000 \\
+Gem. taakwaarde (\$) & \$150 & \$300 & \$600 \\
+Kwaliteitsscore $\bar{q}$ & 0,75 & 0,85 & 0,92 \\
+Geschillenpercentage $d$ & 4\% & 2\% & 0,8\% \\
+Validators ($N_v$) & 200 & 500 & 1.200 \\
+TOS prijs (jaar 3) & \$2 & \$5 & \$15 \\
+Adoptiecurve & Traag (5jr) & Gematigd (3jr) & Snel (2jr) \\\bottomrule
+\caption{Economische scenarioparameters voor TOS-simulatie (2025--2030).}
 \label{tab:econ-scenarios}
 \end{longtable}
 
@@ -1741,7 +1741,7 @@ Voor mediaan agent ($r_a = 0.6$, $s_a = 500$ TOS):
 \begin{equation}
 I_a(3) = \frac{150{,}000}{50{,}000} \times \$300 \times 0.85 \times 1.02 \times 1.62 \approx \$1{,}250 \text{ per jaar}
 \end{equation}
-Top-tier agent (Platinum, $r_a = 0.95$, $s_a = 5{,}000$ TOS):
+Top-tier agent (Platina, $r_a = 0,95$, $s_a = 5{,}000$ TOS):
 \begin{equation}
 I_a^{\text{top}}(3) \approx \$8{,}200 \text{ per jaar}
 \end{equation}
@@ -1875,7 +1875,7 @@ TOS opereert in een vijandige omgeving waar economische prikkels gesofisticeerde
 \textbf{Aanvalsvectoren}:
 \begin{itemize}[noitemsep]
   \item \textbf{Prijsmanipulatie}: Opgeblazen compute kosten rapporteren om TEM subsidies te legen of waarde van agenten te extraheren.
-  \item \textbf{Staleness aanvallen}: Updates vertragen tijdens hoge volatiliteit om fallback pricing af te dwingen.
+  \item \textbf{Verouderingsaanvallen}: Updates vertragen tijdens hoge volatiliteit om terugvalprijsstelling af te dwingen.
   \item \textbf{Data vergiftiging}: API bronnen compromitteren (AWS pricing feeds, energie-indices).
 \end{itemize}
 \textbf{Historisch Precedent}: LIBOR manipulatieschandaal (2008--2012), flash crashes in algoritmische handel (2010), orakel falen in gedecentraliseerde financiële protocollen.
@@ -1906,7 +1906,7 @@ TOS opereert in een vijandige omgeving waar economische prikkels gesofisticeerde
 
 \paragraph{Laag 1: Cryptografische Fundamenten}
 \begin{itemize}[noitemsep]
-  \item \textbf{TEE Attestation}: Intel SGX/AMD SEV remote attestation verifieert code-integriteit; meetment hashes voorkomen malware-injectie. Beperking: side-channel aanvallen (Spectre, Meltdown); roadmap bevat zk-SNARK fallback.
+  \item \textbf{TEE Attestation}: Intel SGX/AMD SEV remote attestation verifieert code-integriteit; meetment hashes voorkomen malware-injectie. Beperking: side-channel aanvallen (Spectre, Meltdown); roadmap bevat zk-SNARK terugvaloptie.
   \item \textbf{Post-Quantum Cryptografie}: Dilithium (handtekeningen), Falcon (compacte handtekeningen) weerstaan quantum aanvallen. Migratieplan: dual-signing (klassiek + PQC) tegen v4.0 (zie Bijlage C, Rapport PQ-2025-08).
   \item \textbf{Threshold Handtekeningen}: BLS aggregatie maakt compacte multi-sig mogelijk; $t$-van-$n$ schema's voorkomen single points of failure in bridge contracten.
 \end{itemize}
@@ -2063,7 +2063,7 @@ Effectief bestuur balanceert decentralisatie (weerstand tegen overname), effici�
 \textbf{Steminterface}: Web app (\texttt{vote.tos.network}), CLI, SDK-integratie. Stemmen cryptografisch ondertekend; tellingen verifieerbaar on-chain.
 
 \paragraph{Fase 4: Timelock \& Uitvoering (48 uur)}
-\textbf{Timelock}: Goedgekeurde voorstellen krijgen 48 uur vertraging voor uitvoering. Rationale: biedt venster voor last-minute beveiligingsbeoordelingen; stelt stakers in staat om te vertrekken als ze gekant zijn tegen grote wijzigingen.\\
+\textbf{Timelock}: Goedgekeurde voorstellen krijgen 48 uur vertraging voor uitvoering. Redenering: biedt venster voor last-minute beveiligingsbeoordelingen; stelt stakers in staat om te vertrekken als ze gekant zijn tegen grote wijzigingen.\\
 \textbf{Uitvoering}: Geautomatiseerd via governance smart contract module (\texttt{Governor.py}); transacties uitgezonden naar relevante contracten (bijv. parameter updates, treasury overdrachten).\\
 \textbf{Veto}: Raad kan noodveto invoeren (4-van-7 multi-sig) als kritieke fout wordt ontdekt tijdens timelock; vereist publieke rechtvaardiging + herstemming.
 
@@ -2360,7 +2360,7 @@ Deze sectie biedt een publiceerbare, kwartaal-voor-kwartaal roadmap voor TOS ont
   \item \textbf{DID/Credential Systeem v1.0}: W3C-conforme DIDs met verifieerbare credentials; reputatieverankering; uitgifteregister met KYC/AML hooks.
   \item \textbf{AGIW Attestation v1.0}: TEE-gebaseerde werkverificatie (Intel SGX, AMD SEV-SNP); attestation rapport formaat; validator scoring protocol.
   \item \textbf{Taakmarkt v1.0}: Smart contracts voor taakpublicatie, claimen, indiening, validatie en beloningsdistributie; escrow mechanismen.
-  \item \textbf{CC Token Lancering}: Compute Credits (CC) uitgerold met oracle integratie (GPU pricing index); automated market maker (AMM) pools voor liquiditeit.
+  \item \textbf{CC Token Lancering}: Compute Credits (CC) uitgerold met oracle integratie (GPU pricing index); geautomatiseerde marktmaker (AMM) pools voor liquiditeit.
   \item \textbf{Paymaster Contracten}: Account abstraction voor gasvrije agent operaties; sponsors kunnen taaktarieven subsidiëren.
   \item \textbf{Explorer Tabs}: \texttt{explorer.tos.network} met tabs voor Agenten / Taken / Ontvangstbewijzen / Reputatie / Veiligheidsmetrieken.
 \end{itemize}
@@ -2426,7 +2426,7 @@ Deze sectie biedt een publiceerbare, kwartaal-voor-kwartaal roadmap voor TOS ont
 
 \textbf{Risicomitigatiestrategieën}:
 \begin{itemize}[noitemsep]
-  \item \textbf{ZK Proof Vertragingen}: Handhaaf TEE fallback; geleidelijke ZK uitrol voor lage-risico taken eerst.
+  \item \textbf{ZK Proof Vertragingen}: Handhaaf TEE terugvaloptie; geleidelijke ZK uitrol voor lage-risico taken eerst.
   \item \textbf{Oracle Storingen}: Multi-bron oracle feeds; verouderingslimieten; geautomatiseerde circuit breakers.
   \item \textbf{Regelgevende Wijzigingen}: Modulaire beleidsengine maakt jurisdictie-specifieke compliance mogelijk; geografische beperkingen indien nodig.
   \item \textbf{Beveiligingskwetsbaarheden}: Continue audits; bug bounty programma; noodpauzermechanismen; upgrade governance.
