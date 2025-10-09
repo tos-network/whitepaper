@@ -1365,28 +1365,22 @@ Mécanisme de burn & 10\% des frais de base & Pression déflationniste \\
 \bottomrule
 \end{tabular}
 \end{table}
-\end{table}
 \textbf{Sensibilité Économique}: Les paramètres TEM font l'objet d'un examen trimestriel par la gouvernance. Les résultats de simulation (disponibles sur \texttt{metrics.tos.network/tem-sensitivity}) démontrent la stabilité du système sous des pics de demande de 3$\times$ et des scénarios de variance d'oracle de 50\%.
-\textbf{Economic Sensitivity}: TEM parameters undergo quarterly review by governance. Simulation results (available at \texttt{metrics.tos.network/tem-sensitivity}) demonstrate system stability under 3$\times$ demand spikes and 50\% oracle variance scenarios.
 \subsection{P3 -- Consensus et Sécurité}
-\label{sec:pillar-consensus}
 \label{sec:pillar-consensus}
 \paragraph{Architecture Baseline BlockDAG}
 Les blockchains traditionnelles forment des chaînes linéaires; TOS utilise un Graphe Acyclique Dirigé (DAG) permettant la production de blocs parallèles.
-Traditional blockchains form linear chains; TOS uses Directed Acyclic Graph (DAG) enabling parallel block production.
 \textbf{Structure de Bloc}:
 \begin{itemize}[noitemsep]
   \item Chaque bloc référence 1--3 blocs parents (vs. 1 dans les chaînes linéaires traditionnelles).
   \item Les validateurs proposent indépendamment des blocs; pas de goulot d'étranglement d'élection de leader.
   \item Le tri topologique détermine l'ordre des transactions; les conflits résolus via horodatage + priorité du proposeur.
 \end{itemize}
-\end{itemize}
 \textbf{Règles de Consensus}:
 \begin{itemize}[noitemsep]
   \item \textbf{Profondeur de Confirmation}: Transaction considérée finale après 8 blocs de profondeur (médiane 90 secondes).
   \item \textbf{Heuristique de Chaîne la Plus Longue}: En cas de forks DAG, préférer le sous-graphe avec le plus de poids cumulatif de preuve de participation.
   \item \textbf{Rotation de Validateurs}: Comité de 100 validateurs sélectionnés par époque (24 heures); pondérés par mise + réputation.
-\end{itemize}
 \end{itemize}
 \textbf{Performance}:
 \begin{itemize}[noitemsep]
