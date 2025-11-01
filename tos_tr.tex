@@ -113,7 +113,7 @@ TOS, işlem ücretleri (\%0,1--0,5 görev emaneti), doğrulayıcı ödülleri (t
 
 \section{Önsöz: Uygarlık Görevi}
 \subsection{İsim Tasarımı Kodlar}
-``TopoSpartan'' bir isimden fazlasıdır: TOS'u dayanıklı ve disiplinli kılan ikili mimari ilkeleri kodlar. ``Topo'', BlockDAG konsensüs katmanının \emph{topolojik} yapısına atıfta bulunur. Doğrusal zincirler oluşturan (verimlilik darboğazları ve tek hata noktaları yaratan) geleneksel blokzincirlerin aksine, TOS her bloğun birden fazla üst bloğa referans verdiği yönlendirilmiş döngüsüz bir grafik (DAG) kullanır. Bu topoloji, paralel blok üretimini sağlayarak doğrulayıcıların katı sıralı sıralamayı beklemeden işlemleri eşzamanlı olarak onaylamasına izin verir. Sonuç, mevcut dağıtımlarda saniyede 2.500+ işlem (TPS) elde ederken merkeziyetsizliği koruyan ve Power of AI (PAI) konsensüsü altında 10.000+ TPS'ye yönelik bir yol haritasına sahip bir sistemdir.\footnote{TOS Network, ``BlockDAG Performance Benchmark PERF-2025-08,'' August 2025.} DAG yapısı ayrıca doğal yedeklilik sağlar: bazı doğrulayıcılar çevrimdışı kalsa bile ağ, tıpkı İnternet'in paket yönlendirme dayanıklılığı gibi alternatif yollar aracılığıyla bağlı kalır.
+``OpenSystem'' bir isimden fazlasıdır: TOS'u dayanıklı ve disiplinli kılan ikili mimari ilkeleri kodlar. ``Topo'', BlockDAG konsensüs katmanının \emph{topolojik} yapısına atıfta bulunur. Doğrusal zincirler oluşturan (verimlilik darboğazları ve tek hata noktaları yaratan) geleneksel blokzincirlerin aksine, TOS her bloğun birden fazla üst bloğa referans verdiği yönlendirilmiş döngüsüz bir grafik (DAG) kullanır. Bu topoloji, paralel blok üretimini sağlayarak doğrulayıcıların katı sıralı sıralamayı beklemeden işlemleri eşzamanlı olarak onaylamasına izin verir. Sonuç, mevcut dağıtımlarda saniyede 2.500+ işlem (TPS) elde ederken merkeziyetsizliği koruyan ve Power of AI (PAI) konsensüsü altında 10.000+ TPS'ye yönelik bir yol haritasına sahip bir sistemdir.\footnote{TOS Network, ``BlockDAG Performance Benchmark PERF-2025-08,'' August 2025.} DAG yapısı ayrıca doğal yedeklilik sağlar: bazı doğrulayıcılar çevrimdışı kalsa bile ağ, tıpkı İnternet'in paket yönlendirme dayanıklılığı gibi alternatif yollar aracılığıyla bağlı kalır.
 
 ``Spartan'', ajan odaklı bir ekonomiyi korumak için gereken disiplinli güvenlik duruşunu yansıtır. Antik Sparta falanjı, kolektif savunma, yedekli koruma katmanları ve sarsılmaz disiplin yoluyla başarılı oldu---bu ilkeler doğrudan blokzincir güvenliğine tercüme edilir. Her AGIW görev makbuzu çoklu doğrulayıcı tasdikinden geçer; her durum geçişi değiştirilemez şekilde kaydedilir; her yönetişim kararı zaman kilitli yürütme ile süper çoğunluk onayı gerektirir. Tıpkı Sparta savaşçılarının baskı altında formasyonu korumak için amansızca talim yapması gibi, TOS titiz mühendislik uygulamalarını uygular: deterministik yapılar, kapsamlı testler, kuantum sonrası kriptografi hazırlığı ve şeffaf telemetri. Bu disiplinli yaklaşım ekonomik tasarıma da uzanır: TEM (TOS Energy Model) ücret oynaklığını önlerken temel görevleri sübvanse eder, stake gereksinimleri Sybil saldırılarını caydırır ve cezalandırma mekanizmaları kötü davranışları cezalandırır. ``Topo'' ve ``Spartan'' birlikte, hem verimlilik \emph{hem de} güvenlik, hem ölçeklenebilirlik \emph{hem de} hesap verebilirlik için optimize edilmiş bir mimariyi tanımlar---otonom ajanlar için ekonomik işletim sistemi olmayı amaçlayan herhangi bir sistemin ikili görevidir.
 
@@ -193,7 +193,7 @@ Mevcut hiçbir blok zinciri yapay zeka ajanları için tasarlanmadı. Mevcut pla
 \subsection{TOS Synthesis}
 TOS bu öncülleri tutarlı bir bütünde sentezler:
 \begin{itemize}[noitemsep]
-  \item \textbf{TopoSpartan mimarisi} (BlockDAG + disiplinli güvenlik) yüksek verim ve dayanıklılık sağlar.
+  \item \textbf{OpenSystem mimarisi} (BlockDAG + disiplinli güvenlik) yüksek verim ve dayanıklılık sağlar.
   \item \textbf{AGIW} (AGI Work protokolü) TEE attestasyonu ve doğrulayıcı konsensüsü ile doğrulanabilir emek mutabakatı sunar.
   \item \textbf{CC/EC tokenleri} kaynak-pariteli para birimini tanıtarak ajanlar için maliyetleri stabilize eder.
   \item \textbf{TEM/PAI} (TOS Energy Model / Power of AI) uyarlanabilir ücret politikası ve yapay zeka destekli konsensüs sağlar.
@@ -2469,7 +2469,7 @@ TOS geliştirmesi, AGI uygarlığı ihtiyaçlarıyla uzun vadeli uyumu korurken 
 Akademik kurumlar, endüstri ortakları ve düzenleyici kuruluşlarla işbirliklerini memnuniyetle karşılıyoruz. İletişim: \texttt{research@tos.network}.
 
 \section{Sonuç ve Görünüm}
-TOS'u, TopoSpartan mimarisine dayanan otonom ajanlar için ekonomik işletim sistemi olarak sunduk. Yakın vadeli çıktılar işletmelere doğrulanabilir otomasyon sağlar; uzun vadeli yol haritası AGI medeniyetini destekler. Devam eden araştırma ve topluluk yönetişimi dayanıklılık ve güveni garanti edecektir.
+TOS'u, OpenSystem mimarisine dayanan otonom ajanlar için ekonomik işletim sistemi olarak sunduk. Yakın vadeli çıktılar işletmelere doğrulanabilir otomasyon sağlar; uzun vadeli yol haritası AGI medeniyetini destekler. Devam eden araştırma ve topluluk yönetişimi dayanıklılık ve güveni garanti edecektir.
 
 \appendix
 \newpage
