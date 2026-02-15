@@ -5,10 +5,6 @@
 *.bak
 *.bak*
 
-# Markdown files (except README.md)
-*.md
-!README.md
-
 # Shell scripts and analysis files
 analyze_coverage.sh
 apply_translations.sh
@@ -20,5 +16,12 @@ translation_analysis_detailed.txt
 *.out
 *.toc
 
-# PDF files (if you want to ignore generated PDFs)
-# *.pdf
+# Blockchain translation reports and helper markdown files
+blockchain/*_REPORT*.md
+blockchain/*_SUMMARY*.md
+blockchain/*_STATUS*.md
+blockchain/*_PROGRESS*.md
+blockchain/DELIVERY_SUMMARY.md
+blockchain/SESSION_SUMMARY.md
+blockchain/TECHNICAL_TERMINOLOGY_GLOSSARY.md
+blockchain/TRANSLATION_README.md
