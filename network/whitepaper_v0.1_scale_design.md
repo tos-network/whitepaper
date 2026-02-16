@@ -15,19 +15,21 @@ This document defines how to evolve the v0.1 architecture into a horizontally sc
 1. Preserve v0.1 protocol contracts (AgentRecord, ToolManifest, Receipt, Escrow proof flow)
 2. Support massive cardinality without making discovery or ranking O(N)
 3. Keep trust guarantees: signature verification, payment proof binding, anti-Sybil economics
-4. Keep direct P2P behavior after discovery (no global relay dependency)
-5. Enable incremental scaling from v0.1 MVP to 100M-agent-scale operations
+4. Keep direct P2P behavior after discovery, while allowing relay fallback for NAT/private-network constrained agents
+5. Keep service accessible for edge/home nodes without public IP through transport fallback and signed record-based verification
+6. Enable incremental scaling from v0.1 MVP to 100M-agent-scale operations
 
 ---
 
 ## 2) What breaks first when we scale
 
-At 100M Agent-level records, naive implementations fail in four ways:
+At 100M Agent-level records, naive implementations fail in five ways:
 
 - **Global scans**: query across all categories/shards becomes slow and expensive
 - **Monolithic ranking**: single ranking pipeline cannot ingest and update fast enough
 - **Chain bottleneck**: every micro-transaction on-chain would become expensive and slow
 - **Control-plane coupling**: discovery, settlement validation, and ranking sharing all tied together
+- **Long-tail transport heterogeneity**: many agents are behind NAT or on private links, requiring non-public transport handling
 
 So the scale design separates data and responsibility across services, shards, and planes.
 
@@ -102,7 +104,16 @@ Recommended path:
 4. Merge/deduplicate/score client-side and verify signatures
 5. Return stable ordered records
 
-### 4.2.3 Index storage and sync model
+### 4.2.3 Home-edge deployment profile (private LAN / no public IP)
+
+To support Raspberry Pi-class and home-LAN nodes, discovery and execution should assume non-public transport as a normal path:
+
+- Nodes may publish private or relay-assisted endpoints in `AgentRecord.endpoints`.
+- Discovery still returns signed records and routing metadata.
+- Routers/clients should attempt direct candidate endpoints first, then fallback to relay-assisted paths.
+- Ranking writeback remains mandatory when receipts are available, allowing private-edge nodes to compete with public nodes on execution quality and verifiable settlement history.
+
+### 4.2.4 Index storage and sync model
 
 - Each shard is replicated to `R` replicas (R=3 for baseline, R=5 for critical categories)
 - Sync model:
@@ -111,7 +122,7 @@ Recommended path:
   - repair on mismatch detection
 - Manifest payloads are content-addressed (`manifest_hash`), so index nodes can exchange only deltas / changed hashes
 
-### 4.2.4 Discovery output contract
+### 4.2.5 Discovery output contract
 
 `QueryTools` response includes existing v0.1 object plus optional scale hints:
 
@@ -258,21 +269,25 @@ Used for router scheduling and failure-safe failover.
 ### Phase A (v0.1 baseline)
 - Core loop implemented
 - small set of index nodes and basic category routing
+- Home-edge acceptance: `AgentRecord` with non-public endpoint support is accepted in discovery indexing, and one or more local Raspberry Pi class nodes can complete a full loop to receive verifiable receipts.
 
 ### Phase B (10k~100k Agents)
 - category+hash sharding
 - multi-replica shard storage
 - async payment proof pipeline
+- Home-edge acceptance: private-LAN nodes can discover peers via bootstrap + bootstrap-provided routing hints, and establish sessions using private or relay-assisted transport candidates.
 
 ### Phase C (1M Agents)
 - regional routers
 - two-tier ranking
 - full Proof-of-Index challenge scheduling
+- Home-edge acceptance: transport fallback telemetry is available (direct/relay ratios, failure reason visibility), and ranking decay/write-back works for intermittently connected household nodes.
 
 ### Phase D (10M~100M Agents)
 - libp2p/DHT + gossip discovery for nodes
 - batch settlement rail rollout
 - federation conflict resolution + periodic global rank epochs
+- Home-edge acceptance: cross-region federation includes private-edge traffic patterns; ranking and settlement confidence remain stable under high NAT/private endpoint share.
 
 ---
 
@@ -302,4 +317,3 @@ This document is an architectural extension and does not replace existing v0.1 s
 2. Which payment rail should be default at 1M scale (on-chain-first vs channel-first)?
 3. How many regional consensus zones are needed before cross-zone routing becomes mandatory?
 4. What is the minimum evidence threshold for a receipt to be counted at full rank weight?
-

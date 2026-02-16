@@ -2,6 +2,11 @@
 
 This repository contains two core whitepapers for the TOS ecosystem.
 
+## TOS Ecosystem One-Liner
+
+**TOS Blockchain** is a secure, fast, privacy-focused infrastructure layer for deterministic execution and programmable automation.  
+**TOS Network** is the decentralized Agent-to-Agent execution layer on top of it, enabling discovery, task matching, and privacy-preserving collaboration across nodes (including home-edge nodes without public IP), with settlement and reward semantics anchored to TOS Blockchain.
+
 ---
 
 ## 📁 Repository Structure
@@ -17,6 +22,10 @@ whitepaper/
 ## ⛓️ blockchain/ — TOS Blockchain
 
 The **TOS Blockchain** defines the on-chain foundation layer for the Agent economy.
+
+TOS Blockchain is a high-performance infrastructure layer designed for deterministic execution, advanced privacy, and programmable automation.  
+It can support DeFi, dApps, and future AI-driven applications — but those are use cases built on top of the protocol, not the identity of the protocol itself.  
+The core identity is: secure, fast, privacy-focused infrastructure for builders.
 
 The core thesis is to advance blockchains from "general computation" to a **General Economic Agency Layer**: agents have on-chain identity, can take jobs, get verifiably paid, settle in compute/energy units, and self-govern on auditable policy rails.
 
@@ -38,6 +47,9 @@ The core thesis is to advance blockchains from "general computation" to a **Gene
 ## 🌐 network/ — TOS Agent Network
 
 The **TOS Agent Network** defines the off-chain discovery and collaboration layer for the Agent economy.
+
+TOS Network is the decentralized Agent-to-Agent execution layer in the TOS ecosystem, enabling independent nodes (including home-edge nodes without public IP) to publish capabilities, discover peers, match tasks, and execute jobs via direct/relay networking with privacy-preserving operational workflows.  
+It is built as an identity-and-execution separation design: the base chain provides the secure infrastructure, while the network layer provides practical interoperability and large-scale AI service collaboration. Rewarding, settlement, and proof-related logic are ultimately based on TOS Blockchain.
 
 The core thesis is to build a **decentralized Agent discovery infrastructure** — not a search engine, not an A2A protocol, not a marketplace, but the "DNS + Google + Reputation Layer" for the Agent Internet.
 

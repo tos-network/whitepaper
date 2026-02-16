@@ -38,6 +38,7 @@
    - 6.3 Ultimate Form: Agent PageRank (Four-Phase Evolution)  
 7. [Roadmap (Pragmatic Execution Order)](#7-roadmap-pragmatic-execution-order)  
 8. [Conclusion: What We Are Building](#8-conclusion-what-we-are-building)  
+9. [Home-First Agent Economy (mydomain.tos)](#9-home-first-agent-economy-mydomaintos)  
 Appendices  
 - [A. Glossary](#a-glossary)  
 - [B. Cryptography & Signature Conventions](#b-cryptography--signature-conventions)  
@@ -63,7 +64,7 @@ TOS Agent Network IS:
 
 **v0.1 Technical Objectives:**
 - **Discover**: Verifiable discovery centered on Tool/Capability (not a centralized authoritative directory)  
-- **Connect**: Peer-to-peer direct connection after discovery (no entry point relay required)  
+- **Connect**: Peer-to-peer direct connection after discovery (no mandatory entry point relay; relay-assisted fallback allowed when direct transport is blocked)  
 - **Settle**: On-chain Escrow as the default settlement proof  
 - **Receipt**: Verifiable receipts as unified feedback and ranking signals  
 - **Rank**: Update ToolRank/AgentRank with real economic behavior, improving future discovery quality
@@ -164,7 +165,7 @@ v0.1 must satisfy:
 
 ## 3.3 Three-Phase Interaction Flow: Discover → Direct Connect → Bypass Entry
 
-> 💡 **Core Principle**: tos.network is only responsible for "discovery," not traffic relay. Once Agent A finds Agent B through search, they can establish a direct connection and bypass the entry point.
+> 💡 **Core Principle**: tos.network is only responsible for "discovery," not traffic relay. Once Agent A finds Agent B through search, they can establish a direct connection and bypass the entry point, with relay-only fallback only when direct transport is blocked.
 
 ### 🟢 Phase 1: Discovery (via tos.network)
 Agent A queries: "Who can perform Solidity audits?" "Who supports Japanese hotel guest service?"
@@ -380,7 +381,7 @@ tos.network serves as the **default aggregation entry point**, providing a Web2 
 - Deduplicates, verifies signatures, and ranks (based on ToolRank/AgentRank)
 - Presents results to the user
 
-> 💡 **Key characteristic**: The entry point has centralized UX, but data and indexes are decentralized. Multiple mirror sites are possible, and the protocol allows anyone to run an entry point.
+> 💡 **Key characteristic**: The entry point has centralized UX, but data and indexes are decentralized. Multiple mirror sites are possible, and the protocol allows anyone to run an entry point. Default transport is peer-to-peer; relay paths are only a fallback when direct connection fails.
 
 ### 4.3.5 Category-based Routing
 Queries are routed to the corresponding node set by category:
@@ -687,6 +688,70 @@ enabling devices of any scale — from Raspberry Pis to data centers — to join
 
 ---
 
+# 9. Home-First Agent Economy (mydomain.tos)
+
+TOS Network's long-term target is that each home can run one or more MCP-capable nodes and economically participate in the same Agent market loop as larger operators.
+
+This is not limited to enterprises, datacenters, or cloud services. A household can run an Agent Node on a Raspberry Pi, publish available capabilities, and earn TOS through verified execution.
+
+## 9.1 From Consumer to Producer
+
+`mydomain.tos` is a practical deployment pattern where:
+- A family runs a local Agent Node and binds its external entry with a readable namespace.
+- The node exposes MCP tools within its real capacity (e.g., language processing, scheduling, data cleaning, home automation glue).
+- The node advertises its capabilities through signed ToolManifest and AgentRecord objects.
+- Discovery, direct connection, settlement, and ranking follow the standard v0.1 flow.
+
+This makes every household a potential micro-enterprise and every user a potential service provider.
+
+## 9.2 Two-way income logic
+
+A household node can profit from both ends of interaction:
+- As a Consumer, it pays trusted providers through settlement rails to finish tasks it cannot complete.
+- As a Provider, it accepts suitable tasks from other agents and gets paid from direct invocation settlements.
+- Reputation and Ranking increase with repeated verifiable work, making the node more discoverable over time.
+
+The key loop remains unchanged:
+1. `Discover` suitable work
+2. `Direct Connect` to selected agents
+3. `Settle` with proof
+4. `Receipt` generation
+5. `Rank Update` and better future matching
+
+## 9.3 Why this becomes a market
+
+This design forms a truly decentralized Agent-to-Agent transaction market:
+- Matching is not mediated by a central market operator's private index.
+- All value transfer is backed by verifiable settlement proofs.
+- Ranking is not hand-tuned; it is driven by receipts and execution quality.
+- Nodes can join and leave with protocol-level compatibility.
+
+In other words, the market is social and economic, not centrally controlled.
+
+## 9.4 Execution constraints for home-grade nodes
+
+- Home nodes should declare throughput, cost limits, latency tolerance, and allowed data domains in their manifests.
+- For unstable networks, endpoints may include multiple transport entries and fallback paths.
+- Sensitive data processing should avoid moving raw data into on-chain layers; task and result hashes are enough for proof.
+- If a home node is temporarily offline, it should quickly de-list unavailable tools rather than emit false commitments.
+
+These constraints preserve trust while enabling long-term scalability of low-cost edge participation.
+
+## 9.5 Tailscale-like reachability without public IP
+
+TOS Network can operate in a similar networking pattern to Tailscale for edge devices:
+- The home Agent Node can remain in a private LAN (for example, behind NAT, with no public IP).
+- Discovery and capability publication are still signed through AgentRecord/ToolManifest and can be done from trusted bootstrap channels.
+- Direct connection for task execution can use:
+  - NAT traversal, or
+  - relay-assisted routing (temporary fallback when NAT conditions block direct connection).
+- Session and identity are still based on TOS cryptographic identity, not on a public IP address.
+
+In this design, "mydomain.tos" is an identity-and-capability identity on the protocol layer.
+The practical transport endpoint may be private, relayed, or mobile—what must remain stable is identity, signature validity, and settlement-receipt linkage.
+
+---
+
 # A. Glossary
 
 - **Agent**: An entity that can externally provide or consume tools (software instance/service)  
@@ -708,6 +773,8 @@ enabling devices of any scale — from Raspberry Pis to data centers — to join
 - **Index Proof Challenge**: A verification mechanism to prevent nodes from claiming to have indexes while returning garbage  
 - **Connection Layer**: Peer-to-peer direct connection layer; agents establish trusted connections and bypass the entry point  
 - **Escrow**: On-chain custody contract providing verifiable payment guarantees (open → claim/refund)  
+- **Home Agent Node**: A user-operated edge Agent Node, often on low-cost hardware, that publishes MCP capabilities and participates in the same Discovery/Settle/Receipt/Rank loop  
+- **mydomain.tos**: A user-facing naming pattern for local Agent endpoints (not a protocol namespace itself; endpoint and record resolution still follow signed discovery contracts)
 
 ---
 
@@ -744,8 +811,25 @@ enabling devices of any scale — from Raspberry Pis to data centers — to join
   "agent_id": "tos1...",
   "pubkey": "base64...",
   "endpoints": [
-    {"type": "https", "url": "https://agent.example.com/mcp"},
-    {"type": "libp2p", "multiaddr": "/ip4/.../tcp/.../p2p/..."}
+    {
+      "type": "https",
+      "url": "https://agent.example.com/mcp",
+      "reachability": "public",
+      "priority": 10
+    },
+    {
+      "type": "libp2p",
+      "multiaddr": "/ip4/10.0.0.12/tcp/4000/p2p/12D3KooW...",
+      "reachability": "private",
+      "priority": 20,
+      "relay": "relay.mydomain.tos:3478"
+    },
+    {
+      "type": "relay",
+      "relay_url": "relay.mydomain.tos:3478",
+      "reachability": "relay",
+      "priority": 30
+    }
   ],
   "manifest_hash": "0x...",
   "capability_digest": "0x...",
@@ -760,6 +844,11 @@ enabling devices of any scale — from Raspberry Pis to data centers — to join
   "sig": "0x..."
 }
 ```
+
+`endpoints` is an ordered transport candidate list. Indexers and clients SHOULD follow `priority` order (lower value first) and support fallback behavior:
+- `type=private` + local IP indicates LAN/private transport.
+- `type=relay` provides fallback relay connectivity when direct paths fail.
+- `reachability` indicates the transport mode and should be interpreted by discovery/client policies.
 
 ## C.2 ToolManifest (MCP Tool Manifest)
 ```json
@@ -792,7 +881,7 @@ enabling devices of any scale — from Raspberry Pis to data centers — to join
 > v0.1 recommends Index Nodes provide an HTTP JSON API; this can also be mapped to MCP tools (recommended approach).
 
 ## D.1 PublishManifest
-- **POST** `/v0.1/manifests`
+- **POST** `/v1/manifests`
 - Input: `ToolManifest`
 - Behavior:
   - Validate signature and expiration time
@@ -800,7 +889,7 @@ enabling devices of any scale — from Raspberry Pis to data centers — to join
 - Output: `{ "ok": true, "manifest_hash": "0x..." }`
 
 ## D.2 QueryTools
-- **POST** `/v0.1/query`
+- **POST** `/v1/query`
 - Input:
 ```json
 {
@@ -817,11 +906,11 @@ enabling devices of any scale — from Raspberry Pis to data centers — to join
 - Output: `AgentRecord[]` (or summary + record_hash)
 
 ## D.3 Resolve
-- **GET** `/v0.1/resolve/{manifest_hash}`
+- **GET** `/v1/resolve/{manifest_hash}`
 - Output: `ToolManifest`
 
 ## D.4 SubmitReceipt
-- **POST** `/v0.1/receipts`
+- **POST** `/v1/receipts`
 - Input: `Receipt`
 - Behavior:
   - Verify signature
