@@ -7,3 +7,4 @@ It is built as an identity- and execution-separation design: the base chain prov
 
 - Core technical whitepaper: [`whitepaper_v1.md`](whitepaper_v1.md)  
 - Large-scale design: [`whitepaper_v1_scale_design.md`](whitepaper_v1_scale_design.md)
+- Payment Rail design for AgentOS layer-2 settlement: [`tos-payment-rail-layer-2-design.md`](tos-payment-rail-layer-2-design.md)
