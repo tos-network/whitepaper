@@ -5,5 +5,5 @@ It is built as an identity- and execution-separation design: the base chain prov
 
 ## Documents
 
-- Core technical whitepaper: [`whitepaper_v0.1.md`](whitepaper_v0.1.md)  
-- Large-scale design: [`whitepaper_v0.1_scale_design.md`](whitepaper_v0.1_scale_design.md)
+- Core technical whitepaper: [`whitepaper_v1.md`](whitepaper_v1.md)  
+- Large-scale design: [`whitepaper_v1_scale_design.md`](whitepaper_v1_scale_design.md)

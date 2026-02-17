@@ -1,10 +1,10 @@
-# TOS Agent Network Technical Whitepaper v0.1 (Draft)
-**Status:** Draft / v0.1  
+# TOS Agent Network Technical Whitepaper v1 (Draft)
+**Status:** Draft / v1  
 **Last Updated:** 2026-02-16 (Asia/Tokyo)  
 **Audience:** Protocol/node/agent developers, ecosystem partners, auditors, and security teams  
-**Scope:** This document defines the minimum viable protocol stack (v0.1) for TOS Agent Network's "Discover → Connect → Settle → Receipt → Rank" lifecycle, along with protocol specifications and interface definitions.
+**Scope:** This document defines the minimum viable protocol stack (v1) for TOS Agent Network's "Discover → Connect → Settle → Receipt → Rank" lifecycle, along with protocol specifications and interface definitions.
 
-> Note: The goal of v0.1 is to "run the complete loop and make it verifiable," without attempting to cover all advanced features at once (e.g., arbitration, semantic index sharding, network-wide consensus ranking, etc.). This document uses **MUST/SHOULD/MAY** to indicate specification strength.
+> Note: The goal of v1 is to "run the complete loop and make it verifiable," without attempting to cover all advanced features at once (e.g., arbitration, semantic index sharding, network-wide consensus ranking, etc.). This document uses **MUST/SHOULD/MAY** to indicate specification strength.
 
 ---
 
@@ -16,7 +16,7 @@
    - 2.3 Three Missing Pieces of Infrastructure  
 3. [Our Answer: A Self-Reinforcing Economic Loop](#3-our-answer-a-self-reinforcing-economic-loop)  
    - 3.1 Lifecycle Overview (DCSRR)  
-   - 3.2 The v0.1 "Trusted Minimum Set"  
+   - 3.2 The v1 "Trusted Minimum Set"  
    - 3.3 Three-Phase Interaction Flow: Discover → Direct Connect → Bypass Entry  
 4. [System Architecture: Six-Layer Infrastructure Stack](#4-system-architecture-six-layer-infrastructure-stack)  
    - 4.0 Architecture Overview  
@@ -34,7 +34,7 @@
    - 5.3 Network Revenue Model (Three Paths)  
 6. [Why This Will Become "Agent Google" (Ranking From Economic Facts)](#6-why-this-will-become-agent-google-ranking-from-economic-facts)  
    - 6.1 From "Content Links" to "Economic Receipts"  
-   - 6.2 v0.1 Ranking Principles  
+   - 6.2 v1 Ranking Principles  
    - 6.3 Ultimate Form: Agent PageRank (Four-Phase Evolution)  
 7. [Roadmap (Pragmatic Execution Order)](#7-roadmap-pragmatic-execution-order)  
 8. [Conclusion: What We Are Building](#8-conclusion-what-we-are-building)  
@@ -42,11 +42,11 @@
 Appendices  
 - [A. Glossary](#a-glossary)  
 - [B. Cryptography & Signature Conventions](#b-cryptography--signature-conventions)  
-- [C. Data Structures (v0.1)](#c-data-structures-v01)  
-- [D. API & Protocol Messages (v0.1)](#d-api--protocol-messages-v01)  
-- [E. TOS Escrow Contract Interface (v0.1)](#e-tos-escrow-contract-interface-v01)  
-- [F. Receipt & Payment Proof (v0.1)](#f-receipt--payment-proof-v01)  
-- [G. Security & Anti-Abuse Recommendations (v0.1)](#g-security--anti-abuse-recommendations-v01)  
+- [C. Data Structures (v1)](#c-data-structures-v1)  
+- [D. API & Protocol Messages (v1)](#d-api--protocol-messages-v1)  
+- [E. TOS Escrow Contract Interface (v1)](#e-tos-escrow-contract-interface-v1)  
+- [F. Receipt & Payment Proof (v1)](#f-receipt--payment-proof-v1)  
+- [G. Security & Anti-Abuse Recommendations (v1)](#g-security--anti-abuse-recommendations-v1)  
 
 ---
 
@@ -62,7 +62,7 @@ TOS Agent Network IS:
 
 > 🔥 **The infrastructure layer of the Agent Internet**: providing decentralized discovery, verifiable settlement, and economically receipt-driven reputation and ranking, enabling agents to collaborate, transact, and self-evolve without centralized intermediaries.
 
-**v0.1 Technical Objectives:**
+**v1 Technical Objectives:**
 - **Discover**: Verifiable discovery centered on Tool/Capability (not a centralized authoritative directory)  
 - **Connect**: Peer-to-peer direct connection after discovery (no mandatory entry point relay; relay-assisted fallback allowed when direct transport is blocked)  
 - **Settle**: On-chain Escrow as the default settlement proof  
@@ -144,7 +144,7 @@ The current MCP ecosystem typically lacks:
 
 # 3. Our Answer: A Self-Reinforcing Economic Loop
 
-The minimum viable loop (v0.1) of this network is:
+The minimum viable loop (v1) of this network is:
 
 ```
 Discover → Direct Connect → Settle → Receipt → Rank Update → Better Discovery
@@ -157,8 +157,8 @@ Discover → Direct Connect → Settle → Receipt → Rank Update → Better Di
 - **Receipt**: After invocation completes, a Receipt is generated, binding `session_id` with PaymentProof  
 - **Rank Update**: Index Nodes collect receipts and update ToolRank/AgentRank, feeding back into Discover ranking
 
-## 3.2 The v0.1 "Trusted Minimum Set"
-v0.1 must satisfy:
+## 3.2 The v1 "Trusted Minimum Set"
+v1 must satisfy:
 - Discovery results are signature-verifiable (no trust in any single entry point/node)  
 - Settlement events are on-chain verifiable (proof)  
 - Receipts and settlement proofs can be bound to the same `session_id` (preventing replay and fake feedback)
@@ -308,7 +308,7 @@ The network is sharded by "Category," with each category served by a set of resp
 - Use DHT or on-chain Registry for fast lookup of the responsible node set
 
 ### 4.2.4 Node Revenue Model
-Nodes earn revenue through two mechanisms (v0.1 must support at least one):
+Nodes earn revenue through two mechanisms (v1 must support at least one):
 
 **A) Search Fee**
 - A small amount of TOS paid per query (can be paid by the entry point or directly by the user)
@@ -332,7 +332,7 @@ Nodes earn revenue through two mechanisms (v0.1 must support at least one):
 - **Slashing**: Partial stake forfeiture (for severe or repeated offenses)
 - **Jail**: Temporary removal from category or entire network; must re-stake to recover
 
-**v0.1 implementation recommendation:**
+**v1 implementation recommendation:**
 - Define penalty interfaces and events
 - Initially use only the demotion mechanism
 - v0.2+ enables full slashing and arbitration workflows
@@ -353,10 +353,10 @@ Nodes earn revenue through two mechanisms (v0.1 must support at least one):
 - Provider **MUST** publish a signed `ToolManifest` (see Appendix C)  
 - Manifest **MUST** include:
   - `tools[]`: tool name, description, input/output schema (JSON Schema or equivalent), pricing, SLA/constraints  
-  - `settlement`: settlement configuration (v0.1 uses TOS Escrow)  
+  - `settlement`: settlement configuration (v1 uses TOS Escrow)  
   - `expires_at`: expiration time (requiring renewal/re-publication)
 
-### 4.3.3 Index Node Responsibilities (v0.1)
+### 4.3.3 Index Node Responsibilities (v1)
 Index Nodes **MUST** provide:
 - Publish capability (publish manifest / record)  
 - Query retrieval (keyword + facet filtering)  
@@ -403,14 +403,14 @@ To prevent nodes from claiming to have indexes but actually returning garbage, a
    - Resolvable manifest CID/hash
 3. Failures count toward SLA/reputation; cumulative failures trigger jail/slash
 
-**Challenge types (v0.1 recommended):**
+**Challenge types (v1 recommended):**
 - **Existence challenge**: Prove the node actually indexes a known manifest
 - **Recall challenge**: Given a keyword, verify the node can recall expected results
 
 > 💡 **Analogy**: This is similar to "proof of work," but lighter — **Proof of Index**
 
 ### 4.3.7 Node Interconnection & Synchronization
-**v0.1 implementation (simplified):**
+**v1 implementation (simplified):**
 - Uses static node lists + HTTP push/pull synchronization
 - Nodes periodically fetch other node lists from the Registry
 - New manifests synchronized via webhook or polling
@@ -450,7 +450,7 @@ To prevent nodes from claiming to have indexes but actually returning garbage, a
 **Core Function**: Providing verifiable on-chain settlement guarantees
 
 ### 4.5.1 TOS Chain Escrow
-- v0.1 **MUST** support TOS on-chain Escrow contract settlement  
+- v1 **MUST** support TOS on-chain Escrow contract settlement  
 - Contract interface uses EVM-compatible ABI (Solidity)
 
 ### 4.5.2 Escrow State Machine
@@ -461,7 +461,7 @@ To prevent nodes from claiming to have indexes but actually returning garbage, a
 - `claim(sessionId, receiptHash)`  
 - `refund(sessionId)`
 
-> v0.1 may support only native currency (`msg.value == amount`); v0.2+ extends to ERC20.
+> v1 may support only native currency (`msg.value == amount`); v0.2+ extends to ERC20.
 
 ### 4.5.4 Events (Payment Proof)
 - `EscrowOpened(sessionId, payer, payee, asset, amount, expiry, termsHash)`  
@@ -470,9 +470,9 @@ To prevent nodes from claiming to have indexes but actually returning garbage, a
 
 ### 4.5.5 Settlement Proof (Payment Proof)
 - On-chain events (logs) serve as proof: `chain_id + tx_hash + log_index`  
-- Proof **MUST** be verifiable by any node via RPC/light client (v0.1 allows RPC verification)
+- Proof **MUST** be verifiable by any node via RPC/light client (v1 allows RPC verification)
 
-**PaymentProof (v0.1) recommended reference format:**
+**PaymentProof (v1) recommended reference format:**
 ```json
 {
   "rail": "tos_escrow_v0",
@@ -497,14 +497,14 @@ To prevent nodes from claiming to have indexes but actually returning garbage, a
   - `session_id`
   - `tool_id`
   - `payment_proof` (at minimum referencing the Escrow event proof)
-- Receipt **SHOULD** be dual-signed (provider + consumer); v0.1 allows single-signing but with reduced weight
+- Receipt **SHOULD** be dual-signed (provider + consumer); v1 allows single-signing but with reduced weight
 
-### 4.6.2 Rank (v0.1 Minimum Viable)
+### 4.6.2 Rank (v1 Minimum Viable)
 Index Nodes **SHOULD** maintain two types of scores:
 - `ToolRank` (tool-level)
 - `AgentRank` (agent-level)
 
-**v0.1 recommended ranking signals:**
+**v1 recommended ranking signals:**
 - Transaction volume/count (based on verifiable proofs)
 - Success rate (receipt status)
 - Dispute/refund rate (if dispute is introduced)
@@ -571,7 +571,7 @@ The core innovation of TOS Agent Network is not any single technology, but the *
 - Purpose: Sybil resistance, punishability, routing weight
 
 ## 5.2 Track B: Payment Settlement
-- v0.1 uses TOS Escrow (on-chain proof) for payment settlement  
+- v1 uses TOS Escrow (on-chain proof) for payment settlement  
 - All payments completed through TOS on-chain Escrow contracts, providing verifiable on-chain proof
 
 ## 5.3 Network Revenue Model (Three Paths)
@@ -610,7 +610,7 @@ TOS Agent Network's key is not "cataloging" but "**economically verifiable ToolR
   - Capitalized trust (stake)
   - Future: Agent Call Graph / Agent PageRank
 
-## 6.2 v0.1 Ranking Principles (Recommended)
+## 6.2 v1 Ranking Principles (Recommended)
 - **proof-backed volume > self-claim**: Real transactions take priority over self-declarations  
 - **Dual-signed receipts > single-signed receipts**: Dual-signing carries more weight  
 - **Stake as sybil resistance weight**: Higher stake = higher cost to game rankings  
@@ -645,7 +645,7 @@ TOS Agent Network's key is not "cataloging" but "**economically verifiable ToolR
 
 # 7. Roadmap (Pragmatic Execution Order)
 
-## Phase 0 (v0.1) — Close the Loop
+## Phase 0 (v1) — Close the Loop
 - Identity Layer: Agent key pairs and signature infrastructure  
 - Registry contract: Node registration, minimum stake admission  
 - Single/few Index Nodes + tos.network entry point  
@@ -700,7 +700,7 @@ This is not limited to enterprises, datacenters, or cloud services. A household 
 - A family runs a local Agent Node and binds its external entry with a readable namespace.
 - The node exposes MCP tools within its real capacity (e.g., language processing, scheduling, data cleaning, home automation glue).
 - The node advertises its capabilities through signed ToolManifest and AgentRecord objects.
-- Discovery, direct connection, settlement, and ranking follow the standard v0.1 flow.
+- Discovery, direct connection, settlement, and ranking follow the standard v1 flow.
 
 This makes every household a potential micro-enterprise and every user a potential service provider.
 
@@ -765,7 +765,7 @@ The practical transport endpoint may be private, relayed, or mobile—what must 
 - **session_id**: A unique session identifier derived from the direct connection handshake  
 - **terms_hash**: Transaction terms hash (binding tool version, quote, SLA, deadline, etc.)  
 - **Receipt**: Execution receipt (binding execution with payment proof, used for ranking)  
-- **PaymentProof**: Payment proof (v0.1 is an on-chain event reference)  
+- **PaymentProof**: Payment proof (v1 is an on-chain event reference)  
 - **Registry**: On-chain registration contract maintaining node registration, staking, categories, and status  
 - **Category**: A basic unit of network category-based sharding (e.g., `Dev.Security`, `Travel.HotelOps`)  
 - **A2A Protocol**: Agent-to-Agent interaction protocol ([a2a.org](https://a2a.org)), defining inter-agent communication  
@@ -782,7 +782,7 @@ The practical transport endpoint may be private, relayed, or mobile—what must 
 
 ## B.1 Hashing
 - `hash()` defaults to `keccak256` (EVM-compatible)  
-- If the TOS chain uses a different standard, the v0.1 implementation may specify via the `hash_alg` field
+- If the TOS chain uses a different standard, the v1 implementation may specify via the `hash_alg` field
 
 ## B.2 Signature Algorithm
 - `sig_alg` **MUST** be explicitly declared in all objects  
@@ -793,14 +793,14 @@ The practical transport endpoint may be private, relayed, or mobile—what must 
 
 ## B.3 Canonical Serialization
 - Objects used for signing must be canonically serialized (otherwise multi-implementation interoperability fails)  
-- v0.1 recommendation:
+- v1 recommendation:
   - JSON Canonicalization Scheme (JCS) or  
   - CBOR Canonical Encoding  
 - `sig` computation: `sig = Sign(privkey, hash(canonical_bytes(payload)))`
 
 ---
 
-# C. Data Structures (v0.1)
+# C. Data Structures (v1)
 
 > The following are reference JSON structures. Implementations may use protobuf/CBOR, but semantic fields must be equivalent.
 
@@ -876,9 +876,9 @@ The practical transport endpoint may be private, relayed, or mobile—what must 
 
 ---
 
-# D. API & Protocol Messages (v0.1)
+# D. API & Protocol Messages (v1)
 
-> v0.1 recommends Index Nodes provide an HTTP JSON API; this can also be mapped to MCP tools (recommended approach).
+> v1 recommends Index Nodes provide an HTTP JSON API; this can also be mapped to MCP tools (recommended approach).
 
 ## D.1 PublishManifest
 - **POST** `/v1/manifests`
@@ -914,13 +914,13 @@ The practical transport endpoint may be private, relayed, or mobile—what must 
 - Input: `Receipt`
 - Behavior:
   - Verify signature
-  - Validate payment proof (v0.1 allows asynchronous validation)
+  - Validate payment proof (v1 allows asynchronous validation)
   - Deduplicate (by `receipt_id` or `session_id+payment_ref`)
 - Output: `{ "ok": true }`
 
 ---
 
-# E. TOS Escrow Contract Interface (v0.1)
+# E. TOS Escrow Contract Interface (v1)
 
 > Contract uses EVM-compatible ABI (Solidity).
 
@@ -932,14 +932,14 @@ The practical transport endpoint may be private, relayed, or mobile—what must 
 - `claim(sessionId, receiptHash)`  
 - `refund(sessionId)`
 
-> v0.1 may support only native currency (`msg.value == amount`); v0.2+ extends to ERC20.
+> v1 may support only native currency (`msg.value == amount`); v0.2+ extends to ERC20.
 
 ## E.3 Events (Payment Proof)
 - `EscrowOpened(sessionId, payer, payee, asset, amount, expiry, termsHash)`  
 - `EscrowClaimed(sessionId, payee, receiptHash)`  
 - `EscrowRefunded(sessionId, payer)`
 
-**PaymentProof (v0.1) recommended reference format:**
+**PaymentProof (v1) recommended reference format:**
 ```json
 {
   "rail": "tos_escrow_v0",
@@ -952,7 +952,7 @@ The practical transport endpoint may be private, relayed, or mobile—what must 
 
 ---
 
-# F. Receipt & Payment Proof (v0.1)
+# F. Receipt & Payment Proof (v1)
 
 ## F.1 Receipt Structure
 ```json
@@ -981,7 +981,7 @@ The practical transport endpoint may be private, relayed, or mobile—what must 
 ## F.2 receipt_id Computation Recommendation
 - `receipt_id = hash(session_id || tool_id || payment_proof.tx_hash || payment_proof.log_index)`
 
-## F.3 Proof Verification Rules (v0.1)
+## F.3 Proof Verification Rules (v1)
 When an Index Node receives a receipt:
 - **MUST** verify signature (at least provider's)  
 - **SHOULD** verify via RPC that the `EscrowClaimed` event exists and that `sessionId` matches  
@@ -989,7 +989,7 @@ When an Index Node receives a receipt:
 
 ---
 
-# G. Security & Anti-Abuse Recommendations (v0.1)
+# G. Security & Anti-Abuse Recommendations (v1)
 
 ## G.1 Anti-Spam (Publishing & Querying)
 - PublishManifest **SHOULD** require a minimum fee or stake (determined by node policy)  

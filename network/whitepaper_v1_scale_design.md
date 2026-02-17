@@ -1,10 +1,10 @@
-# TOS Agent Network v0.1 Scale Design (100k / 100M Agent Interactions)
+# TOS Agent Network v1 Scale Design (100k / 100M Agent Interactions)
 
-**Status:** Draft Extension for `whitepaper_v0.1.md` (English)
+**Status:** Draft Extension for `whitepaper_v1.md` (English)
 **Scope:** Architecture design for large-scale deployment and operation
 **Target scale:** 100k, 1M, and 100M discoverable Agents with viable interaction throughput
 
-This document defines how to evolve the v0.1 architecture into a horizontally scalable system while keeping protocol compatibility with the v0.1 core loop:
+This document defines how to evolve the v1 architecture into a horizontally scalable system while keeping protocol compatibility with the v1 core loop:
 
 **Discover → Direct Connect → Settle → Receipt → Rank**
 
@@ -12,12 +12,12 @@ This document defines how to evolve the v0.1 architecture into a horizontally sc
 
 ## 1) Design objectives
 
-1. Preserve v0.1 protocol contracts (AgentRecord, ToolManifest, Receipt, Escrow proof flow)
+1. Preserve v1 protocol contracts (AgentRecord, ToolManifest, Receipt, Escrow proof flow)
 2. Support massive cardinality without making discovery or ranking O(N)
 3. Keep trust guarantees: signature verification, payment proof binding, anti-Sybil economics
 4. Keep direct P2P behavior after discovery, while allowing relay fallback for NAT/private-network constrained agents
 5. Keep service accessible for edge/home nodes without public IP through transport fallback and signed record-based verification
-6. Enable incremental scaling from v0.1 MVP to 100M-agent-scale operations
+6. Enable incremental scaling from v1 MVP to 100M-agent-scale operations
 
 ---
 
@@ -46,14 +46,14 @@ Reasoning: control-plane objects are small and mostly on-chain/consensus; data-p
 
 ---
 
-## 3.2 Keep v0.1 compatibility and add indirection layers
+## 3.2 Keep v1 compatibility and add indirection layers
 
 - `AgentRecord` and `ToolManifest` remain as primary protocol objects
 - For scale we add an indirection layer:
   - discovery returns signed pointers/hints (category shards, version pointers)
   - payload bodies can be served from regional/object caches with hash verification
 
-No breaking change for v0.1 consumers; only index providers need to understand hint fields.
+No breaking change for v1 consumers; only index providers need to understand hint fields.
 
 ---
 
@@ -124,7 +124,7 @@ To support Raspberry Pi-class and home-LAN nodes, discovery and execution should
 
 ### 4.2.5 Discovery output contract
 
-`QueryTools` response includes existing v0.1 object plus optional scale hints:
+`QueryTools` response includes existing v1 object plus optional scale hints:
 
 - shard count consulted
 - age/last_sync timestamp
@@ -167,13 +167,13 @@ At scale, direct transport needs to tolerate NAT and mobile/short-lived nodes:
 
 ### 4.4.2 Payment proof abstraction
 
-Extend `PaymentProof` type to support multiple rails while preserving v0.1 fields.
+Extend `PaymentProof` type to support multiple rails while preserving v1 fields.
 
 - `tos_escrow_v0`: direct on-chain open/claim/refund
 - `tos_channel_v0`: off-chain payment channel with channel close proof
 - `tos_batch_v0`: batched settlement proof from checkpoint contract
 
-Receipt keeps accepting v0.1-compatible format; rail-specific proof is an extension to the same field.
+Receipt keeps accepting v1-compatible format; rail-specific proof is an extension to the same field.
 
 ### 4.4.3 Receipt binding
 
@@ -254,7 +254,7 @@ A scale-friendly index may optionally return:
 - `replica_version`: per-shard vector clock/version
 - `proof_mode`: `sync`, `async`, or `none`
 
-These are optional and do not break existing v0.1 behavior.
+These are optional and do not break existing v1 behavior.
 
 ### 6.2 Index node metadata
 
@@ -264,9 +264,9 @@ Used for router scheduling and failure-safe failover.
 
 ---
 
-## 7) Deployment roadmap from v0.1 to large-scale
+## 7) Deployment roadmap from v1 to large-scale
 
-### Phase A (v0.1 baseline)
+### Phase A (v1 baseline)
 - Core loop implemented
 - small set of index nodes and basic category routing
 - Home-edge acceptance: `AgentRecord` with non-public endpoint support is accepted in discovery indexing, and one or more local Raspberry Pi class nodes can complete a full loop to receive verifiable receipts.
@@ -303,10 +303,10 @@ Used for router scheduling and failure-safe failover.
 
 ## 9) Compatibility statement
 
-This document is an architectural extension and does not replace existing v0.1 semantics.
+This document is an architectural extension and does not replace existing v1 semantics.
 
-- v0.1 objects remain accepted
-- v0.1 payment proof event types remain valid
+- v1 objects remain accepted
+- v1 payment proof event types remain valid
 - Additional layers improve scale efficiency while preserving verifiability and trust assumptions
 
 ---

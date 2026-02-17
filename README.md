@@ -68,7 +68,7 @@ Discover → Connect → Settle → Receipt → Rank Update → Influences Futur
 
 > **TOS Agent Network is not an application layer — it is a protocol layer: economically verifiable Agent discovery infrastructure.**
 
-📄 Whitepaper: [`network/tosagent_Whitepaper_v0.1.md`](network/tosagent_Whitepaper_v0.1.md)
+📄 Whitepaper: [`network/whitepaper_v1.md`](network/whitepaper_v1.md)
 
 ---
 
